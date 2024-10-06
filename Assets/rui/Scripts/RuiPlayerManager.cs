@@ -6,18 +6,20 @@ using System.Security.Cryptography;
 
 public class RuiPlayerManager : MonoBehaviour
 {
-    float speed;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            transform.DOMove(new Vector3(1, 0, 0), 3.0f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        /*if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             transform.position += new Vector3(0, 1, 0);
         }
@@ -35,6 +37,6 @@ public class RuiPlayerManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             transform.position += new Vector3(-1, 0, 0);
-        }
+        }*/
     }
 }
