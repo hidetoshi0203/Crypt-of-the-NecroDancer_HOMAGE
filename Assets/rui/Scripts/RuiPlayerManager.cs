@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 public class RuiPlayerManager : MonoBehaviour
 {
-    float speed;
+
 
     // Start is called before the first frame update
     void Start()
