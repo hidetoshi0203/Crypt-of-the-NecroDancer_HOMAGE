@@ -6,62 +6,51 @@ public class Note : MonoBehaviour
 {
     private float speed;
     private Vector2 direction;
-    private bool isTouchingHeart;
-
-    public AudioClip sound1;
-    private AudioSource audioSource;
+    private bool isTouchingHeart; // ハートに接触しているかどうか
+    private NoteSpawn noteSpawn; // NoteSpawnのインスタンスを参照
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        // NoteSpawnを探して参照を取得
+        noteSpawn = FindObjectOfType<NoteSpawn>();
     }
 
     public void Initialize(float moveSpeed, Vector2 moveDirection)
     {
         speed = moveSpeed;
-        direction = moveDirection.normalized;
+        direction = moveDirection.normalized; // 方向を正規化
     }
 
     private void Update()
     {
-        transform.position += (Vector3)(direction * speed * Time.deltaTime);
+        transform.position += (Vector3)(direction * speed * Time.deltaTime); // オブジェクトの位置を更新
 
-        if (Mathf.Abs(transform.position.x) < 0.01f)
+        if (Mathf.Abs(transform.position.x) < 0.01f) // X軸0でオブジェクト削除
         {
             Destroy(gameObject);
         }
 
-        // スペースキーが押されたときの処理
         if (isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space pressed");
-            PlaySound();
+            // NoteSpawnのPlaySoundメソッドを呼び出す
+            noteSpawn.PlaySound();
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D collider) // heartに触れているとき
     {
         if (collider.CompareTag("heart"))
         {
             isTouchingHeart = true;
-            //Debug.Log("Collision detected");
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    private void OnTriggerExit2D(Collider2D collider) // heartに触れてから離れるとき
     {
         if (collider.CompareTag("heart"))
         {
             isTouchingHeart = false;
-        }
-    }
-
-    private void PlaySound()
-    {
-        if (!audioSource.isPlaying) // すでに再生中でない場合のみ再生
-        {
-            audioSource.clip = sound1;
-            audioSource.Play();
         }
     }
 }
