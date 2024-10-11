@@ -6,51 +6,62 @@ public class Note : MonoBehaviour
 {
     private float speed;
     private Vector2 direction;
+    private bool isTouchingHeart;
 
     public AudioClip sound1;
-    AudioSource audioSource;
-
-    //private Rigidbody2D rb;
+    private AudioSource audioSource;
 
     private void Start()
     {
-        //rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
     }
-
 
     public void Initialize(float moveSpeed, Vector2 moveDirection)
     {
         speed = moveSpeed;
         direction = moveDirection.normalized;
-
     }
 
     private void Update()
     {
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
 
-        // X軸が0に到達したらオブジェクトを削除
         if (Mathf.Abs(transform.position.x) < 0.01f)
         {
             Destroy(gameObject);
+        }
+
+        // スペースキーが押されたときの処理
+        if (isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space pressed");
+            PlaySound();
         }
     }
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-
         if (collider.CompareTag("heart"))
         {
-            Debug.Log("Collision detected");
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("Space pressed");
-
-                audioSource.PlayOneShot(sound1);
-            }
+            isTouchingHeart = true;
+            //Debug.Log("Collision detected");
         }
+    }
 
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("heart"))
+        {
+            isTouchingHeart = false;
+        }
+    }
+
+    private void PlaySound()
+    {
+        if (!audioSource.isPlaying) // すでに再生中でない場合のみ再生
+        {
+            audioSource.clip = sound1;
+            audioSource.Play();
+        }
     }
 }
