@@ -25,11 +25,11 @@ public class RuiPlayerManager : MonoBehaviour
         { -1, 1 }
     };
 
-    //MapGenerator mapGenerator;
+    MapCreate mapCreate;
 
     void Start()
     {
-        //mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapCreate = transform.parent.GetComponent<MapCreate>();
     }
 
     void Update()
@@ -62,9 +62,9 @@ public class RuiPlayerManager : MonoBehaviour
     void PlayerMove()
     {
         nextPos = currentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-        //if (mapGenerator.GetNextMapType(nextPos) != ManGenerator.MAP_TYPE.WALL)
+        if (mapCreate.GetNextMapType(nextPos) != MapCreate.MAP_TYPE.WALL)
         {
-            //transform.localPosition = mapGenerator.ScreenPos(nextPos);
+            transform.localPosition = mapCreate.screenPos(nextPos);
             currentPos = nextPos;
         }
     }
