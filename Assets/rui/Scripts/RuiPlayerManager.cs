@@ -9,8 +9,8 @@ public class RuiPlayerManager : MonoBehaviour
     public enum DIRECTION
     {
         TOP,
-        DOWN,
         RIGHT,
+        DOWN,
         LEFT
     }
 
@@ -40,15 +40,15 @@ public class RuiPlayerManager : MonoBehaviour
             PlayerMove();
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            direction = DIRECTION.DOWN;
-            PlayerMove();
-        }
-
         if (Input.GetKeyDown(KeyCode.D))
         {
             direction = DIRECTION.RIGHT;
+            PlayerMove();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            direction = DIRECTION.DOWN;
             PlayerMove();
         }
 
