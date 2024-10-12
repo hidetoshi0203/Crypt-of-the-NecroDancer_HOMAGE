@@ -6,34 +6,66 @@ using System.Security.Cryptography;
 
 public class RuiPlayerManager : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
+    public enum DIRECTION
     {
-
+        TOP,
+        DOWN,
+        RIGHT,
+        LEFT
     }
 
-    // Update is called once per frame
+    public DIRECTION direction;
+    public Vector2Int currentPos, nextPos;
+
+    int[,] move =
+    {
+        { 0, -1 },
+        { 1, 0 },
+        { 0, 1 },
+        { -1, 1 }
+    };
+
+    //MapGenerator mapGenerator;
+
+    void Start()
+    {
+        //mapGenerator = transform.parent.GetComponent<MapGenerator>();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            transform.position += new Vector3(0, 1, 0);
+            direction = DIRECTION.TOP;
+            PlayerMove();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            transform.position += new Vector3(0, -1, 0);
+            direction = DIRECTION.DOWN;
+            PlayerMove();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            transform.position += new Vector3(1, 0, 0);
+            direction = DIRECTION.RIGHT;
+            PlayerMove();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            transform.position += new Vector3(-1, 0, 0);
+            direction = DIRECTION.LEFT;
+            PlayerMove();
+        }
+    }
+
+    void PlayerMove()
+    {
+        nextPos = currentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+        //if (mapGenerator.GetNextMapType(nextPos) != ManGenerator.MAP_TYPE.WALL)
+        {
+            //transform.localPosition = mapGenerator.ScreenPos(nextPos);
+            currentPos = nextPos;
         }
     }
 }
