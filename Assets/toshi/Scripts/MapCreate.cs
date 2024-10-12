@@ -14,13 +14,17 @@ public class MapCreate : MonoBehaviour
     private string[] mapLines;
     float mapSize;
     Vector2 centerPos; // 中心座標変数
-    enum MAP_TYPE
+    public enum MAP_TYPE
     {
         FLOOR, //0
         WALL,  //1
         PLAYER //2
     }
 
+    public MAP_TYPE GetNextMapType(Vector2Int _pos)
+    {
+        return mapTable[_pos.x, _pos.y];
+    }
     private void Start()
     {
         loadMapData();
@@ -91,17 +95,23 @@ public class MapCreate : MonoBehaviour
                 //現在のポジション
                 Vector2Int pos = new Vector2Int(x, y);
                 // floorを敷き詰める
-                GameObject floor = Instantiate(objPrefabs[(int)MAP_TYPE.FLOOR]);
+                GameObject floor = Instantiate(objPrefabs[(int)MAP_TYPE.FLOOR], transform);
                 floor.transform.position = screenPos(pos);
                 //objPrefabの中のmapTable[x,y]にあたるものを生成
-                GameObject map = Instantiate(objPrefabs[(int)mapTable[x,y]]);
+                GameObject map = Instantiate(objPrefabs[(int)mapTable[x,y]],transform);
                 //生成したゲームオブジェクトの位置を設定
                 map.transform.position = screenPos(pos); 
+
+                //Playerスクリプトのcurrntposにposを代入
+                if (mapTable[x,y] == MAP_TYPE.PLAYER)
+                {
+                    map.GetComponent<RuiPlayerManager>().currentPos = pos;
+                }
             }
         }
     }
 
-    Vector2 screenPos(Vector2Int _pos)
+    public Vector2 screenPos(Vector2Int _pos)
     {
         return new Vector2(
             _pos.x * mapSize - centerPos.x,
