@@ -13,13 +13,15 @@ public class NoteSpawn : MonoBehaviour
 
 
     [SerializeField] AudioClip sound1;
-    private AudioSource audioSource; //AudioSourceコンポーネントを格納
+    [SerializeField] AudioClip sound2;
+    AudioSource audioSource; //AudioSourceコンポーネントを格納
 
     private Function function;
 
     private void Start()
     {
         function = FindObjectOfType<Function>();
+        audioSource = GetComponent<AudioSource>();
 
         InvokeRepeating("SpawnObjects", 0f, spawnInterval); //一定間隔でSpawnObjectsメソッドを呼び出す
 
@@ -36,11 +38,19 @@ public class NoteSpawn : MonoBehaviour
         spawnedObjectLeft.AddComponent<Note>().Initialize(moveSpeed, Vector2.right);
     }
 
-    public void PlaySound()
+    public void PlaySound1()
     {
         if (audioSource != null && sound1 != null) //AudioSourceと音声クリップが設定されているとき
         {
             audioSource.PlayOneShot(sound1); //音を再生
+        }
+    }
+
+    public void PlaySound2()
+    {
+        if (audioSource != null && sound2 != null) //AudioSourceと音声クリップが設定されているとき
+        {
+            audioSource.PlayOneShot(sound2); //音を再生
         }
     }
 }
