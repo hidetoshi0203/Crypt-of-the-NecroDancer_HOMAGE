@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObjectMove : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
+
     public enum DIRECTION
     {
         TOP,
@@ -13,7 +15,7 @@ public class ObjectMove : MonoBehaviour
     }
 
     public DIRECTION direction;
-    public Vector2Int currentPos, nextPos;
+    public Vector2Int playerCurrentPos, playerNextPos;
 
     int[,] move =
     {
@@ -32,38 +34,16 @@ public class ObjectMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            direction = DIRECTION.TOP;
-            MoveMent();
-        }
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            direction = DIRECTION.RIGHT;
-            MoveMent();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            direction = DIRECTION.DOWN;
-            MoveMent();
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            direction = DIRECTION.LEFT;
-            MoveMent();
-        }
     }
 
-    void MoveMent()
+    public void MoveMent()
     {
-        nextPos = currentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-        if (mapCreate.GetNextMapType(nextPos) != MapCreate.MAP_TYPE.WALL)
+        playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+        if (mapCreate.GetNextMapType(playerNextPos) != MapCreate.MAP_TYPE.WALL)
         {
-            transform.localPosition = mapCreate.screenPos(nextPos);
-            currentPos = nextPos;
+            transform.localPosition = mapCreate.screenPos(playerNextPos);
+            playerCurrentPos = playerNextPos;
         }
     }
 }

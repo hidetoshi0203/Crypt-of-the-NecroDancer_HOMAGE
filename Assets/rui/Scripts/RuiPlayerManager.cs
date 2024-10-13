@@ -6,19 +6,42 @@ using System.Security.Cryptography;
 
 public class RuiPlayerManager : MonoBehaviour
 {
-
-    MapCreate mapCreate;
+    ObjectMove objectMove;
     Note noteScript;
 
     void Start()
     {
+        objectMove = GetComponent<ObjectMove>();
         noteScript = GetComponent<Note>();
     }
 
     void Update()
     {
-        if (noteScript.isTouchingHeart)
+        //if (noteScript.isTouchingHeart)
         {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.MoveMent();
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.MoveMent();
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.MoveMent();
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.MoveMent();
+            }
         }
     }
 }
