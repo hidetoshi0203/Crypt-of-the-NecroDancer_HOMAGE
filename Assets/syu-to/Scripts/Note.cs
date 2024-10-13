@@ -6,13 +6,12 @@ public class Note : MonoBehaviour
 {
     private float speed;
     private Vector2 direction;
-    private bool isTouchingHeart; // ハートに接触しているかどうか
+    public bool isTouchingHeart; // ハートに接触しているかどうか
     private NoteSpawn noteSpawn; // NoteSpawnのインスタンスを参照
 
     private void Start()
     {
-        // NoteSpawnを探して参照を取得
-        noteSpawn = FindObjectOfType<NoteSpawn>();
+        noteSpawn = FindObjectOfType<NoteSpawn>(); //NoteSpawnを探して参照を取得
     }
 
     public void Initialize(float moveSpeed, Vector2 moveDirection)
