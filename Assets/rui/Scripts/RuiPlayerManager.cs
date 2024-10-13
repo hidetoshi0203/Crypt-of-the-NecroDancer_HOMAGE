@@ -26,36 +26,41 @@ public class RuiPlayerManager : MonoBehaviour
     };
 
     MapCreate mapCreate;
+    Note noteScript;
 
     void Start()
     {
         mapCreate = transform.parent.GetComponent<MapCreate>();
+        noteScript = GetComponent<Note>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (noteScript.isTouchingHeart)
         {
-            direction = DIRECTION.TOP;
-            PlayerMove();
-        }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                direction = DIRECTION.TOP;
+                PlayerMove();
+            }
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            direction = DIRECTION.RIGHT;
-            PlayerMove();
-        }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                direction = DIRECTION.RIGHT;
+                PlayerMove();
+            }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            direction = DIRECTION.DOWN;
-            PlayerMove();
-        }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                direction = DIRECTION.DOWN;
+                PlayerMove();
+            }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            direction = DIRECTION.LEFT;
-            PlayerMove();
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                direction = DIRECTION.LEFT;
+                PlayerMove();
+            }
         }
     }
 
