@@ -300,10 +300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728f6cbcbadb59b4e9044bee9fd45b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 753357951}
   direction: 0
-  currentPos: {x: 0, y: 0}
-  nextPos: {x: 0, y: 0}
+  playerCurrentPos: {x: 0, y: 0}
+  playerNextPos: {x: 0, y: 0}
 --- !u!1 &1067676076
 GameObject:
   m_ObjectHideFlags: 0
