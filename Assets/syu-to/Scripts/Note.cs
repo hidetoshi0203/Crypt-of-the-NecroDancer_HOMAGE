@@ -29,11 +29,16 @@ public class Note : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (isTouchingHeart)
+        {
+            noteSpawn.PlaySound2();
+        }
+
         if (isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space pressed");
             
-            noteSpawn.PlaySound(); //NoteSpawnのPlaySoundメソッドを呼び出す
+            noteSpawn.PlaySound1(); //NoteSpawnのPlaySoundメソッドを呼び出す
         }
     }
 

@@ -265,7 +265,7 @@ MonoBehaviour:
   moveSpeed: 5
   spawnPositionX: 8
   spawnPositionY: -3
-  sound1: {fileID: 8300000, guid: efe50fd17ddef924cb769319d245d30b, type: 3}
+  sound1: {fileID: 8300000, guid: b7034b3205054d342baa414c6b570106, type: 3}
 --- !u!82 &556961138
 AudioSource:
   m_ObjectHideFlags: 0
