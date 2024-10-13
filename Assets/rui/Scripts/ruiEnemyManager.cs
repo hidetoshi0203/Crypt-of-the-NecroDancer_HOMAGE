@@ -28,40 +28,7 @@ public class ruiEnemyManager : MonoBehaviour
 
         if (slime.name == "Slime")
         {
-            EnemyMoveRight();
-        }
-    }
 
-    public void EnemyMoveUp()
-    {
-        if (!isEnemyMove)
-        {
-            transform.position += new Vector3(0, 1, 0);
-            isEnemyMove = true;
-        }
-    }
-    public void EnemyMoveDown()
-    {
-        if (!isEnemyMove)
-        {
-            transform.position += new Vector3(0, -1, 0);
-            isEnemyMove = true;
-        }
-    }
-    public void EnemyMoveRight()
-    {
-        if (!isEnemyMove)
-        {
-            transform.position += new Vector3(1, 0, 0);
-            isEnemyMove = true;
-        }
-    }
-    public void EnemyMoveLeft()
-    {
-        if (!isEnemyMove)
-        {
-            transform.position += new Vector3(-1, 0, 0);
-            isEnemyMove = true;
         }
     }
 }
