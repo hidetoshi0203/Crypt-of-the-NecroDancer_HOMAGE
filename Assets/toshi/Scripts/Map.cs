@@ -1,13 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
-public class MapCreate : MonoBehaviour
+public class Map : MonoBehaviour
 {
     [SerializeField] TextAsset mapText;
     [SerializeField] GameObject[] objPrefabs;
@@ -58,7 +53,7 @@ public class MapCreate : MonoBehaviour
                 mapTable[x, y] = (MAP_TYPE)int.Parse(mapValues[x]);
             }
         }
-        
+
     }
 
     void createMap()
@@ -72,26 +67,26 @@ public class MapCreate : MonoBehaviour
         //列が偶数の場合
         if (mapTable.GetLength(0) % 2 == 0)
         {
-            centerPos.x = mapTable.GetLength(0) / 2* mapSize - (mapSize / 2);   
+            centerPos.x = mapTable.GetLength(0) / 2 * mapSize - (mapSize / 2);
         }
         else
         {
-            centerPos.x = mapTable.GetLength(0) / 2* mapSize;
+            centerPos.x = mapTable.GetLength(0) / 2 * mapSize;
         }
         //行偶数の場合
         if (mapTable.GetLength(1) % 2 == 0)
         {
-            centerPos.y = mapTable.GetLength(1) / 2* mapSize - (mapSize / 2);
+            centerPos.y = mapTable.GetLength(1) / 2 * mapSize - (mapSize / 2);
         }
         else
         {
-            centerPos.y = mapTable.GetLength(1) / 2* mapSize;
+            centerPos.y = mapTable.GetLength(1) / 2 * mapSize;
         }
         //mapTableの行のループ
-        for (int y = 0;y < mapTable.GetLength(1);y++) 
+        for (int y = 0; y < mapTable.GetLength(1); y++)
         {
             //mapTableの列のループ
-            for (int x = 0;x < mapTable.GetLength(0); x++)
+            for (int x = 0; x < mapTable.GetLength(0); x++)
             {
                 //現在のポジション
                 Vector2Int pos = new Vector2Int(x, y);
@@ -99,16 +94,15 @@ public class MapCreate : MonoBehaviour
                 GameObject floor = Instantiate(objPrefabs[(int)MAP_TYPE.FLOOR], transform);
                 floor.transform.position = screenPos(pos);
                 //objPrefabの中のmapTable[x,y]にあたるものを生成
-                GameObject map = Instantiate(objPrefabs[(int)mapTable[x,y]],transform);
+                GameObject map = Instantiate(objPrefabs[(int)mapTable[x, y]], transform);
                 //生成したゲームオブジェクトの位置を設定
-                map.transform.position = screenPos(pos); 
+                map.transform.position = screenPos(pos);
 
                 //Playerスクリプトのcurrntposにposを代入
-                if (mapTable[x,y] == MAP_TYPE.PLAYER)
+                if (mapTable[x, y] == MAP_TYPE.PLAYER)
                 {
                     map.GetComponent<ObjectMove>().currentPos = pos;
                 }
-
             }
         }
     }
