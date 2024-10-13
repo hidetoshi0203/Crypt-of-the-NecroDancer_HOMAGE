@@ -5,7 +5,7 @@ using UnityEngine;
 public class Note : MonoBehaviour
 {
     private float speed;
-    private Vector2 direction;
+    private Vector2 direction; //向き
     public bool isTouchingHeart; // ハートに接触しているかどうか
     private NoteSpawn noteSpawn; // NoteSpawnのインスタンスを参照
 
@@ -32,8 +32,8 @@ public class Note : MonoBehaviour
         if (isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space pressed");
-            // NoteSpawnのPlaySoundメソッドを呼び出す
-            noteSpawn.PlaySound();
+            
+            noteSpawn.PlaySound(); //NoteSpawnのPlaySoundメソッドを呼び出す
         }
     }
 
