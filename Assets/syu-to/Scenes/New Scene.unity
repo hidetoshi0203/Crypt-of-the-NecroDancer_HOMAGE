@@ -362,7 +362,7 @@ MonoBehaviour:
   spawnPositionX: 8
   spawnPositionY: -3
   sound1: {fileID: 8300000, guid: b7034b3205054d342baa414c6b570106, type: 3}
-  sound2: {fileID: 8300000, guid: efe50fd17ddef924cb769319d245d30b, type: 3}
+  sound2: {fileID: 8300000, guid: 67d5e5aa1c0d5eb48b1ee457df8ea479, type: 3}
 --- !u!1 &1226904769
 GameObject:
   m_ObjectHideFlags: 0
