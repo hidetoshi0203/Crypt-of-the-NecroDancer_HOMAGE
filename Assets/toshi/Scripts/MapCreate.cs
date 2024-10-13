@@ -106,7 +106,7 @@ public class MapCreate : MonoBehaviour
                 //Playerスクリプトのcurrntposにposを代入
                 if (mapTable[x,y] == MAP_TYPE.PLAYER)
                 {
-                    map.GetComponent<RuiPlayerManager>().currentPos = pos;
+                    map.GetComponent<ObjectMove>().currentPos = pos;
                 }
             }
         }
