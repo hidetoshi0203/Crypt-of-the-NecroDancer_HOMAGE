@@ -7,29 +7,31 @@ public class NoteSpawn : MonoBehaviour
     [SerializeField] GameObject objectToSpawn; //出現させるオブジェクト
     [SerializeField] float spawnInterval = 2f; //出現間隔
     [SerializeField] float moveSpeed = 2f; //移動速度
-    [SerializeField] float spawnPosition = 5f; //スポーン位置
+
+    [SerializeField] float spawnPositionX = 5f; //スポーン位置
+    [SerializeField] float spawnPositionY = 5f; //スポーン位置
+
+
     [SerializeField] AudioClip sound1;
     private AudioSource audioSource; //AudioSourceコンポーネントを格納
 
-    private Vector3 pPos;
-    private float spawnY = -5.0f;
+    private Function function;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>(); //AudioSourceコンポーネントを取得
+        function = FindObjectOfType<Function>();
 
         InvokeRepeating("SpawnObjects", 0f, spawnInterval); //一定間隔でSpawnObjectsメソッドを呼び出す
 
-        pPos = new Vector3(spawnPosition, spawnY, transform.position.z);
     }
 
     private void SpawnObjects()
     {
-        Vector3 spawnPositionRight = pPos; //右側からオブジェクトをスポーン
+        Vector3 spawnPositionRight = new Vector3(spawnPositionX, spawnPositionY, transform.position.z); ; //右側からオブジェクトをスポーン
         GameObject spawnedObjectRight = Instantiate(objectToSpawn, spawnPositionRight, Quaternion.identity);
         spawnedObjectRight.AddComponent<Note>().Initialize(moveSpeed, Vector2.left);
 
-        Vector3 spawnPositionLeft = pPos; //左側からオブジェクトをスポーン
+        Vector3 spawnPositionLeft = new Vector3(-spawnPositionX, spawnPositionY, transform.position.z); ; //左側からオブジェクトをスポーン
         GameObject spawnedObjectLeft = Instantiate(objectToSpawn, spawnPositionLeft, Quaternion.identity);
         spawnedObjectLeft.AddComponent<Note>().Initialize(moveSpeed, Vector2.right);
     }
