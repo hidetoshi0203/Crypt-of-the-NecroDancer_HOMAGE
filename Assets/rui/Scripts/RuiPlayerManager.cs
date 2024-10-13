@@ -18,7 +18,7 @@ public class RuiPlayerManager : MonoBehaviour
     void Update()
     {
         //if (noteScript.isTouchingHeart)
-        {
+        //{
             if (Input.GetKeyDown(KeyCode.W))
             {
                 objectMove.direction = ObjectMove.DIRECTION.TOP;
@@ -27,21 +27,21 @@ public class RuiPlayerManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.direction = ObjectMove.DIRECTION.RIGHT;
                 objectMove.MoveMent();
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.direction = ObjectMove.DIRECTION.DOWN;
                 objectMove.MoveMent();
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.direction = ObjectMove.DIRECTION.LEFT;
                 objectMove.MoveMent();
             }
-        }
+        //}
     }
 }
