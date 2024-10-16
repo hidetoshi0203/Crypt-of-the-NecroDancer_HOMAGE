@@ -6,12 +6,14 @@ public class Note : MonoBehaviour
 {
     private float speed;
     private Vector2 direction; //Œü‚«
-    public bool isTouchingHeart; // ƒn[ƒg‚ÉÚG‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    //public bool isTouchingHeart; // ƒn[ƒg‚ÉÚG‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
     private NoteSpawn noteSpawn; // NoteSpawn‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğQÆ
+    public Function function;
 
     private void Start()
     {
         noteSpawn = FindObjectOfType<NoteSpawn>(); //NoteSpawn‚ğ’T‚µ‚ÄQÆ‚ğæ“¾
+        function = FindObjectOfType<Function>();
     }
 
     public void Initialize(float moveSpeed, Vector2 moveDirection)
@@ -29,7 +31,7 @@ public class Note : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
+        if (function.isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space pressed");
             
@@ -37,7 +39,7 @@ public class Note : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collider) //heart‚ÉG‚ê‚½uŠÔ
     {
         if(collider.CompareTag("heart"))
         {
@@ -45,19 +47,19 @@ public class Note : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collider) // heart‚ÉG‚ê‚Ä‚¢‚é‚Æ‚«
+    private void OnTriggerStay2D(Collider2D collider) //heart‚ÉG‚ê‚Ä‚¢‚é‚Æ‚«
     {
         if (collider.CompareTag("heart"))
         {
-            isTouchingHeart = true;
+            function.isTouchingHeart = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider) // heart‚ÉG‚ê‚Ä‚©‚ç—£‚ê‚é‚Æ‚«
+    private void OnTriggerExit2D(Collider2D collider) //heart‚ÉG‚ê‚Ä‚©‚ç—£‚ê‚é‚Æ‚«
     {
         if (collider.CompareTag("heart"))
         {
-            isTouchingHeart = false;
+            function.isTouchingHeart = false;
         }
     }
 }
