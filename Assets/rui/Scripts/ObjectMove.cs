@@ -26,10 +26,14 @@ public class ObjectMove : MonoBehaviour
     };
 
     MapCreate mapCreate;
+    Function functionScript;
+    public GameObject function;
 
     void Start()
     {
         mapCreate = transform.parent.GetComponent<MapCreate>();
+        function = GameObject.Find("Function");
+        functionScript = FindObjectOfType<Function>();
     }
 
     void Update()
@@ -39,11 +43,14 @@ public class ObjectMove : MonoBehaviour
 
     public void MoveMent()
     {
-        playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-        if (mapCreate.GetNextMapType(playerNextPos) != MapCreate.MAP_TYPE.WALL)
+        if (functionScript.isTouchingHeart)
         {
-            transform.localPosition = mapCreate.screenPos(playerNextPos);
-            playerCurrentPos = playerNextPos;
+            playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+            if (mapCreate.GetNextMapType(playerNextPos) != MapCreate.MAP_TYPE.WALL)
+            {
+                transform.localPosition = mapCreate.screenPos(playerNextPos);
+                playerCurrentPos = playerNextPos;
+            }
         }
     }
 }

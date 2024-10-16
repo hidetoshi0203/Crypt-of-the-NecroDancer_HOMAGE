@@ -8,7 +8,7 @@ public class Function : MonoBehaviour
 
     private NoteSpawn noteSpawn; // NoteSpawnのインスタンスを参照
     private Note　note;
-    public bool isTouchingHeart; // ハートに接触しているかどうか
+    [SerializeField] public bool isTouchingHeart; // ハートに接触しているかどうか
 
     void Start()
     {

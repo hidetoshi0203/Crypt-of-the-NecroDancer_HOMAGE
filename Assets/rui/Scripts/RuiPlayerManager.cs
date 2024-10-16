@@ -7,41 +7,40 @@ using System.Security.Cryptography;
 public class RuiPlayerManager : MonoBehaviour
 {
     ObjectMove objectMove;
-    Note noteScript;
+    GameObject function;
+    Function functionScript;
 
     void Start()
     {
         objectMove = GetComponent<ObjectMove>();
-        noteScript = GetComponent<Note>();
+        function = GameObject.Find("Function");
+        functionScript = FindObjectOfType<Function>();
     }
 
     void Update()
     {
-        //if (noteScript.isTouchingHeart)
-        //{
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                objectMove.direction = ObjectMove.DIRECTION.TOP;
-                objectMove.MoveMent();
-            }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            objectMove.direction = ObjectMove.DIRECTION.TOP;
+            objectMove.MoveMent();
+        }
 
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                objectMove.direction = ObjectMove.DIRECTION.RIGHT;
-                objectMove.MoveMent();
-            }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            objectMove.direction = ObjectMove.DIRECTION.RIGHT;
+            objectMove.MoveMent();
+        }
 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                objectMove.direction = ObjectMove.DIRECTION.DOWN;
-                objectMove.MoveMent();
-            }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            objectMove.direction = ObjectMove.DIRECTION.DOWN;
+            objectMove.MoveMent();
+        }
 
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                objectMove.direction = ObjectMove.DIRECTION.LEFT;
-                objectMove.MoveMent();
-            }
-        //}
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            objectMove.direction = ObjectMove.DIRECTION.LEFT;
+            objectMove.MoveMent();
+        }
     }
 }
