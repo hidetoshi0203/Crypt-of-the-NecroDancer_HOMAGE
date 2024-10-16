@@ -8,12 +8,13 @@ public class Note : MonoBehaviour
     private Vector2 direction; //向き
     //public bool isTouchingHeart; // ハートに接触しているかどうか
     private NoteSpawn noteSpawn; // NoteSpawnのインスタンスを参照
-    public Function function;
-
+    Function functionScript;
+    GameObject function;
     private void Start()
     {
         noteSpawn = FindObjectOfType<NoteSpawn>(); //NoteSpawnを探して参照を取得
-        function = FindObjectOfType<Function>();
+        function = GameObject.Find("Function");
+        functionScript = GetComponent<Function>();
     }
 
     public void Initialize(float moveSpeed, Vector2 moveDirection)
@@ -31,7 +32,7 @@ public class Note : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (function.isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
+        if (functionScript.isTouchingHeart && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space pressed");
             
@@ -51,7 +52,7 @@ public class Note : MonoBehaviour
     {
         if (collider.CompareTag("heart"))
         {
-            function.isTouchingHeart = true;
+            functionScript.isTouchingHeart = true;
         }
     }
 
@@ -59,7 +60,7 @@ public class Note : MonoBehaviour
     {
         if (collider.CompareTag("heart"))
         {
-            function.isTouchingHeart = false;
+            functionScript.isTouchingHeart = false;
         }
     }
 }
