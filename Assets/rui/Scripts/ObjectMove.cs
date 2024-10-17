@@ -33,7 +33,7 @@ public class ObjectMove : MonoBehaviour
     {
         mapCreate = transform.parent.GetComponent<MapCreate>();
         function = GameObject.Find("Function");
-        functionScript = FindObjectOfType<Function>();
+        functionScript = function.GetComponent<Function>();//FindObjectOfType<Function>();
     }
 
     void Update()
