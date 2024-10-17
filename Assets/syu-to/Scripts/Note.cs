@@ -14,7 +14,7 @@ public class Note : MonoBehaviour
     {
         noteSpawn = FindObjectOfType<NoteSpawn>(); //NoteSpawn‚ğ’T‚µ‚ÄQÆ‚ğæ“¾
         function = GameObject.Find("Function");
-        functionScript = GetComponent<Function>();
+        functionScript = function.GetComponent<Function>();
     }
 
     public void Initialize(float moveSpeed, Vector2 moveDirection)
