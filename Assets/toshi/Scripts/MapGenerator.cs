@@ -12,7 +12,8 @@ public class MapGenerator : MonoBehaviour
     {
         GROUND, //0
         WALL,   //1
-        PLAYER  //2
+        PLAYER, //2
+        ENEMY   //3
     }
     MAP_TYPE[,] mapTable;
 

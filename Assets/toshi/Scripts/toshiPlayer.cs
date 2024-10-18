@@ -21,7 +21,8 @@ public class toshiPlayer : MonoBehaviour
 
     public DIRECTION direction;
     public Vector2Int currentPos, nextPos;
-   
+
+    public bool isEnemy; 
 
     MapGenerator mapGenerator;
 
@@ -39,25 +40,33 @@ public class toshiPlayer : MonoBehaviour
     //修正　入力時に_move関数を呼ぶようにする。
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (!isEnemy)
         {
-            direction = DIRECTION.TOP;
-            _move();
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                direction = DIRECTION.TOP;
+                _move();
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                direction = DIRECTION.RIGHT;
+                _move();
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                direction = DIRECTION.DOWN;
+                _move();
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                direction = DIRECTION.LEFT;
+                _move();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (isEnemy)
         {
-            direction = DIRECTION.RIGHT;
-            _move();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            direction = DIRECTION.DOWN;
-            _move();
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            direction = DIRECTION.LEFT;
-            _move();
+            //敵に向かって移動キー入力されたら移動はせず、攻撃をする処理を書く
+
         }
     }
 
@@ -72,5 +81,13 @@ public class toshiPlayer : MonoBehaviour
             transform.localPosition = mapGenerator.ScreenPos(nextPos);
             currentPos = nextPos;
         }
+    }
+    void _attack()
+    {
+        if (mapGenerator.GetNextMapType(nextPos) != MapGenerator.MAP_TYPE.ENEMY)
+        {
+            isEnemy = true;
+            currentPos = nextPos;
+        } 
     }
 }
