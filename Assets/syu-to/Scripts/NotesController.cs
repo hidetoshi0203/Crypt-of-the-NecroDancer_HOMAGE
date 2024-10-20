@@ -6,6 +6,7 @@ public class NotesController : MonoBehaviour
 {
     [SerializeField] private float endX = 0.5f; // ノーツの移動先のX座標
     [SerializeField] private float tempo = 2.0f; // ノーツの移動時間
+    [SerializeField] private float Heart_range = 0; // ハートに触れる範囲
 
     private Vector3 startPos; // ノーツの生成位置
     private Vector3 endPos; // ノーツの目的地
@@ -16,6 +17,7 @@ public class NotesController : MonoBehaviour
 
     private NotesManager notesManager; // NotesManagerのインスタンス
     private bool canPlaySpaceSound = true; // スペースキーの音を鳴らせるかどうかのフラグ
+    private bool isTouchSoundPlaying = false; // ハートに触れた音が再生中かどうか
 
     private void Awake()
     {
@@ -31,18 +33,20 @@ public class NotesController : MonoBehaviour
         transform.position = Vector3.Lerp(startPos, endPos, currentTime / tempo);
 
         // ハートに触れた場合のチェック
-        if (!isTouchingHeart && transform.position.x >= -1f && transform.position.x <= 1f)
+        if (!isTouchingHeart && transform.position.x >= -Heart_range && transform.position.x <= Heart_range)
         {
             OnTouchHeart(); // ハートに触れたと見なす
         }
 
-        if (isTouchingHeart)
+        // ハートに触れている状態でスペースキーが押されたとき
+        if (isTouchingHeart && Input.GetKeyDown(KeyCode.Space) && canPlaySpaceSound)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && canPlaySpaceSound)
+            if (isTouchSoundPlaying)
             {
-                notesManager.PlaySpaceSound(); // 音を鳴らす
-                canPlaySpaceSound = false; // フラグをオフにして音を鳴らせないようにする
+                notesManager.StopTouchSound(); // ハートに触れた音を停止
             }
+            notesManager.PlaySpaceSound(); // スペースキーを押したときの音を鳴らす
+            canPlaySpaceSound = false; // フラグをオフにして音を鳴らせないようにする
         }
 
         // ノーツが移動し終わったら削除
@@ -58,6 +62,8 @@ public class NotesController : MonoBehaviour
         {
             isTouchingHeart = true; // ハートに触れた状態
             notesManager.PlayTouchSound(); // ハートに触れたときの音を鳴らす
+            isTouchSoundPlaying = true; // ハートの音が再生中であることをフラグに設定
+            canPlaySpaceSound = true; // ハートに触れた後にスペースキーで音を鳴らせるようにフラグをリセット
         }
     }
 

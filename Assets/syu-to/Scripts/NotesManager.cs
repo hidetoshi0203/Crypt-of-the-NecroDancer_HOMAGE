@@ -14,7 +14,6 @@ public class NotesManager : MonoBehaviour
     [SerializeField] private AudioClip touchSound; // ハートに触れたときの音
     [SerializeField] private AudioClip spaceSound; // スペースキーを押したときの音
 
-
     private float nextGenerateTime = 1f;
     private float generateTime = 1f;
 
@@ -25,11 +24,11 @@ public class NotesManager : MonoBehaviour
 
         audioSource = gameObject.AddComponent<AudioSource>(); // AudioSourceを追加
     }
+
     private void Update()
     {
         if (Time.time > nextGenerateTime)
         {
-            //Debug.Log(Time.time);
             Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
             Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
             nextGenerateTime += generateTime;
@@ -39,6 +38,11 @@ public class NotesManager : MonoBehaviour
     public void PlayTouchSound()
     {
         audioSource.PlayOneShot(touchSound); // ハートに触れたときの音を鳴らす
+    }
+
+    public void StopTouchSound()
+    {
+        audioSource.Stop(); // ハートに触れたときの音を停止
     }
 
     public void PlaySpaceSound()
