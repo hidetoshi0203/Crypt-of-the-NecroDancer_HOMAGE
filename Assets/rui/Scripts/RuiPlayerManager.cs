@@ -8,39 +8,43 @@ public class RuiPlayerManager : MonoBehaviour
 {
     ObjectMove objectMove;
     GameObject function;
-    Function functionScript;
+    NotesController notesController;
 
     void Start()
     {
         objectMove = GetComponent<ObjectMove>();
         function = GameObject.Find("Function");
-        functionScript = FindObjectOfType<Function>();
+        notesController = FindObjectOfType<NotesController>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (notesController != null && notesController.IsTouchingHeart)
         {
-            objectMove.direction = ObjectMove.DIRECTION.TOP;
-            objectMove.MoveMent();
-        }
+            Debug.Log("aa");
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.MoveMent();
+            }
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            objectMove.direction = ObjectMove.DIRECTION.RIGHT;
-            objectMove.MoveMent();
-        }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.RIGHT;
+                objectMove.MoveMent();
+            }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            objectMove.direction = ObjectMove.DIRECTION.DOWN;
-            objectMove.MoveMent();
-        }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.DOWN;
+                objectMove.MoveMent();
+            }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            objectMove.direction = ObjectMove.DIRECTION.LEFT;
-            objectMove.MoveMent();
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                objectMove.direction = ObjectMove.DIRECTION.LEFT;
+                objectMove.MoveMent();
+            }
         }
     }
 }

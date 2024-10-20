@@ -11,42 +11,45 @@ public class NotesManager : MonoBehaviour
     [SerializeField] private Transform rightGenerateTrans;
 
     private AudioSource audioSource;
-    [SerializeField] private AudioClip touchSound; // ハートに触れたときの音
-    [SerializeField] private AudioClip spaceSound; // スペースキーを押したときの音
+    [SerializeField] private AudioClip touchSound; //ハートに触れたときの音
+    [SerializeField] private AudioClip spaceSound; //スペースキーを押したときの音
 
     private float nextGenerateTime = 1f;
     private float generateTime = 1f;
+
+    public GameObject leftNoteObject;
+    public GameObject rightNoteObject;
 
     private void Awake()
     {
         generateTime = tempoManager.Tempo;
         nextGenerateTime = Time.time + generateTime;
 
-        audioSource = gameObject.AddComponent<AudioSource>(); // AudioSourceを追加
+        audioSource = gameObject.AddComponent<AudioSource>(); //AudioSourceを追加
     }
 
     private void Update()
     {
         if (Time.time > nextGenerateTime)
         {
-            Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
-            Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
+            leftNoteObject = Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
+            rightNoteObject  = Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
             nextGenerateTime += generateTime;
         }
     }
 
     public void PlayTouchSound()
     {
-        audioSource.PlayOneShot(touchSound); // ハートに触れたときの音を鳴らす
+        audioSource.PlayOneShot(touchSound); //ハートに触れたときの音を鳴らす
     }
 
     public void StopTouchSound()
     {
-        audioSource.Stop(); // ハートに触れたときの音を停止
+        audioSource.Stop(); //ハートに触れたときの音を停止
     }
 
     public void PlaySpaceSound()
     {
-        audioSource.PlayOneShot(spaceSound); // スペースキーを押したときの音を鳴らす
+        audioSource.PlayOneShot(spaceSound); //スペースキーを押したときの音を鳴らす
     }
 }
