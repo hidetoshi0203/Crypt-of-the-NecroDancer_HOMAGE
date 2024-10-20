@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c71136d4127aef4795bc9b5136769f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endX: 0.5
+  endX: 0
   tempo: 2
-  Edgeofheart: 1
+  Heart_range: 1.1
+  touchSoundDelay: 0.15
