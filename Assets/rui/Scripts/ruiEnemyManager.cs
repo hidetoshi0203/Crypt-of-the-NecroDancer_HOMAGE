@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class ruiEnemyManager : MonoBehaviour
 {
+    ObjectMove objectMove;
     public GameObject slime;
-    bool isEnemyMove = false;
+    private bool isEnemyMoveUp;
     private float enemyMoveTime;
 
     // Start is called before the first frame update
     void Start()
     {
+        objectMove = GetComponent<ObjectMove>();
     }
 
     // Update is called once per frame
@@ -22,13 +25,18 @@ public class ruiEnemyManager : MonoBehaviour
 
         if (enemyMoveTime > 1)
         {
-            isEnemyMove = false;
             enemyMoveTime = 0;
-        }
 
-        if (slime.name == "Slime")
-        {
-
+            if (slime.name == "Slime" && isEnemyMoveUp)
+            {
+                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.MoveMent();
+            }
+            else if (slime.name == "Slime" && !isEnemyMoveUp)
+            {
+                objectMove.direction = ObjectMove.DIRECTION.DOWN;
+                objectMove.MoveMent();
+            }
         }
     }
 }
