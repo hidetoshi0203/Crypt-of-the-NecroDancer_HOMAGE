@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 5006679726026550513}
   - component: {fileID: 2984988447210303045}
   - component: {fileID: -3037332067090051203}
-  - component: {fileID: -1491687769012093326}
-  - component: {fileID: 9129955012034975642}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -116,29 +114,4 @@ MonoBehaviour:
   direction: 0
   playerCurrentPos: {x: 0, y: 0}
   playerNextPos: {x: 0, y: 0}
-  function: {fileID: 0}
---- !u!114 &-1491687769012093326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4808332212926426428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f18a77b21fbcbe24b84db6fb494b9bf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTouchingHeart: 0
---- !u!114 &9129955012034975642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4808332212926426428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55c26e9fe5a33c6468c329e5794f7a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Notes: {fileID: 8437184838734769576, guid: 42801792e0daf4e4ebb5d29600e51381, type: 3}
