@@ -27,13 +27,13 @@ public class ObjectMove : MonoBehaviour
 
     MapCreate mapCreate;
     Function functionScript;
-    public GameObject function;
+    //public GameObject function;
 
     void Start()
     {
         mapCreate = transform.parent.GetComponent<MapCreate>();
-        function = GameObject.Find("Function");
-        functionScript = function.GetComponent<Function>();//FindObjectOfType<Function>();
+        //function = GameObject.Find("Function");
+       // functionScript = function.GetComponent<Function>();//FindObjectOfType<Function>();
     }
 
     void Update()
@@ -43,7 +43,7 @@ public class ObjectMove : MonoBehaviour
 
     public void MoveMent()
     {
-        if (functionScript.isTouchingHeart)
+        //if (functionScript.isTouchingHeart)
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             if (mapCreate.GetNextMapType(playerNextPos) != MapCreate.MAP_TYPE.WALL)
