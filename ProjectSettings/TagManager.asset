@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - heart
+  - judgTag
+  - attackTag
+  - judgTagw
+  - judgTaga
+  - judgTags
+  - judgTagd
   layers:
   - Default
   - TransparentFX

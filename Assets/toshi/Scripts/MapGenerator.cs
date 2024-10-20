@@ -83,7 +83,6 @@ public class MapGenerator : MonoBehaviour
             {
                 Vector2Int pos = new Vector2Int(x, y);
 
-                //ˆÈ‰º2sC³@‘æ“ñˆø”‚É©g‚Ìtransform‚ğ“n‚·
                 GameObject _ground = Instantiate(prefabs[(int)MAP_TYPE.GROUND], transform);
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
 
@@ -99,7 +98,6 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
-    //C³@public‚É‚µ‚Ä‚¨‚­
     public Vector2 ScreenPos(Vector2Int _pos)
     {
         return new Vector2(
