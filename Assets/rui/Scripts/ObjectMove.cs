@@ -27,8 +27,7 @@ public class ObjectMove : MonoBehaviour
 
     MapCreate mapCreate;
 
-    NotesController notesController;
-    NotesManager notesManager;
+    NotesManager notesManager = null;
     GameObject leftNotes;
     GameObject rightNotes;
 
@@ -38,19 +37,22 @@ public class ObjectMove : MonoBehaviour
         notesManager = GetComponent<NotesManager>();
         leftNotes = GameObject.Find("notesManager.leftNoteObject");
         rightNotes = GameObject.Find("notesManager.rightNoteObject");
-        notesController = leftNotes.GetComponent<NotesController>();//FindObjectOfType<Function>();
-        notesController = rightNotes.GetComponent<NotesController>();
     }
     
     void Update()
     {
-
+        if (notesManager == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
+            notesManager = inst.GetComponent<NotesManager>();
+        }
     }
 
     public void MoveMent()
     {
-        if (notesController.IsTouchingHeart)
+        if (notesManager != null && notesManager.CanInputKey())
         {
+            Debug.Log("aijnnj");
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             if (mapCreate.GetNextMapType(playerNextPos) != MapCreate.MAP_TYPE.WALL)
             {

@@ -17,8 +17,13 @@ public class NotesManager : MonoBehaviour
     private float nextGenerateTime = 1f;
     private float generateTime = 1f;
 
-    public GameObject leftNoteObject;
-    public GameObject rightNoteObject;
+    //    public GameObject leftNoteObject;
+    //    public GameObject rightNoteObject;
+
+    bool isTouchingHeart = false;
+    bool playingTouchSound = false;
+
+    public bool IsTouchingHeart => isTouchingHeart;
 
     private void Awake()
     {
@@ -32,20 +37,45 @@ public class NotesManager : MonoBehaviour
     {
         if (Time.time > nextGenerateTime)
         {
-            leftNoteObject = Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
-            rightNoteObject  = Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
+            Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
+            Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
             nextGenerateTime += generateTime;
         }
     }
 
-    public void PlayTouchSound()
+    public void OnTouchHeart()
+    {
+        if (!isTouchingHeart)
+        {
+            isTouchingHeart = true;
+            PlayTouchSound();
+        }
+    }
+
+    public void OnTimeLimit()
+    {
+        isTouchingHeart = false;
+        StopTouchSound();
+    }
+
+    public bool CanInputKey()
+    {
+        return isTouchingHeart;
+    }
+
+    void PlayTouchSound()
     {
         audioSource.PlayOneShot(touchSound); //ハートに触れたときの音を鳴らす
+        playingTouchSound = true;
     }
 
     public void StopTouchSound()
     {
-        audioSource.Stop(); //ハートに触れたときの音を停止
+        if (playingTouchSound)
+        {
+            audioSource.Stop(); //ハートに触れたときの音を停止
+            playingTouchSound = false;
+        }
     }
 
     public void PlaySpaceSound()

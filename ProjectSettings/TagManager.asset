@@ -11,6 +11,7 @@ TagManager:
   - judgTaga
   - judgTags
   - judgTagd
+  - NotesManager
   layers:
   - Default
   - TransparentFX

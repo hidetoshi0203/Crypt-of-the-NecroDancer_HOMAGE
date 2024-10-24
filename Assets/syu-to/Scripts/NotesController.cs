@@ -12,12 +12,8 @@ public class NotesController : MonoBehaviour
     private Vector3 endPos; //ノーツの終了位置
     private float currentTime = 0f; //ノーツの移動の経過時間
 
-    private bool isTouchingHeart = false; //ハートに触れているかどうか
-    public bool IsTouchingHeart => isTouchingHeart;
-
     private NotesManager notesManager; //NotesManagerのインスタンス
-    private bool canPlaySpaceSound = true; //スペースキーの音を鳴らせるかどうか
-    private bool isTouchSoundPlaying = false; //ハートに触れた音が再生中かどうか
+    bool canPlaySpaceSound = false;
 
     private void Awake()
     {
@@ -29,41 +25,28 @@ public class NotesController : MonoBehaviour
     private void Update()
     {
         currentTime += Time.deltaTime; //経過時間を更新
-        
-        transform.position = Vector3.Lerp(startPos, endPos, currentTime / tempo);　//ノーツの位置を移動
 
-        
-        if (!isTouchingHeart && transform.position.x >= -Heart_range && transform.position.x <= Heart_range) //ハートに触れた場合のチェック
+        transform.position = Vector3.Lerp(startPos, endPos, currentTime / tempo); //ノーツの位置を移動
+
+
+        if (!notesManager.CanInputKey() && transform.position.x >= -Heart_range && transform.position.x <= Heart_range) //ハートに触れた場合のチェック
         {
-            OnTouchHeart();
+            notesManager.OnTouchHeart();
+            canPlaySpaceSound = true; //ハートに触れた後にスペースキーで音を鳴らせるようにフラグをリセット
         }
 
-        
-        if (isTouchingHeart && Input.GetKeyDown(KeyCode.Space) && canPlaySpaceSound) //ハートに触れている状態でスペースキーが押されたとき
+        if (notesManager.CanInputKey() && Input.GetKeyDown(KeyCode.Space) && canPlaySpaceSound) //ハートに触れている状態でスペースキーが押されたとき
         {
-            if (isTouchSoundPlaying)
-            {
-                notesManager.StopTouchSound(); //ハートに触れた音を停止
-            }
+            notesManager.StopTouchSound();
             notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
             canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
         }
 
-        
+
         if (currentTime > tempo) //ノーツが移動し終わったら削除
         {
+            notesManager.OnTimeLimit();
             Destroy(this.gameObject);
-        }
-    }
-
-    public void OnTouchHeart()
-    {
-        if (!isTouchingHeart)
-        {
-            isTouchingHeart = true; //ハートに触れた状態
-            notesManager.PlayTouchSound(); // ハートに触れたときの音を鳴らす
-            isTouchSoundPlaying = true; //ハートの音が再生中であることをフラグに設定
-            canPlaySpaceSound = true; //ハートに触れた後にスペースキーで音を鳴らせるようにフラグをリセット
         }
     }
 
