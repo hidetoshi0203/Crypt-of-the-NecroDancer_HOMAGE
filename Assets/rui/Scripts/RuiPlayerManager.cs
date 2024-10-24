@@ -8,20 +8,25 @@ public class RuiPlayerManager : MonoBehaviour
 {
     ObjectMove objectMove;
     GameObject function;
-    NotesController notesController;
+    NotesManager notesManager = null;
 
     void Start()
     {
         objectMove = GetComponent<ObjectMove>();
         function = GameObject.Find("Function");
-        notesController = FindObjectOfType<NotesController>();
+        //        notesController = FindObjectOfType<NotesController>();
     }
 
     void Update()
     {
-        if (notesController != null && notesController.IsTouchingHeart)
+        if (notesManager == null)
         {
-            Debug.Log("aa");
+            GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
+            notesManager = inst.GetComponent<NotesManager>();
+        }
+        if (notesManager != null && notesManager.CanInputKey())
+        {
+            //Debug.Log("aa");
             if (Input.GetKeyDown(KeyCode.W))
             {
                 objectMove.direction = ObjectMove.DIRECTION.TOP;

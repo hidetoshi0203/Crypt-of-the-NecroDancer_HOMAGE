@@ -19,7 +19,7 @@ public class MapCreate : MonoBehaviour
         FLOOR, //0
         WALL,  //1
         PLAYER, //2
-        ENEMY//3
+        //ENEMY//3
     }
 
     public MAP_TYPE GetNextMapType(Vector2Int _pos)

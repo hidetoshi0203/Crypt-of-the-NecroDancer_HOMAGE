@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 1.5
-  bpm: 60
+  bpm: 30
 --- !u!4 &1224234239
 Transform:
   m_ObjectHideFlags: 0
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 1615398702}
   m_Layer: 0
   m_Name: Notes Manager
-  m_TagString: Untagged
+  m_TagString: NotesManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
