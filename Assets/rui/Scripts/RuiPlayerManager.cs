@@ -31,7 +31,7 @@ public class RuiPlayerManager : MonoBehaviour
             canPlaySpaceSound = true;
 
             //Debug.Log("aa");
-            if (Input.GetKeyDown(KeyCode.W) && canPlaySpaceSound)
+            if (Input.GetKeyDown(KeyCode.W) && canPlaySpaceSound) // Wキーを押したら移動する
             {
                 objectMove.direction = ObjectMove.DIRECTION.TOP;
                 objectMove.MoveMent();
@@ -41,7 +41,7 @@ public class RuiPlayerManager : MonoBehaviour
                 canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
             }
 
-            if (Input.GetKeyDown(KeyCode.D) && canPlaySpaceSound)
+            if (Input.GetKeyDown(KeyCode.D) && canPlaySpaceSound) // Dキーを押したら移動する
             {
                 objectMove.direction = ObjectMove.DIRECTION.RIGHT;
                 objectMove.MoveMent();
@@ -51,7 +51,7 @@ public class RuiPlayerManager : MonoBehaviour
                 canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
             }
 
-            if (Input.GetKeyDown(KeyCode.S) && canPlaySpaceSound)
+            if (Input.GetKeyDown(KeyCode.S) && canPlaySpaceSound) // Sキーを押したら下に移動する
             {
                 objectMove.direction = ObjectMove.DIRECTION.DOWN;
                 objectMove.MoveMent();
