@@ -12,6 +12,11 @@ TagManager:
   - judgTags
   - judgTagd
   - NotesManager
+  - WTag
+  - ATag
+  - STag
+  - DTag
+  - Enemy
   layers:
   - Default
   - TransparentFX

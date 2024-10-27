@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class toshiPlayer : MonoBehaviour
 {
+    EnemyJudgement enemyJudgementW = null;
+    EnemyJudgement enemyJudgementA = null;
+    EnemyJudgement enemyJudgementS = null;
+    EnemyJudgement enemyJudgementD = null;
+
+    public bool isAttack;
     public enum DIRECTION
     {
         TOP,
@@ -29,6 +35,7 @@ public class toshiPlayer : MonoBehaviour
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
 
         direction = DIRECTION.DOWN;
+
     }
     
 
@@ -37,6 +44,30 @@ public class toshiPlayer : MonoBehaviour
     //Å@ì¸óÕéûÇ…_moveä÷êîÇåƒÇ‘ÇÊÇ§Ç…Ç∑ÇÈÅB
     private void Update()
     {
+        if (enemyJudgementW == null)
+        {
+            GameObject instW = GameObject.FindGameObjectWithTag("WTag");
+            enemyJudgementW = instW.GetComponent<EnemyJudgement>();
+        }
+
+        if (enemyJudgementA == null)
+        {
+            GameObject instA = GameObject.FindGameObjectWithTag("ATag");
+            enemyJudgementA = instA.GetComponent<EnemyJudgement>();
+        }
+
+        if (enemyJudgementS == null)
+        {
+            GameObject instS = GameObject.FindGameObjectWithTag("STag");
+            enemyJudgementS = instS.GetComponent<EnemyJudgement>();
+        }
+
+        if (enemyJudgementD == null)
+        {
+            GameObject instD = GameObject.FindGameObjectWithTag("DTag");
+            enemyJudgementD = instD.GetComponent<EnemyJudgement>();
+        }
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             direction = DIRECTION.TOP;
@@ -51,6 +82,7 @@ public class toshiPlayer : MonoBehaviour
         {
             direction = DIRECTION.DOWN;
             _moveType();
+            Debug.Log("aaa");
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -72,7 +104,34 @@ public class toshiPlayer : MonoBehaviour
         else if(mapGenerator.GetNextMapType(nextPos) == MapGenerator.MAP_TYPE.ENEMY)
         {
             // çUåÇ
-
+            //if (enemyJudgementW.isEnemyJudge)
+            {
+                if (Input.GetKeyDown(KeyCode.W)) 
+                {
+                    isAttack = true;
+                }
+            }
+            //if (enemyJudgementA.isEnemyJudge)
+            {
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    isAttack = true;
+                }
+            }
+            //if (enemyJudgementS.isEnemyJudge)
+            {
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    isAttack = true;
+                }
+            }
+            //if (enemyJudgementD.isEnemyJudge)
+            {
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    isAttack = true;
+                }
+            }
         }
         else if(mapGenerator.GetNextMapType(nextPos) == MapGenerator.MAP_TYPE.GROUND || mapGenerator.GetNextMapType(nextPos) == MapGenerator.MAP_TYPE.PLAYER)
         {
