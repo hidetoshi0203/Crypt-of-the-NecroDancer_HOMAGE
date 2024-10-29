@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-
     toshiPlayer ToshiPlayer = null;
+    public Vector2Int pos;
+    MapGenerator mapGenerator;
+    void Start()
+    {
+        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+    }
     private void Update()
     {
         if (ToshiPlayer == null) 
@@ -17,6 +22,7 @@ public class EnemyManager : MonoBehaviour
         if (ToshiPlayer.isAttack)
         {
             Destroy(gameObject);
+            mapGenerator.UpdateTilie(pos, MapGenerator.MAP_TYPE.GROUND);
         }
     }
 }
