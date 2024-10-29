@@ -7,10 +7,12 @@ using UnityEngine.UIElements;
 
 public class ruiEnemyManager : MonoBehaviour
 {
+    toshiPlayer ToshiPlayer = null;
     ObjectMove objectMove;
-    public GameObject slime;
-    private bool isEnemyMoveUp;
+    private bool isEnemyMove = false;
     private float enemyMoveTime;
+
+    public Vector2Int pos;
 
     // Start is called before the first frame update
     void Start()
@@ -21,22 +23,30 @@ public class ruiEnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ToshiPlayer == null)
+        {
+            GameObject instPScript = GameObject.FindGameObjectWithTag("Player");
+            ToshiPlayer = instPScript.GetComponent<toshiPlayer>();
+        }
+
         enemyMoveTime += Time.deltaTime;
 
         if (enemyMoveTime > 1)
         {
+            isEnemyMove = true;
             enemyMoveTime = 0;
+        }
 
-            if (slime.name == "Slime" && isEnemyMoveUp)
-            {
-                objectMove.direction = ObjectMove.DIRECTION.TOP;
-                objectMove.MoveMent();
-            }
-            else if (slime.name == "Slime" && !isEnemyMoveUp)
-            {
-                objectMove.direction = ObjectMove.DIRECTION.DOWN;
-                objectMove.MoveMent();
-            }
+        if (!ToshiPlayer.isAttack && isEnemyMove)
+        {
+            objectMove.direction = ObjectMove.DIRECTION.TOP;
+            objectMove.MoveMent();
+        }
+
+        if (ToshiPlayer.isAttack)
+        {
+            Destroy(gameObject);
+            //mapGenerator.UpdateTilie(pos, MapGenerator.MAP_TYPE.GROUND);
         }
     }
 }

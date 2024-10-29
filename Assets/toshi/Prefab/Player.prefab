@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3037332067090051203}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,4 +114,3 @@ MonoBehaviour:
   direction: 0
   playerCurrentPos: {x: 0, y: 0}
   playerNextPos: {x: 0, y: 0}
-  Notes: {fileID: 8437184838734769576, guid: 42801792e0daf4e4ebb5d29600e51381, type: 3}
