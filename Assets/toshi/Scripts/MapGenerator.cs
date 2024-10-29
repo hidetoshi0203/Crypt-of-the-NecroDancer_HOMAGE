@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -8,6 +10,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject[] prefabs;
     float mapSize;
     Vector2 centerPos;
+    string filePath = Application.dataPath + @"\toshi\Map1.txt";
+
     public enum MAP_TYPE
     {
         GROUND, //0
@@ -28,6 +32,9 @@ public class MapGenerator : MonoBehaviour
 
         //追加　マップ生成関数を呼び出す
         _createMap();
+
+        
+
     }
 
     void _loadMapData()
@@ -51,6 +58,7 @@ public class MapGenerator : MonoBehaviour
                 mapTable[x, y] = (MAP_TYPE)int.Parse(mapValues[x]);
             }
         }
+
     }
     void _createMap()
     {
@@ -85,6 +93,10 @@ public class MapGenerator : MonoBehaviour
 
                 GameObject _ground = Instantiate(prefabs[(int)MAP_TYPE.GROUND], transform);
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
+                if (mapTable[x,y] == MAP_TYPE.ENEMY)
+                {
+                    _map.GetComponent<EnemyManager>().pos = pos;
+                }
 
 
                 _ground.transform.position = ScreenPos(pos);
@@ -104,5 +116,10 @@ public class MapGenerator : MonoBehaviour
             _pos.x * mapSize - centerPos.x,
             -(_pos.y * mapSize - centerPos.y));
 
+    }
+
+   public void UpdateTilie(Vector2Int _pos,MAP_TYPE mapType)
+    {
+        mapTable[_pos.x, _pos.y] = mapType;
     }
 }
