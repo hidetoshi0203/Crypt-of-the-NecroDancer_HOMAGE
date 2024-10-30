@@ -10,7 +10,6 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject[] prefabs;
     float mapSize;
     Vector2 centerPos;
-    string filePath = Application.dataPath + @"\toshi\Map1.txt";
 
     public enum MAP_TYPE
     {
@@ -19,7 +18,7 @@ public class MapGenerator : MonoBehaviour
         PLAYER, //2
         ENEMY   //3
     }
-    MAP_TYPE[,] mapTable;
+    public MAP_TYPE[,] mapTable;
 
     public MAP_TYPE GetNextMapType(Vector2Int _pos)
     {

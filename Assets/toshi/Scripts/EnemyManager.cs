@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     toshiPlayer ToshiPlayer = null;
     public Vector2Int pos;
+    public Vector2Int deathEPos;
     MapGenerator mapGenerator;
     void Start()
     {
@@ -21,8 +22,13 @@ public class EnemyManager : MonoBehaviour
     
         if (ToshiPlayer.isAttack)
         {
-            Destroy(gameObject);
-            mapGenerator.UpdateTilie(pos, MapGenerator.MAP_TYPE.GROUND);
+            deathEPos = ToshiPlayer.nextPos;
+            Debug.Log(deathEPos);
+            if (deathEPos == pos) { 
+                Destroy(gameObject);
+                mapGenerator.UpdateTilie(pos, MapGenerator.MAP_TYPE.GROUND);
+            }
+
         }
     }
 }
