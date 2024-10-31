@@ -41,28 +41,28 @@ public class toshiPlayer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             direction = DIRECTION.TOP;
-            _moveType();
+            moveType();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             direction = DIRECTION.RIGHT;
-            _moveType();
+            moveType();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             direction = DIRECTION.DOWN;
-            _moveType();
+            moveType();
             Debug.Log("aaa");
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             direction = DIRECTION.LEFT;
-            _moveType();
+            moveType();
         }
     }
 
     //à⁄ìÆópÇÃä÷êî
-    void _moveType()
+    void moveType()
     {
         nextPos = currentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
 
@@ -90,7 +90,7 @@ public class toshiPlayer : MonoBehaviour
                 isAttack = true;
            }
         }
-        else if(mapGenerator.GetNextMapType(nextPos) != MapGenerator.MAP_TYPE.WALL || mapGenerator.GetNextMapType(nextPos) != MapGenerator.MAP_TYPE.ENEMY)
+        else if(mapGenerator.GetNextMapType(nextPos) != MapGenerator.MAP_TYPE.WALL)
         {
             // à⁄ìÆ
             mapGenerator.UpdateTilie(currentPos, MapGenerator.MAP_TYPE.GROUND);
