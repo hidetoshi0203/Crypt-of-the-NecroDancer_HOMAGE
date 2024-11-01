@@ -22,7 +22,7 @@ public class NotesManager : MonoBehaviour
 
     bool isTouchingHeart = false;
     bool playingTouchSound = false;
-
+    public bool canMove = false;
     public bool IsTouchingHeart => isTouchingHeart;
 
     private void Awake()
@@ -47,6 +47,7 @@ public class NotesManager : MonoBehaviour
     {
         if (!isTouchingHeart)
         {
+            canMove = true;
             isTouchingHeart = true;
             PlayTouchSound();
         }

@@ -13,7 +13,6 @@ public class NotesController : MonoBehaviour
     private float currentTime = 0f; //ノーツの移動の経過時間
 
     private NotesManager notesManager; //NotesManagerのインスタンス
-    bool canPlaySpaceSound = false;
 
     private void Awake()
     {
@@ -32,14 +31,14 @@ public class NotesController : MonoBehaviour
         if (!notesManager.CanInputKey() && transform.position.x >= -Heart_range && transform.position.x <= Heart_range) //ハートに触れた場合のチェック
         {
             notesManager.OnTouchHeart();
-            canPlaySpaceSound = true; //ハートに触れた後にスペースキーで音を鳴らせるようにフラグをリセット
+            notesManager.canMove = true; //ハートに触れた後にスペースキーで音を鳴らせるようにフラグをリセット
         }
 
-        if (notesManager.CanInputKey() && Input.GetKeyDown(KeyCode.Space) && canPlaySpaceSound) //ハートに触れている状態でスペースキーが押されたとき
+        if (notesManager.CanInputKey() && Input.GetKeyDown(KeyCode.Space) && notesManager.canMove) //ハートに触れている状態でスペースキーが押されたとき
         {
             notesManager.StopTouchSound();
             notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-            canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
+            notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
         }
 
 
@@ -52,6 +51,6 @@ public class NotesController : MonoBehaviour
 
     private void OnDestroy()
     {
-        canPlaySpaceSound = true; //ノーツが削除されるときフラグをリセット
+        notesManager.canMove = true; //ノーツが削除されるときフラグをリセット
     }
 }

@@ -30,8 +30,6 @@ public class toshiPlayer : MonoBehaviour
     GameObject rightNotes;
     GameObject function;
 
-    bool canPlaySpaceSound = false;
-
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
@@ -55,40 +53,41 @@ public class toshiPlayer : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
-           canPlaySpaceSound = true;
+            if (notesManager.canMove)
+            {
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    direction = DIRECTION.TOP;
+                    moveType();
+                    notesManager.StopTouchSound();
+                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
+                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
 
-            if (Input.GetKeyDown(KeyCode.W) && canPlaySpaceSound)
-            {
-                direction = DIRECTION.TOP;
-                moveType();
-                notesManager.StopTouchSound();
-                notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
-                return;
-            }
-            if (Input.GetKeyDown(KeyCode.D) && canPlaySpaceSound)
-            {
-                direction = DIRECTION.RIGHT;
-                moveType();
-                notesManager.StopTouchSound();
-                notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
-            }
-            if (Input.GetKeyDown(KeyCode.S) && canPlaySpaceSound)
-            {
-                direction = DIRECTION.DOWN;
-                moveType();
-                notesManager.StopTouchSound();
-                notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
-            }
-            if (Input.GetKeyDown(KeyCode.A) && canPlaySpaceSound)
-            {
-                direction = DIRECTION.LEFT;
-                moveType();
-                notesManager.StopTouchSound();
-                notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                canPlaySpaceSound = false; //フラグをオフにして音を鳴らせないようにする
+                }
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    direction = DIRECTION.RIGHT;
+                    moveType();
+                    notesManager.StopTouchSound();
+                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
+                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                }
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    direction = DIRECTION.DOWN;
+                    moveType();
+                    notesManager.StopTouchSound();
+                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
+                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                }
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    direction = DIRECTION.LEFT;
+                    moveType();
+                    notesManager.StopTouchSound();
+                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
+                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                }
             }
         }
     }
