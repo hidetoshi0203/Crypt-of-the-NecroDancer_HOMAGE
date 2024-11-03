@@ -34,9 +34,6 @@ public class toshiPlayer : MonoBehaviour
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
-        leftNotes = GameObject.Find("notesManager.leftNoteObject");
-        rightNotes = GameObject.Find("notesManager.rightNoteObject");
-        function = GameObject.Find("Function");
         direction = DIRECTION.DOWN;
     }
     
@@ -60,7 +57,6 @@ public class toshiPlayer : MonoBehaviour
                     direction = DIRECTION.TOP;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
                     notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
 
                 }
@@ -69,7 +65,6 @@ public class toshiPlayer : MonoBehaviour
                     direction = DIRECTION.RIGHT;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
                     notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
                 }
                 if (Input.GetKeyDown(KeyCode.S))
@@ -77,7 +72,6 @@ public class toshiPlayer : MonoBehaviour
                     direction = DIRECTION.DOWN;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
                     notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
                 }
                 if (Input.GetKeyDown(KeyCode.A))
@@ -85,7 +79,6 @@ public class toshiPlayer : MonoBehaviour
                     direction = DIRECTION.LEFT;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
                     notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
                 }
             }
