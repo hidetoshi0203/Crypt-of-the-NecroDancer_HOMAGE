@@ -21,7 +21,7 @@ public class toshiPlayer : MonoBehaviour
     };
 
     public DIRECTION direction;
-    public Vector2Int currentPos, nextPos;
+    public Vector2Int playerCurrentPos, playerNextPos;
     public bool isAttack;
 
     MapGenerator mapGenerator;
@@ -90,18 +90,18 @@ public class toshiPlayer : MonoBehaviour
     {
         if (notesManager != null && notesManager.CanInputKey())
         {
-            nextPos = currentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+            playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
 
-            if (mapGenerator.GetNextMapType(nextPos) == MapGenerator.MAP_TYPE.WALL)
+            if (mapGenerator.GetNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL) // 入力先(プレイヤーのnextPos)が壁だった場合
             {
-                // 何もしない
-
+                // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
             }
-            else if (mapGenerator.GetNextMapType(nextPos) == MapGenerator.MAP_TYPE.ENEMY)
+            else if (mapGenerator.GetNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
             {
+                // 上下左右の入力判定をとりboolをtrueにする
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    isAttack = true;
+                    isAttack = true; // EnemyManager.csでtrueを受け取り、敵を倒す（MapGenarator.csのMAP_TYPEをENEMYからGROUND書き換える）
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
@@ -116,14 +116,13 @@ public class toshiPlayer : MonoBehaviour
                     isAttack = true;
                 }
             }
-            else if (mapGenerator.GetNextMapType(nextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
             {
-                // 移動
-                mapGenerator.UpdateTilie(currentPos, MapGenerator.MAP_TYPE.GROUND);
-                transform.localPosition = mapGenerator.ScreenPos(nextPos);
-                currentPos = nextPos;
-                mapGenerator.UpdateTilie(currentPos, MapGenerator.MAP_TYPE.PLAYER);
-                Debug.Log("移動");
+                // 移動する
+                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+                transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
+                playerCurrentPos = playerNextPos;
+                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
             }
         }
     }

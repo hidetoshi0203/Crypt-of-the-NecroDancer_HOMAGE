@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     toshiPlayer ToshiPlayer = null;
-    public Vector2Int pos;
-    public Vector2Int deathEPos;
+    public Vector2Int enemyCurrentPos;       // 今の座標
+    public Vector2Int attackedPos; // プレイヤーから攻撃された敵オブジェクトの座標
     MapGenerator mapGenerator;
     void Start()
     {
@@ -22,11 +22,11 @@ public class EnemyManager : MonoBehaviour
     
         if (ToshiPlayer.isAttack)
         {
-            deathEPos = ToshiPlayer.nextPos;
-            Debug.Log(deathEPos);
-            if (deathEPos == pos) { 
-                Destroy(gameObject);
-                mapGenerator.UpdateTilie(pos, MapGenerator.MAP_TYPE.GROUND);
+            attackedPos = ToshiPlayer.playerNextPos;　// プレイヤーのnextPosを代入する
+            if (attackedPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
+            { 
+                Destroy(gameObject); // 敵のオブジェクトをDestroyする
+                mapGenerator.UpdateTilie(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
             }
 
         }

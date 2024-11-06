@@ -48,7 +48,7 @@ public class toshiEnemy : MonoBehaviour
                 if (count == 0)
                 {
                     direction = DIRECTION.DOWN;
-                    eMoveType();
+                    //eMoveType();
                     notesManager.StopTouchSound();
                     notesManager.canMove = false;
                     count++;
@@ -56,7 +56,7 @@ public class toshiEnemy : MonoBehaviour
                 if (count != 0)
                 {
                     direction = DIRECTION.TOP;
-                    eMoveType();
+                    //eMoveType();
                     notesManager.StopTouchSound();
                     notesManager.canMove = false;
                     count = 0;
