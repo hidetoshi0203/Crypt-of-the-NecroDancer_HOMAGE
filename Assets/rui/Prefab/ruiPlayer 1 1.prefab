@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514284163240279630}
   - component: {fileID: 6262497649308114380}
-  - component: {fileID: 1032348618948347347}
+  - component: {fileID: 6692671424585562400}
   m_Layer: 0
   m_Name: ruiPlayer 1 1
   m_TagString: Player
@@ -243,7 +243,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1032348618948347347
+--- !u!114 &6692671424585562400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,13 +252,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5870177880929257009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 319c19da404b3d6419e3e7c1fea2f08f, type: 3}
+  m_Script: {fileID: 11500000, guid: dd61566bf3a499e469286dd48a3a588b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
-  currentPos: {x: 0, y: 0}
-  nextPos: {x: 0, y: 0}
-  isAttack: 0
 --- !u!1 &8958697085528578355
 GameObject:
   m_ObjectHideFlags: 0
