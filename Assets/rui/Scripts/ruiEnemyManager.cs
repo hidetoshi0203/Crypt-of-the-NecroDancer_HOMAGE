@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class ruiEnemyManager : MonoBehaviour
 {
     toshiPlayer ToshiPlayer = null;
+    NotesManager notesManager = null;
     ObjectMove objectMove;
     private bool isEnemyMove = false;
     private float enemyMoveTime;
@@ -29,6 +30,12 @@ public class ruiEnemyManager : MonoBehaviour
             ToshiPlayer = instPScript.GetComponent<toshiPlayer>();
         }
 
+        if(notesManager == null)
+        {
+            GameObject instNotesM = GameObject.FindGameObjectWithTag("NotesManager");
+            notesManager = instNotesM.GetComponent<NotesManager>();
+        }
+
         enemyMoveTime += Time.deltaTime;
 
         if (enemyMoveTime > 1)
@@ -37,16 +44,21 @@ public class ruiEnemyManager : MonoBehaviour
             enemyMoveTime = 0;
         }
 
-        if (!ToshiPlayer.isAttack && isEnemyMove)
+        if (notesManager != null && notesManager.CanInputKey())
         {
-            objectMove.direction = ObjectMove.DIRECTION.TOP;
-            objectMove.MoveMent();
-        }
+            notesManager.canMove = true;
 
-        if (ToshiPlayer.isAttack)
-        {
-            Destroy(gameObject);
-            //mapGenerator.UpdateTilie(pos, MapGenerator.MAP_TYPE.GROUND);
+            if (!ToshiPlayer.isAttack && isEnemyMove && notesManager.canMove)
+            {
+                objectMove.direction = ObjectMove.DIRECTION.TOP;
+                objectMove.MoveMent();
+            }
+
+            if (ToshiPlayer.isAttack)
+            {
+                Destroy(gameObject);
+                //mapGenerator.UpdateTilie(pos, MapGenerator.MAP_TYPE.GROUND);
+            }
         }
     }
 }
