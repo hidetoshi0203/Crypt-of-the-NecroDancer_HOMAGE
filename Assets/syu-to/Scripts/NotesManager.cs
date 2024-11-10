@@ -46,6 +46,7 @@ public class NotesManager : MonoBehaviour
         if (!isTouchingHeart)
         {
             playerCanMove = true;
+            enemyCanMove= true;
             isTouchingHeart = true;
             PlayTouchSound();
         }
