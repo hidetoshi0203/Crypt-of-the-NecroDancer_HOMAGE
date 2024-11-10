@@ -13,12 +13,14 @@ public class NotesController : MonoBehaviour
     private float currentTime = 0f; //ノーツの移動の経過時間
 
     private NotesManager notesManager; //NotesManagerのインスタンス
+    private ComboManager comboManager;
 
     private void Awake()
     {
         startPos = transform.position; //現在の位置を生成位置として設定
         endPos = new Vector3(endX, startPos.y, startPos.z); //ノーツの目的地を設定
         notesManager = FindObjectOfType<NotesManager>(); //NotesManagerを取得
+        comboManager = FindObjectOfType<ComboManager>();
     }
 
     private void Update()
@@ -40,8 +42,9 @@ public class NotesController : MonoBehaviour
             notesManager.StopTouchSound();
             notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
             notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
-        }
 
+            comboManager.IncreaseCombo();
+        }
 
         //ノーツが移動し終わったら削除
         if (currentTime > tempo)
