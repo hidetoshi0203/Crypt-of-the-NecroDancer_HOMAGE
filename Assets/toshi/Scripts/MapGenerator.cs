@@ -20,10 +20,16 @@ public class MapGenerator : MonoBehaviour
     }
     public MAP_TYPE[,] mapTable;
 
-    public MAP_TYPE GetNextMapType(Vector2Int _pos)
+    public MAP_TYPE GetPlayerNextMapType(Vector2Int _pos)
     {
         return mapTable[_pos.x, _pos.y];
     }
+
+    public MAP_TYPE GetEnemyNextMapType(Vector2Int _pos)
+    {
+        return mapTable[_pos.x, _pos.y];
+    }
+    public 
 
     void Start()
     {

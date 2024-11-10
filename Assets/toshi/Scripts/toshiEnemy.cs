@@ -36,6 +36,7 @@ public class toshiEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(eNextPos);
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -48,7 +49,7 @@ public class toshiEnemy : MonoBehaviour
                 if (count == 0)
                 {
                     direction = DIRECTION.DOWN;
-                    //eMoveType();
+                    eMoveType();
                     notesManager.enemyCanMove = false;
                     count++;
                 }
@@ -74,15 +75,15 @@ public class toshiEnemy : MonoBehaviour
             eNextPos = eCurrentPos + new Vector2Int(move[(int)direction, 0],
                 move[(int)direction, 1]);
 
-            if (mapGenerator.GetNextMapType(eNextPos) == MapGenerator.MAP_TYPE.WALL)
+            if (mapGenerator.GetEnemyNextMapType(eNextPos) == MapGenerator.MAP_TYPE.WALL)
             {
                 // âΩÇ‡ÇµÇ»Ç¢
             }
-            else if (mapGenerator.GetNextMapType(eNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            else if (mapGenerator.GetEnemyNextMapType(eNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
                 // ÉvÉåÉCÉÑÅ[Ç…çUåÇÇ∑ÇÈ
             }
-            else if (mapGenerator.GetNextMapType(eNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetEnemyNextMapType(eNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
                 //à⁄ìÆ
                 mapGenerator.UpdateTilie(eCurrentPos, MapGenerator.MAP_TYPE.GROUND);
