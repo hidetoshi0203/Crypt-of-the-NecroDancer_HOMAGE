@@ -50,14 +50,14 @@ public class toshiPlayer : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
-            if (notesManager.canMove)
+            if (notesManager.playerCanMove)
             {
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     direction = DIRECTION.TOP;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
 
                 }
                 if (Input.GetKeyDown(KeyCode.D))
@@ -65,21 +65,21 @@ public class toshiPlayer : MonoBehaviour
                     direction = DIRECTION.RIGHT;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     direction = DIRECTION.DOWN;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
                     direction = DIRECTION.LEFT;
                     moveType();
                     notesManager.StopTouchSound();
-                    notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
                 }
             }
         }
