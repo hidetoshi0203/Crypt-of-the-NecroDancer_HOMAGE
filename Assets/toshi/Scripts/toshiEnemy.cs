@@ -19,9 +19,9 @@ public class toshiEnemy : MonoBehaviour
       { -1, 0 }   //LEFTÇÃèÍçá
     };
     public DIRECTION direction;
-    public Vector2Int eCurrentPos, eNextPos;
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
+    EnemyManager enemyManager;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -31,12 +31,14 @@ public class toshiEnemy : MonoBehaviour
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
+        enemyManager = GetComponent<EnemyManager>();
         direction = DIRECTION.DOWN;
     }
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("enemy" + eNextPos);
+        Debug.Log("enemy" + enemyManager.enemyCurrentPos);
+        Debug.Log("enemyNext" + enemyManager.enemyNextPos);
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -44,6 +46,7 @@ public class toshiEnemy : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
+            count = 1;
             if (notesManager.enemyCanMove)
             {
                 if (count == 0)
@@ -51,9 +54,9 @@ public class toshiEnemy : MonoBehaviour
                     direction = DIRECTION.DOWN;
                     eMoveType();
                     notesManager.enemyCanMove = false;
-                    count++;
+                    
                 }
-                if (count != 0)
+                if (count == 1)
                 {
                     direction = DIRECTION.TOP;
                     eMoveType();
@@ -72,24 +75,24 @@ public class toshiEnemy : MonoBehaviour
         //â∫ÇÃèàóùÇæÇ∆à⁄ìÆÇ≈Ç´Ç»Ç¢
         if (notesManager != null && notesManager.CanInputKey())
         {
-            eNextPos = eCurrentPos + new Vector2Int(move[(int)direction, 0],
+            enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0],
                 move[(int)direction, 1]);
 
-            if (mapGenerator.GetEnemyNextMapType(eNextPos) == MapGenerator.MAP_TYPE.WALL)
+            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
             {
                 // âΩÇ‡ÇµÇ»Ç¢
             }
-            else if (mapGenerator.GetEnemyNextMapType(eNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
                 // ÉvÉåÉCÉÑÅ[Ç…çUåÇÇ∑ÇÈ
             }
-            else if (mapGenerator.GetEnemyNextMapType(eNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
                 //à⁄ìÆ
-                mapGenerator.UpdateTilie(eCurrentPos, MapGenerator.MAP_TYPE.GROUND);
-                transform.localPosition = mapGenerator.ScreenPos(eNextPos);
-                eCurrentPos = eNextPos;
-                mapGenerator.UpdateTilie(eCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
+                mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
+                enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
+                mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
                 Debug.Log("ìGÇ™à⁄ìÆ");
             }
         }

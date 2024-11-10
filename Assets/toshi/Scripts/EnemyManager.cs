@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     toshiPlayer ToshiPlayer = null;
-    public Vector2Int enemyCurrentPos;       // 今の座標
+    public Vector2Int enemyCurrentPos , enemyNextPos;       // 今の座標
     public Vector2Int attackedPos; // プレイヤーから攻撃された敵オブジェクトの座標
     MapGenerator mapGenerator;
     void Start()

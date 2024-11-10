@@ -43,7 +43,6 @@ public class toshiPlayer : MonoBehaviour
     //@“ü—Í‚É_moveŠÖ”‚ğŒÄ‚Ô‚æ‚¤‚É‚·‚éB
     private void Update()
     {
-        Debug.Log(playerNextPos);
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");

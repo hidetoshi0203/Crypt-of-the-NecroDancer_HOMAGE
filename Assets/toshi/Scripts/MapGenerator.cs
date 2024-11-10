@@ -98,7 +98,7 @@ public class MapGenerator : MonoBehaviour
 
                 GameObject _ground = Instantiate(prefabs[(int)MAP_TYPE.GROUND], transform);
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
-                if (mapTable[x,y] == MAP_TYPE.ENEMY)
+                if (mapTable[x, y] == MAP_TYPE.ENEMY)
                 {
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
                 }
