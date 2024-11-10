@@ -7,25 +7,22 @@ public class rtoshiEnemy : MonoBehaviour
     public enum DIRECTION
     {
         TOP,
-        RIGHT,
         DOWN,
-        LEFT
     }
 
     int[,] move = {
       { 0, -1 },　//TOPの場合
-      { 1, 0 },   //RIGHTの場合
       { 0, 1 },   //DOWNの場合
-      { -1, 0 }   //LEFTの場合
     };
     public DIRECTION direction;
     public Vector2Int eCurrentPos, eNextPos;
     rMapGenerator mapGenerator;
     NotesManager notesManager = null;
+    EnemyManager enemyManager;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
-    int count = 0;  
+    float count = 0;  
 
     void Start()
     {
@@ -36,6 +33,8 @@ public class rtoshiEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(eNextPos);
+        //Debug.Log(count);
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -43,25 +42,28 @@ public class rtoshiEnemy : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
-            notesManager.enemyCanMove = true;
-
+            count++;
             if (notesManager.enemyCanMove)
             {
-                if (count == 0)
+                if (0 <= count && count <= 60)
                 {
                     direction = DIRECTION.DOWN;
-                    //eMoveType();
+                    eMoveType();
                     notesManager.StopTouchSound();
                     notesManager.enemyCanMove = false;
-                    count++;
                 }
-                if (count != 0)
+                if (60 <= count && count <= 120)
                 {
                     direction = DIRECTION.TOP;
-                    //eMoveType();
+                    eMoveType();
                     notesManager.StopTouchSound();
                     notesManager.enemyCanMove = false;
+                }
+                if (120 <= count)
+                {
                     count = 0;
+                    notesManager.enemyCanMove = false;
+
                 }
             }
         }
@@ -93,9 +95,11 @@ public class rtoshiEnemy : MonoBehaviour
                 transform.localPosition = mapGenerator.ScreenPos(eNextPos);
                 eCurrentPos = eNextPos;
                 mapGenerator.UpdateTilie(eCurrentPos, rMapGenerator.MAP_TYPE.ENEMY);
-                Debug.Log("敵が移動");
+                //Debug.Log("敵が移動");
             }
         }
     }
     
+    //プレイヤーを追いかける敵の動きで、プレイヤーが壁の向こうにいても追うようにする。↓資料
+    //経路探索、ダイクストラ法、Aスター法、←優先、Navigation
 }

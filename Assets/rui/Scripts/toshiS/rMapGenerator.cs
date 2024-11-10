@@ -99,7 +99,7 @@ public class rMapGenerator : MonoBehaviour
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
                 if (mapTable[x,y] == MAP_TYPE.ENEMY)
                 {
-                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                    _map.GetComponent<rtoshiEnemy>().eCurrentPos = pos;
                 }
 
 
@@ -108,7 +108,7 @@ public class rMapGenerator : MonoBehaviour
 
                 if (mapTable[x, y] == MAP_TYPE.PLAYER)
                 {
-                    _map.GetComponent<toshiPlayer>().playerCurrentPos = pos;
+                    _map.GetComponent<rtoshiPlayer>().playerCurrentPos = pos;
 
                 }
             }
