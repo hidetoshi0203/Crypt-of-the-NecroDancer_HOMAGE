@@ -46,9 +46,9 @@ public class ruiEnemyManager : MonoBehaviour
 
         if (notesManager != null && notesManager.CanInputKey())
         {
-            notesManager.canMove = true;
+            notesManager.enemyCanMove = true;
 
-            if (!ToshiPlayer.isAttack && isEnemyMove && notesManager.canMove)
+            if (!ToshiPlayer.isAttack && isEnemyMove && notesManager.enemyCanMove)
             {
                 objectMove.direction = ObjectMove.DIRECTION.TOP;
                 objectMove.MoveMent();

@@ -43,14 +43,14 @@ public class rtoshiEnemy : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
-            if (notesManager.canMove)
+            if (notesManager.enemyCanMove)
             {
                 if (count == 0)
                 {
                     direction = DIRECTION.DOWN;
                     //eMoveType();
                     notesManager.StopTouchSound();
-                    notesManager.canMove = false;
+                    notesManager.enemyCanMove = false;
                     count++;
                 }
                 if (count != 0)
@@ -58,7 +58,7 @@ public class rtoshiEnemy : MonoBehaviour
                     direction = DIRECTION.TOP;
                     //eMoveType();
                     notesManager.StopTouchSound();
-                    notesManager.canMove = false;
+                    notesManager.enemyCanMove = false;
                     count = 0;
                 }
             }
