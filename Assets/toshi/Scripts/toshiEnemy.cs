@@ -36,7 +36,7 @@ public class toshiEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(eNextPos);
+        Debug.Log("enemy" + eNextPos);
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -56,7 +56,7 @@ public class toshiEnemy : MonoBehaviour
                 if (count != 0)
                 {
                     direction = DIRECTION.TOP;
-                    //eMoveType();
+                    eMoveType();
                     notesManager.enemyCanMove = false;
                     count = 0;
                 }

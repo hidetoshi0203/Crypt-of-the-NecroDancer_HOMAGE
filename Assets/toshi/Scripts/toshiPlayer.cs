@@ -93,11 +93,11 @@ public class toshiPlayer : MonoBehaviour
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
 
-            if (mapGenerator.GetNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL) // 入力先(プレイヤーのnextPos)が壁だった場合
+            if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL) // 入力先(プレイヤーのnextPos)が壁だった場合
             {
                 // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
             }
-            else if (mapGenerator.GetNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
+            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
             {
                 // 上下左右の入力判定をとりboolをtrueにする
                 if (Input.GetKeyDown(KeyCode.W))
@@ -117,7 +117,7 @@ public class toshiPlayer : MonoBehaviour
                     isAttack = true;
                 }
             }
-            else if (mapGenerator.GetNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
+            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
             {
                 // 移動する
                 mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
