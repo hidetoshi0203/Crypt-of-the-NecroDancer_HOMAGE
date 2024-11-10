@@ -20,7 +20,7 @@ public class rtoshiEnemy : MonoBehaviour
     };
     public DIRECTION direction;
     public Vector2Int eCurrentPos, eNextPos;
-    MapGenerator mapGenerator;
+    rMapGenerator mapGenerator;
     NotesManager notesManager = null;
     GameObject leftNotes;
     GameObject rightNotes;
@@ -29,7 +29,7 @@ public class rtoshiEnemy : MonoBehaviour
 
     void Start()
     {
-        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapGenerator = transform.parent.GetComponent<rMapGenerator>();
         notesManager = GetComponent<NotesManager>();
         direction = DIRECTION.DOWN;
     }
@@ -43,6 +43,8 @@ public class rtoshiEnemy : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
+            notesManager.enemyCanMove = true;
+
             if (notesManager.enemyCanMove)
             {
                 if (count == 0)
@@ -76,21 +78,21 @@ public class rtoshiEnemy : MonoBehaviour
             eNextPos = eCurrentPos + new Vector2Int(move[(int)direction, 0],
                 move[(int)direction, 1]);
 
-            if (mapGenerator.GetNextMapType(eNextPos) == MapGenerator.MAP_TYPE.WALL)
+            if (mapGenerator.GetEnemyNextMapType(eNextPos) == rMapGenerator.MAP_TYPE.WALL)
             {
                 // âΩÇ‡ÇµÇ»Ç¢
             }
-            else if (mapGenerator.GetNextMapType(eNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            else if (mapGenerator.GetEnemyNextMapType(eNextPos) == rMapGenerator.MAP_TYPE.PLAYER)
             {
                 // ÉvÉåÉCÉÑÅ[Ç…çUåÇÇ∑ÇÈ
             }
-            else if (mapGenerator.GetNextMapType(eNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetEnemyNextMapType(eNextPos) != rMapGenerator.MAP_TYPE.WALL)
             {
                 //à⁄ìÆ
-                mapGenerator.UpdateTilie(eCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                mapGenerator.UpdateTilie(eCurrentPos, rMapGenerator.MAP_TYPE.GROUND);
                 transform.localPosition = mapGenerator.ScreenPos(eNextPos);
                 eCurrentPos = eNextPos;
-                mapGenerator.UpdateTilie(eCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
+                mapGenerator.UpdateTilie(eCurrentPos, rMapGenerator.MAP_TYPE.ENEMY);
                 Debug.Log("ìGÇ™à⁄ìÆ");
             }
         }

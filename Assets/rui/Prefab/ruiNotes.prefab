@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3981383572498119086}
   - component: {fileID: 3338931058671759851}
   m_Layer: 0
-  m_Name: Notes
-  m_TagString: NotesManager
+  m_Name: ruiNotes
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
