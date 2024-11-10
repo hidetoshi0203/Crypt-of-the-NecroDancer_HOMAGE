@@ -19,9 +19,11 @@ public class NotesManager : MonoBehaviour
 
     bool isTouchingHeart = false;
     bool playingTouchSound = false;
+    //bool playingSpaceSound = false;
     public bool playerCanMove = false;
     public bool enemyCanMove = false;
     public bool IsTouchingHeart => isTouchingHeart;
+
 
     private void Awake()
     {
@@ -41,45 +43,52 @@ public class NotesManager : MonoBehaviour
         }
     }
 
+    //ハートに触れたとき
     public void OnTouchHeart()
     {
         if (!isTouchingHeart)
         {
             playerCanMove = true;
-            enemyCanMove= true;
+            enemyCanMove = true;
             isTouchingHeart = true;
             PlayTouchSound();
         }
     }
 
+    //ハートに触れる状態が終わったとき
     public void OnTimeLimit()
     {
         isTouchingHeart = false;
         StopTouchSound();
     }
 
+    //入力可能かどうか
     public bool CanInputKey()
     {
         return isTouchingHeart;
     }
 
-    void PlayTouchSound()
+    //ハートに触れたときの音を鳴らす
+    public void PlayTouchSound()
     {
-        audioSource.PlayOneShot(touchSound); //ハートに触れたときの音を鳴らす
+        audioSource.PlayOneShot(touchSound);
         playingTouchSound = true;
+        //playingSpaceSound = false;
     }
 
+    //ハートに触れたときの音を停止
     public void StopTouchSound()
     {
         if (playingTouchSound)
         {
-            audioSource.Stop(); //ハートに触れたときの音を停止
+            audioSource.Stop();
             playingTouchSound = false;
         }
     }
 
+    //スペースキーを押したときの音を鳴らす
     public void PlaySpaceSound()
     {
-        audioSource.PlayOneShot(spaceSound); //スペースキーを押したときの音を鳴らす
+        audioSource.PlayOneShot(spaceSound);
     }
 }
