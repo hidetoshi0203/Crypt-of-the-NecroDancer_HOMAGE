@@ -24,7 +24,7 @@ public class rtoshiPlayer : MonoBehaviour
     public Vector2Int playerCurrentPos, playerNextPos;
     public bool isAttack;
 
-    MapGenerator mapGenerator;
+    rMapGenerator mapGenerator;
     NotesManager notesManager = null;
     GameObject leftNotes;
     GameObject rightNotes;
@@ -32,7 +32,7 @@ public class rtoshiPlayer : MonoBehaviour
 
     private void Start()
     {
-        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapGenerator = transform.parent.GetComponent<rMapGenerator>();
         notesManager = GetComponent<NotesManager>();
         direction = DIRECTION.DOWN;
     }
@@ -50,6 +50,8 @@ public class rtoshiPlayer : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
+            notesManager.playerCanMove = true;
+
             if (notesManager.playerCanMove)
             {
                 if (Input.GetKeyDown(KeyCode.W))
@@ -92,11 +94,11 @@ public class rtoshiPlayer : MonoBehaviour
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
 
-            if (mapGenerator.GetNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL) // 入力先(プレイヤーのnextPos)が壁だった場合
+            if (mapGenerator.GetPlayerNextMapType(playerNextPos) == rMapGenerator.MAP_TYPE.WALL) // 入力先(プレイヤーのnextPos)が壁だった場合
             {
                 // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
             }
-            else if (mapGenerator.GetNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
+            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) == rMapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
             {
                 // 上下左右の入力判定をとりboolをtrueにする
                 if (Input.GetKeyDown(KeyCode.W))
@@ -116,13 +118,13 @@ public class rtoshiPlayer : MonoBehaviour
                     isAttack = true;
                 }
             }
-            else if (mapGenerator.GetNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
+            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != rMapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
             {
                 // 移動する
-                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+                mapGenerator.UpdateTilie(playerCurrentPos, rMapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
                 transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
                 playerCurrentPos = playerNextPos;
-                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+                mapGenerator.UpdateTilie(playerCurrentPos, rMapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
             }
         }
     }
