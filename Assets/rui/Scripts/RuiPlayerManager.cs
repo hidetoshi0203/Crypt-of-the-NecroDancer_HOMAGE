@@ -10,7 +10,7 @@ public class RuiPlayerManager : MonoBehaviour
     GameObject function;
     NotesManager notesManager = null;
 
-    //bool canMove = false;//一時的のコメントかしといた
+    //bool playerCanMove = false;//一時的のコメントかしといた
 
     void Start()
     {
@@ -28,47 +28,47 @@ public class RuiPlayerManager : MonoBehaviour
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
-            notesManager.canMove = true;
+            notesManager.playerCanMove = true;
 
             //Debug.Log("aa");
-            if (Input.GetKeyDown(KeyCode.W) && notesManager.canMove) // Wキーを押したら移動する
+            if (Input.GetKeyDown(KeyCode.W) && notesManager.playerCanMove) // Wキーを押したら移動する
             {
                 objectMove.direction = ObjectMove.DIRECTION.TOP;
                 objectMove.MoveMent();
 
                 notesManager.StopTouchSound();
                 notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
             }
 
-            if (Input.GetKeyDown(KeyCode.D) && notesManager.canMove) // Dキーを押したら移動する
+            if (Input.GetKeyDown(KeyCode.D) && notesManager.playerCanMove) // Dキーを押したら移動する
             {
                 objectMove.direction = ObjectMove.DIRECTION.RIGHT;
                 objectMove.MoveMent();
 
                 notesManager.StopTouchSound();
                 notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
             }
 
-            if (Input.GetKeyDown(KeyCode.S) && notesManager.canMove) // Sキーを押したら下に移動する
+            if (Input.GetKeyDown(KeyCode.S) && notesManager.playerCanMove) // Sキーを押したら下に移動する
             {
                 objectMove.direction = ObjectMove.DIRECTION.DOWN;
                 objectMove.MoveMent();
 
                 notesManager.StopTouchSound();
                 notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
             }
 
-            if (Input.GetKeyDown(KeyCode.A) && notesManager.canMove)
+            if (Input.GetKeyDown(KeyCode.A) && notesManager.playerCanMove)
             {
                 objectMove.direction = ObjectMove.DIRECTION.LEFT;
                 objectMove.MoveMent();
 
                 notesManager.StopTouchSound();
                 notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-                notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+                notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
             }
         }
     }
