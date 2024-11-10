@@ -27,22 +27,24 @@ public class NotesController : MonoBehaviour
 
         transform.position = Vector3.Lerp(startPos, endPos, currentTime / tempo); //ノーツの位置を移動
 
-
-        if (!notesManager.CanInputKey() && transform.position.x >= -Heart_range && transform.position.x <= Heart_range) //ハートに触れた場合のチェック
+        //ハートに触れた場合のチェック
+        if (!notesManager.CanInputKey() && transform.position.x >= -Heart_range && transform.position.x <= Heart_range)
         {
             notesManager.OnTouchHeart();
-            notesManager.canMove = true; //ハートに触れた後にスペースキーで音を鳴らせるようにフラグをリセット
+            notesManager.playerCanMove = true; //ハートに触れた後に音を鳴らせるようにフラグをリセット
         }
 
-        if (notesManager.CanInputKey() && Input.GetKeyDown(KeyCode.Space) && notesManager.canMove) //ハートに触れている状態でスペースキーが押されたとき
+        //ハートに触れている状態でキーが押されたとき
+        if (notesManager.CanInputKey() && Input.GetKeyDown(KeyCode.Space) && notesManager.playerCanMove)
         {
             notesManager.StopTouchSound();
             notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-            notesManager.canMove = false; //フラグをオフにして音を鳴らせないようにする
+            notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
         }
 
 
-        if (currentTime > tempo) //ノーツが移動し終わったら削除
+        //ノーツが移動し終わったら削除
+        if (currentTime > tempo)
         {
             notesManager.OnTimeLimit();
             Destroy(this.gameObject);
@@ -51,6 +53,6 @@ public class NotesController : MonoBehaviour
 
     private void OnDestroy()
     {
-        notesManager.canMove = true; //ノーツが削除されるときフラグをリセット
+        notesManager.playerCanMove = true; //ノーツが削除されるときフラグをリセット
     }
 }

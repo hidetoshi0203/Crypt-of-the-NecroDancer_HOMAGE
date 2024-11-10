@@ -17,12 +17,10 @@ public class NotesManager : MonoBehaviour
     private float nextGenerateTime = 1f;
     private float generateTime = 1f;
 
-    //    public GameObject leftNoteObject;
-    //    public GameObject rightNoteObject;
-
     bool isTouchingHeart = false;
     bool playingTouchSound = false;
-    public bool canMove = false;
+    public bool playerCanMove = false;
+    public bool enemyCanMove = false;
     public bool IsTouchingHeart => isTouchingHeart;
 
     private void Awake()
@@ -47,7 +45,7 @@ public class NotesManager : MonoBehaviour
     {
         if (!isTouchingHeart)
         {
-            canMove = true;
+            playerCanMove = true;
             isTouchingHeart = true;
             PlayTouchSound();
         }
