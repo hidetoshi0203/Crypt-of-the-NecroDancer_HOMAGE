@@ -34,6 +34,7 @@ public class NotesController : MonoBehaviour
         {
             notesManager.OnTouchHeart();
             notesManager.playerCanMove = true; //ハートに触れた後に音を鳴らせるようにフラグをリセット
+
         }
 
         //ハートに触れている状態でキーが押されたとき
@@ -43,14 +44,19 @@ public class NotesController : MonoBehaviour
             notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
             notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
 
+            notesManager.OnTimeLimit();
             comboManager.IncreaseCombo();
+
+            Destroy(this.gameObject);
         }
 
         //ノーツが移動し終わったら削除
         if (currentTime > tempo)
         {
             notesManager.OnTimeLimit();
+            comboManager.ResetCombo();
             Destroy(this.gameObject);
+
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI; // コンボ数表示用
 public class ComboManager : MonoBehaviour
 {
     public Text comboText; // コンボ数を表示するUIテキスト
-    private int comboCount = 0; // 現在のコンボ数
+    private float comboCount = 0; // 現在のコンボ数
     private NotesManager notesManager; // NotesManagerの参照
 
     private void Start()
@@ -16,27 +16,14 @@ public class ComboManager : MonoBehaviour
     }
 
     private void Update()
-    {/*
-        if (notesManager.CanInputKey() && Input.GetKeyDown(KeyCode.Space))
-        {
-            IncreaseCombo(); // ハートに触れているときにスペースキーが押された場合コンボ数を増加
-        }
-        else
-        {
-            ResetCombo();
-        }
-        /*
-                // ハートに触れていない、または入力に失敗した場合
-                if (!notesManager.isCombo)
-                {
-                   ResetCombo(); // コンボ数をリセット
-                }
-        */
+    {
+
     }
 
     public void IncreaseCombo()
     {
         comboCount++;
+        comboCount = comboCount - (float)0.5;
         UpdateComboText(); // コンボ数を更新
     }
     

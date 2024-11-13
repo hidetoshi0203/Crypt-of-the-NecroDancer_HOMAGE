@@ -19,10 +19,10 @@ public class NotesManager : MonoBehaviour
 
     bool isTouchingHeart = false;
     bool playingTouchSound = false;
-    //bool playingSpaceSound = false;
+
     public bool playerCanMove = false;
     public bool enemyCanMove = false;
-    public bool IsTouchingHeart => isTouchingHeart;
+    //public bool IsTouchingHeart => isTouchingHeart;
 
 
     private void Awake()
@@ -73,7 +73,6 @@ public class NotesManager : MonoBehaviour
     {
         audioSource.PlayOneShot(touchSound);
         playingTouchSound = true;
-        //playingSpaceSound = false;
     }
 
     //ƒn[ƒg‚ÉG‚ê‚½‚Æ‚«‚Ì‰¹‚ğ’â~
