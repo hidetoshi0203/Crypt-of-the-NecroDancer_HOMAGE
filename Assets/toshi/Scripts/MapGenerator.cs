@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] TextAsset mapText;
+    [SerializeField] TextAsset[] mapText;
     [SerializeField] GameObject[] prefabs;
     float mapSize;
+    public int floor;
     Vector2 centerPos;
 
     public enum MAP_TYPE
     {
-        GROUND, //0
-        WALL,   //1
-        PLAYER, //2
-        ENEMY   //3
+        GROUND, // 0 地面
+        WALL,   // 1 壁
+        PLAYER, // 2 プレイヤー
+        ENEMY,  // 3 敵（1体目）
+        STAIRS  // 4 階段
     }
     public MAP_TYPE[,] mapTable;
 
@@ -29,22 +31,22 @@ public class MapGenerator : MonoBehaviour
     {
         return mapTable[_pos.x, _pos.y];
     }
-    public 
 
     void Start()
     {
         _loadMapData();
 
-        //追加　マップ生成関数を呼び出す
         _createMap();
+    }
 
-        
-
+    void Update()
+    {
+         
     }
 
     void _loadMapData()
     {
-        string[] mapLines = mapText.text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+        string[] mapLines = mapText[0].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
 
 
         int row = mapLines.Length;
@@ -122,7 +124,6 @@ public class MapGenerator : MonoBehaviour
             -(_pos.y * mapSize - centerPos.y));
 
     }
-
    public void UpdateTilie(Vector2Int _pos,MAP_TYPE mapType)
     {
         mapTable[_pos.x, _pos.y] = mapType;
