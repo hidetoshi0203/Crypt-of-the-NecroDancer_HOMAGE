@@ -103,15 +103,15 @@ public class toshiPlayer : MonoBehaviour
                 {
                     isAttack = true; // EnemyManager.csでtrueを受け取り、敵を倒す（MapGenarator.csのMAP_TYPEをENEMYからGROUND書き換える）
                 }
-                if (Input.GetKeyDown(KeyCode.A))
+                else if (Input.GetKeyDown(KeyCode.A))
                 {
                     isAttack = true;
                 }
-                if (Input.GetKeyDown(KeyCode.S))
+                else if (Input.GetKeyDown(KeyCode.S))
                 {
                     isAttack = true;
                 }
-                if (Input.GetKeyDown(KeyCode.D))
+                else if (Input.GetKeyDown(KeyCode.D))
                 {
                     isAttack = true;
                 }
@@ -123,6 +123,10 @@ public class toshiPlayer : MonoBehaviour
                 transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
                 playerCurrentPos = playerNextPos;
                 mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+            }
+            else if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
+            {
+                mapGenerator.floor++;
             }
         }
     }
