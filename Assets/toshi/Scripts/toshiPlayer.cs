@@ -88,6 +88,7 @@ public class toshiPlayer : MonoBehaviour
         //移動用の関数
         void moveType()
     {
+        
         if (notesManager != null && notesManager.CanInputKey())
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
@@ -118,15 +119,21 @@ public class toshiPlayer : MonoBehaviour
             }
             else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
             {
+                
                 // 移動する
-                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+                mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
                 transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
                 playerCurrentPos = playerNextPos;
-                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+                mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+                Debug.Log(mapGenerator.GetPlayerNextMapType(playerCurrentPos));
             }
-            else if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
+            if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
             {
+                Debug.Log("階段の上だよ");
                 mapGenerator.floor++;
+
+                mapGenerator._loadMapData();
+                mapGenerator._createMap();
             }
         }
     }

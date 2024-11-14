@@ -37,8 +37,6 @@ public class toshiEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("enemy" + enemyManager.enemyCurrentPos);
-        Debug.Log("enemyNext" + enemyManager.enemyNextPos);
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -93,7 +91,6 @@ public class toshiEnemy : MonoBehaviour
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
-                Debug.Log("“G‚ªˆÚ“®");
             }
         }
     }

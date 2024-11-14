@@ -9,7 +9,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] TextAsset[] mapText;
     [SerializeField] GameObject[] prefabs;
     float mapSize;
-    public int floor;
+    public int floor = 0;
     Vector2 centerPos;
 
     public enum MAP_TYPE
@@ -21,6 +21,7 @@ public class MapGenerator : MonoBehaviour
         STAIRS  // 4 階段
     }
     public MAP_TYPE[,] mapTable;
+    public MAP_TYPE[,] mapTable2;
 
     public MAP_TYPE GetPlayerNextMapType(Vector2Int _pos)
     {
@@ -41,18 +42,17 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-         
+       
     }
 
-    void _loadMapData()
+    public void _loadMapData()
     {
-        string[] mapLines = mapText[0].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-
+        string[] mapLines = mapText[floor].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
 
         int row = mapLines.Length;
         int col = mapLines[0].Split(new char[] { ',' }).Length;
         mapTable = new MAP_TYPE[col, row];
-
+        mapTable2 = new MAP_TYPE[col, row];
         //追加　行の数だけループ
         for (int y = 0; y < row; y++)
         {
@@ -63,11 +63,11 @@ public class MapGenerator : MonoBehaviour
             {
                 //mapValuesのx番目をMAP_TYPEにキャストしてmapTable[x,y]番目に代入
                 mapTable[x, y] = (MAP_TYPE)int.Parse(mapValues[x]);
+
             }
         }
-
     }
-    void _createMap()
+    public void _createMap()
     {
         mapSize = prefabs[1].GetComponent<SpriteRenderer>().bounds.size.x;
 
@@ -117,6 +117,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
+
     public Vector2 ScreenPos(Vector2Int _pos)
     {
         return new Vector2(
@@ -127,6 +128,10 @@ public class MapGenerator : MonoBehaviour
    public void UpdateTilie(Vector2Int _pos,MAP_TYPE mapType)
     {
         mapTable[_pos.x, _pos.y] = mapType;
+    }
+    public void UpdatePlayerTile(Vector2Int _pos, MAP_TYPE mapType)
+    {
+        mapTable2[_pos.x, _pos.y] = mapType;
     }
 
     private void OnGUI()
