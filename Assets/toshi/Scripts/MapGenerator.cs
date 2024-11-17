@@ -40,10 +40,7 @@ public class MapGenerator : MonoBehaviour
         _createMap();
     }
 
-    void Update()
-    {
-       
-    }
+   
 
     public void _loadMapData()
     {

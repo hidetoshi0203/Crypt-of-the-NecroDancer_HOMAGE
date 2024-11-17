@@ -29,7 +29,6 @@ public class toshiPlayer : MonoBehaviour
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
-
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
@@ -130,6 +129,17 @@ public class toshiPlayer : MonoBehaviour
             if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
             {
                 Debug.Log("äKíiÇÃè„ÇæÇÊ");
+
+                GameObject parentObject = GameObject.Find("MapChip");
+
+                int childCount = parentObject.transform.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    Transform childTransform = parentObject.transform.GetChild(i);
+                    GameObject childObject = childTransform.gameObject;
+                    Destroy(childObject);
+                }
+
                 mapGenerator.floor++;
 
                 mapGenerator._loadMapData();
