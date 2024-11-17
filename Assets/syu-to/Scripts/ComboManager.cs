@@ -7,17 +7,15 @@ public class ComboManager : MonoBehaviour
 {
     public Text comboText; // コンボ数を表示するUIテキスト
     private float comboCount = 0; // 現在のコンボ数
+
+    public bool comboreset = false;
     private NotesManager notesManager; // NotesManagerの参照
 
     private void Start()
     {
         notesManager = FindObjectOfType<NotesManager>(); // NotesManagerを取得
+
         UpdateComboText(); // コンボ数表示を初期化
-    }
-
-    private void Update()
-    {
-
     }
 
     public void IncreaseCombo()
@@ -31,6 +29,8 @@ public class ComboManager : MonoBehaviour
     {
         comboCount = 0;
         UpdateComboText(); // コンボ数をリセットして更新
+
+        comboreset = true;
     }
     
 

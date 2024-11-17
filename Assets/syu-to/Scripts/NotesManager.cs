@@ -24,7 +24,6 @@ public class NotesManager : MonoBehaviour
     public bool enemyCanMove = false;
     //public bool IsTouchingHeart => isTouchingHeart;
 
-
     private void Awake()
     {
         generateTime = tempoManager.Tempo;
