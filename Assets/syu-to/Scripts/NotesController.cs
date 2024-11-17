@@ -55,8 +55,25 @@ public class NotesController : MonoBehaviour
         {
             notesManager.OnTimeLimit();
             comboManager.ResetCombo();
+
             Destroy(this.gameObject);
 
+        }
+
+        //ハートの外にいるとき
+        if(transform.position.x < -Heart_range || transform.position.x > Heart_range)
+        {
+            comboManager.comboreset = true;
+        }
+        else
+        {
+            comboManager.comboreset = false;
+        }
+
+        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
+        {
+            comboManager.ResetCombo();
+            Debug.Log("reset");
         }
     }
 

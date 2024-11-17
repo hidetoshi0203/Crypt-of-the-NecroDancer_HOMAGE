@@ -856,6 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboText: {fileID: 1472177666}
+  comboreset: 1
 --- !u!114 &1472177666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,7 +940,6 @@ MonoBehaviour:
   spaceSound: {fileID: 8300000, guid: b7034b3205054d342baa414c6b570106, type: 3}
   playerCanMove: 0
   enemyCanMove: 0
-  isCombo: 1
 --- !u!4 &1615398701
 Transform:
   m_ObjectHideFlags: 0
