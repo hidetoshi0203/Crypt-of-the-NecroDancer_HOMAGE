@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     toshiPlayer ToshiPlayer = null;
     public Vector2Int enemyCurrentPos , enemyNextPos;       // 今の座標
-    public Vector2Int attackedPos; // プレイヤーから攻撃された敵オブジェクトの座標
+    public Vector2Int attackedEnemyPos; // プレイヤーから攻撃された敵オブジェクトの座標
     MapGenerator mapGenerator;
     void Start()
     {
@@ -22,8 +22,8 @@ public class EnemyManager : MonoBehaviour
     
         if (ToshiPlayer.isAttack)
         {
-            attackedPos = ToshiPlayer.playerNextPos;　// プレイヤーのnextPosを代入する
-            if (attackedPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
+            attackedEnemyPos = ToshiPlayer.playerNextPos;　// プレイヤーのnextPosを代入する
+            if (attackedEnemyPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
             { 
                 Destroy(gameObject); // 敵のオブジェクトをDestroyする
                 mapGenerator.UpdateTilie(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
