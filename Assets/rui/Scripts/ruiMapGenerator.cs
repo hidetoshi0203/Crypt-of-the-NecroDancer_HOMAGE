@@ -4,23 +4,31 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class ruiMapGenerator : MonoBehaviour
+public class RuiMapGenerator : MonoBehaviour
 {
-    [SerializeField] TextAsset mapText;
+    [SerializeField] TextAsset[] mapText;
     [SerializeField] GameObject[] prefabs;
     float mapSize;
+    public int floor = 0;
     Vector2 centerPos;
 
     public enum MAP_TYPE
     {
-        GROUND, //0
-        WALL,   //1
-        PLAYER, //2
-        ENEMY   //3
+        GROUND, // 0 地面
+        WALL,   // 1 壁
+        PLAYER, // 2 プレイヤー
+        ENEMY,  // 3 敵（1体目）
+        STAIRS  // 4 階段
     }
     public MAP_TYPE[,] mapTable;
+    public MAP_TYPE[,] mapTable2;
 
-    public MAP_TYPE GetNextMapType(Vector2Int _pos)
+    public MAP_TYPE GetPlayerNextMapType(Vector2Int _pos)
+    {
+        return mapTable[_pos.x, _pos.y];
+    }
+
+    public MAP_TYPE GetEnemyNextMapType(Vector2Int _pos)
     {
         return mapTable[_pos.x, _pos.y];
     }
@@ -29,22 +37,22 @@ public class ruiMapGenerator : MonoBehaviour
     {
         _loadMapData();
 
-        //追加　マップ生成関数を呼び出す
         _createMap();
+    }
 
-
+    void Update()
+    {
 
     }
 
-    void _loadMapData()
+    public void _loadMapData()
     {
-        string[] mapLines = mapText.text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-
+        string[] mapLines = mapText[floor].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
 
         int row = mapLines.Length;
         int col = mapLines[0].Split(new char[] { ',' }).Length;
         mapTable = new MAP_TYPE[col, row];
-
+        mapTable2 = new MAP_TYPE[col, row];
         //追加　行の数だけループ
         for (int y = 0; y < row; y++)
         {
@@ -55,11 +63,11 @@ public class ruiMapGenerator : MonoBehaviour
             {
                 //mapValuesのx番目をMAP_TYPEにキャストしてmapTable[x,y]番目に代入
                 mapTable[x, y] = (MAP_TYPE)int.Parse(mapValues[x]);
+
             }
         }
-
     }
-    void _createMap()
+    public void _createMap()
     {
         mapSize = prefabs[1].GetComponent<SpriteRenderer>().bounds.size.x;
 
@@ -94,7 +102,7 @@ public class ruiMapGenerator : MonoBehaviour
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
                 if (mapTable[x, y] == MAP_TYPE.ENEMY)
                 {
-                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                    _map.GetComponent<RuiAttackedEnemy>().enemyCurrentPos = pos;
                 }
 
 
@@ -103,12 +111,13 @@ public class ruiMapGenerator : MonoBehaviour
 
                 if (mapTable[x, y] == MAP_TYPE.PLAYER)
                 {
-                    _map.GetComponent<toshiPlayer>().playerCurrentPos = pos;
+                    _map.GetComponent<RuiPlayerManager>().playerCurrentPos = pos;
 
                 }
             }
         }
     }
+
     public Vector2 ScreenPos(Vector2Int _pos)
     {
         return new Vector2(
@@ -116,10 +125,13 @@ public class ruiMapGenerator : MonoBehaviour
             -(_pos.y * mapSize - centerPos.y));
 
     }
-
     public void UpdateTilie(Vector2Int _pos, MAP_TYPE mapType)
     {
         mapTable[_pos.x, _pos.y] = mapType;
+    }
+    public void UpdatePlayerTile(Vector2Int _pos, MAP_TYPE mapType)
+    {
+        mapTable2[_pos.x, _pos.y] = mapType;
     }
 
     private void OnGUI()

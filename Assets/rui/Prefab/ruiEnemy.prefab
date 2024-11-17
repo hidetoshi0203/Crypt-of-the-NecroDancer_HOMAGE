@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2843231469952030973}
   - component: {fileID: 3493941914734821646}
   - component: {fileID: 3780603393285255692}
-  - component: {fileID: 5683885038035584353}
+  - component: {fileID: 1111777796381755067}
+  - component: {fileID: 4024885011407535192}
   m_Layer: 0
   m_Name: ruiEnemy
   m_TagString: Enemy
@@ -131,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85333335, y: 0.85333335}
   m_EdgeRadius: 0
---- !u!114 &5683885038035584353
+--- !u!114 &1111777796381755067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,9 +141,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8425694697182779888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcf9a69e612a07842b0de76ffae727d8, type: 3}
+  m_Script: {fileID: 11500000, guid: f506cf1291403a7458e335aa195e7740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  eCurrentPos: {x: 0, y: 0}
-  eNextPos: {x: 0, y: 0}
+  isEnemyAttack: 0
+--- !u!114 &4024885011407535192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8425694697182779888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f08f797019a1741a0944acf76f632b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCurrentPos: {x: 0, y: 0}
+  enemyNextPos: {x: 0, y: 0}
+  attackedEnemyPos: {x: 0, y: 0}

@@ -210,15 +210,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 521689425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6d013edc3b6f5547808ebcebe3bedb7, type: 3}
+  m_Script: {fileID: 11500000, guid: fe3aa49ff449530499e7705e9b9eabf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapText: {fileID: 4900000, guid: 3bdbe684c2d62084d8dc2c3a1ce3150f, type: 3}
+  mapText:
+  - {fileID: 4900000, guid: 3bdbe684c2d62084d8dc2c3a1ce3150f, type: 3}
+  - {fileID: 4900000, guid: d7df27e96f6301a46809bae2f53bc2e7, type: 3}
   prefabs:
   - {fileID: 1332008261866348020, guid: 4fbe1ebf558543b4f91c1f2de015f9dc, type: 3}
   - {fileID: 1565893696268004151, guid: 513a70c274a2fa9459fa292f394f859b, type: 3}
-  - {fileID: 5870177880929257009, guid: 7fa57cb81e1e8534f85696b490872f67, type: 3}
-  - {fileID: 8425694697182779888, guid: b910618894d27a0408fb0fec69bff60f, type: 3}
+  - {fileID: 5870177880929257009, guid: 3d405d111d496594d9403217c3f0b7c7, type: 3}
+  - {fileID: 8425694697182779888, guid: 414493e4d86904b47a983cdfd00c0d58, type: 3}
+  - {fileID: 957766774299044497, guid: 1fd5c6b23609e344ba6fbf82df0689bc, type: 3}
+  floor: 0
 --- !u!1 &1407632278
 GameObject:
   m_ObjectHideFlags: 0
