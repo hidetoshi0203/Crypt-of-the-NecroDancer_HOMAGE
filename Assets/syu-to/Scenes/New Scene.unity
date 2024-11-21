@@ -857,6 +857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboText: {fileID: 1472177666}
   comboreset: 1
+  ChangedCombos: 5
+  ChangeBPM: 30
 --- !u!114 &1472177666
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class NotesManager : MonoBehaviour
@@ -14,8 +15,8 @@ public class NotesManager : MonoBehaviour
     [SerializeField] private AudioClip touchSound; //ハートに触れたときの音
     [SerializeField] private AudioClip spaceSound; //スペースキーを押したときの音
 
-    private float nextGenerateTime = 1f;
-    private float generateTime = 1f;
+    private float nextGenerateTime = 1f; //次の生成タイミング
+    private float generateTime = 1f; //ノーツの生成間隔
 
     bool isTouchingHeart = false;
     bool playingTouchSound = false;
@@ -34,12 +35,19 @@ public class NotesManager : MonoBehaviour
 
     private void Update()
     {
+
         if (Time.time > nextGenerateTime)
         {
             Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
             Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
             nextGenerateTime += generateTime;
         }
+    }
+
+    public void UpdateGenerateTime(float newTempo)
+    {
+        generateTime = newTempo; // 新しいテンポに基づいて生成間隔を更新
+        nextGenerateTime = Time.time + generateTime; // 次のノーツ生成タイミングを再設定
     }
 
     //ハートに触れたとき
