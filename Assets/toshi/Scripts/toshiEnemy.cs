@@ -43,29 +43,47 @@ public class toshiEnemy : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
             notesManager = inst.GetComponent<NotesManager>();
         }
+        //if (notesManager != null && notesManager.CanInputKey())
+        //{
+        //    count = 1;
+        //    if (notesManager.enemyCanMove) // 動けるとき
+        //    {
+        //        if (count == 0)
+        //        {
+        //            // cout0の時1マス下
+        //            direction = DIRECTION.DOWN;
+        //            eMoveType();
+        //            notesManager.enemyCanMove = false;
+
+        //        }
+        //        if (count == 1)
+        //        {
+        //            // cout1の時1マス上
+        //            direction = DIRECTION.TOP;
+        //            eMoveType();
+        //            notesManager.enemyCanMove = false;
+        //            count = 0;
+        //        }
+        //    }
+        //}
         if (notesManager != null && notesManager.CanInputKey())
         {
-            count = 1;
-            if (notesManager.enemyCanMove) // 動けるとき
+            if (notesManager.enemyCanMove)
             {
-                if (count == 0)
+                switch (direction)
                 {
-                    // cout0の時1マス下
-                    direction = DIRECTION.DOWN;
-                    eMoveType();
-                    notesManager.enemyCanMove = false;
-                    
-                }
-                if (count == 1)
-                {
-                    // cout1の時1マス上
-                    direction = DIRECTION.TOP;
-                    eMoveType();
-                    notesManager.enemyCanMove = false;
-                    count = 0;
+                    case DIRECTION.TOP:
+                        eMoveType();
+                        direction = DIRECTION.DOWN;
+                        break;
+                    case DIRECTION.DOWN:
+                        eMoveType();
+                        direction = DIRECTION.TOP;
+                        break;
                 }
             }
         }
+        
     }
     void eMoveType()
     {
