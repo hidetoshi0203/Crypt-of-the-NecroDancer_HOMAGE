@@ -75,10 +75,12 @@ public class toshiEnemy : MonoBehaviour
                     case DIRECTION.TOP:
                         eMoveType();
                         direction = DIRECTION.DOWN;
+                        notesManager.enemyCanMove = false;
                         break;
                     case DIRECTION.DOWN:
                         eMoveType();
                         direction = DIRECTION.TOP;
+                        notesManager.enemyCanMove = false;
                         break;
                 }
             }
