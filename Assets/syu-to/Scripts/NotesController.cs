@@ -6,7 +6,7 @@ public class NotesController : MonoBehaviour
 {
     [SerializeField] private float endX = 0.5f; //ノーツの移動先のX座標
     [SerializeField] private float tempo = 2.0f; //ノーツの移動時間
-    [SerializeField] private float Heart_range = 0; //ハートに触れる範囲
+    [SerializeField] public float Heart_range = 0; //ハートに触れる範囲
 
     private Vector3 startPos; //ノーツの生成位置
     private Vector3 endPos; //ノーツの終了位置
@@ -59,7 +59,7 @@ public class NotesController : MonoBehaviour
             Destroy(this.gameObject);
 
         }
-
+        /*
         //ハートの外にいるとき
         if(transform.position.x < -Heart_range || transform.position.x > Heart_range)
         {
@@ -74,11 +74,30 @@ public class NotesController : MonoBehaviour
         {
             comboManager.ResetCombo();
             Debug.Log("reset");
-        }
+        }*/
     }
 
     private void OnDestroy()
     {
         notesManager.playerCanMove = true; //ノーツが削除されるときフラグをリセット
+    }
+
+    public void OffTouchHeart()
+    {
+        //ハートの外にいるとき
+        if (transform.position.x < -Heart_range || transform.position.x > Heart_range)
+        {
+            comboManager.comboreset = true;
+        }
+        else
+        {
+            comboManager.comboreset = false;
+        }
+
+        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
+        {
+            comboManager.ResetCombo();
+            Debug.Log("reset");
+        }
     }
 }

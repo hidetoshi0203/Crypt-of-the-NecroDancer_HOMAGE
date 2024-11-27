@@ -25,12 +25,21 @@ public class NotesManager : MonoBehaviour
     public bool enemyCanMove = false;
     //public bool IsTouchingHeart => isTouchingHeart;
 
+    private ComboManager comboManager;
+    private NotesController notesController = null;
+
     private void Awake()
     {
         generateTime = tempoManager.Tempo;
         nextGenerateTime = Time.time + generateTime;
 
         audioSource = gameObject.AddComponent<AudioSource>(); //AudioSource‚ð’Ç‰Á
+
+        notesController = FindObjectOfType<NotesController>();
+        comboManager = FindObjectOfType<ComboManager>();
+
+        comboManager.comboreset = false;
+
     }
 
     private void Update()
@@ -42,6 +51,15 @@ public class NotesManager : MonoBehaviour
             Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
             nextGenerateTime += generateTime;
         }
+
+        if (notesController == null)
+        {
+            GameObject NCon = GameObject.FindGameObjectWithTag("Notes");
+            notesController = NCon.GetComponent<NotesController>();
+        }
+
+        notesController.OffTouchHeart();
+
     }
 
     public void UpdateGenerateTime(float newTempo)
