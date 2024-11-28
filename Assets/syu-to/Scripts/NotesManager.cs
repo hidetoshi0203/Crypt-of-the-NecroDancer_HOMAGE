@@ -55,8 +55,16 @@ public class NotesManager : MonoBehaviour
         if (notesController == null)
         {
             GameObject NCon = GameObject.FindGameObjectWithTag("Notes");
-            notesController = NCon.GetComponent<NotesController>();
+            if (NCon != null)
+            {
+                notesController = NCon.GetComponent<NotesController>();
+            }
+            else
+            {
+                return;
+            }
         }
+        
 
         notesController.OffTouchHeart();
 
