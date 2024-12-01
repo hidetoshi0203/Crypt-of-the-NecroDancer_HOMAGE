@@ -42,6 +42,7 @@ public class toshiPlayer : MonoBehaviour
     //　入力時に_move関数を呼ぶようにする。
     private void Update()
     {
+
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -118,14 +119,15 @@ public class toshiPlayer : MonoBehaviour
             }
             else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
             {
-                
+
                 // 移動する
-                mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
                 transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
                 playerCurrentPos = playerNextPos;
-                mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
                 Debug.Log(mapGenerator.GetPlayerNextMapType(playerCurrentPos));
             }
+
             if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
             {
                 Debug.Log("階段の上だよ");
@@ -145,6 +147,10 @@ public class toshiPlayer : MonoBehaviour
                 mapGenerator._loadMapData();
                 mapGenerator._createMap();
             }
+            
         }
     }
+
+
+   
 }

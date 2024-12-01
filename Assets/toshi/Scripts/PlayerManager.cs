@@ -12,10 +12,16 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        
     }
 
     void Update()
     {
+        if (ToshiPlayer == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("Player");
+            ToshiPlayer = inst.GetComponent<toshiPlayer>();
+        }
         if (ToshiEnemy == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
@@ -26,19 +32,14 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
         }
-        if (ToshiPlayer == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Player1");
-            ToshiPlayer = inst.GetComponent<toshiPlayer>();
-        }
-
         if (ToshiEnemy.isEnemyAttack)
         {
+            Debug.Log("敵の攻撃");
             attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
             if (attackedPlayerPos == ToshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
             {
                 Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
-                mapGenerator.UpdateTilie(ToshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYPEの攻撃されたPLAYERをGROUNDに変える
+               
             }
         }
     }
