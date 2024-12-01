@@ -25,7 +25,7 @@ public class toshiEnemy : MonoBehaviour
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
-    int count = 0;
+    int moveCount = 0;//自分が何回動いたか
     public bool isEnemyAttack = false;
 
     void Start()
@@ -38,11 +38,13 @@ public class toshiEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
             notesManager = inst.GetComponent<NotesManager>();
         }
+        
         //if (notesManager != null && notesManager.CanInputKey())
         //{
         //    count = 1;
@@ -68,22 +70,23 @@ public class toshiEnemy : MonoBehaviour
         //}
         if (notesManager != null && notesManager.CanInputKey())
         {
-            if (notesManager.enemyCanMove)
+            if (moveCount != 1 && notesManager.enemyCanMove)
             {
                 switch (direction)
                 {
                     case DIRECTION.TOP:
                         eMoveType();
                         direction = DIRECTION.DOWN;
-                        notesManager.enemyCanMove = false;
+                        moveCount++;
                         break;
                     case DIRECTION.DOWN:
                         eMoveType();
                         direction = DIRECTION.TOP;
-                        notesManager.enemyCanMove = false;
+                        moveCount++;
                         break;
-                }
+                }             
             }
+            else {notesManager.enemyCanMove = false; moveCount = 0; }
         }
         
     }
@@ -93,15 +96,15 @@ public class toshiEnemy : MonoBehaviour
         {
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0],
                 move[(int)direction, 1]);
-
-            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
-                // 何もしない
-            }
-            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
-            {
+                Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
+                mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
+                enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
+                mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
             }
             else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
