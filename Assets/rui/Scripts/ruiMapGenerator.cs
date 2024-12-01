@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class RuiMapGenerator : MonoBehaviour
 {
@@ -38,6 +40,8 @@ public class RuiMapGenerator : MonoBehaviour
         _loadMapData();
 
         _createMap();
+
+        makeAStarMap();
     }
 
     void Update()
@@ -155,5 +159,102 @@ public class RuiMapGenerator : MonoBehaviour
             map += "\n";
         }
         GUI.Label(new Rect(50, 50, 300, 300), map);
+    }
+
+    class Node
+    {
+        public bool floor; // 行けないところはfalse
+        public int cost;
+        public int estimatedCost;
+        public int score;
+    };
+    Node[,] aStarMap;
+
+    public void makeAStarMap()
+    {
+        int xSize = mapTable.GetLength(1);
+        int ySize = mapTable.GetLength(0);
+        aStarMap = new Node[ySize, xSize];
+        for (int x = 0; x < xSize; x++)
+        {
+            for (int y = 0; y < ySize; y++)
+            {
+                aStarMap[y, x].floor = (mapTable[y, x] != MAP_TYPE.WALL);
+            }
+        }
+    }
+
+    ///<summary>
+    ///AStarで経路を探索して、次に行くべきマスの場所を返す
+    /// </summary>
+    /// <param name="enemy">移動前の場所（マス）</param>
+    /// <param name="player">目的の場所（マス）</param>
+    /// <returns>次に行くべき場所（マス）</returns>
+    public Vector2Int SearchRoute(Vector2Int enemy, Vector2Int player)
+    {
+        int xSize = aStarMap.GetLength(1);
+        int ySize = aStarMap.GetLength(0);
+        // A*のマップを全てクリアする
+        const int Max = 100000000; // とてつもなく大きな値
+        for (int x = 0; x < xSize; x++)
+        {
+            for (int y = 0; y < ySize; y++)
+            {
+                aStarMap[y, x].cost = Max;
+                aStarMap[y, x].estimatedCost = 0;
+                aStarMap[y, x].score = Max;
+            }
+        }
+        //ここで、A*の探索をする
+        //目的地から、自分への探索を下ほうが楽なので、
+        //目的地に0をいれておく
+        aStarMap[player.y, player.x].cost = 0;
+        aStarMap[player.y, player.x].estimatedCost = Mathf.Abs(player.y - enemy.y) + Mathf.Abs(player.x - enemy.x);
+        aStarMap[player.y, player.x].score = aStarMap[player.y, player.x].cost + aStarMap[player.y, player.x].estimatedCost;
+        int minScore = aStarMap[player.y, player.x].score; // 最小スコアを保存しておく
+
+        // ここから経路探索を始める
+        bool loop = true;
+        while (loop) // 見つかるまでループする
+        {
+            int nextMinScore = Max;
+            for (int x = 0; x < xSize; x++)
+            {
+                for (int y = 0; y < ySize; y++)
+                {
+                    if (aStarMap[y, x].score == minScore) // この場所から、４方向調べる
+                    {
+                        int[,] dir = {{1, 0},{0, 1},{-1, 0},{0, -1}};
+                        for (int d = 0; d < 4; d++)
+                        {
+                            int nextX = x + dir[d, 0];
+                            int nextY = y + dir[d, 1];
+                            //ToDo
+                            //nextX,nextYが、enemyと同じであれば、経路探索が終わったので、
+                            if (nextX == enemy.x && nextY == enemy.y)
+                            {
+                                loop = false;
+                                return new Vector2Int(x, y);
+                            }
+                            
+                            //ToDo:
+                            // aStarMap[nextY,nextX]が壁でなくて、scoreがminScoreよりも大きいのであれば、
+                            // cost、estimatedCost、scoreを計算して書き込む
+                            if (aStarMap[nextY, nextX].floor = false && aStarMap[nextY,nextX].score >= minScore)
+                            {
+                                aStarMap[nextY, nextX].cost++;
+                                aStarMap[nextY, nextX].estimatedCost
+                            }
+                            if (nextMinScore > aStarMap[nextY, nextX].score) // 次の最小値を求めておく
+                            {
+                                nextMinScore = aStarMap[nextY, nextX].score;
+                            }
+                        }
+                    }
+                }
+            }
+            minScore = nextMinScore;
+        }
+        return enemy;
     }
 }
