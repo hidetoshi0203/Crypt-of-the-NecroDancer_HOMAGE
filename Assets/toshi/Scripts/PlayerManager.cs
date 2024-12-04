@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    toshiEnemy ToshiEnemy = null;
+    toshiEnemy ToshiEnemy = null;  
     EnemyManager enemyManager = null;
     toshiPlayer ToshiPlayer = null;
-    public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
     MapGenerator mapGenerator;
+
+    [SerializeField] int playerHP; // プレイヤーの体力
+    int playerMaxHP = 5;           // プレイヤーの最大体力
+    public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
+    
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
-        
     }
 
     void Update()
@@ -35,11 +38,14 @@ public class PlayerManager : MonoBehaviour
         if (ToshiEnemy.isEnemyAttack)
         {
             Debug.Log("敵の攻撃");
-            attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
-            if (attackedPlayerPos == ToshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
+            playerHP -= 1;
+            if (playerHP == 0)
             {
-                Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
-               
+                attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
+                if (attackedPlayerPos == ToshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
+                {
+                    Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
+                }
             }
         }
     }
