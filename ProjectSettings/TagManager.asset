@@ -18,6 +18,7 @@ TagManager:
   - DTag
   - Enemy
   - Notes
+  - ComboManager
   layers:
   - Default
   - TransparentFX
