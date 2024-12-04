@@ -243,7 +243,7 @@ public class RuiMapGenerator : MonoBehaviour
                             if (aStarMap[nextY, nextX].floor = false && aStarMap[nextY,nextX].score >= minScore)
                             {
                                 aStarMap[nextY, nextX].cost++;
-                                aStarMap[nextY, nextX].estimatedCost
+                                //aStarMap[nextY, nextX].estimatedCost
                             }
                             if (nextMinScore > aStarMap[nextY, nextX].score) // Ÿ‚ÌÅ¬’l‚ğ‹‚ß‚Ä‚¨‚­
                             {
