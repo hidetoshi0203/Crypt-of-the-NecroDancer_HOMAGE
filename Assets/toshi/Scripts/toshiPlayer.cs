@@ -26,6 +26,7 @@ public class toshiPlayer : MonoBehaviour
 
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
+    ComboManager comboManager;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -33,6 +34,7 @@ public class toshiPlayer : MonoBehaviour
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
+        comboManager = GetComponent<ComboManager>();
         direction = DIRECTION.DOWN;
     }
     
@@ -59,6 +61,11 @@ public class toshiPlayer : MonoBehaviour
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
 
+                    notesManager.OnTimeLimit();
+                    comboManager.IncreaseCombo();
+
+                    Destroy(this.gameObject);
+
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
@@ -66,6 +73,11 @@ public class toshiPlayer : MonoBehaviour
                     moveType();
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+
+                    notesManager.OnTimeLimit();
+                    comboManager.IncreaseCombo();
+
+                    Destroy(this.gameObject);
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
@@ -73,6 +85,11 @@ public class toshiPlayer : MonoBehaviour
                     moveType();
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+
+                    notesManager.OnTimeLimit();
+                    comboManager.IncreaseCombo();
+
+                    Destroy(this.gameObject);
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
@@ -80,6 +97,11 @@ public class toshiPlayer : MonoBehaviour
                     moveType();
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+
+                    notesManager.OnTimeLimit();
+                    comboManager.IncreaseCombo();
+
+                    Destroy(this.gameObject);
                 }
             }
         }
