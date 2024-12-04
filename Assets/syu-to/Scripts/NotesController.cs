@@ -14,6 +14,7 @@ public class NotesController : MonoBehaviour
 
     private NotesManager notesManager; //NotesManagerのインスタンス
     private ComboManager comboManager;
+    private toshiPlayer toshiPlayer = null;
 
     private void Awake()
     {
@@ -25,6 +26,11 @@ public class NotesController : MonoBehaviour
 
     private void Update()
     {
+        if (toshiPlayer == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("Player");
+            toshiPlayer = inst.GetComponent<toshiPlayer>();
+        }
         currentTime += Time.deltaTime; //経過時間を更新
 
         transform.position = Vector3.Lerp(startPos, endPos, currentTime / tempo); //ノーツの位置を移動
@@ -94,7 +100,7 @@ public class NotesController : MonoBehaviour
             comboManager.comboreset = false;
         }
 
-        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
+        if (comboManager.comboreset && /*Input.GetKeyDown(KeyCode.Space) */ toshiPlayer.isPlayerMove)
         {
             comboManager.ResetCombo();
             Debug.Log("reset");

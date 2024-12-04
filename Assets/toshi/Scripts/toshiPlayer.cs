@@ -23,19 +23,21 @@ public class toshiPlayer : MonoBehaviour
     public DIRECTION direction;
     public Vector2Int playerCurrentPos, playerNextPos;
     public bool isAttack;
-
+    public bool isPlayerMove;
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
-    ComboManager comboManager;
+    ComboManager comboManager = null;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
+    GameObject notesObjets;
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
         comboManager = GetComponent<ComboManager>();
         direction = DIRECTION.DOWN;
+        notesObjets = GameObject.FindGameObjectWithTag("Notes");
     }
     
 
@@ -50,6 +52,11 @@ public class toshiPlayer : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
             notesManager = inst.GetComponent<NotesManager>();
         }
+        if (comboManager == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
+            comboManager = inst.GetComponent <ComboManager>();
+        }
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (notesManager.playerCanMove)
@@ -60,11 +67,12 @@ public class toshiPlayer : MonoBehaviour
                     moveType();
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+                    isPlayerMove = true;
 
                     notesManager.OnTimeLimit();
                     comboManager.IncreaseCombo();
 
-                    Destroy(this.gameObject);
+                    Destroy(notesObjets);
 
                 }
                 if (Input.GetKeyDown(KeyCode.D))
@@ -73,11 +81,12 @@ public class toshiPlayer : MonoBehaviour
                     moveType();
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+                    isPlayerMove = true;
 
                     notesManager.OnTimeLimit();
                     comboManager.IncreaseCombo();
 
-                    Destroy(this.gameObject);
+                    Destroy(notesObjets);
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
@@ -85,11 +94,12 @@ public class toshiPlayer : MonoBehaviour
                     moveType();
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+                    isPlayerMove= true;
 
                     notesManager.OnTimeLimit();
                     comboManager.IncreaseCombo();
 
-                    Destroy(this.gameObject);
+                    Destroy(notesObjets);
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
@@ -97,11 +107,12 @@ public class toshiPlayer : MonoBehaviour
                     moveType();
                     notesManager.StopTouchSound();
                     notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+                    isPlayerMove = true;
 
                     notesManager.OnTimeLimit();
                     comboManager.IncreaseCombo();
 
-                    Destroy(this.gameObject);
+                    Destroy(notesObjets);
                 }
             }
         }
