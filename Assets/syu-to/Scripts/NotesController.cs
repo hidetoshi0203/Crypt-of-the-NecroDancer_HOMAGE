@@ -14,6 +14,7 @@ public class NotesController : MonoBehaviour
 
     private NotesManager notesManager; //NotesManagerのインスタンス
     private ComboManager comboManager;
+    private ColorChange ColorChange;
     private toshiPlayer toshiPlayer = null;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class NotesController : MonoBehaviour
         endPos = new Vector3(endX, startPos.y, startPos.z); //ノーツの目的地を設定
         notesManager = FindObjectOfType<NotesManager>(); //NotesManagerを取得
         comboManager = FindObjectOfType<ComboManager>();
+        ColorChange = FindObjectOfType<ColorChange>();
     }
 
     private void Update()
@@ -47,23 +49,28 @@ public class NotesController : MonoBehaviour
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.Space))
         {
             KyeDown();
+            ColorChange.Changecolor();
         }
 
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.W))
         {
             KyeDown();
+            ColorChange.Changecolor();
         }
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.A))
         {
             KyeDown();
+            ColorChange.Changecolor();
         }
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.S))
         {
             KyeDown();
+            ColorChange.Changecolor();
         }
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.D))
         {
             KyeDown();
+            ColorChange.Changecolor();
         }
 
         //ノーツが移動し終わったら削除
