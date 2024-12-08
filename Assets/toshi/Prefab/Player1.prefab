@@ -115,5 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e5a03462ae2ac4cb4233a186ed86a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 3
+  lifeArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   attackedPlayerPos: {x: 0, y: 0}

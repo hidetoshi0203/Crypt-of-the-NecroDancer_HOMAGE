@@ -33,14 +33,12 @@ public class MapGenerator : MonoBehaviour
         return mapTable[_pos.x, _pos.y];
     }
 
-    void Start()
+    private void Awake()
     {
         _loadMapData();
 
         _createMap();
     }
-
-   
 
     public void _loadMapData()
     {
