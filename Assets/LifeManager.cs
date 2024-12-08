@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class LifeManager : MonoBehaviour
 {
-    toshiEnemy toshiEnemy;
+    toshiEnemy toshiEnemy = null;
     public GameObject[] lifeArray = new GameObject[3];
     public int playerHP = 3;
 
-    private void Start()
-    {
-        toshiEnemy = GetComponent<toshiEnemy>();
-    }
     void Update()
     {
+        if (toshiEnemy != null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
+            toshiEnemy = inst.GetComponent<toshiEnemy>();
+        }
         if (toshiEnemy.isEnemyAttack)
         {
             lifeArray[playerHP - 1].SetActive(false);

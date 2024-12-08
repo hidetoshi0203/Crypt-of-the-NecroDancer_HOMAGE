@@ -4,48 +4,48 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    LifeManager lifeManager;
-    toshiEnemy ToshiEnemy = null;  
+    LifeManager lifeManager = null;
+    toshiEnemy toshiEnemy = null;  
     EnemyManager enemyManager = null;
-    toshiPlayer ToshiPlayer = null;
-    MapGenerator mapGenerator;
+    toshiPlayer toshiPlayer = null;
+
+    public GameObject[] lifeArray = new GameObject[3];
+    int playerHP = 3;
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
     
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        if (mapGenerator == null)
+        if (lifeManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("GameManager");
             lifeManager = inst.GetComponent<LifeManager>();
         }
-        if (ToshiPlayer == null)
+        if (toshiPlayer == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
-            ToshiPlayer = inst.GetComponent<toshiPlayer>();
+            toshiPlayer = inst.GetComponent<toshiPlayer>();
         }
-        if (ToshiEnemy == null)
+        if (toshiEnemy == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            ToshiEnemy = inst.GetComponent<toshiEnemy>();
+            toshiEnemy = inst.GetComponent<toshiEnemy>();
         }
         if (enemyManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
         }
-        if (ToshiEnemy.isEnemyAttack)
+        if (toshiEnemy.isEnemyAttack)
         {
-            Debug.Log("敵の攻撃");
-            if (lifeManager.playerHP == 0)
+            Debug.Log("敵からの攻撃");
+           
+            attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
+            if (attackedPlayerPos == toshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
             {
-                attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
-                if (attackedPlayerPos == ToshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
+                lifeArray[playerHP - 1].SetActive(false);
+                playerHP--;
+                if (playerHP == 0)
                 {
                     Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
                 }

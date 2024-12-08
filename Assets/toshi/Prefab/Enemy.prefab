@@ -145,7 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCurrentPos: {x: 0, y: 0}
-  attackedPos: {x: 0, y: 0}
+  enemyNextPos: {x: 0, y: 0}
+  attackedEnemyPos: {x: 0, y: 0}
 --- !u!114 &-8089086444032780210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,5 +160,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  eCurrentPos: {x: 0, y: 0}
-  eNextPos: {x: 0, y: 0}
+  isEnemyAttack: 0
