@@ -44,16 +44,26 @@ public class NotesController : MonoBehaviour
         }
 
         //ハートに触れている状態でキーが押されたとき
-        if (notesManager.CanInputKey() && Input.GetKeyDown(KeyCode.Space) && notesManager.playerCanMove)
+        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.Space))
         {
-            notesManager.StopTouchSound();
-            notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-            notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+            KyeDown();
+        }
 
-            notesManager.OnTimeLimit();
-            comboManager.IncreaseCombo();
-
-            Destroy(this.gameObject);
+        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.W))
+        {
+            KyeDown();
+        }
+        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.A))
+        {
+            KyeDown();
+        }
+        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.S))
+        {
+            KyeDown();
+        }
+        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.D))
+        {
+            KyeDown();
         }
 
         //ノーツが移動し終わったら削除
@@ -65,27 +75,23 @@ public class NotesController : MonoBehaviour
             Destroy(this.gameObject);
 
         }
-        /*
-        //ハートの外にいるとき
-        if(transform.position.x < -Heart_range || transform.position.x > Heart_range)
-        {
-            comboManager.comboreset = true;
-        }
-        else
-        {
-            comboManager.comboreset = false;
-        }
-
-        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
-        {
-            comboManager.ResetCombo();
-            Debug.Log("reset");
-        }*/
     }
 
     private void OnDestroy()
     {
         notesManager.playerCanMove = true; //ノーツが削除されるときフラグをリセット
+    }
+
+    public void KyeDown()
+    {
+        notesManager.StopTouchSound();
+        notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
+        notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+
+        notesManager.OnTimeLimit();
+        comboManager.IncreaseCombo();
+
+        Destroy(this.gameObject);
     }
 
     public void OffTouchHeart()
@@ -100,10 +106,34 @@ public class NotesController : MonoBehaviour
             comboManager.comboreset = false;
         }
 
-        if (comboManager.comboreset && /*Input.GetKeyDown(KeyCode.Space) */ toshiPlayer.isPlayerMove)
+        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
         {
             comboManager.ResetCombo();
             Debug.Log("reset");
+        }
+
+
+
+        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.W))
+        {
+            comboManager.ResetCombo();
+            Debug.Log("W_reset");
+        }
+
+        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.A))
+        {
+            comboManager.ResetCombo();
+            Debug.Log("A_reset");
+        }
+        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.S))
+        {
+            comboManager.ResetCombo();
+            Debug.Log("S_reset");
+        }
+        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.D))
+        {
+            comboManager.ResetCombo();
+            Debug.Log("D_reset");
         }
     }
 }

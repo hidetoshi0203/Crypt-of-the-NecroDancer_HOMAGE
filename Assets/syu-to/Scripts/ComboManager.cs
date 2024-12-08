@@ -27,6 +27,7 @@ public class ComboManager : MonoBehaviour
     {
         comboCount += (float)0.5;
         UpdateComboText(); // コンボ数を更新
+        Debug.Log("combo");
 
         // コンボがChangedCombosの倍数になったらBPMを増加
         if (comboCount % ChangedCombos == 0)
@@ -42,7 +43,7 @@ public class ComboManager : MonoBehaviour
         UpdateComboText(); // コンボ数をリセットして更新
 
         tempoManager.ResetBPM(); // BPMを初期値に戻す
-        Debug.Log("BPM");
+        Debug.Log("BPMReset");
 
         comboreset = true;
     }

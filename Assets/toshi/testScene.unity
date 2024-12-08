@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 1.5
-  bpm: 60
+  bpm: 30
 --- !u!4 &1931590996
 Transform:
   m_ObjectHideFlags: 0
