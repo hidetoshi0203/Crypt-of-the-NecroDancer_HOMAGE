@@ -23,7 +23,6 @@ public class NotesManager : MonoBehaviour
 
     public bool playerCanMove = false;
     public bool enemyCanMove = false;
-    //public bool IsTouchingHeart => isTouchingHeart;
 
     private ComboManager comboManager;
     private NotesController notesController = null;
@@ -66,7 +65,7 @@ public class NotesManager : MonoBehaviour
         }
         
 
-        notesController.OffTouchHeart();
+        notesController.OffTouchHeart(); //ƒn[ƒg‚©‚ç—£‚ê‚Ä‚¢‚é‚Æ‚«
 
     }
 

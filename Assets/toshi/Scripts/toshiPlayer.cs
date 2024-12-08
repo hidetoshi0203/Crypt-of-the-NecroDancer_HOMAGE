@@ -63,63 +63,34 @@ public class toshiPlayer : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    direction = DIRECTION.TOP;
-                    moveType();
-                    notesManager.StopTouchSound();
-                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
-                    isPlayerMove = true;
-
-                    notesManager.OnTimeLimit();
-                    comboManager.IncreaseCombo();
-
-                    Destroy(notesObjets);
-
+                    HandlePlayerMove(DIRECTION.TOP);
                 }
-                if (Input.GetKeyDown(KeyCode.D))
+                else if (Input.GetKeyDown(KeyCode.D))
                 {
-                    direction = DIRECTION.RIGHT;
-                    moveType();
-                    notesManager.StopTouchSound();
-                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
-                    isPlayerMove = true;
-
-                    notesManager.OnTimeLimit();
-                    comboManager.IncreaseCombo();
-
-                    Destroy(notesObjets);
+                    HandlePlayerMove(DIRECTION.RIGHT);
                 }
-                if (Input.GetKeyDown(KeyCode.S))
+                else if (Input.GetKeyDown(KeyCode.S))
                 {
-                    direction = DIRECTION.DOWN;
-                    moveType();
-                    notesManager.StopTouchSound();
-                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
-                    isPlayerMove= true;
-
-                    notesManager.OnTimeLimit();
-                    comboManager.IncreaseCombo();
-
-                    Destroy(notesObjets);
+                    HandlePlayerMove(DIRECTION.DOWN);
                 }
-                if (Input.GetKeyDown(KeyCode.A))
+                else if (Input.GetKeyDown(KeyCode.A))
                 {
-                    direction = DIRECTION.LEFT;
-                    moveType();
-                    notesManager.StopTouchSound();
-                    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
-                    isPlayerMove = true;
-
-                    notesManager.OnTimeLimit();
-                    comboManager.IncreaseCombo();
-
-                    Destroy(notesObjets);
+                    HandlePlayerMove(DIRECTION.LEFT);
                 }
             }
         }
     }
 
-        //移動用の関数
-        void moveType()
+    private void HandlePlayerMove(DIRECTION directionInput)
+    {
+        direction = directionInput;
+        moveType();
+
+        notesManager.StopTouchSound();
+    }
+
+    //移動用の関数
+    void moveType()
     {
         
         if (notesManager != null && notesManager.CanInputKey())
