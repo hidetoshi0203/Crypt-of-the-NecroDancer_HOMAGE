@@ -24,6 +24,7 @@ public class toshiPlayer : MonoBehaviour
     public Vector2Int playerCurrentPos, playerNextPos;
     public bool isAttack;
     public bool isPlayerMove;
+    public Camera cam;
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
     ComboManager comboManager = null;
@@ -38,6 +39,7 @@ public class toshiPlayer : MonoBehaviour
         comboManager = GetComponent<ComboManager>();
         direction = DIRECTION.DOWN;
         notesObjets = GameObject.FindGameObjectWithTag("Notes");
+        cam = Camera.main;
     }
     
 
@@ -123,19 +125,16 @@ public class toshiPlayer : MonoBehaviour
             }
             else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
             {
-
                 // 移動する
                 mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
                 transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
                 playerCurrentPos = playerNextPos;
                 mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
-                Debug.Log(mapGenerator.GetPlayerNextMapType(playerCurrentPos));
             }
 
             if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
             {
                 Debug.Log("階段の上だよ");
-
                 GameObject parentObject = GameObject.Find("MapChip");
 
                 int childCount = parentObject.transform.childCount;
@@ -151,7 +150,11 @@ public class toshiPlayer : MonoBehaviour
                 mapGenerator._loadMapData();
                 mapGenerator._createMap();
             }
-            
+
+           
+            //cam.transform.position = playerの位置
+
+
         }
     }
 

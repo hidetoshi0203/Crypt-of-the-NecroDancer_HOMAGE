@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour
     float mapSize;
     public int floor = 0;
     Vector2 centerPos;
+    
 
     public enum MAP_TYPE
     {
@@ -111,6 +112,7 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
+
     }
 
     public Vector2 ScreenPos(Vector2Int _pos)

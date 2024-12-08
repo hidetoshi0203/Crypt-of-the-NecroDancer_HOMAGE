@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    LifeManager lifeManager = null;
     toshiEnemy toshiEnemy = null;  
     EnemyManager enemyManager = null;
     toshiPlayer toshiPlayer = null;
@@ -16,11 +15,7 @@ public class PlayerManager : MonoBehaviour
     
     void Update()
     {
-        if (lifeManager == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("GameManager");
-            lifeManager = inst.GetComponent<LifeManager>();
-        }
+        
         if (toshiPlayer == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
@@ -43,12 +38,15 @@ public class PlayerManager : MonoBehaviour
             attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
             if (attackedPlayerPos == toshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
             {
+                Debug.Log(attackedPlayerPos);
+                
                 lifeArray[playerHP - 1].SetActive(false);
                 playerHP--;
                 if (playerHP == 0)
                 {
                     Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
                 }
+                toshiEnemy.isEnemyAttack = false;
             }
         }
     }

@@ -101,7 +101,7 @@ public class toshiEnemy : MonoBehaviour
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
-                mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 mapGenerator.UpdateTilie(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
