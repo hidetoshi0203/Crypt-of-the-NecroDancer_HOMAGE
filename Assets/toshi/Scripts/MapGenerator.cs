@@ -10,7 +10,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject[] prefabs;
     float mapSize;
     public int floor = 0;
-    Vector2 centerPos;
+    //Vector2 centerPos;
     
 
     public enum MAP_TYPE
@@ -19,7 +19,8 @@ public class MapGenerator : MonoBehaviour
         WALL,   // 1 壁
         PLAYER, // 2 プレイヤー
         ENEMY,  // 3 敵（1体目）
-        STAIRS  // 4 階段
+        STAIRS, // 4 階段
+        WALL2   // 5 壁（）
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -69,23 +70,23 @@ public class MapGenerator : MonoBehaviour
 
 
 
-        if (mapTable.GetLength(0) % 2 == 0)
-        {
-            centerPos.x = mapTable.GetLength(0) / 2 * mapSize - (mapSize / 2);
-        }
-        else
-        {
-            centerPos.x = mapTable.GetLength(0) / 2 * mapSize;
-        }
+        //if (mapTable.GetLength(0) % 2 == 0)
+        //{
+        //    centerPos.x = mapTable.GetLength(0) / 2 * mapSize - (mapSize / 2);
+        //}
+        //else
+        //{
+        //    centerPos.x = mapTable.GetLength(0) / 2 * mapSize;
+        //}
 
-        if (mapTable.GetLength(1) % 2 == 0)
-        {
-            centerPos.y = mapTable.GetLength(1) / 2 * mapSize - (mapSize / 2);
-        }
-        else
-        {
-            centerPos.y = mapTable.GetLength(1) / 2 * mapSize;
-        }
+        //if (mapTable.GetLength(1) % 2 == 0)
+        //{
+        //    centerPos.y = mapTable.GetLength(1) / 2 * mapSize - (mapSize / 2);
+        //}
+        //else
+        //{
+        //    centerPos.y = mapTable.GetLength(1) / 2 * mapSize;
+        //}
 
 
         for (int y = 0; y < mapTable.GetLength(1); y++)
@@ -118,8 +119,8 @@ public class MapGenerator : MonoBehaviour
     public Vector2 ScreenPos(Vector2Int _pos)
     {
         return new Vector2(
-            _pos.x * mapSize - centerPos.x,
-            -(_pos.y * mapSize - centerPos.y));
+            _pos.x * mapSize /*- centerPos.x*/,
+            -(_pos.y * mapSize /*- centerPos.y)*/));
 
     }
    public void UpdateTilie(Vector2Int _pos,MAP_TYPE mapType)
@@ -131,26 +132,26 @@ public class MapGenerator : MonoBehaviour
         mapTable2[_pos.x, _pos.y] = mapType;
     }
 
-    private void OnGUI()
-    {
-        string map = "";
-        for(int x = 0; x < mapTable.GetLength(1); x++)
-        {
+    //private void OnGUI()
+    //{
+    //    string map = "";
+    //    for(int x = 0; x < mapTable.GetLength(1); x++)
+    //    {
             
-            for(int y = 0; y < mapTable.GetLength(0); y++)
-            {
-                //if (isReach[y, x] == false)
-                //{
-                //    map += "？";
-                //    continue;
-                //}
-                if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "◆";
-                else if (mapTable[y, x] == MAP_TYPE.WALL) map += "■";
-                else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "●";
-                else if (mapTable[y, x] == MAP_TYPE.GROUND) map += "□";
-            }
-            map += "\n";
-        }
-        GUI.Label(new Rect(50, 50, 300, 300), map);
-    }
+    //        for(int y = 0; y < mapTable.GetLength(0); y++)
+    //        {
+    //            //if (isReach[y, x] == false)
+    //            //{
+    //            //    map += "？";
+    //            //    continue;
+    //            //}
+    //            if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "◆";
+    //            else if (mapTable[y, x] == MAP_TYPE.WALL) map += "■";
+    //            else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "●";
+    //            else if (mapTable[y, x] == MAP_TYPE.GROUND) map += "□";
+    //        }
+    //        map += "\n";
+    //    }
+    //    GUI.Label(new Rect(50, 50, 300, 300), map);
+    //}
 }

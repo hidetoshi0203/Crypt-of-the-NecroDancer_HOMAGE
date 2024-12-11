@@ -24,7 +24,7 @@ public class toshiPlayer : MonoBehaviour
     public Vector2Int playerCurrentPos, playerNextPos;
     public bool isAttack;
     public bool isPlayerMove;
-    public Camera cam;
+    Camera cam;
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
     ComboManager comboManager = null;
@@ -40,10 +40,14 @@ public class toshiPlayer : MonoBehaviour
         direction = DIRECTION.DOWN;
         notesObjets = GameObject.FindGameObjectWithTag("Notes");
         cam = Camera.main;
+        cam.transform.position = transform.position + new Vector3(0,0,-1);
     }
-    
 
 
+    private void FixedUpdate()
+    {
+        cam.transform.position = transform.position + new Vector3(0, 0, -1);
+    }
 
     //@“ü—Í‚É_moveŠÖ”‚ğŒÄ‚Ô‚æ‚¤‚É‚·‚éB
     private void Update()
@@ -150,11 +154,6 @@ public class toshiPlayer : MonoBehaviour
                 mapGenerator._loadMapData();
                 mapGenerator._createMap();
             }
-
-           
-            //cam.transform.position = player‚ÌˆÊ’u
-
-
         }
     }
 
