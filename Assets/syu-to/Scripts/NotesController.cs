@@ -56,28 +56,28 @@ public class NotesController : MonoBehaviour
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.Space))
         {
             KyeDown();
-            ColorChange.Changecolor();
+            //ColorChange.Changecolor();
         }
 
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.W))
         {
             KyeDown();
-            ColorChange.Changecolor();
+            //ColorChange.Changecolor();
         }
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.A))
         {
             KyeDown();
-            ColorChange.Changecolor();
+            //ColorChange.Changecolor();
         }
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.S))
         {
             KyeDown();
-            ColorChange.Changecolor();
+            //ColorChange.Changecolor();
         }
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.D))
         {
             KyeDown();
-            ColorChange.Changecolor();
+            //ColorChange.Changecolor();
         }
 
         //ÉmÅ[ÉcÇ™à⁄ìÆÇµèIÇÌÇ¡ÇΩÇÁçÌèú

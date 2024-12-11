@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
                 if (playerHP == 0)
                 {
                     Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
-                    mapGenerator.UpdateTilie(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
+                    mapGenerator.UpdateMapTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
                 }
                 toshiEnemy.isEnemyAttack = false;
             }

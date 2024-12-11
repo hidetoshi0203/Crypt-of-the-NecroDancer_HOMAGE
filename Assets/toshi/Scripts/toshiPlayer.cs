@@ -130,10 +130,10 @@ public class toshiPlayer : MonoBehaviour
             else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL2) // 壁以外だった場合
             {
                 // 移動する
-                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+                mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
                 transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
                 playerCurrentPos = playerNextPos;
-                mapGenerator.UpdateTilie(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+                mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
             }
 
             if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
