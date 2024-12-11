@@ -138,11 +138,11 @@ public class RuiPlayerManager : MonoBehaviour
             {
 
                 // 移動する
-                mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
-                transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
-                playerCurrentPos = playerNextPos;
-                mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
-                Debug.Log(mapGenerator.GetPlayerNextMapType(playerCurrentPos));
+                //mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+                //transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
+                //playerCurrentPos = playerNextPos;
+                //mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+                //Debug.Log(mapGenerator.GetPlayerNextMapType(playerCurrentPos));
             }
             if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
             {

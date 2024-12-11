@@ -123,11 +123,11 @@ public class MapGenerator : MonoBehaviour
             -(_pos.y * mapSize /*- centerPos.y)*/));
 
     }
-   public void UpdateTilie(Vector2Int _pos,MAP_TYPE mapType)
+   public void UpdateMapTile(Vector2Int _pos,MAP_TYPE mapType) // マップの情報
     {
         mapTable[_pos.x, _pos.y] = mapType;
     }
-    public void UpdatePlayerTile(Vector2Int _pos, MAP_TYPE mapType)
+    public void UpdateTile(Vector2Int _pos, MAP_TYPE mapType) // プレイヤー、エネミーの情報（移動などで使う）
     {
         mapTable2[_pos.x, _pos.y] = mapType;
     }

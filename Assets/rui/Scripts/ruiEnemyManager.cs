@@ -103,10 +103,10 @@ public class RuiEnemyManager : MonoBehaviour
             else if (mapGenerator.GetEnemyNextMapType(ruiAttackedEnemy.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
                 //ˆÚ“®
-                mapGenerator.UpdateTilie(ruiAttackedEnemy.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
-                transform.localPosition = mapGenerator.ScreenPos(ruiAttackedEnemy.enemyNextPos);
-                ruiAttackedEnemy.enemyCurrentPos = ruiAttackedEnemy.enemyNextPos;
-                mapGenerator.UpdateTilie(ruiAttackedEnemy.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
+                //mapGenerator.UpdateTilie(ruiAttackedEnemy.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                //transform.localPosition = mapGenerator.ScreenPos(ruiAttackedEnemy.enemyNextPos);
+                //ruiAttackedEnemy.enemyCurrentPos = ruiAttackedEnemy.enemyNextPos;
+                //mapGenerator.UpdateTilie(ruiAttackedEnemy.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
             }
         }
     }
