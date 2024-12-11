@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NotesController : MonoBehaviour
 {
-    [SerializeField] private float endX = 0.5f; //ノーツの移動先のX座標
+
+    private float endX; //ノーツの移動先のX座標
     [SerializeField] private float tempo = 2.0f; //ノーツの移動時間
     [SerializeField] public float Heart_range = 0; //ハートに触れる範囲
+    private GameObject heartImage; // ノーツの終着点となるオブジェクト 
 
     private Vector3 startPos; //ノーツの生成位置
     private Vector3 endPos; //ノーツの終了位置
@@ -16,9 +19,12 @@ public class NotesController : MonoBehaviour
     private ComboManager comboManager;
     private ColorChange ColorChange;
     private toshiPlayer toshiPlayer = null;
-
+    private Image a;
     private void Awake()
     {
+        heartImage = GameObject.Find("Heart");
+        endX = heartImage.transform.position.x;
+        Heart_range = heartImage.transform.position.x + Heart_range;
         startPos = transform.position; //現在の位置を生成位置として設定
         endPos = new Vector3(endX, startPos.y, startPos.z); //ノーツの目的地を設定
         notesManager = FindObjectOfType<NotesManager>(); //NotesManagerを取得

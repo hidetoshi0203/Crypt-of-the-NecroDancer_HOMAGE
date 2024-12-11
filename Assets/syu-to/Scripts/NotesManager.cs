@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class NotesManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class NotesManager : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip touchSound; //ハートに触れたときの音
     [SerializeField] private AudioClip spaceSound; //スペースキーを押したときの音
+
+    Camera cam;
 
     private float nextGenerateTime = 1f; //次の生成タイミング
     private float generateTime = 1f; //ノーツの生成間隔
@@ -43,11 +46,11 @@ public class NotesManager : MonoBehaviour
         reSizeHeart = defaultHeart.transform.localScale;
         Debug.Log("re" + reSizeHeart);
         Debug.Log("de" + defaultHeart.transform.localScale);
+        cam = Camera.main;
     }
 
     private void Update()
     {
-
         if (Time.time > nextGenerateTime)
         {
             Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
