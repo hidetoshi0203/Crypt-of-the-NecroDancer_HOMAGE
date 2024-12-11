@@ -44,8 +44,6 @@ public class NotesManager : MonoBehaviour
         comboManager.comboreset = false;
 
         reSizeHeart = defaultHeart.transform.localScale;
-        Debug.Log("re" + reSizeHeart);
-        Debug.Log("de" + defaultHeart.transform.localScale);
         cam = Camera.main;
     }
 
@@ -93,8 +91,6 @@ public class NotesManager : MonoBehaviour
             PlayTouchSound();
         }
         defaultHeart.transform.localScale = new Vector3(2, 2, 2);
-        
-        Debug.Log("UpdateDe" + defaultHeart.transform.localScale);
     }
 
     //ハートに触れる状態が終わったとき
@@ -103,7 +99,6 @@ public class NotesManager : MonoBehaviour
         isTouchingHeart = false;
         StopTouchSound();
         defaultHeart.transform.localScale = reSizeHeart;
-        Debug.Log("UpdateRe" + reSizeHeart);
     }
 
     //入力可能かどうか

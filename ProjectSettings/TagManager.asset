@@ -20,6 +20,7 @@ TagManager:
   - Notes
   - ComboManager
   - GameManager
+  - MapChip
   layers:
   - Default
   - TransparentFX

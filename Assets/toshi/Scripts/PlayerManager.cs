@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     toshiEnemy toshiEnemy = null;  
     EnemyManager enemyManager = null;
     toshiPlayer toshiPlayer = null;
+    MapGenerator mapGenerator = null;
 
     public GameObject[] lifeArray = new GameObject[3];
     int playerHP = 3;
@@ -15,7 +16,11 @@ public class PlayerManager : MonoBehaviour
     
     void Update()
     {
-        
+        if (mapGenerator == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("MapChip");
+            mapGenerator = inst.GetComponent<MapGenerator>();
+        }
         if (toshiPlayer == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
@@ -45,6 +50,7 @@ public class PlayerManager : MonoBehaviour
                 if (playerHP == 0)
                 {
                     Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
+                    mapGenerator.UpdateTilie(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
                 }
                 toshiEnemy.isEnemyAttack = false;
             }
