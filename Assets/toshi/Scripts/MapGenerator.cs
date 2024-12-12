@@ -20,7 +20,8 @@ public class MapGenerator : MonoBehaviour
         PLAYER, // 2 プレイヤー
         ENEMY,  // 3 敵（1体目）
         STAIRS, // 4 階段
-        WALL2   // 5 壁（）
+        WALL2,   // 5 壁（）
+        ENEMY2  // 6 敵2
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;

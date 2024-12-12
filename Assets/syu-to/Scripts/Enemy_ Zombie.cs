@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class toshiEnemy : MonoBehaviour
+public class Enemy_zombie: MonoBehaviour
 {
     public enum DIRECTION
     {
@@ -33,68 +33,46 @@ public class toshiEnemy : MonoBehaviour
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<EnemyManager>();
-        direction = DIRECTION.DOWN;
+        direction = DIRECTION.LEFT;
     }
-    // Update is called once per frame
+
     void Update()
     {
-        
+
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
             notesManager = inst.GetComponent<NotesManager>();
         }
-        
-        //if (notesManager != null && notesManager.CanInputKey())
-        //{
-        //    count = 1;
-        //    if (notesManager.enemyCanMove) // 動けるとき
-        //    {
-        //        if (count == 0)
-        //        {
-        //            // cout0の時1マス下
-        //            direction = DIRECTION.DOWN;
-        //            eMoveType();
-        //            notesManager.enemyCanMove = false;
 
-        //        }
-        //        if (count == 1)
-        //        {
-        //            // cout1の時1マス上
-        //            direction = DIRECTION.TOP;
-        //            eMoveType();
-        //            notesManager.enemyCanMove = false;
-        //            count = 0;
-        //        }
-        //    }
-        //}
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (moveCount != 1 && notesManager.enemyCanMove)
             {
                 switch (direction)
                 {
-                    case DIRECTION.TOP:
+                    case DIRECTION.RIGHT:
                         eMoveType();
-                        direction = DIRECTION.DOWN;
+                        direction = DIRECTION.LEFT;
                         moveCount++;
                         break;
-                    case DIRECTION.DOWN:
+                    case DIRECTION.LEFT:
                         eMoveType();
-                        direction = DIRECTION.TOP;
+                        direction = DIRECTION.RIGHT;
                         moveCount++;
                         break;
-                }             
+                }
             }
-            else {notesManager.enemyCanMove = false; moveCount = 0; }
+            else { notesManager.enemyCanMove = false; moveCount = 0; }
         }
-        
+
     }
+
     void eMoveType()
     {
         if (notesManager != null && notesManager.CanInputKey())
         {
-            enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0],move[(int)direction, 1]);
+            enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
@@ -115,5 +93,5 @@ public class toshiEnemy : MonoBehaviour
             }
         }
     }
-    
+
 }
