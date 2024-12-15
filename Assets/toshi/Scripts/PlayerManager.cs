@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
     EnemyManager enemyManager = null;
     toshiPlayer toshiPlayer = null;
     MapGenerator mapGenerator = null;
-    Enemy_zombie enemy_Zombie = null;
+    Enemy_Zombie enemy_Zombie = null;
 
     public GameObject[] lifeArray = new GameObject[3];
     int playerHP = 3;
@@ -34,8 +34,8 @@ public class PlayerManager : MonoBehaviour
         }
         if (enemy_Zombie == null)
         {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_zombie");
-            enemy_Zombie = inst.GetComponent<Enemy_zombie>();
+            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
+            enemy_Zombie = inst.GetComponent<Enemy_Zombie>();
         }
         if (enemyManager == null)
         {
