@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_zombie: MonoBehaviour
+public class Enemy_Zombie : MonoBehaviour
 {
     public enum DIRECTION
     {
@@ -35,7 +35,7 @@ public class Enemy_zombie: MonoBehaviour
         enemyManager = GetComponent<EnemyManager>();
         direction = DIRECTION.LEFT;
     }
-
+    // Update is called once per frame
     void Update()
     {
 
@@ -53,12 +53,20 @@ public class Enemy_zombie: MonoBehaviour
                 {
                     case DIRECTION.RIGHT:
                         eMoveType();
-                        direction = DIRECTION.LEFT;
+
+                        if(mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        {
+                            direction = DIRECTION.LEFT;
+                        }
+                        
                         moveCount++;
                         break;
                     case DIRECTION.LEFT:
                         eMoveType();
-                        direction = DIRECTION.RIGHT;
+                        if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        {
+                            direction = DIRECTION.RIGHT;
+                        }
                         moveCount++;
                         break;
                 }
@@ -67,7 +75,6 @@ public class Enemy_zombie: MonoBehaviour
         }
 
     }
-
     void eMoveType()
     {
         if (notesManager != null && notesManager.CanInputKey())
@@ -81,7 +88,7 @@ public class Enemy_zombie: MonoBehaviour
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
             }
             else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
@@ -89,9 +96,8 @@ public class Enemy_zombie: MonoBehaviour
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
             }
         }
     }
-
 }

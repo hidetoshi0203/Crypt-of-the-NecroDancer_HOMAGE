@@ -21,7 +21,8 @@ TagManager:
   - ComboManager
   - GameManager
   - MapChip
-  - Enemy_zombie
+  - Undefined
+  - Enemy_Zombie
   layers:
   - Default
   - TransparentFX

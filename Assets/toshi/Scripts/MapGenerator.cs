@@ -102,6 +102,11 @@ public class MapGenerator : MonoBehaviour
                 {
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
                 }
+                
+                if (mapTable[x, y] == MAP_TYPE.ENEMY2)
+                {
+                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                }
 
 
                 _ground.transform.position = ScreenPos(pos);
