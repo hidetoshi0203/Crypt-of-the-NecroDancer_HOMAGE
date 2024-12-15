@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     MapGenerator mapGenerator = null;
     Enemy_Zombie enemy_Zombie = null;
 
+    [SerializeField] GameObject playerObj;
     public GameObject[] lifeArray = new GameObject[3];
     int playerHP = 3;
 
@@ -69,7 +70,7 @@ public class PlayerManager : MonoBehaviour
         playerHP--;
         if (playerHP == 0)
         {
-            Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
+            Destroy(playerObj); // プレイヤーのオブジェクトをDestroyする
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
         }
     }

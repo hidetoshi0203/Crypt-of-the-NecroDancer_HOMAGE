@@ -590,6 +590,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &376306587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376306589}
+  - component: {fileID: 376306588}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &376306588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376306587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a5607e200ff6547b771199374e1b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCurrentPos: {x: 0, y: 0}
+  enemyNextPos: {x: 0, y: 0}
+  attackedEnemyPos: {x: 0, y: 0}
+  enemyObj: {fileID: 8425694697182779888, guid: dc75975107579424781bc084229972c4, type: 3}
+--- !u!4 &376306589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376306587}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.841312, y: -2.7102463, z: -0.022671258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &452976573
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +692,7 @@ MonoBehaviour:
   - {fileID: 8425694697182779888, guid: dc75975107579424781bc084229972c4, type: 3}
   - {fileID: 8602714596683316640, guid: 2e715061bdf63c842a566ac7c2b2ff76, type: 3}
   - {fileID: 3531436477471686659, guid: e7dd179fbb7ba2a4ba0e8610195804a2, type: 3}
+  - {fileID: 5038783893017895171, guid: 550cbdd05cc30244ba57b93f18dc0abc, type: 3}
   floor: 0
 --- !u!1 &652910187
 GameObject:
@@ -674,6 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e5a03462ae2ac4cb4233a186ed86a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObj: {fileID: 5870177880929257009, guid: 0de902502049a384fab0407bbd41d35c, type: 3}
   lifeArray:
   - {fileID: 2080564363}
   - {fileID: 310536152}
@@ -1438,3 +1488,4 @@ SceneRoots:
   - {fileID: 372768251}
   - {fileID: 190121556}
   - {fileID: 652910189}
+  - {fileID: 376306589}

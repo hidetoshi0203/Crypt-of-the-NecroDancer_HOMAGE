@@ -8,9 +8,19 @@ public class EnemyManager : MonoBehaviour
     public Vector2Int enemyCurrentPos , enemyNextPos;       // 今の座標
     public Vector2Int attackedEnemyPos; // プレイヤーから攻撃された敵オブジェクトの座標
     MapGenerator mapGenerator;
+    private int hp = 0;
+    public List<GameObject> HeartObjList;
+    //[SerializeField] GameObject HeartObj;
+    //[SerializeField] GameObject Spawner;
+    //[SerializeField] GameObject Spawner1;
+
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        hp = HeartObjList.Count;
+        //Instantiate(HeartObj, Spawner.transform.position, Quaternion.identity);
+        //Instantiate(HeartObj, Spawner1.transform.position, Quaternion.identity);
+        
     }
     private void Update()
     {
@@ -29,5 +39,15 @@ public class EnemyManager : MonoBehaviour
                 mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
             }
         }
+    }
+    public void Hit()
+    {
+        hp--;
+        if(hp < 0)
+        {
+            Destroy(gameObject); // 敵のオブジェクトをDestroyする
+            mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+        }
+        HeartObjList[hp].SetActive(false);
     }
 }
