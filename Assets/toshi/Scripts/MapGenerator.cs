@@ -28,10 +28,15 @@ public class MapGenerator : MonoBehaviour
 
     public MAP_TYPE GetPlayerNextMapType(Vector2Int _pos)
     {
-        return mapTable[_pos.x, _pos.y];
+        return mapTable2[_pos.x, _pos.y];
     }
 
     public MAP_TYPE GetEnemyNextMapType(Vector2Int _pos)
+    {
+        Debug.Log(_pos);
+        return mapTable2[_pos.x, _pos.y];
+    }
+    public MAP_TYPE GetMapType(Vector2Int _pos)
     {
         return mapTable[_pos.x, _pos.y];
     }
@@ -101,11 +106,15 @@ public class MapGenerator : MonoBehaviour
                 if (mapTable[x, y] == MAP_TYPE.ENEMY)
                 {
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
                 
                 if (mapTable[x, y] == MAP_TYPE.ENEMY2)
                 {
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
 
 
@@ -115,6 +124,8 @@ public class MapGenerator : MonoBehaviour
                 if (mapTable[x, y] == MAP_TYPE.PLAYER)
                 {
                     _map.GetComponent<toshiPlayer>().playerCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.PLAYER;
 
                 }
             }
@@ -138,26 +149,29 @@ public class MapGenerator : MonoBehaviour
         mapTable2[_pos.x, _pos.y] = mapType;
     }
 
-    //private void OnGUI()
-    //{
-    //    string map = "";
-    //    for(int x = 0; x < mapTable.GetLength(1); x++)
-    //    {
-            
-    //        for(int y = 0; y < mapTable.GetLength(0); y++)
-    //        {
-    //            //if (isReach[y, x] == false)
-    //            //{
-    //            //    map += "H";
-    //            //    continue;
-    //            //}
-    //            if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "Ÿ";
-    //            else if (mapTable[y, x] == MAP_TYPE.WALL) map += "¡";
-    //            else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "œ";
-    //            else if (mapTable[y, x] == MAP_TYPE.GROUND) map += " ";
-    //        }
-    //        map += "\n";
-    //    }
-    //    GUI.Label(new Rect(50, 50, 300, 300), map);
-    //}
+    private void OnGUI()
+    {
+        string map = "";
+        for (int x = 0; x < mapTable.GetLength(1); x++)
+        {
+
+            for (int y = 0; y < mapTable.GetLength(0); y++)
+            {
+                //if (isReach[y, x] == false)
+                //{
+                //    map += "H";
+                //    continue;
+                //}
+                if (mapTable2[y, x] == MAP_TYPE.PLAYER) map += "œ";
+                else if (mapTable2[y, x] == MAP_TYPE.ENEMY) map += "Ÿ";
+                else if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "Ÿ";
+                else if (mapTable[y, x] == MAP_TYPE.WALL) map += "¡";
+                else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "œ";
+                else if (mapTable[y, x] == MAP_TYPE.GROUND) map += " ";
+                else map += "¡";
+            }
+            map += "\n";
+        }
+        GUI.Label(new Rect(50, 50, 300, 300), map);
+    }
 }

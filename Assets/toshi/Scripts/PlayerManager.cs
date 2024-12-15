@@ -42,24 +42,35 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
         }
-        if (toshiEnemy.isEnemyAttack)
-        {
-            Debug.Log("敵からの攻撃");
+        //if (toshiEnemy.isEnemyAttack)
+        //{
+        //    Debug.Log("敵からの攻撃");
            
-            attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
-            if (attackedPlayerPos == toshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
-            {
-                Debug.Log(attackedPlayerPos);
+        //    attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
+        //    if (attackedPlayerPos == toshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
+        //    {
+        //        Debug.Log(attackedPlayerPos);
                 
-                lifeArray[playerHP - 1].SetActive(false);
-                playerHP--;
-                if (playerHP == 0)
-                {
-                    Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
-                    mapGenerator.UpdateMapTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
-                }
-                toshiEnemy.isEnemyAttack = false;
-            }
+        //        lifeArray[playerHP - 1].SetActive(false);
+        //        playerHP--;
+        //        if (playerHP == 0)
+        //        {
+        //            Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
+        //            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
+        //        }
+        //        toshiEnemy.isEnemyAttack = false;
+        //    }
+        //}
+    }
+
+    public void Hit()
+    {
+        lifeArray[playerHP - 1].SetActive(false);
+        playerHP--;
+        if (playerHP == 0)
+        {
+            Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
+            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
         }
     }
 }

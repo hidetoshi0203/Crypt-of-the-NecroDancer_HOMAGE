@@ -28,7 +28,6 @@ public class EnemyManager : MonoBehaviour
                 Destroy(gameObject); // 敵のオブジェクトをDestroyする
                 mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
             }
-
         }
     }
 }

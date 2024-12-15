@@ -22,6 +22,7 @@ public class Enemy_Zombie : MonoBehaviour
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
     EnemyManager enemyManager;
+    PlayerManager playerManager;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -44,7 +45,11 @@ public class Enemy_Zombie : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
             notesManager = inst.GetComponent<NotesManager>();
         }
-
+        if (playerManager == null)
+        {
+            GameObject inst = GameObject.Find("PlayerManager");
+            playerManager = inst.GetComponent<PlayerManager>();
+        }
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (moveCount != 1 && notesManager.enemyCanMove)
@@ -52,20 +57,27 @@ public class Enemy_Zombie : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.RIGHT:
-                        eMoveType();
-
-                        if(mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.LEFT;
+                        }
+                        else
+                        {
+                            eMoveType();
                         }
                         
                         moveCount++;
                         break;
                     case DIRECTION.LEFT:
-                        eMoveType();
-                        if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.RIGHT;
+                        }
+                        else
+                        {
+                            eMoveType();
                         }
                         moveCount++;
                         break;
@@ -85,10 +97,11 @@ public class Enemy_Zombie : MonoBehaviour
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
-                transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
-                enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
+                //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
+                //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
+                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+                playerManager.Hit();
             }
             else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
