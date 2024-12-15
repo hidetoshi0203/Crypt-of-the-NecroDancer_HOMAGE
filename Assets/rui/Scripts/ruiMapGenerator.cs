@@ -37,16 +37,25 @@ public class RuiMapGenerator : MonoBehaviour
 
     void Start()
     {
+        //Vector2 aa = new Vector2(playerObj.transform.position.x, playerObj.transform.position.y);
+        //Vector2Int bb = new Vector2Int(aa.x, aa.y);
+
         _loadMapData();
 
         _createMap();
 
         makeAStarMap();
+
     }
+    [SerializeField] Vector2Int enemy = new Vector2Int(0, 0);
+    [SerializeField] Vector2Int player = new Vector2Int(5, 4);
 
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            enemy = SearchRoute(enemy, player);
+        }
     }
 
     public void _loadMapData()
@@ -103,6 +112,7 @@ public class RuiMapGenerator : MonoBehaviour
                 Vector2Int pos = new Vector2Int(x, y);
 
                 GameObject _ground = Instantiate(prefabs[(int)MAP_TYPE.GROUND], transform);
+                //Debug.Log((int)mapTable[x, y]);
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
                 if (mapTable[x, y] == MAP_TYPE.ENEMY)
                 {
@@ -151,22 +161,32 @@ public class RuiMapGenerator : MonoBehaviour
                 //    map += "？";
                 //    continue;
                 //}
-                if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "◆";
-                else if (mapTable[y, x] == MAP_TYPE.WALL) map += "■";
-                else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "●";
-                else if (mapTable[y, x] == MAP_TYPE.GROUND) map += "□";
+                //if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "◆";
+                //else if (mapTable[y, x] == MAP_TYPE.WALL) map += "■";
+                //else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "●";
+                //else if (mapTable[y, x] == MAP_TYPE.GROUND) map += "□";
+                if (aStarMap[y, x].cost == 100000000) map += "◆";
+                else  map += aStarMap[y, x].cost;
             }
             map += "\n";
         }
         GUI.Label(new Rect(50, 50, 300, 300), map);
     }
 
-    class Node
+    struct Node
     {
         public bool floor; // 行けないところはfalse
-        public int cost;
-        public int estimatedCost;
-        public int score;
+        public int cost; // 使用した歩数
+        public int estimatedCost; // goalまでの歩数
+        public int score; // スタートからゴールまでの最短歩数
+
+        public Node(bool floor, int cost, int estimatedCost, int score)
+        {
+            this.floor = floor;
+            this.cost = cost;
+            this.estimatedCost = estimatedCost;
+            this.score = score;
+        }
     };
     Node[,] aStarMap;
 
@@ -174,14 +194,20 @@ public class RuiMapGenerator : MonoBehaviour
     {
         int xSize = mapTable.GetLength(1);
         int ySize = mapTable.GetLength(0);
+        Debug.Log(ySize);
+        Debug.Log(xSize);
         aStarMap = new Node[ySize, xSize];
         for (int x = 0; x < xSize; x++)
         {
             for (int y = 0; y < ySize; y++)
             {
+                aStarMap[y,x] = new Node(false, 0,0,0);
+                Debug.Log(aStarMap[y, x].floor);
                 aStarMap[y, x].floor = (mapTable[y, x] != MAP_TYPE.WALL);
             }
         }
+       
+        
     }
 
     ///<summary>
@@ -230,20 +256,24 @@ public class RuiMapGenerator : MonoBehaviour
                             int nextX = x + dir[d, 0];
                             int nextY = y + dir[d, 1];
                             //ToDo
-                            //nextX,nextYが、enemyと同じであれば、経路探索が終わったので、
+                            //nextX,nextYが、enemyと同じであれば、経路探索が終わったので、最短経路のxとyを返す
                             if (nextX == enemy.x && nextY == enemy.y)
                             {
                                 loop = false;
+                                
                                 return new Vector2Int(x, y);
                             }
-                            
+
+                            if (nextX < 0 || nextY < 0 || nextX >= xSize || nextY >= ySize) continue;
+                            Debug.Log(nextX + "," + nextY);
                             //ToDo:
                             // aStarMap[nextY,nextX]が壁でなくて、scoreがminScoreよりも大きいのであれば、
                             // cost、estimatedCost、scoreを計算して書き込む
-                            if (aStarMap[nextY, nextX].floor = false && aStarMap[nextY,nextX].score >= minScore)
+                            if (aStarMap[nextY, nextX].floor == true && aStarMap[nextY,nextX].score >= minScore)
                             {
                                 aStarMap[nextY, nextX].cost++;
-                                //aStarMap[nextY, nextX].estimatedCost
+                                aStarMap[nextY, nextX].estimatedCost = Mathf.Abs(player.y - nextY) + Mathf.Abs(player.x - nextX);
+                                aStarMap[nextY, nextX].score = aStarMap[nextY, nextX].cost + aStarMap[nextY, nextX].estimatedCost;
                             }
                             if (nextMinScore > aStarMap[nextY, nextX].score) // 次の最小値を求めておく
                             {
