@@ -222,7 +222,11 @@ MonoBehaviour:
   - {fileID: 5870177880929257009, guid: 3d405d111d496594d9403217c3f0b7c7, type: 3}
   - {fileID: 8425694697182779888, guid: 414493e4d86904b47a983cdfd00c0d58, type: 3}
   - {fileID: 957766774299044497, guid: 1fd5c6b23609e344ba6fbf82df0689bc, type: 3}
+  - {fileID: 957766774299044497, guid: 1fd5c6b23609e344ba6fbf82df0689bc, type: 3}
+  - {fileID: 957766774299044497, guid: 1fd5c6b23609e344ba6fbf82df0689bc, type: 3}
   floor: 0
+  enemy: {x: 0, y: 0}
+  player: {x: 5, y: 4}
 --- !u!1 &1407632278
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +326,8 @@ MonoBehaviour:
   rightNode: {fileID: 8437184838734769576, guid: 42801792e0daf4e4ebb5d29600e51381, type: 3}
   leftGenerateTrans: {fileID: 1407632279}
   rightGenerateTrans: {fileID: 1508619451}
+  defaultHeart: {fileID: 0}
+  reSizeHeart: {x: 0, y: 0, z: 0}
   touchSound: {fileID: 8300000, guid: 67d5e5aa1c0d5eb48b1ee457df8ea479, type: 3}
   spaceSound: {fileID: 8300000, guid: efe50fd17ddef924cb769319d245d30b, type: 3}
   playerCanMove: 0
