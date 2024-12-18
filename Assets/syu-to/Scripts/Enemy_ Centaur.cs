@@ -97,10 +97,7 @@ public class Enemy_Centaur : MonoBehaviour
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
-                //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
-                //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+
                 playerManager.Hit();
             }
             else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)

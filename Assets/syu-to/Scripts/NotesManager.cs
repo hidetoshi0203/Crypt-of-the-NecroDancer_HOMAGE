@@ -17,7 +17,7 @@ public class NotesManager : MonoBehaviour
     [SerializeField] private AudioClip touchSound; //ハートに触れたときの音
     [SerializeField] private AudioClip spaceSound; //スペースキーを押したときの音
 
-    Camera cam;
+    //Camera cam;
 
     private float nextGenerateTime = 1f; //次の生成タイミング
     private float generateTime = 1f; //ノーツの生成間隔
@@ -44,7 +44,7 @@ public class NotesManager : MonoBehaviour
         comboManager.comboreset = false;
 
         reSizeHeart = defaultHeart.transform.localScale;
-        cam = Camera.main;
+        //cam = Camera.main;
     }
 
     private void Update()
