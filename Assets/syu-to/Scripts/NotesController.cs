@@ -48,7 +48,7 @@ public class NotesController : MonoBehaviour
         transform.position = Vector3.Lerp(startPos, endPos, currentTime / tempo); //ノーツの位置を移動
 
         //ハートに触れた場合のチェック
-        if (!notesManager.CanInputKey() && transform.position.x >= /*heartImage.*/transform.position.x -Heart_range && transform.position.x <= /*heartImage.*/transform.position.x + Heart_range)
+        if (!notesManager.CanInputKey() && transform.position.x >= -Heart_range && transform.position.x <= Heart_range)
         {
             notesManager.OnTouchHeart();
             notesManager.playerCanMove = true; //ハートに触れた後に音を鳴らせるようにフラグをリセット
