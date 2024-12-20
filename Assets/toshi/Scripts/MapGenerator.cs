@@ -26,14 +26,19 @@ public class MapGenerator : MonoBehaviour
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
 
-    public MAP_TYPE GetPlayerNextMapType(Vector2Int _pos)
+    public MAP_TYPE GetEntityMapType(Vector2Int _pos)
     {
         return mapTable2[_pos.x, _pos.y];
     }
 
+    public MAP_TYPE GetStageMapType(Vector2Int _pos)
+    {
+        return mapTable[_pos.x, _pos.y];
+    }
+
     public MAP_TYPE GetEnemyNextMapType(Vector2Int _pos)
     {
-        Debug.Log(_pos);
+        //Debug.Log(_pos);
         return mapTable2[_pos.x, _pos.y];
     }
     public MAP_TYPE GetMapType(Vector2Int _pos)

@@ -103,11 +103,42 @@ public class toshiPlayer : MonoBehaviour
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
 
-            if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
+            switch (mapGenerator.GetStageMapType(playerNextPos))
             {
-                // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
+                case MapGenerator.MAP_TYPE.GROUND:
+                    Move();
+                    break;
+                case MapGenerator.MAP_TYPE.WALL:
+                    // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
+                    break;
+                case MapGenerator.MAP_TYPE.STAIRS:
+                    // 次のステージに進む
+                    break;
+                case MapGenerator.MAP_TYPE.WALL2:
+                    // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
+                    break;
             }
-            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
+
+            switch (mapGenerator.GetEntityMapType(playerNextPos))
+            {
+                case MapGenerator.MAP_TYPE.PLAYER:
+                    // バグ
+                    break;
+                case MapGenerator.MAP_TYPE.ENEMY:
+                    // 攻撃
+                    Attack();
+                    break;
+                case MapGenerator.MAP_TYPE.ENEMY2:
+                    // 攻撃
+
+                    break;
+            }
+
+            //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
+            //{
+            //    
+            //}
+            if (mapGenerator.GetEntityMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
             {
                 // 上下左右の入力判定をとりboolをtrueにする
                 if (Input.GetKeyDown(KeyCode.W))
@@ -127,16 +158,8 @@ public class toshiPlayer : MonoBehaviour
                     isAttack = true;
                 }
             }
-            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL2) // 壁以外だった場合
-            {
-                // 移動する
-                mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
-                transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
-                playerCurrentPos = playerNextPos;
-                mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
-            }
 
-            if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
+            if (mapGenerator.GetStageMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
             {
                 Debug.Log("階段の上だよ");
                 GameObject parentObject = GameObject.Find("MapChip");
@@ -155,8 +178,22 @@ public class toshiPlayer : MonoBehaviour
                 mapGenerator._createMap();
             }
         }
+        void Attack()
+        {
+
+        }
+        void Move()
+        {
+            Debug.Log(playerCurrentPos);
+            Debug.Log("床だよ");
+            // 移動する
+            mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+            transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
+            playerCurrentPos = playerNextPos;
+            mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+        }
     }
 
 
-   
+
 }

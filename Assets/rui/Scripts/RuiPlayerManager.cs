@@ -110,11 +110,11 @@ public class RuiPlayerManager : MonoBehaviour
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
 
-            if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL) // 入力先(プレイヤーのnextPos)が壁だった場合
+            if (mapGenerator.GetEntityMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL) // 入力先(プレイヤーのnextPos)が壁だった場合
             {
                 // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
             }
-            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
+            else if (mapGenerator.GetEntityMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
             {
                 // 上下左右の入力判定をとりboolをtrueにする
                 if (Input.GetKeyDown(KeyCode.W))
@@ -134,7 +134,7 @@ public class RuiPlayerManager : MonoBehaviour
                     isPlayerAttack = true;
                 }
             }
-            else if (mapGenerator.GetPlayerNextMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
+            else if (mapGenerator.GetEntityMapType(playerNextPos) != MapGenerator.MAP_TYPE.WALL) // 壁以外だった場合
             {
 
                 // 移動する
@@ -144,7 +144,7 @@ public class RuiPlayerManager : MonoBehaviour
                 //mapGenerator.UpdatePlayerTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
                 //Debug.Log(mapGenerator.GetPlayerNextMapType(playerCurrentPos));
             }
-            if (mapGenerator.GetPlayerNextMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
+            if (mapGenerator.GetEntityMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
             {
                 Debug.Log("階段の上だよ");
                 mapGenerator.floor++;
