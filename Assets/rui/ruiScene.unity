@@ -1330,7 +1330,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1855369673}
-  - component: {fileID: 1855369672}
   - component: {fileID: 1855369674}
   m_Layer: 0
   m_Name: MapChip
@@ -1339,30 +1338,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1855369672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855369671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: accf9ca9b8b5bca40abe4bc50ec98136, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapText:
-  - {fileID: 4900000, guid: 3bdbe684c2d62084d8dc2c3a1ce3150f, type: 3}
-  - {fileID: 4900000, guid: d7df27e96f6301a46809bae2f53bc2e7, type: 3}
-  prefabs:
-  - {fileID: 8837513816826681690, guid: e996474c534008346827f623aa76b2ae, type: 3}
-  - {fileID: 1565893696268004151, guid: 3af14526d53fdaf44b83cf12e6298182, type: 3}
-  - {fileID: 5870177880929257009, guid: 2bc672930450c064e86cd42e23ad6cce, type: 3}
-  - {fileID: 8425694697182779888, guid: af15cc3743ba8544fac16e3e4904565e, type: 3}
-  - {fileID: 8602714596683316640, guid: 001a2ff2c7a2660438238932b1bc6a42, type: 3}
-  - {fileID: 3531436477471686659, guid: 2663b17ef7b5aff4fbf89fa95e69527a, type: 3}
-  - {fileID: 5038783893017895171, guid: c26b637fb257cbc40bdad6d5e40284bb, type: 3}
-  floor: 0
 --- !u!4 &1855369673
 Transform:
   m_ObjectHideFlags: 0
@@ -1390,8 +1365,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3aa49ff449530499e7705e9b9eabf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapText: []
-  prefabs: []
+  mapText:
+  - {fileID: 4900000, guid: 3bdbe684c2d62084d8dc2c3a1ce3150f, type: 3}
+  - {fileID: 4900000, guid: d7df27e96f6301a46809bae2f53bc2e7, type: 3}
+  prefabs:
+  - {fileID: 8837513816826681690, guid: e996474c534008346827f623aa76b2ae, type: 3}
+  - {fileID: 1565893696268004151, guid: 3af14526d53fdaf44b83cf12e6298182, type: 3}
+  - {fileID: 5870177880929257009, guid: 2bc672930450c064e86cd42e23ad6cce, type: 3}
+  - {fileID: 8425694697182779888, guid: af15cc3743ba8544fac16e3e4904565e, type: 3}
+  - {fileID: 8602714596683316640, guid: 001a2ff2c7a2660438238932b1bc6a42, type: 3}
+  - {fileID: 3531436477471686659, guid: 2663b17ef7b5aff4fbf89fa95e69527a, type: 3}
+  - {fileID: 5038783893017895171, guid: c26b637fb257cbc40bdad6d5e40284bb, type: 3}
   floor: 0
   enemy: {x: 0, y: 0}
   player: {x: 5, y: 4}
