@@ -23,6 +23,7 @@ TagManager:
   - MapChip
   - Undefined
   - Enemy_Zombie
+  - Enemy_Centaur
   layers:
   - Default
   - TransparentFX

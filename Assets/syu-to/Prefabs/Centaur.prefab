@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4367261347822757484}
   m_Layer: 0
   m_Name: Centaur
-  m_TagString: Untagged
+  m_TagString: Enemy_Centaur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,3 +149,4 @@ MonoBehaviour:
   enemyCurrentPos: {x: 0, y: 0}
   enemyNextPos: {x: 0, y: 0}
   attackedEnemyPos: {x: 0, y: 0}
+  HeartObjList: []
