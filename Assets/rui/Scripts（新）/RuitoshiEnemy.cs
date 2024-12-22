@@ -21,7 +21,9 @@ public class RuitoshiEnemy : MonoBehaviour
     public DIRECTION direction;
     RuiMapGenerator mapGenerator;
     NotesManager notesManager = null;
+    RuiEnemyManager ruiEnemyManager;
     RuiEnemyManager enemyManager;
+    RuitoshiPlayer ruiToshiPlayer = null;
     RuiPlayerManager playerManager;
     GameObject leftNotes;
     GameObject rightNotes;
@@ -34,6 +36,7 @@ public class RuitoshiEnemy : MonoBehaviour
         mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<RuiEnemyManager>();
+        ruiEnemyManager = GetComponent<RuiEnemyManager>();
         direction = DIRECTION.DOWN;
     }
     // Update is called once per frame
@@ -44,6 +47,11 @@ public class RuitoshiEnemy : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
             notesManager = inst.GetComponent<NotesManager>();
+        }
+        if (ruiToshiPlayer == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("Player");
+            ruiToshiPlayer = inst.GetComponent<RuitoshiPlayer>();
         }
         if (playerManager == null)
         {
@@ -93,6 +101,15 @@ public class RuitoshiEnemy : MonoBehaviour
                 }             
             }
             else {notesManager.enemyCanMove = false; moveCount = 0; }
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ruiEnemyManager.enemyCurrentPos = mapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log(ruiToshiPlayer.playerCurrentPos);
         }
         
     }
