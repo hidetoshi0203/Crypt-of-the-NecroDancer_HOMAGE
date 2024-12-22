@@ -19,10 +19,10 @@ public class RuiEnemy_Zombie : MonoBehaviour
       { -1, 0 }   //LEFTの場合
     };
     public DIRECTION direction;
-    MapGenerator mapGenerator;
+    RuiMapGenerator mapGenerator;
     NotesManager notesManager = null;
-    EnemyManager enemyManager;
-    PlayerManager playerManager;
+    RuiEnemyManager enemyManager;
+    RuiPlayerManager playerManager;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -31,9 +31,9 @@ public class RuiEnemy_Zombie : MonoBehaviour
 
     void Start()
     {
-        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         notesManager = GetComponent<NotesManager>();
-        enemyManager = GetComponent<EnemyManager>();
+        enemyManager = GetComponent<RuiEnemyManager>();
         direction = DIRECTION.LEFT;
     }
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class RuiEnemy_Zombie : MonoBehaviour
         if (playerManager == null)
         {
             GameObject inst = GameObject.Find("PlayerManager");
-            playerManager = inst.GetComponent<PlayerManager>();
+            playerManager = inst.GetComponent<RuiPlayerManager>();
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
@@ -58,7 +58,7 @@ public class RuiEnemy_Zombie : MonoBehaviour
                 {
                     case DIRECTION.RIGHT:
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.LEFT;
                         }
@@ -71,7 +71,7 @@ public class RuiEnemy_Zombie : MonoBehaviour
                         break;
                     case DIRECTION.LEFT:
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.RIGHT;
                         }
@@ -92,7 +92,7 @@ public class RuiEnemy_Zombie : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
@@ -103,13 +103,13 @@ public class RuiEnemy_Zombie : MonoBehaviour
                 //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
                 playerManager.Hit();
             }
-            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != RuiMapGenerator.MAP_TYPE.WALL)
             {
                 //移動
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND);
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.ENEMY2);
             }
         }
     }

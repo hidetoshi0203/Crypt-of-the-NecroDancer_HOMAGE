@@ -25,7 +25,7 @@ public class RuitoshiPlayer : MonoBehaviour
     public bool isAttack;
     public bool isPlayerMove;
     Camera cam;
-    MapGenerator mapGenerator;
+    RuiMapGenerator mapGenerator;
     NotesManager notesManager = null;
     ComboManager comboManager = null;
     GameObject leftNotes;
@@ -34,7 +34,7 @@ public class RuitoshiPlayer : MonoBehaviour
     GameObject notesObjets;
     private void Start()
     {
-        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         notesManager = GetComponent<NotesManager>();
         comboManager = GetComponent<ComboManager>();
         direction = DIRECTION.DOWN;
@@ -105,40 +105,40 @@ public class RuitoshiPlayer : MonoBehaviour
 
             switch (mapGenerator.GetStageMapType(playerNextPos))
             {
-                case MapGenerator.MAP_TYPE.GROUND:
+                case RuiMapGenerator.MAP_TYPE.GROUND:
                     Move();
                     break;
-                case MapGenerator.MAP_TYPE.WALL:
+                case RuiMapGenerator.MAP_TYPE.WALL:
                     // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
                     break;
-                case MapGenerator.MAP_TYPE.STAIRS:
+                case RuiMapGenerator.MAP_TYPE.STAIRS:
                     // 次のステージに進む
                     break;
-                case MapGenerator.MAP_TYPE.WALL2:
+                case RuiMapGenerator.MAP_TYPE.WALL2:
                     // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
                     break;
             }
 
             switch (mapGenerator.GetEntityMapType(playerNextPos))
             {
-                case MapGenerator.MAP_TYPE.PLAYER:
+                case RuiMapGenerator.MAP_TYPE.PLAYER:
                     // バグ
                     break;
-                case MapGenerator.MAP_TYPE.ENEMY:
+                case RuiMapGenerator.MAP_TYPE.ENEMY:
                     // 攻撃
                     Attack();
                     break;
-                case MapGenerator.MAP_TYPE.ENEMY2:
+                case RuiMapGenerator.MAP_TYPE.ENEMY2:
                     // 攻撃
 
                     break;
             }
 
-            //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
+            //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
             //{
             //    
             //}
-            if (mapGenerator.GetEntityMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
+            if (mapGenerator.GetEntityMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
             {
                 // 上下左右の入力判定をとりboolをtrueにする
                 if (Input.GetKeyDown(KeyCode.W))
@@ -159,7 +159,7 @@ public class RuitoshiPlayer : MonoBehaviour
                 }
             }
 
-            if (mapGenerator.GetStageMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
+            if (mapGenerator.GetStageMapType(playerCurrentPos) == RuiMapGenerator.MAP_TYPE.STAIRS)
             {
                 Debug.Log("階段の上だよ");
                 GameObject parentObject = GameObject.Find("MapChip");
@@ -187,10 +187,10 @@ public class RuitoshiPlayer : MonoBehaviour
             Debug.Log(playerCurrentPos);
             Debug.Log("床だよ");
             // 移動する
-            mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
+            mapGenerator.UpdateTile(playerCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
             transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
             playerCurrentPos = playerNextPos;
-            mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+            mapGenerator.UpdateTile(playerCurrentPos, RuiMapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
         }
     }
 

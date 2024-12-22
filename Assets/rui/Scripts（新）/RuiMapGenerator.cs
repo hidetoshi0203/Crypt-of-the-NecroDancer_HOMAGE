@@ -60,6 +60,17 @@ public class RuiMapGenerator : MonoBehaviour
         makeAStarMap();
     }
 
+    [SerializeField] Vector2Int enemy = new Vector2Int(0, 0);
+    [SerializeField] Vector2Int player = new Vector2Int(5, 4);
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            enemy = SearchRoute(enemy, player);
+        }
+    }
+
     public void _loadMapData()
     {
         string[] mapLines = mapText[floor].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -299,15 +310,4 @@ public class RuiMapGenerator : MonoBehaviour
         }
         return enemy;
     }
-
-    /*[SerializeField] Vector2Int enemy = new Vector2Int(0, 0);
-    [SerializeField] Vector2Int player = new Vector2Int(5, 4);
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            enemy = SearchRoute(enemy, player);
-        }
-    }*/
 }

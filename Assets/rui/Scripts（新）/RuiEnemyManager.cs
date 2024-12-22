@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RuiEnemyManager : MonoBehaviour
 {
-    toshiPlayer ToshiPlayer = null;
+    RuitoshiPlayer ToshiPlayer = null;
     public Vector2Int enemyCurrentPos , enemyNextPos;       // 今の座標
     public Vector2Int attackedEnemyPos; // プレイヤーから攻撃された敵オブジェクトの座標
-    MapGenerator mapGenerator;
+    RuiMapGenerator mapGenerator;
     private int hp = 0;
     public List<GameObject> HeartObjList;
     //[SerializeField] GameObject HeartObj;
@@ -16,7 +16,7 @@ public class RuiEnemyManager : MonoBehaviour
 
     void Start()
     {
-        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         hp = HeartObjList.Count;
         //Instantiate(HeartObj, Spawner.transform.position, Quaternion.identity);
         //Instantiate(HeartObj, Spawner1.transform.position, Quaternion.identity);
@@ -27,7 +27,7 @@ public class RuiEnemyManager : MonoBehaviour
         if (ToshiPlayer == null) 
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
-            ToshiPlayer = inst.GetComponent<toshiPlayer>();
+            ToshiPlayer = inst.GetComponent<RuitoshiPlayer>();
         }
     
         if (ToshiPlayer.isAttack)
@@ -36,7 +36,7 @@ public class RuiEnemyManager : MonoBehaviour
             if (attackedEnemyPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
             { 
                 Destroy(gameObject); // 敵のオブジェクトをDestroyする
-                mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+                mapGenerator.UpdateTile(enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
             }
         }
     }
@@ -46,7 +46,7 @@ public class RuiEnemyManager : MonoBehaviour
         if(hp < 0)
         {
             Destroy(gameObject); // 敵のオブジェクトをDestroyする
-            mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+            mapGenerator.UpdateTile(enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
         }
         HeartObjList[hp].SetActive(false);
     }
