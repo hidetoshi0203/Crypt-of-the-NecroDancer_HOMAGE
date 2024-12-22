@@ -12,7 +12,7 @@ public class RuiMapGenerator : MonoBehaviour
     [SerializeField] GameObject[] prefabs;
     float mapSize;
     public int floor = 0;
-    Vector2 centerPos;
+    //Vector2 centerPos;
 
     public enum MAP_TYPE
     {
@@ -20,7 +20,9 @@ public class RuiMapGenerator : MonoBehaviour
         WALL,   // 1 ï«
         PLAYER, // 2 ÉvÉåÉCÉÑÅ[
         ENEMY,  // 3 ìGÅi1ëÃñ⁄Åj
-        STAIRS  // 4 äKíi
+        STAIRS,  // 4 äKíi
+        WALL2, // 5 ï« ()
+        ENEMY2 // 6 ìG2
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -86,7 +88,7 @@ public class RuiMapGenerator : MonoBehaviour
 
 
 
-        if (mapTable.GetLength(0) % 2 == 0)
+        /*if (mapTable.GetLength(0) % 2 == 0)
         {
             centerPos.x = mapTable.GetLength(0) / 2 * mapSize - (mapSize / 2);
         }
@@ -102,7 +104,7 @@ public class RuiMapGenerator : MonoBehaviour
         else
         {
             centerPos.y = mapTable.GetLength(1) / 2 * mapSize;
-        }
+        }*/
 
 
         for (int y = 0; y < mapTable.GetLength(1); y++)
@@ -116,7 +118,7 @@ public class RuiMapGenerator : MonoBehaviour
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
                 if (mapTable[x, y] == MAP_TYPE.ENEMY)
                 {
-                    _map.GetComponent<RuiAttackedEnemy>().enemyCurrentPos = pos;
+                    _map.GetComponent<RuiEnemyManager>().enemyCurrentPos = pos;
                 }
 
 
@@ -125,7 +127,7 @@ public class RuiMapGenerator : MonoBehaviour
 
                 if (mapTable[x, y] == MAP_TYPE.PLAYER)
                 {
-                    _map.GetComponent<RuiPlayerManager>().playerCurrentPos = pos;
+                    _map.GetComponent<RuitoshiPlayer>().playerCurrentPos = pos;
 
                 }
             }
@@ -135,8 +137,8 @@ public class RuiMapGenerator : MonoBehaviour
     public Vector2 ScreenPos(Vector2Int _pos)
     {
         return new Vector2(
-            _pos.x * mapSize - centerPos.x,
-            -(_pos.y * mapSize - centerPos.y));
+            _pos.x * mapSize /*- centerPos.x*/,
+            -(_pos.y * mapSize /*- centerPos.y*/));
 
     }
     public void UpdateTilie(Vector2Int _pos, MAP_TYPE mapType)

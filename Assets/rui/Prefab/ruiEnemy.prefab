@@ -179,8 +179,8 @@ GameObject:
   - component: {fileID: 2843231469952030973}
   - component: {fileID: 3493941914734821646}
   - component: {fileID: 3780603393285255692}
-  - component: {fileID: -2760752990650508349}
-  - component: {fileID: -8089086444032780210}
+  - component: {fileID: -502106648491185598}
+  - component: {fileID: -7269970473282808560}
   m_Layer: 0
   m_Name: ruiEnemy
   m_TagString: Enemy
@@ -304,7 +304,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85333335, y: 0.85333335}
   m_EdgeRadius: 0
---- !u!114 &-2760752990650508349
+--- !u!114 &-502106648491185598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,16 +313,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8425694697182779888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a5607e200ff6547b771199374e1b18, type: 3}
+  m_Script: {fileID: 11500000, guid: c9086ad9bd0c6c7429e80851e42977f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCurrentPos: {x: 0, y: 0}
   enemyNextPos: {x: 0, y: 0}
   attackedEnemyPos: {x: 0, y: 0}
-  HeartObjList:
-  - {fileID: 8069109865666423890}
-  - {fileID: 6903693553756283729}
---- !u!114 &-8089086444032780210
+  HeartObjList: []
+--- !u!114 &-7269970473282808560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,7 +329,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8425694697182779888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1dfbcd7bf5c17940bfe28d155500285, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b8f6b9d3033d174bb967e9afae6683d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
@@ -398,11 +396,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7964581874464780745, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
   m_PrefabInstance: {fileID: 5378337680791078230}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6903693553756283729 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1544005789200066055, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
-  m_PrefabInstance: {fileID: 5378337680791078230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8833341993813740117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,10 +456,5 @@ PrefabInstance:
 --- !u!4 &1446135667581254556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7964581874464780745, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
-  m_PrefabInstance: {fileID: 8833341993813740117}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8069109865666423890 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1544005789200066055, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
   m_PrefabInstance: {fileID: 8833341993813740117}
   m_PrefabAsset: {fileID: 0}
