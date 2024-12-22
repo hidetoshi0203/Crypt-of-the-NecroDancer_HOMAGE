@@ -89,12 +89,12 @@ public class RuitoshiEnemy : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.TOP:
-                        eMoveType();
+                        //eMoveType();
                         direction = DIRECTION.DOWN;
                         moveCount++;
                         break;
                     case DIRECTION.DOWN:
-                        eMoveType();
+                        //eMoveType();
                         direction = DIRECTION.TOP;
                         moveCount++;
                         break;
@@ -106,12 +106,10 @@ public class RuitoshiEnemy : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             ruiEnemyManager.enemyCurrentPos = mapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
+            Debug.Log(ruiEnemyManager.enemyCurrentPos);
+            eMoveType();
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log(ruiToshiPlayer.playerCurrentPos);
-        }
-        
+
     }
     void eMoveType()
     {

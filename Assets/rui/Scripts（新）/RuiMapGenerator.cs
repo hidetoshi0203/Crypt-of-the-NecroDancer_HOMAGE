@@ -214,15 +214,15 @@ public class RuiMapGenerator : MonoBehaviour
     {
         int xSize = mapTable.GetLength(0);
         int ySize = mapTable.GetLength(1);
-        Debug.Log(xSize);
-        Debug.Log(ySize);
+        //Debug.Log(xSize);
+        //Debug.Log(ySize);
         aStarMap = new Node[xSize, ySize];
         for (int x = 0; x < xSize; x++)
         {
             for (int y = 0; y < ySize; y++)
             {
                 aStarMap[x, y] = new Node(false, 0,0,0);
-                Debug.Log(aStarMap[x, y].floor);
+                //Debug.Log(aStarMap[x, y].floor);
                 aStarMap[x, y].floor = (mapTable[x, y] != MAP_TYPE.WALL);
             }
         }
