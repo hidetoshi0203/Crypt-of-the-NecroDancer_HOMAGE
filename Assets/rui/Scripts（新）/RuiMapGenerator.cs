@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -27,7 +28,12 @@ public class RuiMapGenerator : MonoBehaviour
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
 
-    public MAP_TYPE GetPlayerNextMapType(Vector2Int _pos)
+    public MAP_TYPE GetEntityMapType(Vector2Int _pos)
+    {
+        return mapTable2[_pos.x, _pos.y];
+    }
+
+    public MAP_TYPE GetStageMapType(Vector2Int _pos)
     {
         return mapTable[_pos.x, _pos.y];
     }
@@ -37,27 +43,21 @@ public class RuiMapGenerator : MonoBehaviour
         return mapTable[_pos.x, _pos.y];
     }
 
-    void Start()
+    public MAP_TYPE GetMapType(Vector2Int _pos)
     {
-        //Vector2 aa = new Vector2(playerObj.transform.position.x, playerObj.transform.position.y);
-        //Vector2Int bb = new Vector2Int(aa.x, aa.y);
+        return mapTable[_pos.x, _pos.y];
+    }
 
+    private void Awake()
+    {
         _loadMapData();
 
         _createMap();
-
-        makeAStarMap();
-
     }
-    [SerializeField] Vector2Int enemy = new Vector2Int(0, 0);
-    [SerializeField] Vector2Int player = new Vector2Int(5, 4);
 
-    void Update()
+    void Start()
     {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            enemy = SearchRoute(enemy, player);
-        }
+        makeAStarMap();
     }
 
     public void _loadMapData()
@@ -86,8 +86,6 @@ public class RuiMapGenerator : MonoBehaviour
     {
         mapSize = prefabs[1].GetComponent<SpriteRenderer>().bounds.size.x;
 
-
-
         /*if (mapTable.GetLength(0) % 2 == 0)
         {
             centerPos.x = mapTable.GetLength(0) / 2 * mapSize - (mapSize / 2);
@@ -114,13 +112,19 @@ public class RuiMapGenerator : MonoBehaviour
                 Vector2Int pos = new Vector2Int(x, y);
 
                 GameObject _ground = Instantiate(prefabs[(int)MAP_TYPE.GROUND], transform);
-                //Debug.Log((int)mapTable[x, y]);
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
                 if (mapTable[x, y] == MAP_TYPE.ENEMY)
                 {
                     _map.GetComponent<RuiEnemyManager>().enemyCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
-
+                if (mapTable[x, y] == MAP_TYPE.ENEMY2)
+                {
+                    _map.GetComponent<RuiEnemyManager>().enemyCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                }
 
                 _ground.transform.position = ScreenPos(pos);
                 _map.transform.position = ScreenPos(pos);
@@ -128,6 +132,8 @@ public class RuiMapGenerator : MonoBehaviour
                 if (mapTable[x, y] == MAP_TYPE.PLAYER)
                 {
                     _map.GetComponent<RuitoshiPlayer>().playerCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.PLAYER;
 
                 }
             }
@@ -141,11 +147,11 @@ public class RuiMapGenerator : MonoBehaviour
             -(_pos.y * mapSize /*- centerPos.y*/));
 
     }
-    public void UpdateTilie(Vector2Int _pos, MAP_TYPE mapType)
+    public void UpdateMapTile(Vector2Int _pos, MAP_TYPE mapType) // マップの情報
     {
         mapTable[_pos.x, _pos.y] = mapType;
     }
-    public void UpdatePlayerTile(Vector2Int _pos, MAP_TYPE mapType)
+    public void UpdateTile(Vector2Int _pos, MAP_TYPE mapType)
     {
         mapTable2[_pos.x, _pos.y] = mapType;
     }
@@ -163,12 +169,13 @@ public class RuiMapGenerator : MonoBehaviour
                 //    map += "？";
                 //    continue;
                 //}
-                //if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "◆";
-                //else if (mapTable[y, x] == MAP_TYPE.WALL) map += "■";
-                //else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "●";
-                //else if (mapTable[y, x] == MAP_TYPE.GROUND) map += "□";
-                if (aStarMap[x, y].cost == 100000000) map += "◆";
-                else  map += aStarMap[x, y].cost;
+                if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "●";
+                else if (mapTable2[y, x] == MAP_TYPE.PLAYER) map += "●";
+                else if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "◆";
+                else if (mapTable2[y, x] == MAP_TYPE.ENEMY) map += "◆";
+                else if (mapTable[y, x] == MAP_TYPE.WALL) map += "■";
+                else if (mapTable[y, x] == MAP_TYPE.GROUND) map += "□";
+                else map += "■";
             }
             map += "\n";
         }
@@ -292,4 +299,15 @@ public class RuiMapGenerator : MonoBehaviour
         }
         return enemy;
     }
+
+    /*[SerializeField] Vector2Int enemy = new Vector2Int(0, 0);
+    [SerializeField] Vector2Int player = new Vector2Int(5, 4);
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            enemy = SearchRoute(enemy, player);
+        }
+    }*/
 }
