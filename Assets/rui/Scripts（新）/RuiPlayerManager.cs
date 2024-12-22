@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RuiPlayerManager : MonoBehaviour
 {
-    toshiEnemy toshiEnemy = null;  
-    EnemyManager enemyManager = null;
-    toshiPlayer toshiPlayer = null;
-    MapGenerator mapGenerator = null;
-    Enemy_Zombie enemy_Zombie = null;
+    RuitoshiEnemy toshiEnemy = null;  
+    RuiEnemyManager enemyManager = null;
+    RuitoshiPlayer toshiPlayer = null;
+    RuiMapGenerator mapGenerator = null;
+    RuiEnemy_Zombie enemy_Zombie = null;
 
     [SerializeField] GameObject playerObj;
     public GameObject[] lifeArray = new GameObject[3];
@@ -21,27 +21,27 @@ public class RuiPlayerManager : MonoBehaviour
         if (mapGenerator == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("MapChip");
-            mapGenerator = inst.GetComponent<MapGenerator>();
+            mapGenerator = inst.GetComponent<RuiMapGenerator>();
         }
         if (toshiPlayer == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
-            toshiPlayer = inst.GetComponent<toshiPlayer>();
+            toshiPlayer = inst.GetComponent<RuitoshiPlayer>();
         }
         if (toshiEnemy == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            toshiEnemy = inst.GetComponent<toshiEnemy>();
+            toshiEnemy = inst.GetComponent<RuitoshiEnemy>();
         }
         if (enemy_Zombie == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
-            enemy_Zombie = inst.GetComponent<Enemy_Zombie>();
+            enemy_Zombie = inst.GetComponent<RuiEnemy_Zombie>();
         }
         if (enemyManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            enemyManager = inst.GetComponent<EnemyManager>();
+            enemyManager = inst.GetComponent<RuiEnemyManager>();
         }
         //if (toshiEnemy.isEnemyAttack)
         //{
@@ -71,7 +71,7 @@ public class RuiPlayerManager : MonoBehaviour
         if (playerHP == 0)
         {
             Destroy(playerObj); // プレイヤーのオブジェクトをDestroyする
-            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
+            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
         }
     }
 }
