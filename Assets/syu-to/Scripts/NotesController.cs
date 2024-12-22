@@ -37,7 +37,7 @@ public class NotesController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Heart_range);
+        //Debug.Log(Heart_range);
         if (toshiPlayer == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
