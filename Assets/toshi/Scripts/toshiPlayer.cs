@@ -28,6 +28,7 @@ public class toshiPlayer : MonoBehaviour
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
     ComboManager comboManager = null;
+    EnemyManager enemyManager = null;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -35,8 +36,6 @@ public class toshiPlayer : MonoBehaviour
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
-        notesManager = GetComponent<NotesManager>();
-        comboManager = GetComponent<ComboManager>();
         direction = DIRECTION.DOWN;
         notesObjets = GameObject.FindGameObjectWithTag("Notes");
         cam = Camera.main;
@@ -62,6 +61,11 @@ public class toshiPlayer : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
             comboManager = inst.GetComponent <ComboManager>();
+        }
+        if (enemyManager == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
+            enemyManager = inst.GetComponent<EnemyManager>();
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
@@ -113,6 +117,7 @@ public class toshiPlayer : MonoBehaviour
                     break;
                 case MapGenerator.MAP_TYPE.STAIRS:
                     // 次のステージに進む
+                    Stairs();
                     break;
                 case MapGenerator.MAP_TYPE.WALL2:
                     // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
@@ -126,36 +131,46 @@ public class toshiPlayer : MonoBehaviour
                     break;
                 case MapGenerator.MAP_TYPE.ENEMY:
                     // 攻撃
+                    Debug.Log("攻撃");
                     Attack();
+                    enemyManager.Hit();
                     break;
                 case MapGenerator.MAP_TYPE.ENEMY2:
                     // 攻撃
-
+                    Debug.Log("攻撃");
+                    Attack();
+                    enemyManager.Hit();
                     break;
             }
-
+            /*
             //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
             //{
             //    
             //}
+            
             if (mapGenerator.GetEntityMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
             {
                 // 上下左右の入力判定をとりboolをtrueにする
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    isAttack = true; // EnemyManager.csでtrueを受け取り、敵を倒す（MapGenarator.csのMAP_TYPEをENEMYからGROUND書き換える）
+                    // 敵を倒す（MapGenarator.csのMAP_TYPEをENEMYからGROUND書き換える）
+                    Attack();
+                    enemyManager.Hit();
                 }
                 else if (Input.GetKeyDown(KeyCode.A))
                 {
-                    isAttack = true;
+                    Attack();
+                    enemyManager.Hit();
                 }
                 else if (Input.GetKeyDown(KeyCode.S))
                 {
-                    isAttack = true;
+                    Attack();
+                    enemyManager.Hit();
                 }
                 else if (Input.GetKeyDown(KeyCode.D))
                 {
-                    isAttack = true;
+                    Attack();
+                    enemyManager.Hit();
                 }
             }
 
@@ -177,9 +192,17 @@ public class toshiPlayer : MonoBehaviour
                 mapGenerator._loadMapData();
                 mapGenerator._createMap();
             }
+            */
         }
+            
         void Attack()
         {
+            enemyManager.attackedEnemyPos = playerNextPos;　// プレイヤーのnextPosを代入する
+            if (enemyManager.attackedEnemyPos == enemyManager.enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
+            {
+                Destroy(gameObject); // 敵のオブジェクトをDestroyする
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+            }
 
         }
         void Move()
@@ -191,6 +214,24 @@ public class toshiPlayer : MonoBehaviour
             transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
             playerCurrentPos = playerNextPos;
             mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+        }
+        void Stairs()
+        {
+            Debug.Log("階段の上だよ");
+            GameObject parentObject = GameObject.Find("MapChip");
+
+            int childCount = parentObject.transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                Transform childTransform = parentObject.transform.GetChild(i);
+                GameObject childObject = childTransform.gameObject;
+                Destroy(childObject);
+            }
+
+            mapGenerator.floor++;
+
+            mapGenerator._loadMapData();
+            mapGenerator._createMap();
         }
     }
 

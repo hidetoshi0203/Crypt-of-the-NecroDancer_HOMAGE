@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 475ad3ac4e668d248ac99cf72a5b83a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d3c98593d3918f4da67480d185581af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,4 +102,3 @@ MonoBehaviour:
   playerNextPos: {x: 0, y: 0}
   isAttack: 0
   isPlayerMove: 0
-  cam: {fileID: 0}
