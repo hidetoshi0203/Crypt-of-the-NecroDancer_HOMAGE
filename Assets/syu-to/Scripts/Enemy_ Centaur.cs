@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class Enemy_Centaur : MonoBehaviour
 {
@@ -9,16 +11,20 @@ public class Enemy_Centaur : MonoBehaviour
         TOP,
         RIGHT,
         DOWN,
-        LEFT
+        LEFT,
+        STOP
     }
 
     int[,] move = {
       { 0, -1 },　//TOPの場合
       { 1, 0 },   //RIGHTの場合
       { 0, 1 },   //DOWNの場合
-      { -1, 0 }   //LEFTの場合
+      { -1, 0 },   //LEFTの場合
+      { 0 , 0 }   //STOP
     };
+
     public DIRECTION direction;
+
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
     EnemyManager enemyManager;
@@ -26,6 +32,7 @@ public class Enemy_Centaur : MonoBehaviour
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
+
     int moveCount = 0;//自分が何回動いたか
     public bool isEnemyAttack = false;
 
@@ -34,11 +41,12 @@ public class Enemy_Centaur : MonoBehaviour
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<EnemyManager>();
-        direction = DIRECTION.LEFT;
+        direction = DIRECTION.STOP;
     }
-    // Update is called once per frame
+
     void Update()
     {
+        CheckPlayer();
 
         if (notesManager == null)
         {
@@ -50,6 +58,7 @@ public class Enemy_Centaur : MonoBehaviour
             GameObject inst = GameObject.Find("PlayerManager");
             playerManager = inst.GetComponent<PlayerManager>();
         }
+
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (moveCount != 1 && notesManager.enemyCanMove)
@@ -85,8 +94,8 @@ public class Enemy_Centaur : MonoBehaviour
             }
             else { notesManager.enemyCanMove = false; moveCount = 0; }
         }
-
     }
+
     void eMoveType()
     {
         if (notesManager != null && notesManager.CanInputKey())
@@ -107,6 +116,36 @@ public class Enemy_Centaur : MonoBehaviour
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+            }
+        }
+    }
+
+    private void CheckPlayer()
+    {
+        Vector2 origin = transform.position; // Ray開始位置
+
+        // Rayの方向ベクトル
+        Vector2[] directions = {
+        Vector2.up,    // 上方向
+        Vector2.right, // 右方向
+        Vector2.down,  // 下方向
+        Vector2.left   // 左方向
+    };
+
+        string[] directionNames = { "Up", "Right", "Down", "Left" };
+
+        for (int i = 0; i < directions.Length; i++)
+        {
+            // Raycastを実行
+            RaycastHit2D hit = Physics2D.Raycast(origin, directions[i], Mathf.Infinity);
+
+            // DebugでRayを可視化（常に緑色）
+            Debug.DrawRay(origin, directions[i] * 10, Color.green);
+
+            // プレイヤーに当たった場合
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("あたった"); // 当たった方向をログに表示
             }
         }
     }
