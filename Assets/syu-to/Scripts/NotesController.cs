@@ -126,7 +126,7 @@ public class NotesController : MonoBehaviour
         if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
         {
             comboManager.ResetCombo();
-            Debug.Log("reset");
+            //Debug.Log("reset");
         }
 
 
@@ -134,23 +134,23 @@ public class NotesController : MonoBehaviour
         if (comboManager.comboreset && Input.GetKeyDown(KeyCode.W))
         {
             comboManager.ResetCombo();
-            Debug.Log("W_reset");
+            //Debug.Log("W_reset");
         }
 
         if (comboManager.comboreset && Input.GetKeyDown(KeyCode.A))
         {
             comboManager.ResetCombo();
-            Debug.Log("A_reset");
+            //Debug.Log("A_reset");
         }
         if (comboManager.comboreset && Input.GetKeyDown(KeyCode.S))
         {
             comboManager.ResetCombo();
-            Debug.Log("S_reset");
+            //Debug.Log("S_reset");
         }
         if (comboManager.comboreset && Input.GetKeyDown(KeyCode.D))
         {
             comboManager.ResetCombo();
-            Debug.Log("D_reset");
+            //Debug.Log("D_reset");
         }
     }
 }

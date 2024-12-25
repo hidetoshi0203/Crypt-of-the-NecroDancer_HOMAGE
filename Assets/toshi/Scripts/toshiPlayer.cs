@@ -106,7 +106,7 @@ public class toshiPlayer : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-
+            Debug.Log(playerNextPos);
             switch (mapGenerator.GetStageMapType(playerNextPos))
             {
                 case MapGenerator.MAP_TYPE.GROUND:
@@ -126,19 +126,17 @@ public class toshiPlayer : MonoBehaviour
 
             switch (mapGenerator.GetEntityMapType(playerNextPos))
             {
-                case MapGenerator.MAP_TYPE.PLAYER:
-                    // バグ
-                    break;
+                //case MapGenerator.MAP_TYPE.PLAYER:
+                //    // バグ
+                //    break;
                 case MapGenerator.MAP_TYPE.ENEMY:
                     // 攻撃
                     Debug.Log("攻撃");
-                    Attack();
                     enemyManager.Hit();
                     break;
                 case MapGenerator.MAP_TYPE.ENEMY2:
                     // 攻撃
                     Debug.Log("攻撃");
-                    Attack();
                     enemyManager.Hit();
                     break;
             }
@@ -194,21 +192,11 @@ public class toshiPlayer : MonoBehaviour
             }
             */
         }
-            
-        void Attack()
-        {
-            enemyManager.attackedEnemyPos = playerNextPos;　// プレイヤーのnextPosを代入する
-            if (enemyManager.attackedEnemyPos == enemyManager.enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
-            {
-                Destroy(gameObject); // 敵のオブジェクトをDestroyする
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
-            }
-
-        }
+        
         void Move()
         {
-            Debug.Log(playerCurrentPos);
-            Debug.Log("床だよ");
+            //Debug.Log(playerCurrentPos);
+            //Debug.Log("床だよ");
             // 移動する
             mapGenerator.UpdateTile(playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
             transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
