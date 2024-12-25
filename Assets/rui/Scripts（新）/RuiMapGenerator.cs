@@ -193,7 +193,7 @@ public class RuiMapGenerator : MonoBehaviour
         GUI.Label(new Rect(50, 50, 300, 300), map);
     }
 
-    struct Node
+    public struct Node
     {
         public bool floor; // 行けないところはfalse
         public int cost; // 使用した歩数
@@ -208,7 +208,7 @@ public class RuiMapGenerator : MonoBehaviour
             this.score = score;
         }
     };
-    Node[,] aStarMap;
+    public Node[,] aStarMap;
 
     public void makeAStarMap()
     {
@@ -229,6 +229,9 @@ public class RuiMapGenerator : MonoBehaviour
        
         
     }
+
+    public int nextX;
+    public int nextY;
 
     ///<summary>
     ///AStarで経路を探索して、次に行くべきマスの場所を返す
@@ -273,8 +276,8 @@ public class RuiMapGenerator : MonoBehaviour
                         int[,] dir = {{1, 0},{0, 1},{-1, 0},{0, -1}};
                         for (int d = 0; d < 4; d++)
                         {
-                            int nextX = x + dir[d, 0];
-                            int nextY = y + dir[d, 1];
+                            nextX = x + dir[d, 0];
+                            nextY = y + dir[d, 1];
                             //ToDo
                             //nextX,nextYが、enemyと同じであれば、経路探索が終わったので、最短経路のxとyを返す
                             if (nextX == enemy.x && nextY == enemy.y)

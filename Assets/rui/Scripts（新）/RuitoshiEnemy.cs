@@ -19,7 +19,7 @@ public class RuitoshiEnemy : MonoBehaviour
       { -1, 0 }   //LEFTの場合
     };
     public DIRECTION direction;
-    RuiMapGenerator mapGenerator;
+    RuiMapGenerator ruiMapGenerator = null;
     NotesManager notesManager = null;
     RuiEnemyManager ruiEnemyManager;
     RuiEnemyManager enemyManager;
@@ -33,7 +33,7 @@ public class RuitoshiEnemy : MonoBehaviour
 
     void Start()
     {
-        mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
+        //ruiMapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<RuiEnemyManager>();
         ruiEnemyManager = GetComponent<RuiEnemyManager>();
@@ -42,7 +42,13 @@ public class RuitoshiEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ruiMapGenerator == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("MapChip");
+            ruiMapGenerator = inst.GetComponent<RuiMapGenerator>();
+        }
         
+
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -105,8 +111,9 @@ public class RuitoshiEnemy : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            ruiEnemyManager.enemyCurrentPos = mapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
-            Debug.Log(ruiEnemyManager.enemyCurrentPos);
+            ruiEnemyManager.enemyCurrentPos = ruiMapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
+            //Debug.Log(ruiEnemyManager.enemyCurrentPos);
+            //Debug.Log(ruiMapGenerator.aStarMap[ruiMapGenerator.nextX, ruiMapGenerator.nextY].score <= );
             eMoveType();
         }
 
@@ -116,24 +123,24 @@ public class RuitoshiEnemy : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0],move[(int)direction, 1]);
-            if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.PLAYER)
+            if (ruiMapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
-                //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
+                //ruiMapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
+                //transform.localPosition = ruiMapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
+                //ruiMapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
                 playerManager.Hit();
             }
-            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != RuiMapGenerator.MAP_TYPE.WALL)
+            else if (ruiMapGenerator.GetStageMapType(enemyManager.enemyNextPos) != RuiMapGenerator.MAP_TYPE.WALL)
             {
                 //移動
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND);
-                transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
+                ruiMapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND);
+                transform.localPosition = ruiMapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.ENEMY);
+                ruiMapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.ENEMY);
             }
         }
     }
