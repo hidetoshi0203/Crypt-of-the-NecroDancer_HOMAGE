@@ -625,7 +625,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.1252804
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -1379,6 +1379,8 @@ MonoBehaviour:
   floor: 0
   enemy: {x: 0, y: 0}
   player: {x: 5, y: 4}
+  nextX: 0
+  nextY: 0
 --- !u!1 &1950762906
 GameObject:
   m_ObjectHideFlags: 0

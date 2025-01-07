@@ -288,7 +288,7 @@ public class RuiMapGenerator : MonoBehaviour
                             }
 
                             if (nextX < 0 || nextY < 0 || nextX >= xSize || nextY >= ySize) continue;
-                            Debug.Log(nextX + "," + nextY);
+                            //Debug.Log(nextX + "," + nextY);
                             //ToDo:
                             // aStarMap[nextY,nextX]が壁でなくて、scoreがminScoreよりも大きいのであれば、
                             // cost、estimatedCost、scoreを計算して書き込む

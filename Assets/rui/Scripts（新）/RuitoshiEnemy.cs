@@ -42,6 +42,7 @@ public class RuitoshiEnemy : MonoBehaviour
 
     float eMoveTime = 0;
     bool isEMove = false;
+    float distance;
 
     // Update is called once per frame
     void Update()
@@ -121,21 +122,26 @@ public class RuitoshiEnemy : MonoBehaviour
             eMoveType();
         }*/
 
-        eMoveTime++;
-        if (eMoveTime >= 60)
+        //修正予定
+        //変数で時間を計って移動させているため、ノーツがハートに触れたら移動するようにする
+        distance = Vector2Int.Distance(enemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
+        if (distance < 5)
         {
-            isEMove = true;
-        }
+            eMoveTime++;
+            if (eMoveTime >= 60)
+            {
+                isEMove = true;
+            }
 
-        if (isEMove)
-        {
-            ruiEnemyManager.enemyNextPos = ruiMapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
-            eMoveType();
+            if (isEMove)
+            {
+                ruiEnemyManager.enemyNextPos = ruiMapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
+                eMoveType();
 
-            isEMove = false;
-            eMoveTime = 0;
+                isEMove = false;
+                eMoveTime = 0;
+            }
         }
-        Debug.Log(eMoveTime);
     }
     void eMoveType()
     {
