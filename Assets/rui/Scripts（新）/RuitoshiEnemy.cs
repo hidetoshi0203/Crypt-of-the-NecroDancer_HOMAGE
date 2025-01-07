@@ -39,6 +39,10 @@ public class RuitoshiEnemy : MonoBehaviour
         ruiEnemyManager = GetComponent<RuiEnemyManager>();
         direction = DIRECTION.DOWN;
     }
+
+    float eMoveTime = 0;
+    bool isEMove = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -109,20 +113,35 @@ public class RuitoshiEnemy : MonoBehaviour
             else {notesManager.enemyCanMove = false; moveCount = 0; }
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
+        /*if (Input.GetKeyDown(KeyCode.L))
         {
             ruiEnemyManager.enemyCurrentPos = ruiMapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
             //Debug.Log(ruiEnemyManager.enemyCurrentPos);
             //Debug.Log(ruiMapGenerator.aStarMap[ruiMapGenerator.nextX, ruiMapGenerator.nextY].score <= );
             eMoveType();
+        }*/
+
+        eMoveTime++;
+        if (eMoveTime >= 60)
+        {
+            isEMove = true;
         }
 
+        if (isEMove)
+        {
+            ruiEnemyManager.enemyNextPos = ruiMapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
+            eMoveType();
+
+            isEMove = false;
+            eMoveTime = 0;
+        }
+        Debug.Log(eMoveTime);
     }
     void eMoveType()
     {
         if (notesManager != null && notesManager.CanInputKey())
         {
-            enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0],move[(int)direction, 1]);
+            //enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0],move[(int)direction, 1]);
             if (ruiMapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
