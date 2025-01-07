@@ -24,6 +24,7 @@ TagManager:
   - Undefined
   - Enemy_Zombie
   - Enemy_Centaur
+  - HealingPotion
   layers:
   - Default
   - TransparentFX
