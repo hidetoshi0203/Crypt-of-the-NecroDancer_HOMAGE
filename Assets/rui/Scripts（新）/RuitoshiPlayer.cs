@@ -32,6 +32,9 @@ public class RuitoshiPlayer : MonoBehaviour
     GameObject rightNotes;
     GameObject function;
     GameObject notesObjets;
+
+    RuiPlayerManager ruiPlayerManager;
+    bool isHealing;
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
@@ -41,6 +44,8 @@ public class RuitoshiPlayer : MonoBehaviour
         notesObjets = GameObject.FindGameObjectWithTag("Notes");
         cam = Camera.main;
         cam.transform.position = transform.position + new Vector3(0,0,-1);
+
+        ruiPlayerManager = GetComponent<RuiPlayerManager>();
     }
 
 
@@ -48,6 +53,8 @@ public class RuitoshiPlayer : MonoBehaviour
     {
         cam.transform.position = transform.position + new Vector3(0, 0, -1);
     }
+
+    public GameObject potionObj;
 
     //Å@ì¸óÕéûÇ…_moveä÷êîÇåƒÇ‘ÇÊÇ§Ç…Ç∑ÇÈÅB
     private void Update()
@@ -84,6 +91,11 @@ public class RuitoshiPlayer : MonoBehaviour
                     HandlePlayerMove(DIRECTION.LEFT);
                 }
             }
+        }
+
+        if (this.transform.position == potionObj.transform.position)
+        {
+            //ruiPlayerManager.playerHP;
         }
     }
 

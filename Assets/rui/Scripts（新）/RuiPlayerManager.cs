@@ -12,7 +12,7 @@ public class RuiPlayerManager : MonoBehaviour
 
     [SerializeField] GameObject playerObj;
     public GameObject[] lifeArray = new GameObject[3];
-    int playerHP = 3;
+    public int playerHP = 3;
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
     
