@@ -69,7 +69,7 @@ public class Enemy_Centaur : MonoBehaviour
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
                         if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
-                            direction = DIRECTION.LEFT;
+                            direction = DIRECTION.STOP;
                         }
                         else
                         {
@@ -82,7 +82,32 @@ public class Enemy_Centaur : MonoBehaviour
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
                         if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
-                            direction = DIRECTION.RIGHT;
+                            direction = DIRECTION.STOP;
+                        }
+                        else
+                        {
+                            eMoveType();
+                        }
+                        moveCount++;
+                        break;
+                    case DIRECTION.TOP:
+                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        {
+                            direction = DIRECTION.STOP;
+                        }
+                        else
+                        {
+                            eMoveType();
+                        }
+                        
+                        moveCount++;
+                        break;
+                    case DIRECTION.DOWN:
+                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        {
+                            direction = DIRECTION.STOP;
                         }
                         else
                         {
@@ -130,23 +155,28 @@ public class Enemy_Centaur : MonoBehaviour
         Vector2.right, // 右方向
         Vector2.down,  // 下方向
         Vector2.left   // 左方向
-    };
+        };
+
+        float detectionRange = 5.0f;  // 検出距離を 5 ユニットに制限
 
         string[] directionNames = { "Up", "Right", "Down", "Left" };
 
         for (int i = 0; i < directions.Length; i++)
         {
             // Raycastを実行
-            RaycastHit2D hit = Physics2D.Raycast(origin, directions[i], Mathf.Infinity);
+            RaycastHit2D hit = Physics2D.Raycast(origin, directions[i], detectionRange);
 
             // DebugでRayを可視化（常に緑色）
-            Debug.DrawRay(origin, directions[i] * 10, Color.green);
+            Debug.DrawRay(origin, directions[i] * detectionRange, Color.green);
 
             // プレイヤーに当たった場合
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                Debug.Log("あたった"); // 当たった方向をログに表示
+                Debug.Log("あたった");
+                direction = (DIRECTION)i;
             }
+
         }
+
     }
 }
