@@ -21,7 +21,8 @@ public class MapGenerator : MonoBehaviour
         ENEMY,  // 3 ìGÅi1ëÃñ⁄Åj
         STAIRS, // 4 äKíi
         WALL2,   // 5 ï«ÅiÅj
-        ENEMY2  // 6 ìG2
+        ENEMY2,  // 6 ìG2
+        ENEMY3  // 7 ìG3
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -116,6 +117,13 @@ public class MapGenerator : MonoBehaviour
                 }
                 
                 if (mapTable[x, y] == MAP_TYPE.ENEMY2)
+                {
+                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                }
+                
+                if (mapTable[x, y] == MAP_TYPE.ENEMY3)
                 {
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
                     mapTable[x, y] = MAP_TYPE.GROUND;
