@@ -23,7 +23,9 @@ public class RuiMapGenerator : MonoBehaviour
         ENEMY,  // 3 敵（1体目）
         STAIRS,  // 4 階段
         WALL2, // 5 壁 ()
-        ENEMY2 // 6 敵2
+        ENEMY2, // 6 敵2
+        HEALINGPOTION, // 7 回復ポーション
+        STRENGTHPOTION, // 8 攻撃力UPポーション
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
