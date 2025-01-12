@@ -118,7 +118,7 @@ MonoBehaviour:
   direction: 4
   isEnemyAttack: 0
   check: 0
-  detectionRange: 10
+  detectionRange: 3
 --- !u!50 &4667129563248564170
 Rigidbody2D:
   serializedVersion: 4
