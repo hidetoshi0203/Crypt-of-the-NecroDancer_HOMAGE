@@ -149,15 +149,10 @@ public class RuitoshiPlayer : MonoBehaviour
                     // 攻撃
 
                     break;
-                case RuiMapGenerator.MAP_TYPE.HEALINGPOTION:
-                    // 回復
-                    item.HealingHP();
-                    break;
                 case RuiMapGenerator.MAP_TYPE.STRENGTHPOTION:
                     //item.
                     break;
             }
-
             //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
             //{
             //    
@@ -217,7 +212,4 @@ public class RuitoshiPlayer : MonoBehaviour
             mapGenerator.UpdateTile(playerCurrentPos, RuiMapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
         }
     }
-
-
-
 }

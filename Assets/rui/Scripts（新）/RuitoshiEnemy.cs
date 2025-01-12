@@ -41,7 +41,7 @@ public class RuitoshiEnemy : MonoBehaviour
     }
 
     float eMoveTime = 0;
-    bool isEMove = false;
+    bool isEnemyMove = false;
     float distance;
 
     // Update is called once per frame
@@ -130,15 +130,15 @@ public class RuitoshiEnemy : MonoBehaviour
             eMoveTime++;
             if (eMoveTime >= 60)
             {
-                isEMove = true;
+                isEnemyMove = true;
             }
 
-            if (isEMove)
+            if (isEnemyMove)
             {
                 ruiEnemyManager.enemyNextPos = ruiMapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
                 eMoveType();
 
-                isEMove = false;
+                isEnemyMove = false;
                 eMoveTime = 0;
             }
         }

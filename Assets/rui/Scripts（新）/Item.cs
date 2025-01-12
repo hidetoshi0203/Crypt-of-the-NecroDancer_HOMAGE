@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
     public void HealingHP()
     {
         ruiPlayerManager.playerHP++;
+        Debug.Log("‰ñ•œ‚µ‚½");
     }
 
     public void PlayerPowerUp()
