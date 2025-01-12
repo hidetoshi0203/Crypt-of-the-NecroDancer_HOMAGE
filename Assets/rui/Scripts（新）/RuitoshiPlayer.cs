@@ -10,14 +10,14 @@ public class RuitoshiPlayer : MonoBehaviour
         TOP,
         RIGHT,
         DOWN,
-        LEFT
+        LEFT,
     }
 
     int[,] move = {
       { 0, -1 },Å@//TOPÇÃèÍçá
       { 1, 0 },   //RIGHTÇÃèÍçá
       { 0, 1 },   //DOWNÇÃèÍçá
-      { -1, 0 }   //LEFTÇÃèÍçá
+      { -1, 0 },  //LEFTÇÃèÍçá
     };
 
     public DIRECTION direction;
@@ -34,6 +34,8 @@ public class RuitoshiPlayer : MonoBehaviour
     GameObject notesObjets;
 
     RuiPlayerManager ruiPlayerManager;
+    Item item = null;
+
     bool isHealing;
     private void Start()
     {
@@ -54,8 +56,6 @@ public class RuitoshiPlayer : MonoBehaviour
         cam.transform.position = transform.position + new Vector3(0, 0, -1);
     }
 
-    public GameObject potionObj;
-
     //Å@ì¸óÕéûÇ…_moveä÷êîÇåƒÇ‘ÇÊÇ§Ç…Ç∑ÇÈÅB
     private void Update()
     {
@@ -69,6 +69,16 @@ public class RuitoshiPlayer : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
             comboManager = inst.GetComponent <ComboManager>();
+        }
+        if (item == null)
+        {
+            GameObject instHPotion = GameObject.FindGameObjectWithTag("HealingPotion");
+            GameObject instSPotion = GameObject.FindGameObjectWithTag("StrengthPotion");
+            item = instHPotion.GetComponent<Item>();
+            item = instSPotion.GetComponent<Item>();
+        }
+        {
+            
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
@@ -91,11 +101,6 @@ public class RuitoshiPlayer : MonoBehaviour
                     HandlePlayerMove(DIRECTION.LEFT);
                 }
             }
-        }
-
-        if (this.transform.position == potionObj.transform.position)
-        {
-            //ruiPlayerManager.playerHP;
         }
     }
 
@@ -143,6 +148,13 @@ public class RuitoshiPlayer : MonoBehaviour
                 case RuiMapGenerator.MAP_TYPE.ENEMY2:
                     // çUåÇ
 
+                    break;
+                case RuiMapGenerator.MAP_TYPE.HEALINGPOTION:
+                    // âÒïú
+                    item.HealingHP();
+                    break;
+                case RuiMapGenerator.MAP_TYPE.STRENGTHPOTION:
+                    //item.
                     break;
             }
 
