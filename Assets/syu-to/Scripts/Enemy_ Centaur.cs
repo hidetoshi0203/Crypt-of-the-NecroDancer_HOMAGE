@@ -36,17 +36,24 @@ public class Enemy_Centaur : MonoBehaviour
     int moveCount = 0;//自分が何回動いたか
     public bool isEnemyAttack = false;
 
+    public bool check = false;
+
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<EnemyManager>();
         direction = DIRECTION.STOP;
+        check = true;
     }
 
     void Update()
     {
-        CheckPlayer();
+        if (check)
+        {
+            CheckPlayer();
+        }
+        
 
         if (notesManager == null)
         {
@@ -70,10 +77,12 @@ public class Enemy_Centaur : MonoBehaviour
                         if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.STOP;
+                            check = true;
                         }
                         else
                         {
                             eMoveType();
+                            check = false;
                         }
                         
                         moveCount++;
@@ -83,10 +92,12 @@ public class Enemy_Centaur : MonoBehaviour
                         if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.STOP;
+                            check = true;
                         }
                         else
                         {
                             eMoveType();
+                            check = false;
                         }
                         moveCount++;
                         break;
@@ -95,10 +106,12 @@ public class Enemy_Centaur : MonoBehaviour
                         if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.STOP;
+                            check = true;
                         }
                         else
                         {
                             eMoveType();
+                            check = false;
                         }
                         
                         moveCount++;
@@ -108,10 +121,12 @@ public class Enemy_Centaur : MonoBehaviour
                         if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
                         {
                             direction = DIRECTION.STOP;
+                            check = true;
                         }
                         else
                         {
                             eMoveType();
+                            check = false;
                         }
                         moveCount++;
                         break;
@@ -145,6 +160,7 @@ public class Enemy_Centaur : MonoBehaviour
         }
     }
 
+    [SerializeField] float detectionRange = 5.0f;  // 索敵範囲を 5 ユニットに制限
     private void CheckPlayer()
     {
         Vector2 origin = transform.position; // Ray開始位置
@@ -157,22 +173,21 @@ public class Enemy_Centaur : MonoBehaviour
         Vector2.left   // 左方向
         };
 
-        float detectionRange = 5.0f;  // 検出距離を 5 ユニットに制限
-
-        string[] directionNames = { "Up", "Right", "Down", "Left" };
-
         for (int i = 0; i < directions.Length; i++)
         {
+            //Rayを飛ばす
+            Ray2D ray = new Ray2D(origin, directions[i]);
             // Raycastを実行
             RaycastHit2D hit = Physics2D.Raycast(origin, directions[i], detectionRange);
 
             // DebugでRayを可視化（常に緑色）
             Debug.DrawRay(origin, directions[i] * detectionRange, Color.green);
 
+            
             // プレイヤーに当たった場合
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                Debug.Log("あたった");
+                Debug.Log($"{direction}方向");
                 direction = (DIRECTION)i;
             }
 
