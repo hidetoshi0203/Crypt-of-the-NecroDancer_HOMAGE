@@ -149,9 +149,6 @@ public class RuitoshiPlayer : MonoBehaviour
                     // UŒ‚
 
                     break;
-                case RuiMapGenerator.MAP_TYPE.STRENGTHPOTION:
-                    //item.
-                    break;
             }
             //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL2) // “ü—Íæ(ƒvƒŒƒCƒ„[‚ÌnextPos)‚ª•Ç‚¾‚Á‚½ê‡
             //{
