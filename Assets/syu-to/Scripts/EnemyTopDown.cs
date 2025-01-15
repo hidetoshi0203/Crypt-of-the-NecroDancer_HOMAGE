@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Zombie_TopDown : MonoBehaviour
+public class EnemyTopDown : MonoBehaviour
 {
     public enum DIRECTION
     {
@@ -39,7 +39,7 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -50,6 +50,7 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
             GameObject inst = GameObject.Find("PlayerManager");
             playerManager = inst.GetComponent<PlayerManager>();
         }
+
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (moveCount != 1 && notesManager.enemyCanMove)
@@ -57,60 +58,42 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.TOP:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
-                        {
-                            direction = DIRECTION.DOWN;
-                        }
-                        else
-                        {
-                            eMoveType();
-                        }
-                        
+                        eMoveType();
+                        direction = DIRECTION.DOWN;
                         moveCount++;
                         break;
                     case DIRECTION.DOWN:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
-                        {
-                            direction = DIRECTION.TOP;
-                        }
-                        else
-                        {
-                            eMoveType();
-                        }
+                        eMoveType();
+                        direction = DIRECTION.TOP;
                         moveCount++;
                         break;
-                }
+                }             
             }
-            else { notesManager.enemyCanMove = false; moveCount = 0; }
+            else {notesManager.enemyCanMove = false; moveCount = 0; }
         }
-
+        
     }
     void eMoveType()
     {
         if (notesManager != null && notesManager.CanInputKey())
         {
-            enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0],move[(int)direction, 1]);
+            if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
-                //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
-                //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
                 playerManager.Hit();
             }
-            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
                 //移動
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
             }
         }
     }
+    
 }

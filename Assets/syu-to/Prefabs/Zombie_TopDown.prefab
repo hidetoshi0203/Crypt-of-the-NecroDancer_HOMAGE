@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -8843969164592419746}
   - component: {fileID: -5539685057982955466}
   - component: {fileID: -3417575129445322808}
-  - component: {fileID: 7401613226992540895}
+  - component: {fileID: 6853304192857892629}
   m_Layer: 0
   m_Name: Zombie_TopDown
   m_TagString: Enemy_Zombie
@@ -176,7 +176,7 @@ MonoBehaviour:
   enemyNextPos: {x: 0, y: 0}
   attackedEnemyPos: {x: 0, y: 0}
   HeartObjList: []
---- !u!114 &7401613226992540895
+--- !u!114 &6853304192857892629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,8 +185,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5038783893017895171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d55880c76c8a3459825c6cb6594695, type: 3}
+  m_Script: {fileID: 11500000, guid: d8667a75c9ccef1499e4fa79ebe15801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
+  direction: 0
   isEnemyAttack: 0
