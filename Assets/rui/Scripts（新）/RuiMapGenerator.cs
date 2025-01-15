@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class RuiMapGenerator : MonoBehaviour
 {
@@ -17,15 +10,18 @@ public class RuiMapGenerator : MonoBehaviour
 
     public enum MAP_TYPE
     {
-        GROUND, // 0 地面
-        WALL,   // 1 壁
-        PLAYER, // 2 プレイヤー
-        ENEMY,  // 3 敵（1体目）
-        STAIRS,  // 4 階段
-        WALL2, // 5 壁 ()
-        ENEMY2, // 6 敵2
-        HEALINGPOTION, // 8 回復ポーション
-        STRENGTHPOTION, // 9 攻撃力UPポーション
+        GROUND,         // 0 地面
+        WALL,           // 1 壁
+        WALL2,          // 2 壁（）
+        PLAYER,         // 3 プレイヤー
+        STAIRS,         // 4 階段
+        ENEMY,          // 5 敵(スライム上下)
+        ENEMY_2,        // 6 敵(スライム左右)
+        ENEMY2,         // 7 敵2(ゾンビ左右)
+        ENEMY2_1,       // 8 敵2(ゾンビ上下)
+        ENEMY3,         // 9 敵3(ケンタウロス)
+        HEALINGPOTION,  // 10 回復ポーション
+        STRENGTHPOTION, // 11 攻撃力UPポーション
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -223,13 +219,13 @@ public class RuiMapGenerator : MonoBehaviour
         {
             for (int y = 0; y < ySize; y++)
             {
-                aStarMap[x, y] = new Node(false, 0,0,0);
+                aStarMap[x, y] = new Node(false, 0, 0, 0);
                 //Debug.Log(aStarMap[x, y].floor);
                 aStarMap[x, y].floor = (mapTable[x, y] != MAP_TYPE.WALL);
             }
         }
-       
-        
+
+
     }
 
     public int nextX;
@@ -275,7 +271,7 @@ public class RuiMapGenerator : MonoBehaviour
                 {
                     if (aStarMap[x, y].score == minScore) // この場所から、４方向調べる
                     {
-                        int[,] dir = {{1, 0},{0, 1},{-1, 0},{0, -1}};
+                        int[,] dir = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
                         for (int d = 0; d < 4; d++)
                         {
                             nextX = x + dir[d, 0];
@@ -285,7 +281,7 @@ public class RuiMapGenerator : MonoBehaviour
                             if (nextX == enemy.x && nextY == enemy.y)
                             {
                                 loop = false;
-                                
+
                                 return new Vector2Int(x, y);
                             }
 
@@ -294,7 +290,7 @@ public class RuiMapGenerator : MonoBehaviour
                             //ToDo:
                             // aStarMap[nextY,nextX]が壁でなくて、scoreがminScoreよりも大きいのであれば、
                             // cost、estimatedCost、scoreを計算して書き込む
-                            if (aStarMap[nextX, nextY].floor == true && aStarMap[nextX,nextY].score >= minScore)
+                            if (aStarMap[nextX, nextY].floor == true && aStarMap[nextX, nextY].score >= minScore)
                             {
                                 if (aStarMap[nextX, nextY].cost > aStarMap[x, y].cost)
                                 {
