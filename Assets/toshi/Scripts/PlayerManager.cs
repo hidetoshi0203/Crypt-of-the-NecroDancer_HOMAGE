@@ -8,7 +8,8 @@ public class PlayerManager : MonoBehaviour
     EnemyManager enemyManager = null;
     toshiPlayer toshiPlayer = null;
     MapGenerator mapGenerator = null;
-    Enemy_Zombie enemy_Zombie = null;
+    Enemy_Zombie_RightLeft enemy_Zombie_RightLeft = null;
+    Enemy_Zombie_TopDown enemy_Zombie_TopDown = null;
 
     [SerializeField] GameObject playerObj;
     public GameObject[] lifeArray = new GameObject[3];
@@ -33,10 +34,15 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             toshiEnemy = inst.GetComponent<toshiEnemy>();
         }
-        if (enemy_Zombie == null)
+        if (enemy_Zombie_RightLeft == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
-            enemy_Zombie = inst.GetComponent<Enemy_Zombie>();
+            enemy_Zombie_RightLeft = inst.GetComponent<Enemy_Zombie_RightLeft>();
+        }
+        if (enemy_Zombie_TopDown == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
+            enemy_Zombie_TopDown = inst.GetComponent<Enemy_Zombie_TopDown>();
         }
         if (enemyManager == null)
         {

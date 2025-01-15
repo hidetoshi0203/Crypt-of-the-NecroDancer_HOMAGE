@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Zombie : MonoBehaviour
+public class Enemy_Zombie_RightLeft : MonoBehaviour
 {
     public enum DIRECTION
     {

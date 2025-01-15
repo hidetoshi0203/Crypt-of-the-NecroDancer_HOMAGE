@@ -14,7 +14,7 @@ public class MapGenerator : MonoBehaviour
     
 
     public enum MAP_TYPE
-    {
+    {   /*
         GROUND, // 0 地面
         WALL,   // 1 壁
         PLAYER, // 2 プレイヤー
@@ -23,6 +23,18 @@ public class MapGenerator : MonoBehaviour
         WALL2,   // 5 壁（）
         ENEMY2,  // 6 敵2
         ENEMY3  // 7 敵3
+        */
+
+        GROUND,     // 0 地面
+        WALL,       // 1 壁
+        WALL2,      // 2 壁（）
+        PLAYER,     // 3 プレイヤー
+        STAIRS,     // 4 階段
+        ENEMY,      // 5 敵(スライム上下)
+        ENEMY_2,    // 6 敵(スライム左右)
+        ENEMY2,     // 7 敵2(ゾンビ左右)
+        ENEMY2_1,   // 8 敵2(ゾンビ上下)
+        ENEMY3      // 9 敵3(ケンタウロス)
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -115,14 +127,28 @@ public class MapGenerator : MonoBehaviour
                     mapTable[x, y] = MAP_TYPE.GROUND;
                     mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
-                
+
+                if (mapTable[x, y] == MAP_TYPE.ENEMY_2)
+                {
+                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                }
+
                 if (mapTable[x, y] == MAP_TYPE.ENEMY2)
                 {
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
                     mapTable[x, y] = MAP_TYPE.GROUND;
                     mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
-                
+
+                if (mapTable[x, y] == MAP_TYPE.ENEMY2_1)
+                {
+                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                }
+
                 if (mapTable[x, y] == MAP_TYPE.ENEMY3)
                 {
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
