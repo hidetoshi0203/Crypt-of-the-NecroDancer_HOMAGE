@@ -20,7 +20,7 @@ public class NotesManager : MonoBehaviour
     //Camera cam;
 
     private float nextGenerateTime = 1f; //次の生成タイミング
-    private float generateTime = 1f; //ノーツの生成間隔
+    private float generateTime; //ノーツの生成間隔
 
     bool isTouchingHeart = false;
     bool playingTouchSound = false;
@@ -44,17 +44,18 @@ public class NotesManager : MonoBehaviour
         comboManager.comboreset = false;
 
         reSizeHeart = defaultHeart.transform.localScale;
-        //cam = Camera.main;
     }
 
     private void Update()
     {
+        
         if (Time.time > nextGenerateTime)
         {
             Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
             Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
             nextGenerateTime += generateTime;
         }
+        
 
         if (notesController == null)
         {
@@ -74,11 +75,14 @@ public class NotesManager : MonoBehaviour
 
     }
 
+
     public void UpdateGenerateTime(float newTempo)
     {
-        generateTime = newTempo; // 新しいテンポに基づいて生成間隔を更新
-        nextGenerateTime = Time.time + generateTime; // 次のノーツ生成タイミングを再設定
+        float elapsedTime = Time.time - (nextGenerateTime - generateTime); // 経過時間を計算
+        generateTime = newTempo;
+        nextGenerateTime = Time.time + (generateTime - elapsedTime); // 補正
     }
+
 
     //ハートに触れたとき
     public void OnTouchHeart()
