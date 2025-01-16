@@ -34,7 +34,7 @@ public class RuitoshiPlayer : MonoBehaviour
     GameObject function;
     GameObject notesObjets;
 
-    RuiPlayerManager ruiPlayerManager;
+    RuiPlayerManager ruiPlayerManager = null;
     Item itemHPotion = null;
     Item itemSPotion = null;
 
@@ -62,6 +62,12 @@ public class RuitoshiPlayer : MonoBehaviour
     private void Update()
     {
 
+        if (ruiPlayerManager == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("PlayerManager");
+            ruiPlayerManager = inst.GetComponent<RuiPlayerManager>();
+        }
+
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -74,13 +80,13 @@ public class RuitoshiPlayer : MonoBehaviour
         }
         if (itemHPotion == null)
         {
-            GameObject instHPotion = GameObject.FindGameObjectWithTag("HealingPotion");
-            itemHPotion = instHPotion.GetComponent<Item>();
+            GameObject inst = GameObject.FindGameObjectWithTag("HealingPotion");
+            itemHPotion = inst.GetComponent<Item>();
         }
         if (itemSPotion == null)
         {
-            GameObject instSPotion = GameObject.FindGameObjectWithTag("StrengthPotion");
-            itemSPotion = instSPotion.GetComponent<Item>();
+            GameObject inst = GameObject.FindGameObjectWithTag("StrengthPotion");
+            itemSPotion = inst.GetComponent<Item>();
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
@@ -152,6 +158,12 @@ public class RuitoshiPlayer : MonoBehaviour
 
                     break;
             }
+
+            if (mapGenerator.GetMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.HEALINGPOTION)
+            {
+                itemHPotion.HealingHP();
+            }
+
             //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL2) // ì¸óÕêÊ(ÉvÉåÉCÉÑÅ[ÇÃnextPos)Ç™ï«ÇæÇ¡ÇΩèÍçá
             //{
             //    

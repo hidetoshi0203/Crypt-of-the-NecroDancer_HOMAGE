@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3493941914734821646}
   - component: {fileID: 3780603393285255692}
   - component: {fileID: -502106648491185598}
-  - component: {fileID: -7269970473282808560}
+  - component: {fileID: -5673181475005271008}
   m_Layer: 0
   m_Name: RuiRLEnemy
   m_TagString: Enemy
@@ -320,7 +320,7 @@ MonoBehaviour:
   enemyNextPos: {x: 0, y: 0}
   attackedEnemyPos: {x: 0, y: 0}
   HeartObjList: []
---- !u!114 &-7269970473282808560
+--- !u!114 &-5673181475005271008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8425694697182779888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b8f6b9d3033d174bb967e9afae6683d, type: 3}
+  m_Script: {fileID: 11500000, guid: c4c6943f30dff27469066fa914df778d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RL_Slime : MonoBehaviour
+public class RuiRL_Slime : MonoBehaviour
 {
     public enum DIRECTION
     {
@@ -19,10 +19,10 @@ public class RL_Slime : MonoBehaviour
       { -1, 0 }   //LEFTの場合
     };
     public DIRECTION direction;
-    MapGenerator mapGenerator;
+    RuiMapGenerator mapGenerator;
     NotesManager notesManager = null;
-    EnemyManager enemyManager;
-    PlayerManager playerManager;
+    RuiEnemyManager enemyManager;
+    RuiPlayerManager playerManager;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -31,9 +31,9 @@ public class RL_Slime : MonoBehaviour
 
     void Start()
     {
-        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         notesManager = GetComponent<NotesManager>();
-        enemyManager = GetComponent<EnemyManager>();
+        enemyManager = GetComponent<RuiEnemyManager>();
         direction = DIRECTION.RIGHT;
     }
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class RL_Slime : MonoBehaviour
         if (playerManager == null)
         {
             GameObject inst = GameObject.Find("PlayerManager");
-            playerManager = inst.GetComponent<PlayerManager>();
+            playerManager = inst.GetComponent<RuiPlayerManager>();
         }
 
         if (notesManager != null && notesManager.CanInputKey())
@@ -78,20 +78,20 @@ public class RL_Slime : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-            if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
                 playerManager.Hit();
             }
-            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != RuiMapGenerator.MAP_TYPE.WALL)
             {
                 //移動
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND);
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.ENEMY);
             }
         }
     }

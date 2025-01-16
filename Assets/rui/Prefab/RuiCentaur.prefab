@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4528805129255909799}
   - component: {fileID: 4667129563248564170}
   - component: {fileID: 9094467021252193915}
-  - component: {fileID: 9153384121895640502}
   - component: {fileID: 7244408207701044890}
+  - component: {fileID: 1509404638890081113}
   m_Layer: 0
   m_Name: RuiCentaur
   m_TagString: Enemy_Centaur
@@ -160,22 +160,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.682226, y: 9.922342}
   m_EdgeRadius: 0
---- !u!114 &9153384121895640502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4340557720051008725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0028c17ef55d1cc4baf3be0398aa87fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: 4
-  isEnemyAttack: 0
-  check: 0
-  detectionRange: 3
 --- !u!114 &7244408207701044890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +176,19 @@ MonoBehaviour:
   enemyNextPos: {x: 0, y: 0}
   attackedEnemyPos: {x: 0, y: 0}
   HeartObjList: []
+--- !u!114 &1509404638890081113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340557720051008725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae09ba2f832b334eb0331d6f23e7d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
+  isEnemyAttack: 0
+  check: 0
+  detectionRange: 5

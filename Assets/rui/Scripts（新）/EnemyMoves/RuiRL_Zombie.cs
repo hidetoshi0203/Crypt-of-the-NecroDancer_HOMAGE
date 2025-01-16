@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TD_Slime : MonoBehaviour
+public class RuiRL_Zombie : MonoBehaviour
 {
     public enum DIRECTION
     {
@@ -19,10 +19,10 @@ public class TD_Slime : MonoBehaviour
       { -1, 0 }   //LEFTの場合
     };
     public DIRECTION direction;
-    MapGenerator mapGenerator;
+    RuiMapGenerator mapGenerator;
     NotesManager notesManager = null;
-    EnemyManager enemyManager;
-    PlayerManager playerManager;
+    RuiEnemyManager enemyManager;
+    RuiPlayerManager playerManager;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -31,10 +31,10 @@ public class TD_Slime : MonoBehaviour
 
     void Start()
     {
-        mapGenerator = transform.parent.GetComponent<MapGenerator>();
+        mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         notesManager = GetComponent<NotesManager>();
-        enemyManager = GetComponent<EnemyManager>();
-        direction = DIRECTION.TOP;
+        enemyManager = GetComponent<RuiEnemyManager>();
+        direction = DIRECTION.LEFT;
     }
     // Update is called once per frame
     void Update()
@@ -48,7 +48,7 @@ public class TD_Slime : MonoBehaviour
         if (playerManager == null)
         {
             GameObject inst = GameObject.Find("PlayerManager");
-            playerManager = inst.GetComponent<PlayerManager>();
+            playerManager = inst.GetComponent<RuiPlayerManager>();
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
@@ -56,11 +56,11 @@ public class TD_Slime : MonoBehaviour
             {
                 switch (direction)
                 {
-                    case DIRECTION.TOP:
+                    case DIRECTION.RIGHT:
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.WALL)
                         {
-                            direction = DIRECTION.DOWN;
+                            direction = DIRECTION.LEFT;
                         }
                         else
                         {
@@ -69,11 +69,11 @@ public class TD_Slime : MonoBehaviour
 
                         moveCount++;
                         break;
-                    case DIRECTION.DOWN:
+                    case DIRECTION.LEFT:
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.WALL)
                         {
-                            direction = DIRECTION.TOP;
+                            direction = DIRECTION.RIGHT;
                         }
                         else
                         {
@@ -92,7 +92,7 @@ public class TD_Slime : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == RuiMapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
@@ -103,13 +103,13 @@ public class TD_Slime : MonoBehaviour
                 //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
                 playerManager.Hit();
             }
-            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != RuiMapGenerator.MAP_TYPE.WALL)
             {
                 //移動
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND);
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+                mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, RuiMapGenerator.MAP_TYPE.ENEMY2);
             }
         }
     }

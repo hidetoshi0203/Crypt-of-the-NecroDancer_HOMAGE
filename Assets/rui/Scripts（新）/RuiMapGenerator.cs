@@ -25,16 +25,18 @@ public class RuiMapGenerator : MonoBehaviour
         ENEMY3  // 7 敵3
         */
 
-        GROUND,     // 0 地面
-        WALL,       // 1 壁
-        WALL2,      // 2 壁（）
-        PLAYER,     // 3 プレイヤー
-        STAIRS,     // 4 階段
-        ENEMY,      // 5 敵(スライム上下)
-        ENEMY_2,    // 6 敵(スライム左右)
-        ENEMY2,     // 7 敵2(ゾンビ左右)
-        ENEMY2_1,   // 8 敵2(ゾンビ上下)
-        ENEMY3      // 9 敵3(ケンタウロス)
+        GROUND,         // 0 地面
+        WALL,           // 1 壁
+        WALL2,          // 2 壁（）
+        PLAYER,         // 3 プレイヤー
+        STAIRS,         // 4 階段
+        ENEMY,          // 5 敵(スライム上下)
+        ENEMY_2,        // 6 敵(スライム左右)
+        ENEMY2,         // 7 敵2(ゾンビ左右)
+        ENEMY2_1,       // 8 敵2(ゾンビ上下)
+        ENEMY3,         // 9 敵3(ケンタウロス)
+        HEALINGPOTION,  // 10 回復ポーション
+        STRENGTHPOTION, // 11 攻撃力UPポーション
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -166,6 +168,13 @@ public class RuiMapGenerator : MonoBehaviour
                     mapTable[x, y] = MAP_TYPE.GROUND;
                     mapTable2[x, y] = MAP_TYPE.PLAYER;
 
+                }
+
+                if (mapTable[x, y] == MAP_TYPE.HEALINGPOTION)
+                {
+                    _map.GetComponent<Item>().HPotionCurrentPos = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable[x, y] = MAP_TYPE.HEALINGPOTION;
                 }
             }
         }

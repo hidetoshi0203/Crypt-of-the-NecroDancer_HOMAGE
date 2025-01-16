@@ -25,6 +25,8 @@ TagManager:
   - Enemy_Zombie
   - Enemy_Centaur
   - HealingPotion
+  - StrengthPotion
+  - PlayerManager
   layers:
   - Default
   - TransparentFX

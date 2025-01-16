@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8428522278948726420}
   - component: {fileID: 9166545246400746325}
-  - component: {fileID: 3597221806066611285}
+  - component: {fileID: -6544278006274514172}
   m_Layer: 0
   m_Name: StrengthPotion
   m_TagString: StrengthPotion
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3597221806066611285
+--- !u!114 &-6544278006274514172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,3 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d007e07b0c4b57479406034e1ac99fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPotionCurrentPos: {x: 0, y: 0}
+  SPotionCurrentPos: {x: 0, y: 0}

@@ -5,12 +5,16 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     RuiMapGenerator ruiMapGenerator = null;
-    RuiPlayerManager ruiPlayerManager;
+    RuiPlayerManager ruiPlayerManager = null;
+    GameObject HPotionObj;
+    GameObject SPotionObj;
+
+    public Vector2Int HPotionCurrentPos;
+    public Vector2Int SPotionCurrentPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        ruiPlayerManager = GetComponent<RuiPlayerManager>();
     }
 
     // Update is called once per frame
@@ -21,11 +25,25 @@ public class Item : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("MapChip");
             ruiMapGenerator = inst.GetComponent<RuiMapGenerator>();
         }
+
+        if (ruiPlayerManager == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("PlayerManager");
+            ruiPlayerManager = inst.GetComponent<RuiPlayerManager>();
+        }
+
+        HPotionObj = GameObject.FindGameObjectWithTag("HealingPotion");
+        SPotionObj = GameObject.FindGameObjectWithTag("StrengthPotion");
     }
 
     public void HealingHP()
     {
-        ruiPlayerManager.playerHP++;
-        Debug.Log("‰ñ•œ‚µ‚½");
+        if (ruiPlayerManager.playerHP < 3)
+        {
+            ruiPlayerManager.playerHP++;
+        }
+        Destroy(HPotionObj);
+        ruiMapGenerator.UpdateTile(HPotionCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND);
+        Debug.Log("‰ñ•œƒ|[ƒVƒ‡ƒ“Á‚¦‚½");
     }
 }

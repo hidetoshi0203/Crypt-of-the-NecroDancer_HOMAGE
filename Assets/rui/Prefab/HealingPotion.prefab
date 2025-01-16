@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4204262174414442553}
   - component: {fileID: 8684873038070415883}
-  - component: {fileID: 1493945540708193034}
+  - component: {fileID: -1151862566328351711}
   m_Layer: 0
   m_Name: HealingPotion
   m_TagString: HealingPotion
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: d19ccb8e619c9324487328c4f83f7f66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e6e84eeae1af484ebc6eeb724cced33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1493945540708193034
+--- !u!114 &-1151862566328351711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,3 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d007e07b0c4b57479406034e1ac99fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPotionCurrentPos: {x: 0, y: 0}
+  SPotionCurrentPos: {x: 0, y: 0}

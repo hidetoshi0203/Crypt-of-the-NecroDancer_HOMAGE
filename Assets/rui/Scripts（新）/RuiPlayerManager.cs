@@ -43,6 +43,7 @@ public class RuiPlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<RuiEnemyManager>();
         }
+
         //if (toshiEnemy.isEnemyAttack)
         //{
         //    Debug.Log("“G‚©‚ç‚ÌUŒ‚");
