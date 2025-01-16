@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6883502709273434069}
   - component: {fileID: 4528805129255909799}
-  - component: {fileID: 4367261347822757484}
-  - component: {fileID: 9153384121895640502}
   - component: {fileID: 4667129563248564170}
   - component: {fileID: 9094467021252193915}
+  - component: {fileID: 9153384121895640502}
+  - component: {fileID: 7244408207701044890}
   m_Layer: 0
   m_Name: RuiCentaur
   m_TagString: Enemy_Centaur
@@ -88,38 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4367261347822757484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4340557720051008725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a5607e200ff6547b771199374e1b18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyCurrentPos: {x: 0, y: 0}
-  enemyNextPos: {x: 0, y: 0}
-  attackedEnemyPos: {x: 0, y: 0}
-  HeartObjList: []
---- !u!114 &9153384121895640502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4340557720051008725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0028c17ef55d1cc4baf3be0398aa87fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: 4
-  isEnemyAttack: 0
-  check: 0
-  detectionRange: 3
 --- !u!50 &4667129563248564170
 Rigidbody2D:
   serializedVersion: 4
@@ -192,3 +160,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.682226, y: 9.922342}
   m_EdgeRadius: 0
+--- !u!114 &9153384121895640502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340557720051008725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0028c17ef55d1cc4baf3be0398aa87fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 4
+  isEnemyAttack: 0
+  check: 0
+  detectionRange: 3
+--- !u!114 &7244408207701044890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340557720051008725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9086ad9bd0c6c7429e80851e42977f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCurrentPos: {x: 0, y: 0}
+  enemyNextPos: {x: 0, y: 0}
+  attackedEnemyPos: {x: 0, y: 0}
+  HeartObjList: []

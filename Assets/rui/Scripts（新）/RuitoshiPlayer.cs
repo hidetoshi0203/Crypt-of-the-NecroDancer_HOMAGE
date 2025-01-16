@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
+using static UnityEditor.Progress;
 public class RuitoshiPlayer : MonoBehaviour
 {
     public enum DIRECTION
@@ -34,7 +35,8 @@ public class RuitoshiPlayer : MonoBehaviour
     GameObject notesObjets;
 
     RuiPlayerManager ruiPlayerManager;
-    Item item = null;
+    Item itemHPotion = null;
+    Item itemSPotion = null;
 
     bool isHealing;
     private void Start()
@@ -70,15 +72,15 @@ public class RuitoshiPlayer : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
             comboManager = inst.GetComponent <ComboManager>();
         }
-        if (item == null)
+        if (itemHPotion == null)
         {
             GameObject instHPotion = GameObject.FindGameObjectWithTag("HealingPotion");
-            GameObject instSPotion = GameObject.FindGameObjectWithTag("StrengthPotion");
-            item = instHPotion.GetComponent<Item>();
-            item = instSPotion.GetComponent<Item>();
+            itemHPotion = instHPotion.GetComponent<Item>();
         }
+        if (itemSPotion == null)
         {
-            
+            GameObject instSPotion = GameObject.FindGameObjectWithTag("StrengthPotion");
+            itemSPotion = instSPotion.GetComponent<Item>();
         }
         if (notesManager != null && notesManager.CanInputKey())
         {

@@ -114,17 +114,8 @@ public class RuitoshiEnemy : MonoBehaviour
             else {notesManager.enemyCanMove = false; moveCount = 0; }
         }
 
-        /*if (Input.GetKeyDown(KeyCode.L))
-        {
-            ruiEnemyManager.enemyCurrentPos = ruiMapGenerator.SearchRoute(ruiEnemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
-            //Debug.Log(ruiEnemyManager.enemyCurrentPos);
-            //Debug.Log(ruiMapGenerator.aStarMap[ruiMapGenerator.nextX, ruiMapGenerator.nextY].score <= );
-            eMoveType();
-        }*/
-
-        //修正予定
-        //変数で時間を計って移動させているため、ノーツがハートに触れたら移動するようにする
-        distance = Vector2Int.Distance(enemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
+        //プレイヤー追尾（プレイヤーが一定の範囲内に入ったら敵がプレイヤーを追いかける）
+        /*distance = Vector2Int.Distance(enemyManager.enemyCurrentPos, ruiToshiPlayer.playerCurrentPos);
         if (distance < 5)
         {
             eMoveTime++;
@@ -141,7 +132,7 @@ public class RuitoshiEnemy : MonoBehaviour
                 isEnemyMove = false;
                 eMoveTime = 0;
             }
-        }
+        }*/
     }
     void eMoveType()
     {
