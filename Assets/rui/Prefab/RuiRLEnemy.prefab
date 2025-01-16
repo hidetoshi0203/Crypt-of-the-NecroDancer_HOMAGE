@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: -502106648491185598}
   - component: {fileID: -7269970473282808560}
   m_Layer: 0
-  m_Name: ruiEnemy
+  m_Name: RuiRLEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
