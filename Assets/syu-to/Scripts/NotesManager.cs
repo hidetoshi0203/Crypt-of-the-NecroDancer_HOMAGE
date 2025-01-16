@@ -7,8 +7,9 @@ using UnityEngine.UIElements;
 public class NotesManager : MonoBehaviour
 {
     [SerializeField] private TempoManager tempoManager;
-    [SerializeField] private GameObject leftNode;
-    [SerializeField] private GameObject rightNode;
+    [SerializeField] private GameObject node;
+    [SerializeField] private float tempo = 2.0f;
+    [SerializeField] private Transform generateTrans;
     [SerializeField] private Transform leftGenerateTrans;
     [SerializeField] private Transform rightGenerateTrans;
     [SerializeField] GameObject defaultHeart;
@@ -20,25 +21,31 @@ public class NotesManager : MonoBehaviour
     //Camera cam;
 
     private float nextGenerateTime = 1f; //次の生成タイミング
+    private float nextTouchTime;
+    [SerializeField] private float touchTime;
     private float generateTime; //ノーツの生成間隔
 
     bool isTouchingHeart = false;
+    bool canInputKey = false;
     bool playingTouchSound = false;
 
     public bool playerCanMove = false;
     public bool enemyCanMove = false;
 
     private ComboManager comboManager;
-    private NotesController notesController = null;
+    private NotesCont notesController = null;
+
+    public int moveControl; // ノーツがハートに触れた回数
+    public bool notesCountFlag;
 
     private void Awake()
     {
         generateTime = tempoManager.Tempo;
         nextGenerateTime = Time.time + generateTime;
-
+        nextTouchTime = nextGenerateTime + tempo;
         audioSource = gameObject.AddComponent<AudioSource>(); //AudioSourceを追加
 
-        notesController = FindObjectOfType<NotesController>();
+        notesController = FindObjectOfType<NotesCont>();
         comboManager = FindObjectOfType<ComboManager>();
 
         comboManager.comboreset = false;
@@ -51,27 +58,51 @@ public class NotesManager : MonoBehaviour
         
         if (Time.time > nextGenerateTime)
         {
-            Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
-            Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
+            //Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
+            //Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
+            GameObject n = Instantiate(node, generateTrans.position, Quaternion.identity, this.transform);
+            NotesCont notesCont = n.GetComponent<NotesCont>();
+            notesCont.Set(leftGenerateTrans.position, rightGenerateTrans.position);
             nextGenerateTime += generateTime;
         }
         
-
-        if (notesController == null)
+        if(Time.time < nextTouchTime + touchTime && Time.time > nextTouchTime - touchTime)
         {
-            GameObject NCon = GameObject.FindGameObjectWithTag("Notes");
-            if (NCon != null)
+            OnTouchHeart();
+        }
+        else
+        {
+            if (isTouchingHeart)
             {
-                notesController = NCon.GetComponent<NotesController>();
+                isTouchingHeart = false;
+                nextTouchTime += tempoManager.Tempo;
+                OnTimeLimit();
             }
-            else
+        }
+        if (isTouchingHeart && canInputKey)
+        {
+            // キー入力
+            //　入力されたら
+            if (Input.GetKeyDown(KeyCode.W)) 
             {
-                return;
+                canInputKey = false;
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                canInputKey = false;
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                canInputKey = false;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                canInputKey = false;
             }
         }
         
 
-        notesController.OffTouchHeart(); //ハートから離れているとき
+        //notesController.OffTouchHeart(); //ハートから離れているとき
 
     }
 
@@ -90,8 +121,8 @@ public class NotesManager : MonoBehaviour
         if (!isTouchingHeart)
         {
             playerCanMove = true;
-            enemyCanMove = true;
             isTouchingHeart = true;
+            canInputKey = true;
             PlayTouchSound();
         }
         defaultHeart.transform.localScale = new Vector3(2, 2, 2);
@@ -100,9 +131,22 @@ public class NotesManager : MonoBehaviour
     //ハートに触れる状態が終わったとき
     public void OnTimeLimit()
     {
+        Debug.Log("move");
         isTouchingHeart = false;
+        enemyCanMove = true;
+        notesCountFlag = true;
         StopTouchSound();
         defaultHeart.transform.localScale = reSizeHeart;
+        moveControl = (moveControl + 1) % 2;
+        Debug.Log(moveControl);
+        //if (notesCountFlag)
+        //{
+        //    moveControl++;
+        //    if (moveControl >= 1)
+        //    {
+        //        notesCountFlag = false;
+        //    }
+        //}
     }
 
     //入力可能かどうか

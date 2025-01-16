@@ -28,13 +28,14 @@ public class EnemyTopDown : MonoBehaviour
     GameObject function;
     int moveCount = 0;//Ž©•ª‚ª‰½‰ñ“®‚¢‚½‚©
     public bool isEnemyAttack = false;
+    private bool isMove = false;
 
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<EnemyManager>();
-        direction = DIRECTION.TOP;
+        direction = DIRECTION.DOWN;
     }
     // Update is called once per frame
     void Update()
@@ -53,23 +54,33 @@ public class EnemyTopDown : MonoBehaviour
 
         if (notesManager != null && notesManager.CanInputKey())
         {
-            if (moveCount != 1 && notesManager.enemyCanMove)
+            
+            if (notesManager.enemyCanMove)
             {
-                switch (direction)
+                if(isMove) return;
+                else
                 {
-                    case DIRECTION.TOP:
-                        eMoveType();
-                        direction = DIRECTION.DOWN;
-                        moveCount++;
-                        break;
-                    case DIRECTION.DOWN:
-                        eMoveType();
-                        direction = DIRECTION.TOP;
-                        moveCount++;
-                        break;
-                }             
+                    isMove = true;
+                    moveCount =(moveCount + 1) % 2;
+
+                    if (moveCount == 0) return;
+                    switch (direction)
+                    {
+                        case DIRECTION.TOP:
+                            eMoveType();
+                            direction = DIRECTION.DOWN;
+                            break;
+                        case DIRECTION.DOWN:
+                            eMoveType();
+                            direction = DIRECTION.TOP;
+                            break;
+                    }
+                }
             }
-            else {notesManager.enemyCanMove = false; moveCount = 0; }
+            else
+            {
+                isMove = false;
+            }
         }
         
     }
@@ -85,7 +96,8 @@ public class EnemyTopDown : MonoBehaviour
                 isEnemyAttack = true;
                 playerManager.Hit();
             }
-            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL ||
+                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL2)
             {
                 //ˆÚ“®
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);

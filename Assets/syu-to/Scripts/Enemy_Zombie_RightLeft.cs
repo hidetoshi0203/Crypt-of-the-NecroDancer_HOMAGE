@@ -58,7 +58,8 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                 {
                     case DIRECTION.RIGHT:
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL ||
+                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
                         {
                             direction = DIRECTION.LEFT;
                         }
@@ -71,7 +72,8 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                         break;
                     case DIRECTION.LEFT:
                         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL)
+                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL ||
+                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
                         {
                             direction = DIRECTION.RIGHT;
                         }
@@ -92,7 +94,7 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-            if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
+            if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
@@ -103,7 +105,8 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                 //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
                 playerManager.Hit();
             }
-            else if (mapGenerator.GetEnemyNextMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
+            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL ||
+                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL2)
             {
                 //移動
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);

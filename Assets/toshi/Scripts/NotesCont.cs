@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class NotesController : MonoBehaviour
+public class NotesCont : MonoBehaviour
 {
     [SerializeField] private float endX;
 
@@ -12,8 +11,10 @@ public class NotesController : MonoBehaviour
     [SerializeField] private float tempo = 2.0f; //ノーツの移動時間
     [SerializeField] public float Heart_range = 0; //ハートに触れる範囲
     //private GameObject heartImage; // ノーツの終着点となるオブジェクト 
+    [SerializeField] GameObject[] notesObjects;
 
-    private Vector3 startPos; //ノーツの生成位置
+    private Vector3 leftStartPos; //ノーツの生成位置
+    private Vector3 rightStartPos; //ノーツの生成位置
     private Vector3 endPos; //ノーツの終了位置
     private float currentTime = 0f; //ノーツの移動の経過時間
 
@@ -28,13 +29,18 @@ public class NotesController : MonoBehaviour
         endX = heartImage.transform.position.x;
         //Heart_range = heartImage.transform.position.x + Heart_range;
         */
-        startPos = transform.position; //現在の位置を生成位置として設定
-        endPos = new Vector3(endX, startPos.y, startPos.z); //ノーツの目的地を設定
         notesManager = FindObjectOfType<NotesManager>(); //NotesManagerを取得
         comboManager = FindObjectOfType<ComboManager>();
         ColorChange = FindObjectOfType<ColorChange>();
     }
-
+    public void Set(Vector3 leftPos, Vector3 rightPos)
+    {
+        notesObjects[0].transform.position = leftPos;
+        notesObjects[1].transform.position = rightPos;
+        leftStartPos = notesObjects[0].transform.position; //現在の位置を生成位置として設定
+        rightStartPos = notesObjects[1].transform.position;
+        endPos = new Vector3(endX, leftStartPos.y, leftStartPos.z); //ノーツの目的地を設定
+    }
     private void Update()
     {
         //Debug.Log(Heart_range);
@@ -45,15 +51,16 @@ public class NotesController : MonoBehaviour
         }
         currentTime += Time.deltaTime; //経過時間を更新
 
-        transform.position = Vector3.Lerp(startPos, endPos, currentTime / tempo); //ノーツの位置を移動
+        notesObjects[0].transform.position = Vector3.Lerp(leftStartPos, endPos, currentTime / tempo); //ノーツの位置を移動
+        notesObjects[1].transform.position = Vector3.Lerp(rightStartPos, endPos, currentTime / tempo); //ノーツの位置を移動
 
         //ハートに触れた場合のチェック
-        if (!notesManager.CanInputKey() && transform.position.x >= -Heart_range && transform.position.x <= Heart_range)
-        {
-            notesManager.OnTouchHeart();
-            notesManager.playerCanMove = true; //ハートに触れた後に音を鳴らせるようにフラグをリセット
+        //if (!notesManager.CanInputKey() && notesObjects[0].transform.position.x >= -Heart_range && notesObjects[0].transform.position.x <= Heart_range)
+        //{
+        //    notesManager.OnTouchHeart();
+        //    notesManager.playerCanMove = true; //ハートに触れた後に音を鳴らせるようにフラグをリセット
 
-        }
+        //}
 
         //ハートに触れている状態でキーが押されたとき
         if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.Space))
@@ -86,11 +93,10 @@ public class NotesController : MonoBehaviour
         //ノーツが移動し終わったら削除
         if (currentTime > tempo)
         {
-            notesManager.OnTimeLimit();
+            //notesManager.OnTimeLimit();
             comboManager.ResetCombo();
             currentTime = 0f;
             Destroy(this.gameObject);
-
         }
     }
 
@@ -111,46 +117,46 @@ public class NotesController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void OffTouchHeart()
-    {
-        //ハートの外にいるとき
-        if (transform.position.x < -Heart_range || transform.position.x > Heart_range)
-        {
-            comboManager.comboreset = true;
-        }
-        else
-        {
-            comboManager.comboreset = false;
-        }
+    //public void OffTouchHeart()
+    //{
+    //    //ハートの外にいるとき
+    //    if (notesObjects[0].transform.position.x < -Heart_range || notesObjects[0].transform.position.x > Heart_range)
+    //    {
+    //        comboManager.comboreset = true;
+    //    }
+    //    else
+    //    {
+    //        comboManager.comboreset = false;
+    //    }
 
-        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
-        {
-            comboManager.ResetCombo();
-            //Debug.Log("reset");
-        }
+    //    if (comboManager.comboreset && Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        comboManager.ResetCombo();
+    //        //Debug.Log("reset");
+    //    }
 
 
 
-        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.W))
-        {
-            comboManager.ResetCombo();
-            //Debug.Log("W_reset");
-        }
+    //    if (comboManager.comboreset && Input.GetKeyDown(KeyCode.W))
+    //    {
+    //        comboManager.ResetCombo();
+    //        //Debug.Log("W_reset");
+    //    }
 
-        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.A))
-        {
-            comboManager.ResetCombo();
-            //Debug.Log("A_reset");
-        }
-        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.S))
-        {
-            comboManager.ResetCombo();
-            //Debug.Log("S_reset");
-        }
-        if (comboManager.comboreset && Input.GetKeyDown(KeyCode.D))
-        {
-            comboManager.ResetCombo();
-            //Debug.Log("D_reset");
-        }
-    }
+    //    if (comboManager.comboreset && Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        comboManager.ResetCombo();
+    //        //Debug.Log("A_reset");
+    //    }
+    //    if (comboManager.comboreset && Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        comboManager.ResetCombo();
+    //        //Debug.Log("S_reset");
+    //    }
+    //    if (comboManager.comboreset && Input.GetKeyDown(KeyCode.D))
+    //    {
+    //        comboManager.ResetCombo();
+    //        //Debug.Log("D_reset");
+    //    }
+    //}
 }

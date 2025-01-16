@@ -31,13 +31,13 @@ public class PlayerManager : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<toshiPlayer>();
-        }
-        if (toshiEnemy == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            toshiEnemy = inst.GetComponent<toshiEnemy>();
-        }
+        }        //if (toshiEnemy == null)
+        //{
+        //    GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
+        //    toshiEnemy = inst.GetComponent<toshiEnemy>();
+        //}
         
+
         if (enemyTopDown == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
