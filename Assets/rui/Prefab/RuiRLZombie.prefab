@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1517974295593882764}
   - component: {fileID: -8843969164592419746}
   - component: {fileID: -5539685057982955466}
-  - component: {fileID: -3417575129445322808}
   - component: {fileID: 7401613226992540895}
+  - component: {fileID: -1783806511296074360}
   m_Layer: 0
   m_Name: RuiRLZombie
   m_TagString: Enemy_Zombie
@@ -160,22 +160,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 8}
   m_EdgeRadius: 0
---- !u!114 &-3417575129445322808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5038783893017895171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a5607e200ff6547b771199374e1b18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyCurrentPos: {x: 0, y: 0}
-  enemyNextPos: {x: 0, y: 0}
-  attackedEnemyPos: {x: 0, y: 0}
-  HeartObjList: []
 --- !u!114 &7401613226992540895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,3 +174,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 1
   isEnemyAttack: 0
+--- !u!114 &-1783806511296074360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038783893017895171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9086ad9bd0c6c7429e80851e42977f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCurrentPos: {x: 0, y: 0}
+  enemyNextPos: {x: 0, y: 0}
+  attackedEnemyPos: {x: 0, y: 0}
+  HeartObjList: []

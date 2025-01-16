@@ -28,9 +28,4 @@ public class Item : MonoBehaviour
         ruiPlayerManager.playerHP++;
         Debug.Log("‰ñ•œ‚µ‚½");
     }
-
-    public void PlayerPowerUp()
-    {
-        return;
-    }
 }

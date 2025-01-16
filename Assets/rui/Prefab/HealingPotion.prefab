@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4204262174414442553}
   - component: {fileID: 8684873038070415883}
+  - component: {fileID: 1493945540708193034}
   m_Layer: 0
   m_Name: HealingPotion
-  m_TagString: Untagged
+  m_TagString: HealingPotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1493945540708193034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612257906180551226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d007e07b0c4b57479406034e1ac99fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
