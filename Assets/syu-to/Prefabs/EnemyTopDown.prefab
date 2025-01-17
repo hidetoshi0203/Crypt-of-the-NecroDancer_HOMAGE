@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3493941914734821646}
   - component: {fileID: 3780603393285255692}
   - component: {fileID: -2760752990650508349}
-  - component: {fileID: 300988303643651223}
+  - component: {fileID: 3797450071625468157}
   m_Layer: 0
   m_Name: EnemyTopDown
   m_TagString: Enemy
@@ -322,7 +322,7 @@ MonoBehaviour:
   HeartObjList:
   - {fileID: 8069109865666423890}
   - {fileID: 6903693553756283729}
---- !u!114 &300988303643651223
+--- !u!114 &3797450071625468157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,11 +331,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8425694697182779888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54158227dd52fd64cbeb83ec715efce5, type: 3}
+  m_Script: {fileID: 11500000, guid: 27080a8b044f22f4d8d94b92cbde413b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
-  isEnemyAttack: 0
+  moveDirections: 0000000002000000
+  currentDirectionIndex: 0
 --- !u!1001 &5378337680791078230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,6 +347,10 @@ PrefabInstance:
     - target: {fileID: 1544005789200066055, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
       propertyPath: m_Name
       value: heart (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544005789200066055, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2294185597536125276, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
       propertyPath: m_SortingOrder
@@ -418,6 +422,10 @@ PrefabInstance:
     - target: {fileID: 1544005789200066055, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
       propertyPath: m_Name
       value: heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544005789200066055, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2294185597536125276, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
       propertyPath: m_SortingOrder

@@ -30,24 +30,28 @@ public class EnemyManager : MonoBehaviour
             ToshiPlayer = inst.GetComponent<toshiPlayer>();
         }
     
-        if (ToshiPlayer.isAttack)
-        {
-            attackedEnemyPos = ToshiPlayer.playerNextPos;　// プレイヤーのnextPosを代入する
-            if (attackedEnemyPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
-            { 
-                Destroy(gameObject); // 敵のオブジェクトをDestroyする
-                mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
-            }
-        }
+        //if (ToshiPlayer.isAttack)
+        //{
+        //    attackedEnemyPos = ToshiPlayer.playerNextPos;　// プレイヤーのnextPosを代入する
+        //    if (attackedEnemyPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
+        //    { 
+        //        Destroy(gameObject); // 敵のオブジェクトをDestroyする
+        //        mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+        //    }
+        //}
     }
     public void Hit()
     {
-        hp--;
-        if(hp < 0)
+        attackedEnemyPos = ToshiPlayer.playerNextPos; // プレイヤーのnextPosを代入する
+        if (attackedEnemyPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
         {
-            Destroy(gameObject); // 敵のオブジェクトをDestroyする
-            mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+            hp--;
+            if(hp <= 0)
+            {
+                Destroy(gameObject); // 敵のオブジェクトをDestroyする
+                mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+            }
+          HeartObjList[hp].SetActive(false);
         }
-        HeartObjList[hp].SetActive(false);
     }
 }

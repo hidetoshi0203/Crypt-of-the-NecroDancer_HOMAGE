@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     toshiPlayer toshiPlayer = null;
     MapGenerator mapGenerator = null;
 
-    EnemyTopDown enemyTopDown = null;
+    EnemySlimeMoveComponent enemyTopDown = null;
     EnemyRightLeft enemyRightLeft = null;
     Enemy_Zombie_RightLeft enemy_Zombie_RightLeft = null;
     Enemy_Zombie_TopDown enemy_Zombie_TopDown = null;
@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
         if (enemyTopDown == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            enemyTopDown = inst.GetComponent<EnemyTopDown>();
+            enemyTopDown = inst.GetComponent<EnemySlimeMoveComponent>();
         }
         
         if (enemyRightLeft == null)

@@ -28,7 +28,8 @@ public class toshiPlayer : MonoBehaviour
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
     ComboManager comboManager = null;
-    EnemyManager enemyManager = null;
+    //EnemyManager enemyManager = null;
+    EnemySystem enemySystem = null;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -62,31 +63,28 @@ public class toshiPlayer : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
             comboManager = inst.GetComponent <ComboManager>();
         }
-        if (enemyManager == null)
+        if (enemySystem == null)
         {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            enemyManager = inst.GetComponent<EnemyManager>();
+            GameObject inst = GameObject.FindGameObjectWithTag("EnemySystem");
+            enemySystem = inst.GetComponent<EnemySystem>();
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
-            if (notesManager.playerCanMove)
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    HandlePlayerMove(DIRECTION.TOP);
-                }
-                else if (Input.GetKeyDown(KeyCode.D))
-                {
-                    HandlePlayerMove(DIRECTION.RIGHT);
-                }
-                else if (Input.GetKeyDown(KeyCode.S))
-                {
-                    HandlePlayerMove(DIRECTION.DOWN);
-                }
-                else if (Input.GetKeyDown(KeyCode.A))
-                {
-                    HandlePlayerMove(DIRECTION.LEFT);
-                }
+                HandlePlayerMove(DIRECTION.TOP);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                HandlePlayerMove(DIRECTION.RIGHT);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                HandlePlayerMove(DIRECTION.DOWN);
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                HandlePlayerMove(DIRECTION.LEFT);
             }
         }
     }
@@ -95,7 +93,7 @@ public class toshiPlayer : MonoBehaviour
     {
         direction = directionInput;
         moveType();
-
+        notesManager.PlayerInputKey();
         notesManager.StopTouchSound();
     }
 
@@ -106,24 +104,7 @@ public class toshiPlayer : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-            Debug.Log(playerNextPos);
-            switch (mapGenerator.GetStageMapType(playerNextPos))
-            {
-                case MapGenerator.MAP_TYPE.GROUND:
-                    Move();
-                    break;
-                case MapGenerator.MAP_TYPE.WALL:
-                    // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
-                    break;
-                case MapGenerator.MAP_TYPE.STAIRS:
-                    // 次のステージに進む
-                    Stairs();
-                    break;
-                case MapGenerator.MAP_TYPE.WALL2:
-                    // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
-                    break;
-            }
-
+            Debug.Log( "PlayerPos"+playerNextPos);
             switch (mapGenerator.GetEntityMapType(playerNextPos))
             {
                 //case MapGenerator.MAP_TYPE.PLAYER:
@@ -132,14 +113,39 @@ public class toshiPlayer : MonoBehaviour
                 case MapGenerator.MAP_TYPE.ENEMY:
                     // 攻撃
                     Debug.Log("攻撃");
-                    enemyManager.Hit();
+                    enemySystem.Hit(playerNextPos);
                     break;
                 case MapGenerator.MAP_TYPE.ENEMY2:
                     // 攻撃
                     Debug.Log("攻撃");
-                    enemyManager.Hit();
+                    enemySystem.Hit(playerNextPos);
+                    break;
+                default:
+                    TryMovement();
                     break;
             }
+            void TryMovement()
+            {
+                switch (mapGenerator.GetStageMapType(playerNextPos))
+                {
+                    case MapGenerator.MAP_TYPE.GROUND:
+                        Move();
+                        break;
+                    case MapGenerator.MAP_TYPE.WALL:
+                        // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
+                        break;
+                    case MapGenerator.MAP_TYPE.STAIRS:
+                        // 次のステージに進む
+                        Stairs();
+                        break;
+                    case MapGenerator.MAP_TYPE.WALL2:
+                        // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
+                        break;
+                }
+            }
+            
+
+            
             /*
             //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
             //{
