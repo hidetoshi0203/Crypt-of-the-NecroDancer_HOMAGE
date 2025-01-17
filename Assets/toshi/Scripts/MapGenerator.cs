@@ -8,6 +8,7 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] TextAsset[] mapText;
     [SerializeField] GameObject[] prefabs;
+    [SerializeField] EnemySystem enemySystem;
     float mapSize;
     public int floor = 0;
     //Vector2 centerPos;
@@ -112,7 +113,7 @@ public class MapGenerator : MonoBehaviour
         //    centerPos.y = mapTable.GetLength(1) / 2 * mapSize;
         //}
 
-
+        List<EnemyManager> list = new List<EnemyManager>();
         for (int y = 0; y < mapTable.GetLength(1); y++)
         {
             for (int x = 0; x < mapTable.GetLength(0); x++)
@@ -121,40 +122,42 @@ public class MapGenerator : MonoBehaviour
 
                 GameObject _ground = Instantiate(prefabs[(int)MAP_TYPE.GROUND], transform);
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
-                if (mapTable[x, y] == MAP_TYPE.ENEMY)
+                if (mapTable[x, y] >= MAP_TYPE.ENEMY && mapTable[x, y] <= MAP_TYPE.ENEMY3)
                 {
+                    list.Add(_map.GetComponent<EnemyManager>());
+
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
                     mapTable[x, y] = MAP_TYPE.GROUND;
                     mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
 
-                if (mapTable[x, y] == MAP_TYPE.ENEMY_2)
-                {
-                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                    mapTable[x, y] = MAP_TYPE.GROUND;
-                    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                }
+                //if (mapTable[x, y] == MAP_TYPE.ENEMY_2)
+                //{
+                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                //    mapTable[x, y] = MAP_TYPE.GROUND;
+                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                //}
 
-                if (mapTable[x, y] == MAP_TYPE.ENEMY2)
-                {
-                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                    mapTable[x, y] = MAP_TYPE.GROUND;
-                    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                }
+                //if (mapTable[x, y] == MAP_TYPE.ENEMY2)
+                //{
+                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                //    mapTable[x, y] = MAP_TYPE.GROUND;
+                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                //}
 
-                if (mapTable[x, y] == MAP_TYPE.ENEMY2_1)
-                {
-                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                    mapTable[x, y] = MAP_TYPE.GROUND;
-                    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                }
+                //if (mapTable[x, y] == MAP_TYPE.ENEMY2_1)
+                //{
+                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                //    mapTable[x, y] = MAP_TYPE.GROUND;
+                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                //}
 
-                if (mapTable[x, y] == MAP_TYPE.ENEMY3)
-                {
-                    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                    mapTable[x, y] = MAP_TYPE.GROUND;
-                    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                }
+                //if (mapTable[x, y] == MAP_TYPE.ENEMY3)
+                //{
+                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
+                //    mapTable[x, y] = MAP_TYPE.GROUND;
+                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
+                //}
 
 
                 _ground.transform.position = ScreenPos(pos);
@@ -169,7 +172,7 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
-
+        enemySystem.SetEnemyManagers(list);
     }
 
     public Vector2 ScreenPos(Vector2Int _pos)

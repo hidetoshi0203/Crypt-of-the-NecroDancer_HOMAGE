@@ -63,59 +63,59 @@ public class NotesCont : MonoBehaviour
         //}
 
         //ハートに触れている状態でキーが押されたとき
-        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.Space))
-        {
-            KyeDown();
-            //ColorChange.Changecolor();
-        }
+        //if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    KyeDown();
+        //    //ColorChange.Changecolor();
+        //}
 
-        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.W))
-        {
-            KyeDown();
-            //ColorChange.Changecolor();
-        }
-        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.A))
-        {
-            KyeDown();
-            //ColorChange.Changecolor();
-        }
-        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.S))
-        {
-            KyeDown();
-            //ColorChange.Changecolor();
-        }
-        if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.D))
-        {
-            KyeDown();
-            //ColorChange.Changecolor();
-        }
+        //if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.W))
+        //{
+        //    KyeDown();
+        //    //ColorChange.Changecolor();
+        //}
+        //if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.A))
+        //{
+        //    KyeDown();
+        //    //ColorChange.Changecolor();
+        //}
+        //if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.S))
+        //{
+        //    KyeDown();
+        //    //ColorChange.Changecolor();
+        //}
+        //if (notesManager.CanInputKey() && notesManager.playerCanMove && Input.GetKeyDown(KeyCode.D))
+        //{
+        //    KyeDown();
+        //    //ColorChange.Changecolor();
+        //}
 
         //ノーツが移動し終わったら削除
         if (currentTime > tempo)
         {
             //notesManager.OnTimeLimit();
-            comboManager.ResetCombo();
+            //comboManager.ResetCombo();
             currentTime = 0f;
             Destroy(this.gameObject);
         }
     }
 
-    private void OnDestroy()
-    {
-        notesManager.playerCanMove = true; //ノーツが削除されるときフラグをリセット
-    }
+    //private void OnDestroy()
+    //{
+    //    notesManager.playerCanMove = true; //ノーツが削除されるときフラグをリセット
+    //}
 
-    public void KyeDown()
-    {
-        notesManager.StopTouchSound();
-        notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
-        notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
+    //public void KyeDown()
+    //{
+    //    notesManager.StopTouchSound();
+    //    notesManager.PlaySpaceSound(); //スペースキーを押したときの音を鳴らす
+    //    notesManager.playerCanMove = false; //フラグをオフにして音を鳴らせないようにする
 
-        notesManager.OnTimeLimit();
-        comboManager.IncreaseCombo();
+    //    notesManager.OnTimeLimit();
+    //    comboManager.IncreaseCombo();
 
-        Destroy(this.gameObject);
-    }
+    //    Destroy(this.gameObject);
+    //}
 
     //public void OffTouchHeart()
     //{

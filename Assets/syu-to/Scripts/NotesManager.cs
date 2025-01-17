@@ -58,8 +58,6 @@ public class NotesManager : MonoBehaviour
         
         if (Time.time > nextGenerateTime)
         {
-            //Instantiate(leftNode, leftGenerateTrans.position, Quaternion.identity, this.transform);
-            //Instantiate(rightNode, rightGenerateTrans.position, Quaternion.identity, this.transform);
             GameObject n = Instantiate(node, generateTrans.position, Quaternion.identity, this.transform);
             NotesCont notesCont = n.GetComponent<NotesCont>();
             notesCont.Set(leftGenerateTrans.position, rightGenerateTrans.position);
@@ -79,31 +77,6 @@ public class NotesManager : MonoBehaviour
                 OnTimeLimit();
             }
         }
-        if (isTouchingHeart && canInputKey)
-        {
-            // キー入力
-            //　入力されたら
-            if (Input.GetKeyDown(KeyCode.W)) 
-            {
-                canInputKey = false;
-            }
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                canInputKey = false;
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                canInputKey = false;
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                canInputKey = false;
-            }
-        }
-        
-
-        //notesController.OffTouchHeart(); //ハートから離れているとき
-
     }
 
 
@@ -114,7 +87,7 @@ public class NotesManager : MonoBehaviour
         nextGenerateTime = Time.time + (generateTime - elapsedTime); // 補正
     }
 
-
+    
     //ハートに触れたとき
     public void OnTouchHeart()
     {
@@ -129,16 +102,23 @@ public class NotesManager : MonoBehaviour
     }
 
     //ハートに触れる状態が終わったとき
-    public void OnTimeLimit()
+    private void OnTimeLimit()
     {
-        Debug.Log("move");
-        isTouchingHeart = false;
+        if (canInputKey) // 行動してなかったらコンボリセット
+        {
+            comboManager.ResetCombo();
+        }
+        else // 行動してたらコンボを増やす
+        {
+            comboManager.IncreaseCombo();
+        }
+        canInputKey = false;
         enemyCanMove = true;
         notesCountFlag = true;
         StopTouchSound();
         defaultHeart.transform.localScale = reSizeHeart;
         moveControl = (moveControl + 1) % 2;
-        Debug.Log(moveControl);
+        //Debug.Log(moveControl);
         //if (notesCountFlag)
         //{
         //    moveControl++;
@@ -148,11 +128,14 @@ public class NotesManager : MonoBehaviour
         //    }
         //}
     }
-
+    public void PlayerInputKey()
+    {
+        canInputKey = false;
+    }
     //入力可能かどうか
     public bool CanInputKey()
     {
-        return isTouchingHeart;
+        return canInputKey;
     }
 
     //ハートに触れたときの音を鳴らす

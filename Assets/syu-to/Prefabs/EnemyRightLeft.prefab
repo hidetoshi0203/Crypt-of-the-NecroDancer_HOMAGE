@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3493941914734821646}
   - component: {fileID: 3780603393285255692}
   - component: {fileID: -2760752990650508349}
-  - component: {fileID: 5705231362926354405}
+  - component: {fileID: -2384522082107797281}
   m_Layer: 0
   m_Name: EnemyRightLeft
   m_TagString: Enemy
@@ -322,7 +322,7 @@ MonoBehaviour:
   HeartObjList:
   - {fileID: 8069109865666423890}
   - {fileID: 6903693553756283729}
---- !u!114 &5705231362926354405
+--- !u!114 &-2384522082107797281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,11 +331,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8425694697182779888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db846b890cd93a04facead83c83fd750, type: 3}
+  m_Script: {fileID: 11500000, guid: 27080a8b044f22f4d8d94b92cbde413b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
-  isEnemyAttack: 0
+  moveDirections: 0100000003000000
+  currentDirectionIndex: 0
 --- !u!1001 &5378337680791078230
 PrefabInstance:
   m_ObjectHideFlags: 0
