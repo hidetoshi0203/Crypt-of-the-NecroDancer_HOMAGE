@@ -60,6 +60,10 @@ public class RuiMapGenerator : MonoBehaviour
     {
         return mapTable[_pos.x, _pos.y];
     }
+    public MAP_TYPE GetItemMapType(Vector2Int _pos)
+    {
+        return mapTable[_pos.x, _pos.y];
+    }
 
     private void Awake()
     {

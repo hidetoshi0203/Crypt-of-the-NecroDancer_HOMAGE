@@ -241,54 +241,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &326607889
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 326607891}
-  - component: {fileID: 326607892}
-  m_Layer: 0
-  m_Name: EnemyManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &326607891
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326607889}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.841312, y: -2.7102463, z: -0.022671258}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &326607892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326607889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9086ad9bd0c6c7429e80851e42977f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyCurrentPos: {x: 0, y: 0}
-  enemyNextPos: {x: 0, y: 0}
-  attackedEnemyPos: {x: 0, y: 0}
-  HeartObjList: []
 --- !u!1 &386212374
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,8 +345,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d007e07b0c4b57479406034e1ac99fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAliveHPotion: 0
+  isAliveSPotion: 0
   HPotionCurrentPos: {x: 0, y: 0}
   SPotionCurrentPos: {x: 0, y: 0}
+  takenHPotionPos: {x: 0, y: 0}
+  takenSPotionPos: {x: 0, y: 0}
 --- !u!4 &399242323
 Transform:
   m_ObjectHideFlags: 0
@@ -535,6 +491,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867554489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 867554490}
+  m_Layer: 5
+  m_Name: GenerateTrans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &867554490
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867554489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1804023804}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &909982658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,16 +1227,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempoManager: {fileID: 846218167}
-  leftNode: {fileID: 8437184838734769576, guid: 42801792e0daf4e4ebb5d29600e51381, type: 3}
-  rightNode: {fileID: 8437184838734769576, guid: 42801792e0daf4e4ebb5d29600e51381, type: 3}
+  node: {fileID: 95249433581332236, guid: c86baac88280e704b9265f37d2d0aad6, type: 3}
+  tempo: 2
+  generateTrans: {fileID: 867554490}
   leftGenerateTrans: {fileID: 1293244744}
   rightGenerateTrans: {fileID: 187280873}
   defaultHeart: {fileID: 386212374}
   reSizeHeart: {x: 0, y: 0, z: 0}
   touchSound: {fileID: 8300000, guid: 67d5e5aa1c0d5eb48b1ee457df8ea479, type: 3}
   spaceSound: {fileID: 8300000, guid: b7034b3205054d342baa414c6b570106, type: 3}
+  touchTime: 0.2
   playerCanMove: 0
   enemyCanMove: 0
+  moveControl: 0
+  notesCountFlag: 0
 --- !u!4 &1765007329
 Transform:
   m_ObjectHideFlags: 0
@@ -1361,6 +1356,7 @@ RectTransform:
   - {fileID: 1683486792}
   - {fileID: 187280873}
   - {fileID: 1293244744}
+  - {fileID: 867554490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1542,5 +1538,4 @@ SceneRoots:
   - {fileID: 1280009588}
   - {fileID: 1653118876}
   - {fileID: 1346186131}
-  - {fileID: 326607891}
   - {fileID: 399242323}

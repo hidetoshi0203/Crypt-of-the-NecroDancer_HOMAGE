@@ -6,16 +6,16 @@ public class Item : MonoBehaviour
 {
     RuiMapGenerator ruiMapGenerator = null;
     RuiPlayerManager ruiPlayerManager = null;
+
     GameObject HPotionObj;
     GameObject SPotionObj;
+    public bool isAliveHPotion = true; // 回復ポーションが存在しているか
+    public bool isAliveSPotion = true; // 攻撃力UPポーションが存在しているか
 
-    public Vector2Int HPotionCurrentPos;
-    public Vector2Int SPotionCurrentPos;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    public Vector2Int HPotionCurrentPos; // 現在の回復ポーションの位置
+    public Vector2Int SPotionCurrentPos; // 現在の攻撃力UPポーションの位置
+    public Vector2Int takenHPotionPos; // プレイヤーが回復ポーションを取った位置
+    public Vector2Int takenSPotionPos; // プレイヤーが攻撃力UPポーションを取った位置
 
     // Update is called once per frame
     void Update()
@@ -36,14 +36,13 @@ public class Item : MonoBehaviour
         SPotionObj = GameObject.FindGameObjectWithTag("StrengthPotion");
     }
 
-    public void HealingHP()
+    public void HealingHP() // プレイヤーのHPを回復する関数
     {
-        if (ruiPlayerManager.playerHP < 3)
+        if (ruiPlayerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
         {
-            ruiPlayerManager.playerHP++;
+            ruiPlayerManager.playerHP++; // プレイヤー体力(HP)を回復する
         }
         Destroy(HPotionObj);
-        ruiMapGenerator.UpdateTile(HPotionCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND);
-        Debug.Log("回復ポーション消えた");
+        isAliveHPotion = false; // プレイヤーが回復ポーションを取ったので、回復ポーションを消す
     }
 }
