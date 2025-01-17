@@ -159,9 +159,12 @@ public class RuitoshiPlayer : MonoBehaviour
                     break;
             }
 
-            if (mapGenerator.GetMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.HEALINGPOTION)
+            switch (mapGenerator.GetItemMapType(playerNextPos))
             {
-                itemHPotion.HealingHP();
+                case RuiMapGenerator.MAP_TYPE.HEALINGPOTION:
+                    Move();
+                    itemHPotion.HealingHP();
+                    break;
             }
 
             //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL2) // ì¸óÕêÊ(ÉvÉåÉCÉÑÅ[ÇÃnextPos)Ç™ï«ÇæÇ¡ÇΩèÍçá
