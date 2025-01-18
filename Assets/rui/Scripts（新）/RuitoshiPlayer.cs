@@ -38,7 +38,7 @@ public class RuitoshiPlayer : MonoBehaviour
     Item itemHPotion = null;
     Item itemSPotion = null;
 
-    bool isHealing;
+    public float playerAttackPower = 1;
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
@@ -61,7 +61,6 @@ public class RuitoshiPlayer : MonoBehaviour
     //　入力時に_move関数を呼ぶようにする。
     private void Update()
     {
-
         if (ruiPlayerManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("PlayerManager");
@@ -78,11 +77,11 @@ public class RuitoshiPlayer : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
             comboManager = inst.GetComponent <ComboManager>();
         }
-        if (itemHPotion == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("HealingPotion");
-            itemHPotion = inst.GetComponent<Item>();
-        }
+        //if (itemHPotion == null)
+        //{
+        //    GameObject inst = GameObject.FindGameObjectWithTag("HealingPotion");
+        //    itemHPotion = inst.GetComponent<Item>();
+        //}
         if (itemSPotion == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("StrengthPotion");
@@ -133,6 +132,16 @@ public class RuitoshiPlayer : MonoBehaviour
                 case RuiMapGenerator.MAP_TYPE.GROUND:
                     Move();
                     break;
+                case RuiMapGenerator.MAP_TYPE.HEALINGPOTION:
+                    Heal();
+                    mapGenerator.GetItem(playerNextPos);
+                    Move();
+                    break;
+                case RuiMapGenerator.MAP_TYPE.STRENGTHPOTION:
+                    // プレイヤーの攻撃力を上げる関数
+                    mapGenerator.GetItem(playerNextPos);
+                    Move();
+                    break;
                 case RuiMapGenerator.MAP_TYPE.WALL:
                     // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
                     break;
@@ -159,13 +168,13 @@ public class RuitoshiPlayer : MonoBehaviour
                     break;
             }
 
-            switch (mapGenerator.GetItemMapType(playerNextPos))
-            {
-                case RuiMapGenerator.MAP_TYPE.HEALINGPOTION:
-                    Move();
-                    itemHPotion.HealingHP();
-                    break;
-            }
+            //switch (mapGenerator.GetItemMapType(playerNextPos))
+            //{
+            //    case RuiMapGenerator.MAP_TYPE.HEALINGPOTION:
+            //        Move();
+            //        itemHPotion.HealingHP();
+            //        break;
+            //}
 
             //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == RuiMapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
             //{
@@ -215,10 +224,24 @@ public class RuitoshiPlayer : MonoBehaviour
         {
 
         }
+
+        void Heal() // プレイヤーが回復する関数
+        {
+            if (ruiPlayerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
+            {
+                ruiPlayerManager.playerHP++; // プレイヤー体力(HP)を回復する
+            }
+        }
+
+        void playerPowerAttackUp()
+        {
+            playerAttackPower++;
+        }
+
         void Move()
         {
-            Debug.Log(playerCurrentPos);
-            Debug.Log("床だよ");
+            //Debug.Log(playerCurrentPos);
+            //Debug.Log("床だよ");
             // 移動する
             mapGenerator.UpdateTile(playerCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND); // 自分の座標のMAP_TYPEをGROUNDにする
             transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動

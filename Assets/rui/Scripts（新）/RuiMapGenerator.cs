@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class RuiMapGenerator : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class RuiMapGenerator : MonoBehaviour
     [SerializeField] GameObject[] prefabs;
     float mapSize;
     public int floor = 0;
+
+    List<Item> items = new List<Item>();
     //Vector2 centerPos;
 
 
@@ -118,7 +121,7 @@ public class RuiMapGenerator : MonoBehaviour
         //    centerPos.y = mapTable.GetLength(1) / 2 * mapSize;
         //}
 
-
+        List<Item> items = new List<Item>();
         for (int y = 0; y < mapTable.GetLength(1); y++)
         {
             for (int x = 0; x < mapTable.GetLength(0); x++)
@@ -162,6 +165,14 @@ public class RuiMapGenerator : MonoBehaviour
                     mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
 
+                if (mapTable[x, y] == MAP_TYPE.HEALINGPOTION)
+                {
+                    items.Add(_map.GetComponent<Item>());
+
+                    _map.GetComponent<Item>().myPosition = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable[x, y] = MAP_TYPE.HEALINGPOTION;
+                }
 
                 _ground.transform.position = ScreenPos(pos);
                 _map.transform.position = ScreenPos(pos);
@@ -173,16 +184,28 @@ public class RuiMapGenerator : MonoBehaviour
                     mapTable2[x, y] = MAP_TYPE.PLAYER;
 
                 }
-
-                if (mapTable[x, y] == MAP_TYPE.HEALINGPOTION)
-                {
-                    _map.GetComponent<Item>().HPotionCurrentPos = pos;
-                    mapTable[x, y] = MAP_TYPE.GROUND;
-                    mapTable[x, y] = MAP_TYPE.HEALINGPOTION;
-                }
             }
         }
+        this.items = items;
+    }
 
+    public void GetItem(Vector2Int pos)
+    {
+       Item gotItem = null;
+        foreach(Item item in items)
+        {
+            if(item.myPosition == pos)
+            {
+                gotItem = item;
+            }
+        }
+        if (gotItem != null)
+        {
+            items.Remove(gotItem);
+            Destroy(gotItem.gameObject);
+            UpdateMapTile(pos, MAP_TYPE.GROUND);
+
+        }
     }
 
     public Vector2 ScreenPos(Vector2Int _pos)
