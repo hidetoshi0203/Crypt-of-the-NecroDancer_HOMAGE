@@ -13,17 +13,15 @@ public class toshiPlayer : MonoBehaviour
         LEFT
     }
 
-    int[,] move = {
-      { 0, -1 },Å@//TOPÇÃèÍçá
-      { 1, 0 },   //RIGHTÇÃèÍçá
-      { 0, 1 },   //DOWNÇÃèÍçá
-      { -1, 0 }   //LEFTÇÃèÍçá
+    Vector2Int[] move = {
+      new Vector2Int(  0, -1 ),Å@//TOPÇÃèÍçá
+      new Vector2Int(  1,  0 ),   //RIGHTÇÃèÍçá
+      new Vector2Int(  0,  1 ),   //DOWNÇÃèÍçá
+      new Vector2Int( -1,  0 )   //LEFTÇÃèÍçá
     };
 
-    public DIRECTION direction;
+    private DIRECTION direction;
     public Vector2Int playerCurrentPos, playerNextPos;
-    public bool isAttack;
-    public bool isPlayerMove;
     Camera cam;
     MapGenerator mapGenerator;
     NotesManager notesManager = null;
@@ -103,7 +101,8 @@ public class toshiPlayer : MonoBehaviour
         
         if (notesManager != null && notesManager.CanInputKey())
         {
-            playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+            playerNextPos = playerCurrentPos + move[(int)direction];
+            //playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             Debug.Log( "PlayerPos"+playerNextPos);
             switch (mapGenerator.GetEntityMapType(playerNextPos))
             {
