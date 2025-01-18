@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3493941914734821646}
   - component: {fileID: 3780603393285255692}
   - component: {fileID: -2760752990650508349}
-  - component: {fileID: -2384522082107797281}
+  - component: {fileID: 3797450071625468157}
   m_Layer: 0
   m_Name: EnemyRightLeft
   m_TagString: Enemy
@@ -249,7 +249,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: f837cd5ca282ee04e9406b46f3e148c2, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.4143858, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -322,7 +322,7 @@ MonoBehaviour:
   HeartObjList:
   - {fileID: 8069109865666423890}
   - {fileID: 6903693553756283729}
---- !u!114 &-2384522082107797281
+--- !u!114 &3797450071625468157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

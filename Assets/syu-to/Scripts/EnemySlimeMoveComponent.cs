@@ -31,6 +31,7 @@ public class EnemySlimeMoveComponent : MonoBehaviour
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         enemyManager = GetComponent<EnemyManager>();
+        if (moveDirections.Length == 0) return;
         direction = moveDirections[currentDirectionIndex];
     }
 
