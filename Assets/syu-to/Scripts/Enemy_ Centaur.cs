@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.UI.Image;
 
 public class Enemy_Centaur : MonoBehaviour
@@ -29,6 +30,7 @@ public class Enemy_Centaur : MonoBehaviour
     NotesManager notesManager = null;
     EnemyManager enemyManager;
     PlayerManager playerManager;
+    toshiPlayer toshiPlayer;
     GameObject leftNotes;
     GameObject rightNotes;
     GameObject function;
@@ -65,7 +67,11 @@ public class Enemy_Centaur : MonoBehaviour
             GameObject inst = GameObject.Find("PlayerManager");
             playerManager = inst.GetComponent<PlayerManager>();
         }
-
+        if (toshiPlayer == null)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("Player");
+            toshiPlayer = inst.GetComponent<toshiPlayer>();
+        }
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (moveCount != 1 && notesManager.enemyCanMove)
@@ -178,25 +184,40 @@ public class Enemy_Centaur : MonoBehaviour
         Vector2.left   // 左方向
         };
 
-        for (int i = 0; i < directions.Length; i++)
+        Vector2Int enemy = enemyManager.enemyCurrentPos;
+        Vector2Int player = toshiPlayer.playerCurrentPos;
+        float pPos = Mathf.Abs(enemy.y - player.y);
+        if (enemy.x == player.x)
         {
-            //Rayを飛ばす
-            Ray2D ray = new Ray2D(origin, directions[i]);
-            // Raycastを実行
-            RaycastHit2D hit = Physics2D.Raycast(origin, directions[i], detectionRange);
-
-            // DebugでRayを可視化（常に緑色）
-            Debug.DrawRay(origin, directions[i] * detectionRange, Color.green);
-
-            
-            // プレイヤーに当たった場合
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            if(pPos < 3 && pPos > 0)
             {
-                Debug.Log($"{direction}方向");
-                direction = (DIRECTION)i;
+                direction = DIRECTION.TOP;
             }
-
+            else
+            {
+                direction = DIRECTION.DOWN;
+            }
         }
+        //for (int i = 0; i < directions.Length; i++)
+        //{
+        //    //Rayを飛ばす
+        //    Ray2D ray = new Ray2D(origin, directions[i]);
+        //    // Raycastを実行
+        //    RaycastHit2D hit = Physics2D.Raycast(origin, directions[i], detectionRange);
+
+        //    // DebugでRayを可視化（常に緑色）
+        //    Debug.DrawRay(origin, directions[i] * detectionRange, Color.green);
+
+        //    //Debug.Log(hit.collider.name);
+            
+        //    // プレイヤーに当たった場合
+        //    if (hit.collider != null && hit.collider.CompareTag("Player"))
+        //    {
+        //        Debug.Log($"{direction}方向");
+        //        direction = (DIRECTION)i;
+        //    }
+
+        //}
 
     }
 }
