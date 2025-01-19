@@ -253,7 +253,6 @@ public class RuitoshiPlayer : MonoBehaviour
         {
             ruiPlayerManager.playerHP++; // プレイヤー体力(HP)を回復する
         }
-        Debug.Log("回復した");
     }
 
     void playerAttackPowerUp() // プレイヤーの攻撃力が上がる関数
@@ -264,7 +263,6 @@ public class RuitoshiPlayer : MonoBehaviour
         {
             playerAttackPower++; // プレイヤーの攻撃力を上げる
             isPowerUp = false; // isPowerUpをfalseにして、プレイヤーの攻撃力を過度に上げないようにしている
-            Debug.Log("攻撃力が上がった");
         }
     }
 
@@ -279,7 +277,6 @@ public class RuitoshiPlayer : MonoBehaviour
             isPowerUpTimer = false; // falseにして効果時間を数えるのを終わる
             powerUpTimer = 0.0f; // 効果時間を初期化する
             playerAttackPower--; // 攻撃力を元に戻す
-            Debug.Log("攻撃力が戻った");
         }
     }
 }
