@@ -4,6 +4,9 @@ using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
 using static UnityEditor.Progress;
+using System.Runtime.CompilerServices;
+using UnityEditor.Rendering;
+using UnityEngine.UIElements;
 public class RuitoshiPlayer : MonoBehaviour
 {
     public enum DIRECTION
@@ -39,6 +42,11 @@ public class RuitoshiPlayer : MonoBehaviour
     Item itemSPotion = null;
 
     public float playerAttackPower = 1;
+    private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ
+    private float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
+    private const float powerUpTimerEnd = 4.0f; // プレイヤー攻撃力UPの効果が切れる時間
+    private bool isPowerUpTimer = false; // プレイヤー攻撃力UPの効果時間のフラグ
+
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
@@ -109,6 +117,18 @@ public class RuitoshiPlayer : MonoBehaviour
                 }
             }
         }
+        if (isPowerUpTimer)
+        {
+            powerUpTimer += Time.deltaTime;
+        }
+        if (powerUpTimer >= powerUpTimerEnd)
+        {
+            isPowerUpTimer = false;
+            powerUpTimer = 0.0f;
+            playerAttackPower--;
+
+        }
+        Debug.Log(powerUpTimer);
     }
 
     private void HandlePlayerMove(DIRECTION directionInput)
@@ -132,13 +152,13 @@ public class RuitoshiPlayer : MonoBehaviour
                 case RuiMapGenerator.MAP_TYPE.GROUND:
                     Move();
                     break;
-                case RuiMapGenerator.MAP_TYPE.HEALINGPOTION:
+                case RuiMapGenerator.MAP_TYPE.HEALINGPOTION: // プレイヤーが回復ポーションを取ったら
                     Heal();
                     mapGenerator.GetItem(playerNextPos);
                     Move();
                     break;
                 case RuiMapGenerator.MAP_TYPE.STRENGTHPOTION:
-                    // プレイヤーの攻撃力を上げる関数
+                    playerAttackPowerUp();
                     mapGenerator.GetItem(playerNextPos);
                     Move();
                     break;
@@ -233,9 +253,15 @@ public class RuitoshiPlayer : MonoBehaviour
             }
         }
 
-        void playerPowerAttackUp()
+        void playerAttackPowerUp() // プレイヤーの攻撃力が上がる関数
         {
-            playerAttackPower++;
+            isPowerUpTimer = true;
+            isPowerUp = true;
+            if (isPowerUp)
+            {
+                playerAttackPower++;
+                isPowerUp = false;
+            }
         }
 
         void Move()
