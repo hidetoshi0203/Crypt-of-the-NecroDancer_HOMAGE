@@ -174,6 +174,15 @@ public class RuiMapGenerator : MonoBehaviour
                     mapTable[x, y] = MAP_TYPE.HEALINGPOTION;
                 }
 
+                if (mapTable[x, y] == MAP_TYPE.STRENGTHPOTION)
+                {
+                    items.Add(_map.GetComponent<Item>());
+
+                    _map.GetComponent<Item>().myPosition = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable[x, y] = MAP_TYPE.STRENGTHPOTION;
+                }
+
                 _ground.transform.position = ScreenPos(pos);
                 _map.transform.position = ScreenPos(pos);
 

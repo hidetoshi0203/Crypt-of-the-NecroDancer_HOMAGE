@@ -41,8 +41,8 @@ public class RuitoshiPlayer : MonoBehaviour
     Item itemHPotion = null;
     Item itemSPotion = null;
 
-    public float playerAttackPower = 1;
-    private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ
+    public float playerAttackPower = 1; // プレイヤーの攻撃力
+    private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
     private float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
     private const float powerUpTimerEnd = 4.0f; // プレイヤー攻撃力UPの効果が切れる時間
     private bool isPowerUpTimer = false; // プレイヤー攻撃力UPの効果時間のフラグ
@@ -117,18 +117,8 @@ public class RuitoshiPlayer : MonoBehaviour
                 }
             }
         }
-        if (isPowerUpTimer)
-        {
-            powerUpTimer += Time.deltaTime;
-        }
-        if (powerUpTimer >= powerUpTimerEnd)
-        {
-            isPowerUpTimer = false;
-            powerUpTimer = 0.0f;
-            playerAttackPower--;
 
-        }
-        Debug.Log(powerUpTimer);
+        playerAttackPowerUpTimer();
     }
 
     private void HandlePlayerMove(DIRECTION directionInput)
@@ -245,25 +235,6 @@ public class RuitoshiPlayer : MonoBehaviour
 
         }
 
-        void Heal() // プレイヤーが回復する関数
-        {
-            if (ruiPlayerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
-            {
-                ruiPlayerManager.playerHP++; // プレイヤー体力(HP)を回復する
-            }
-        }
-
-        void playerAttackPowerUp() // プレイヤーの攻撃力が上がる関数
-        {
-            isPowerUpTimer = true;
-            isPowerUp = true;
-            if (isPowerUp)
-            {
-                playerAttackPower++;
-                isPowerUp = false;
-            }
-        }
-
         void Move()
         {
             //Debug.Log(playerCurrentPos);
@@ -273,6 +244,42 @@ public class RuitoshiPlayer : MonoBehaviour
             transform.localPosition = mapGenerator.ScreenPos(playerNextPos);          // 移動
             playerCurrentPos = playerNextPos;
             mapGenerator.UpdateTile(playerCurrentPos, RuiMapGenerator.MAP_TYPE.PLAYER); // 自分の座標のMAP_TYPEをPLAYERにする
+        }
+    }
+
+    void Heal() // プレイヤーが回復する関数
+    {
+        if (ruiPlayerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
+        {
+            ruiPlayerManager.playerHP++; // プレイヤー体力(HP)を回復する
+        }
+        Debug.Log("回復した");
+    }
+
+    void playerAttackPowerUp() // プレイヤーの攻撃力が上がる関数
+    {
+        isPowerUpTimer = true; // trueにしてプレイヤーの攻撃力UPの効果時間を数え始める
+        isPowerUp = true;
+        if (isPowerUp) // 攻撃力UPポーションを取ったら、
+        {
+            playerAttackPower++; // プレイヤーの攻撃力を上げる
+            isPowerUp = false; // isPowerUpをfalseにして、プレイヤーの攻撃力を過度に上げないようにしている
+            Debug.Log("攻撃力が上がった");
+        }
+    }
+
+    void playerAttackPowerUpTimer() // プレイヤーの攻撃力UPの効果時間の関数
+    {
+        if (isPowerUpTimer)
+        {
+            powerUpTimer += Time.deltaTime; // プレイヤーの攻撃力UPの効果時間を数えて、
+        }
+        if (powerUpTimer >= powerUpTimerEnd) // 効果時間がpowerUpTimerEndまでいったら,
+        {
+            isPowerUpTimer = false; // falseにして効果時間を数えるのを終わる
+            powerUpTimer = 0.0f; // 効果時間を初期化する
+            playerAttackPower--; // 攻撃力を元に戻す
+            Debug.Log("攻撃力が戻った");
         }
     }
 }
