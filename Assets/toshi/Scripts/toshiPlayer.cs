@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 public class toshiPlayer : MonoBehaviour
 {
     public enum DIRECTION
@@ -32,6 +33,11 @@ public class toshiPlayer : MonoBehaviour
     GameObject rightNotes;
     GameObject function;
     GameObject notesObjets;
+
+    float sconds;
+    [SerializeField] SpriteRenderer firstSlashObj;
+    [SerializeField] Sprite[] slashSprites;
+    //[SerializeField] SpriteRenderer secondSlashObj;
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
@@ -102,6 +108,8 @@ public class toshiPlayer : MonoBehaviour
         if (notesManager != null && notesManager.CanInputKey())
         {
             playerNextPos = playerCurrentPos + move[(int)direction];
+            //firstSlashObj.transform.localPosition = new Vector3(move[(int)direction].x, -move[(int)direction].y);
+            firstSlashObj.transform.position = new Vector3(playerNextPos.x, -playerNextPos.y);
             //playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             Debug.Log( "PlayerPos"+playerNextPos);
             switch (mapGenerator.GetEntityMapType(playerNextPos))
@@ -113,11 +121,13 @@ public class toshiPlayer : MonoBehaviour
                     // çUåÇ
                     Debug.Log("çUåÇ");
                     enemySystem.Hit(playerNextPos);
+                    StartCoroutine("Slash");
                     break;
                 case MapGenerator.MAP_TYPE.ENEMY2:
                     // çUåÇ
                     Debug.Log("çUåÇ");
                     enemySystem.Hit(playerNextPos);
+                    StartCoroutine("Slash");
                     break;
                 default:
                     TryMovement();
@@ -227,7 +237,16 @@ public class toshiPlayer : MonoBehaviour
             mapGenerator._createMap();
         }
     }
-
-
-
+    public IEnumerator Slash()
+    {
+        Debug.Log("éaåÇ");
+        int index = 0;
+        firstSlashObj.sprite = slashSprites[index];
+        firstSlashObj.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        index++;
+        firstSlashObj.sprite = slashSprites[index];
+        yield return new WaitForSeconds(0.1f);
+        firstSlashObj.enabled = false;
+    }
 }
