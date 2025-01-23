@@ -27,12 +27,17 @@ public class EnemySlimeMoveComponent : MonoBehaviour
     int moveCount = 0;//自分が何回動いたか
     private bool isEnemyTurn = false;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip PlayerDamage;
+
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         enemyManager = GetComponent<EnemyManager>();
         if (moveDirections.Length == 0) return;
         direction = moveDirections[currentDirectionIndex];
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -78,6 +83,7 @@ public class EnemySlimeMoveComponent : MonoBehaviour
         if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
         {
             Debug.Log("攻撃エネミー側");
+            DamageSound();
             // プレイヤーに攻撃する
             playerManager.Hit();
         }
@@ -98,5 +104,10 @@ public class EnemySlimeMoveComponent : MonoBehaviour
     {
         currentDirectionIndex = (currentDirectionIndex + 1) % moveDirections.Length;
         direction = moveDirections[currentDirectionIndex];
+    }
+
+    public void DamageSound()
+    {
+        audioSource.PlayOneShot(PlayerDamage);
     }
 }

@@ -239,7 +239,6 @@ MonoBehaviour:
   HeartObjList:
   - {fileID: 8069109865666423890}
   - {fileID: 6903693553756283729}
-  PlayerAttack: {fileID: 8300000, guid: 63139a432f54e66449ca5c9031e1b24d, type: 3}
 --- !u!114 &3797450071625468157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirections: 0000000002000000
   currentDirectionIndex: 0
+  PlayerDamage: {fileID: 8300000, guid: 9308f85b5c6c7734890d79f89f80bf04, type: 3}
 --- !u!82 &-4685754920461723748
 AudioSource:
   m_ObjectHideFlags: 0

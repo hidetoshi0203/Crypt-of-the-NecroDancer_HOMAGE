@@ -29,12 +29,17 @@ public class EnemyRightLeft : MonoBehaviour
     int moveCount = 0;//自分が何回動いたか
     public bool isEnemyAttack = false;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip PlayerDamage;
+
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<EnemyManager>();
         direction = DIRECTION.RIGHT;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -81,6 +86,7 @@ public class EnemyRightLeft : MonoBehaviour
             if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
+                DamageSound();
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
                 playerManager.Hit();
@@ -96,5 +102,10 @@ public class EnemyRightLeft : MonoBehaviour
             }
         }
     }
-    
+
+    public void DamageSound()
+    {
+        audioSource.PlayOneShot(PlayerDamage);
+    }
+
 }
