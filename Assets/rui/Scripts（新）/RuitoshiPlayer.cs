@@ -45,7 +45,7 @@ public class RuitoshiPlayer : MonoBehaviour
     public float playerAttackPower = 1; // プレイヤーの攻撃力
     private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
     private float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
-    private const float powerUpTimerEnd = 10.0f; // プレイヤー攻撃力UPの効果が切れる時間
+    private const float powerUpTimerEnd = 4.0f; // プレイヤー攻撃力UPの効果が切れる時間
     private bool isPowerUpTimer = false; // プレイヤー攻撃力UPの効果時間のフラグ
 
     private void Start()
