@@ -25,7 +25,7 @@ public class ComboManager : MonoBehaviour
 
     public void IncreaseCombo()
     {
-        comboCount += (float)0.5;
+        comboCount += 1f;
         UpdateComboText(); // コンボ数を更新
         //Debug.Log("combo");
 
