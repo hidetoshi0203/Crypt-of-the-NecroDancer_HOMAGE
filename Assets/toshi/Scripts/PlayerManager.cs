@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -17,8 +21,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject playerObj;
     public GameObject[] lifeArray = new GameObject[3];
     int playerHP = 3;
+    [SerializeField] float cycle;
+    bool isBlinking = false;
+    double time;
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
+
     
     void Update()
     {
@@ -66,30 +74,33 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
         }
-        //if (toshiEnemy.isEnemyAttack)
-        //{
-        //    Debug.Log("敵からの攻撃");
-           
-        //    attackedPlayerPos = enemyManager.enemyNextPos; // 敵のnextPosを代入する
-        //    if (attackedPlayerPos == toshiPlayer.playerCurrentPos) // 敵から攻撃された座標とプレイヤーの座標を比べる
-        //    {
-        //        Debug.Log(attackedPlayerPos);
-                
-        //        lifeArray[playerHP - 1].SetActive(false);
-        //        playerHP--;
-        //        if (playerHP == 0)
-        //        {
-        //            Destroy(gameObject); // プレイヤーのオブジェクトをDestroyする
-        //            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
-        //        }
-        //        toshiEnemy.isEnemyAttack = false;
-        //    }
-        //}
-    }
+        //if (!isBlinking) return;
 
-    public void Hit()
+        //time += Time.deltaTime;
+
+        //var repeatValue = Mathf.Repeat((float)time,cycle);
+
+        //lifeArray[playerHP - 1].GetComponent<Image>().enabled =
+        //    repeatValue >= cycle * 0.5f;
+    }
+    
+    public IEnumerator Damage()
     {
-        lifeArray[playerHP - 1].SetActive(false);
+        while(time < 0.5f)
+        {
+            time += Time.deltaTime;
+            var repeatValue = Mathf.Repeat((float)time, cycle);
+
+            lifeArray[playerHP - 1].GetComponent<Image>().enabled =
+                repeatValue >= cycle * 0.5f;
+            yield return null;
+        }
+        time = 0f;
+        Hit();
+    }
+    public void Hit() 
+    {
+        lifeArray[playerHP - 1].GetComponent<Image>().enabled = false;
         playerHP--;
         if (playerHP == 0)
         {
@@ -97,4 +108,10 @@ public class PlayerManager : MonoBehaviour
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
         }
     }
+
+    //public void StartBlink()
+    //{
+    //    //点滅処理
+    //    EndBlink();
+    //}
 }
