@@ -105,6 +105,9 @@ MonoBehaviour:
   isPlayerMove: 0
   sPotionEffect: {fileID: 4581732039551948088}
   playerAttackPower: 1
+  powerUpTimer: 0
+  powerUpTimerEnd: 9
+  isPowerUpTimer: 0
 --- !u!1 &7316073488911169968
 GameObject:
   m_ObjectHideFlags: 0

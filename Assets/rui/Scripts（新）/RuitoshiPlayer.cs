@@ -42,10 +42,12 @@ public class RuitoshiPlayer : MonoBehaviour
     Item itemSPotion = null;
 
     public ParticleSystem sPotionEffect;
+
     public float playerAttackPower = 1; // プレイヤーの攻撃力
     private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
-    private float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
-    private const float powerUpTimerEnd = 4.0f; // プレイヤー攻撃力UPの効果が切れる時間
+
+    public float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
+    public float powerUpTimerEnd = 9.0f; // プレイヤー攻撃力UPの効果が切れる時間
     public bool isPowerUpTimer = false; // プレイヤー攻撃力UPの効果時間のフラグ
 
     private void Start()
@@ -274,10 +276,11 @@ public class RuitoshiPlayer : MonoBehaviour
     {
         if (isPowerUpTimer) 
         {
-            Debug.Log(isPowerUpTimer);
+            Debug.Log("効果時間数えてるで");
+            Debug.Log(powerUpTimer);
             powerUpTimer += Time.deltaTime; // プレイヤーの攻撃力UPの効果時間を数える
         }
-        if (powerUpTimer >= powerUpTimerEnd) // 効果時間がpowerUpTimerEndまでいったら、
+        if (powerUpTimer >= powerUpTimerEnd) // 効果時間がPOWERUPTIMERENDまでいったら、
         {
             isPowerUpTimer = false; // falseにして効果時間を数えるのを終わる
             powerUpTimer = 0.0f; // 効果時間を初期化する
