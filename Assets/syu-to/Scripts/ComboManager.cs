@@ -14,6 +14,10 @@ public class ComboManager : MonoBehaviour
 
     [SerializeField] float ChangedCombos = 10;
     [SerializeField] int ChangeBPM = 30;
+    [SerializeField] int ChangeBPMCount = 3; //BPMの変更回数
+
+    private int bpmChangeCount = 0; // BPMを変更した回数
+
 
     private void Start()
     {
@@ -27,13 +31,13 @@ public class ComboManager : MonoBehaviour
     {
         comboCount += 1f;
         UpdateComboText(); // コンボ数を更新
-        //Debug.Log("combo");
 
         // コンボがChangedCombosの倍数になったらBPMを増加
-        if (comboCount % ChangedCombos == 0)
+        if (comboCount % ChangedCombos == 0 && bpmChangeCount < ChangeBPMCount)
         {
             tempoManager.BPM += ChangeBPM; // BPMを更新
-            //Debug.Log("BPM Updated ");
+            bpmChangeCount++; // BPM変更回数を増加
+
         }
     }
     
@@ -43,7 +47,7 @@ public class ComboManager : MonoBehaviour
         UpdateComboText(); // コンボ数をリセットして更新
 
         tempoManager.ResetBPM(); // BPMを初期値に戻す
-        //Debug.Log("BPMReset");
+        bpmChangeCount = 0; // BPM変更回数をリセット
 
         comboreset = true;
     }
