@@ -38,6 +38,8 @@ public class toshiPlayer : MonoBehaviour
     [SerializeField] SpriteRenderer firstSlashObj;
     [SerializeField] Sprite[] slashSprites;
     //[SerializeField] SpriteRenderer secondSlashObj;
+
+    PlayerAttackSound playerAttackSound;
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
@@ -45,6 +47,8 @@ public class toshiPlayer : MonoBehaviour
         notesObjets = GameObject.FindGameObjectWithTag("Notes");
         cam = Camera.main;
         cam.transform.position = transform.position + new Vector3(0,0,-1);
+
+        playerAttackSound.audioSource = gameObject.AddComponent<AudioSource>();
     }
 
 
@@ -72,6 +76,13 @@ public class toshiPlayer : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("EnemySystem");
             enemySystem = inst.GetComponent<EnemySystem>();
         }
+
+        if (playerAttackSound == null)
+        {
+            GameObject inst = GameObject.Find("PlayerAttackSound");
+            playerAttackSound = inst.GetComponent<PlayerAttackSound>();
+        }
+
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (Input.GetKeyDown(KeyCode.W))
@@ -122,12 +133,14 @@ public class toshiPlayer : MonoBehaviour
                     Debug.Log("çUåÇ");
                     enemySystem.Hit(playerNextPos);
                     StartCoroutine("Slash");
+                    playerAttackSound.AttackSound();
                     break;
                 case MapGenerator.MAP_TYPE.ENEMY2:
                     // çUåÇ
                     Debug.Log("çUåÇ");
                     enemySystem.Hit(playerNextPos);
                     StartCoroutine("Slash");
+                    playerAttackSound.AttackSound();
                     break;
                 default:
                     TryMovement();

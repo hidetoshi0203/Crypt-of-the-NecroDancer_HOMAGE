@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDelay: 1.5
-  bpm: 60
+  bpm: 118
 --- !u!4 &383488649
 Transform:
   m_ObjectHideFlags: 0
@@ -1143,6 +1143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 867943099}
+  - component: {fileID: 867943100}
   - component: {fileID: 867943098}
   m_Layer: 0
   m_Name: BGM
@@ -1150,7 +1151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &867943098
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1161,7 +1162,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 24b2b22c0ac7fc74dbe4de4242e03dae, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3ab1fc3c1c113804d83d4b7a5c342faa, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1262,6 +1263,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &867943100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867943097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd6678249b201c43a751b1454dca6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialBPM: 128
 --- !u!1 &874553546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1329,7 @@ MonoBehaviour:
   comboText: {fileID: 874553549}
   comboreset: 0
   ChangedCombos: 10
-  ChangeBPM: 30
+  ChangeBPM: 10
 --- !u!114 &874553549
 MonoBehaviour:
   m_ObjectHideFlags: 0

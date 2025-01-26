@@ -29,12 +29,16 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
     int moveCount = 0;//自分が何回動いたか
     public bool isEnemyAttack = false;
 
+    PlayerDamageSound playerDamageSound;
+
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<EnemyManager>();
         direction = DIRECTION.LEFT;
+
+        playerDamageSound.audioSource = gameObject.AddComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -50,6 +54,13 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
             GameObject inst = GameObject.Find("PlayerManager");
             playerManager = inst.GetComponent<PlayerManager>();
         }
+
+        if (playerDamageSound == null)
+        {
+            GameObject inst = GameObject.Find("PlayerDamageSound");
+            playerDamageSound = inst.GetComponent<PlayerDamageSound>();
+        }
+
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (moveCount != 1 && notesManager.enemyCanMove)
@@ -99,6 +110,7 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                 Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
+                playerDamageSound.DamageSound();
                 //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
                 //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;

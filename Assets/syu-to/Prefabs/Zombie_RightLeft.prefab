@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: -8843969164592419746}
   - component: {fileID: -5539685057982955466}
   - component: {fileID: -3417575129445322808}
-  - component: {fileID: 6853304192857892629}
+  - component: {fileID: 8040627879966306604}
   - component: {fileID: -9149568615128404670}
   m_Layer: 0
   m_Name: Zombie_RightLeft
@@ -267,8 +267,7 @@ MonoBehaviour:
   HeartObjList:
   - {fileID: 7645379804959812787}
   - {fileID: 4190847727556448704}
-  PlayerAttack: {fileID: 8300000, guid: 63139a432f54e66449ca5c9031e1b24d, type: 3}
---- !u!114 &6853304192857892629
+--- !u!114 &8040627879966306604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,7 +276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5038783893017895171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8667a75c9ccef1499e4fa79ebe15801, type: 3}
+  m_Script: {fileID: 11500000, guid: 06d55880c76c8a3459825c6cb6594695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
