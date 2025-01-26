@@ -36,7 +36,6 @@ public class EnemySlimeMoveComponent : MonoBehaviour
         if (moveDirections.Length == 0) return;
         direction = moveDirections[currentDirectionIndex];
 
-        playerDamageSound.audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()

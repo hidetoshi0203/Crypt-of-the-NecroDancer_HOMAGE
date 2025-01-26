@@ -48,7 +48,7 @@ public class toshiPlayer : MonoBehaviour
         cam = Camera.main;
         cam.transform.position = transform.position + new Vector3(0,0,-1);
 
-        playerAttackSound.audioSource = gameObject.AddComponent<AudioSource>();
+        //playerAttackSound.audioSource = gameObject.AddComponent<AudioSource>();
     }
 
 

@@ -38,7 +38,6 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
         enemyManager = GetComponent<EnemyManager>();
         direction = DIRECTION.LEFT;
 
-        playerDamageSound.audioSource = gameObject.AddComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()

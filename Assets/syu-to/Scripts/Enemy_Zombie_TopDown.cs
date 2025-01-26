@@ -37,8 +37,6 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
         notesManager = GetComponent<NotesManager>();
         enemyManager = GetComponent<EnemyManager>();
         direction = DIRECTION.TOP;
-
-        playerDamageSound.audioSource = gameObject.AddComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
