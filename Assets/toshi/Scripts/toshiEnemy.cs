@@ -110,7 +110,9 @@ public class toshiEnemy : MonoBehaviour
                 //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY);
-                playerManager.Hit();
+                //playerManager.BeginBlink();
+                //Invoke("EndBlink", 1);
+                StartCoroutine(playerManager.Damage());
             }
             else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL)
             {
