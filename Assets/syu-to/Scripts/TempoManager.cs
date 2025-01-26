@@ -37,9 +37,20 @@ public class TempoManager : MonoBehaviour
         BPM = initialBPM; // 初期BPMに戻す
     }
 
+    /*
     private void NotifyBPMChanged()
     {
         // NotesManagerにBPM変更の通知を送る
         FindObjectOfType<NotesManager>().UpdateGenerateTime(Tempo); // Tempoに基づいてノーツ生成間隔を更新
+    }
+    */
+
+    private void NotifyBPMChanged()
+    {
+        // NotesManagerにBPM変更の通知を送る
+        FindObjectOfType<NotesManager>().UpdateGenerateTime(Tempo);
+
+        // BGMにBPM変更の通知を送る
+        FindObjectOfType<BGM>()?.UpdatePlaybackSpeed(BPM);
     }
 }
