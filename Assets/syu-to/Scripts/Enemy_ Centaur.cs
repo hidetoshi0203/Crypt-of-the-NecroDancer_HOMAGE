@@ -51,12 +51,6 @@ public class Enemy_Centaur : MonoBehaviour
 
     void Update()
     {
-        if (check)
-        {
-            CheckPlayer();
-        }
-        
-
         if (notesManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("NotesManager");
@@ -71,6 +65,10 @@ public class Enemy_Centaur : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<toshiPlayer>();
+        }
+        if (check)
+        {
+            CheckPlayer();
         }
         if (notesManager != null && notesManager.CanInputKey())
         {
@@ -144,6 +142,7 @@ public class Enemy_Centaur : MonoBehaviour
             }
             else { notesManager.enemyCanMove = false; moveCount = 0; }
         }
+        
     }
 
     void eMoveType()
@@ -186,16 +185,37 @@ public class Enemy_Centaur : MonoBehaviour
 
         Vector2Int enemy = enemyManager.enemyCurrentPos;
         Vector2Int player = toshiPlayer.playerCurrentPos;
-        float pPos = Mathf.Abs(enemy.y - player.y);
+        Debug.Log(enemy + " : " + player);
         if (enemy.x == player.x)
         {
-            if(pPos < 3 && pPos > 0)
+            float pPos = enemy.y - player.y;
+            if (Mathf.Abs(pPos) < 3)
             {
-                direction = DIRECTION.TOP;
+                if (pPos > 0)
+                {
+                    direction = DIRECTION.TOP;
+                }
+                else
+                {
+                    direction = DIRECTION.DOWN;
+                }
+
             }
-            else
+        }
+        else if (enemy.y == player.y)
+        {
+            float pPos = enemy.x - player.x;
+            if (Mathf.Abs(pPos) < 3)
             {
-                direction = DIRECTION.DOWN;
+                if (pPos > 0)
+                {
+                    direction = DIRECTION.LEFT;
+                }
+                else
+                {
+                    direction = DIRECTION.RIGHT;
+                }
+
             }
         }
         //for (int i = 0; i < directions.Length; i++)
@@ -209,7 +229,7 @@ public class Enemy_Centaur : MonoBehaviour
         //    Debug.DrawRay(origin, directions[i] * detectionRange, Color.green);
 
         //    //Debug.Log(hit.collider.name);
-            
+
         //    // ƒvƒŒƒCƒ„[‚É“–‚½‚Á‚½ê‡
         //    if (hit.collider != null && hit.collider.CompareTag("Player"))
         //    {

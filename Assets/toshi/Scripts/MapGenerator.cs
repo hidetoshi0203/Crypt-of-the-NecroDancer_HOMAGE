@@ -33,6 +33,7 @@ public class MapGenerator : MonoBehaviour
         STAIRS,     // 4 ŠK’i
         ENEMY,      // 5 “G(ƒXƒ‰ƒCƒ€ã‰º)
         ENEMY_2,    // 6 “G(ƒXƒ‰ƒCƒ€¶‰E)
+        ENEMY_STAY,
         ENEMY2,     // 7 “G2(ƒ]ƒ“ƒr¶‰E)
         ENEMY2_1,   // 8 “G2(ƒ]ƒ“ƒrã‰º)
         ENEMY3      // 9 “G3(ƒPƒ“ƒ^ƒEƒƒX)
@@ -125,7 +126,7 @@ public class MapGenerator : MonoBehaviour
                 if (mapTable[x, y] >= MAP_TYPE.ENEMY && mapTable[x, y] <= MAP_TYPE.ENEMY3)
                 {
                     list.Add(_map.GetComponent<EnemyManager>());
-
+                    if (mapTable[x, y] == MAP_TYPE.ENEMY3) Debug.Log(_map.name);
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
                     mapTable[x, y] = MAP_TYPE.GROUND;
                     mapTable2[x, y] = MAP_TYPE.ENEMY;
