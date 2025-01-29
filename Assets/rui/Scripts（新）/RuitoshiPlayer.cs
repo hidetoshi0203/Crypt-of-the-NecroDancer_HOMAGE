@@ -47,7 +47,7 @@ public class RuitoshiPlayer : MonoBehaviour
     private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
 
     public float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
-    public float powerUpTimerEnd = 9.0f; // プレイヤー攻撃力UPの効果が切れる時間
+    public float powerUpTimerEnd = 20.0f; // プレイヤー攻撃力UPの効果が切れる時間
     public bool isPowerUpTimer = false; // プレイヤー攻撃力UPの効果時間のフラグ
 
     private void Start()
@@ -276,8 +276,6 @@ public class RuitoshiPlayer : MonoBehaviour
     {
         if (isPowerUpTimer) 
         {
-            Debug.Log("効果時間数えてるで");
-            Debug.Log(powerUpTimer);
             powerUpTimer += Time.deltaTime; // プレイヤーの攻撃力UPの効果時間を数える
         }
         if (powerUpTimer >= powerUpTimerEnd) // 効果時間がPOWERUPTIMERENDまでいったら、

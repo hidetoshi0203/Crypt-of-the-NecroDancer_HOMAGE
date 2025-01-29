@@ -26,14 +26,13 @@ public class BlinkUI : MonoBehaviour
 
         if (ruiToshiPlayer.powerUpTimer >= (ruiToshiPlayer.powerUpTimerEnd - 5.0f))
         {
-            Debug.Log("5秒前やで");
             image.color = GetImageColorAlpha(image.color); // 関数を読んでreturnで帰ってきたalpha値を読み込んでいる
         }
     }
 
     Color GetImageColorAlpha(Color color) // UIを点滅させる関数
     {
-        blinkTime += Time.deltaTime * blinkSpeed; // 点滅の時間を決めている
+        blinkTime += Time.deltaTime * blinkSpeed * 5.0f; // 点滅の時間を決めている
         color.a = Mathf.Sin(blinkTime); // colorのalpha値を変更して点滅させている
 
         return color; // colorのalpha値の変更を返している
