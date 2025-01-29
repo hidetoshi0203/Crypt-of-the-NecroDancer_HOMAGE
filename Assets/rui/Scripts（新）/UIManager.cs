@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    RuitoshiPlayer ruiToshiPlayer = null;
-
     [SerializeField] private GameObject SPotionBoxUI;
     [SerializeField] private GameObject SPotionUI;
 
+    RuitoshiPlayer ruiToshiPlayer = null;
+
     void Start()
     {
+
         SPotionBoxUI.SetActive(false);
         SPotionUI.SetActive(false);
     }
