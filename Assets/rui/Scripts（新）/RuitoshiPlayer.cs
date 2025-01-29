@@ -95,12 +95,7 @@ public class RuitoshiPlayer : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
             comboManager = inst.GetComponent <ComboManager>();
         }
-        //if (itemHPotion == null)
-        //{
-        //    GameObject inst = GameObject.FindGameObjectWithTag("HealingPotion");
-        //    itemHPotion = inst.GetComponent<Item>();
-        //}
-        if (itemSPotion == null)
+        if (itemSPotion == null && itemSPotion.aliveItemScript)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("StrengthPotion");
             itemSPotion = inst.GetComponent<Item>();
