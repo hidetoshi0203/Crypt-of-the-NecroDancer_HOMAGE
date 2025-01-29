@@ -11,6 +11,7 @@ public class BlinkUI : MonoBehaviour
 
     RuitoshiPlayer ruiToshiPlayer = null;
 
+
     void Start()
     {
         image = this.gameObject.GetComponent<Image>(); // Image‚Ìæ“¾
@@ -27,6 +28,7 @@ public class BlinkUI : MonoBehaviour
         if (ruiToshiPlayer.powerUpTimer >= (ruiToshiPlayer.powerUpTimerEnd - 5.0f))
         {
             image.color = GetImageColorAlpha(image.color); // ŠÖ”‚ğ“Ç‚ñ‚Åreturn‚Å‹A‚Á‚Ä‚«‚½alpha’l‚ğ“Ç‚İ‚ñ‚Å‚¢‚é
+
         }
     }
 

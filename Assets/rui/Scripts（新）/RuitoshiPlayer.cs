@@ -50,6 +50,9 @@ public class RuitoshiPlayer : MonoBehaviour
     public float powerUpTimerEnd = 20.0f; // プレイヤー攻撃力UPの効果が切れる時間
     public bool isPowerUpTimer = false; // プレイヤー攻撃力UPの効果時間のフラグ
 
+    AudioSource audioSource;
+    public AudioClip getSPotionSound;
+
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
@@ -63,6 +66,8 @@ public class RuitoshiPlayer : MonoBehaviour
         ruiPlayerManager = GetComponent<RuiPlayerManager>();
 
         sPotionEffect.Stop();
+        audioSource = GetComponent<AudioSource>();
+
     }
 
 
@@ -264,7 +269,9 @@ public class RuitoshiPlayer : MonoBehaviour
     {
         isPowerUpTimer = true; // trueにしてプレイヤーの攻撃力UPの効果時間を数え始める
         isPowerUp = true;
+        audioSource.PlayOneShot(getSPotionSound);
         sPotionEffect.Play(); // 攻撃力UPポーションのエフェクトを始める
+
         if (isPowerUp) // 攻撃力UPポーションを取ったら、
         {
             playerAttackPower++; // プレイヤーの攻撃力を上げる
@@ -278,6 +285,7 @@ public class RuitoshiPlayer : MonoBehaviour
         {
             powerUpTimer += Time.deltaTime; // プレイヤーの攻撃力UPの効果時間を数える
         }
+
         if (powerUpTimer >= powerUpTimerEnd) // 効果時間がPOWERUPTIMERENDまでいったら、
         {
             isPowerUpTimer = false; // falseにして効果時間を数えるのを終わる
