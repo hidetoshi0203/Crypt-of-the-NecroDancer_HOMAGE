@@ -1697,6 +1697,7 @@ MonoBehaviour:
   comboreset: 0
   ChangedCombos: 10
   ChangeBPM: 30
+  ChangeBPMCount: 3
 --- !u!114 &1950762909
 MonoBehaviour:
   m_ObjectHideFlags: 0
