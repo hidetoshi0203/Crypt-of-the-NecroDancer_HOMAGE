@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Vector2Int myPosition;
+    public bool aliveItemScript;
     //RuiMapGenerator ruiMapGenerator = null;
     //RuitoshiPlayer ruiToshiPlayer = null;
     //RuiPlayerManager ruiPlayerManager = null;

@@ -40,6 +40,7 @@ public class RuiMapGenerator : MonoBehaviour
         ENEMY3,         // 9 敵3(ケンタウロス)
         HEALINGPOTION,  // 10 回復ポーション
         STRENGTHPOTION, // 11 攻撃力UPポーション
+        ENEMY4,         // 12 敵4(ドラゴン)
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
