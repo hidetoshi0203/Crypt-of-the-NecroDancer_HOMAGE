@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class RuiPlayerManager : MonoBehaviour
 {
-    RuitoshiEnemy toshiEnemy = null;  
     RuiEnemyManager enemyManager = null;
     RuitoshiPlayer toshiPlayer = null;
     RuiMapGenerator mapGenerator = null;
-    RuiEnemy_Zombie enemy_Zombie = null;
+    CheckAliveScripts checkAliveScripts;
+    [SerializeField] private GameObject checkAliveObjs;
 
     [SerializeField] GameObject playerObj;
     public GameObject[] lifeArray = new GameObject[3];
     public int playerHP = 3;
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
-    
+
+    void Start()
+    {
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
+    }
     void Update()
     {
         if (mapGenerator == null)
@@ -27,16 +32,6 @@ public class RuiPlayerManager : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<RuitoshiPlayer>();
-        }
-        if (toshiEnemy == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            toshiEnemy = inst.GetComponent<RuitoshiEnemy>();
-        }
-        if (enemy_Zombie == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
-            enemy_Zombie = inst.GetComponent<RuiEnemy_Zombie>();
         }
         if (enemyManager == null)
         {
@@ -73,6 +68,7 @@ public class RuiPlayerManager : MonoBehaviour
         {
             Destroy(playerObj); // プレイヤーのオブジェクトをDestroyする
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
+            checkAliveScripts.isAliveToshiPlayerScr = false;
         }
     }
 }

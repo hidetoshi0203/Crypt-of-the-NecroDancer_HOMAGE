@@ -8,9 +8,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject SPotionUI;
 
     RuitoshiPlayer ruiToshiPlayer = null;
+    CheckAliveScripts checkAliveScripts;
+    [SerializeField] private GameObject checkAliveObjs;
 
     void Start()
     {
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
 
         SPotionBoxUI.SetActive(false);
         SPotionUI.SetActive(false);
@@ -18,7 +22,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (ruiToshiPlayer == null)
+        if (ruiToshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             ruiToshiPlayer = inst.GetComponent<RuitoshiPlayer>();
