@@ -252,7 +252,6 @@ public class toshiPlayer : MonoBehaviour
     }
     public IEnumerator Slash()
     {
-        Debug.Log("ŽaŒ‚");
         int index = 0;
         firstSlashObj.sprite = slashSprites[index];
         firstSlashObj.enabled = true;

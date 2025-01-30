@@ -89,7 +89,7 @@ public class EnemySlimeMoveComponent : MonoBehaviour
             Debug.Log("攻撃エネミー側");
             playerDamageSound.DamageSound();
             // プレイヤーに攻撃する
-            playerManager.Hit();
+            StartCoroutine(playerManager.Damage());
         }
         else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL ||
                         mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL2)
