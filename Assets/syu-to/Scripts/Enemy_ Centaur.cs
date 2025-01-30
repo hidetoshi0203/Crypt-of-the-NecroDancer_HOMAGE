@@ -156,7 +156,7 @@ public class Enemy_Centaur : MonoBehaviour
                 // ƒvƒŒƒCƒ„[‚ÉUŒ‚‚·‚é
                 isEnemyAttack = true;
 
-                playerManager.Hit();
+                StartCoroutine(playerManager.Damage());
             }
             else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL ||
                             mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL2)

@@ -114,7 +114,7 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                 //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
-                playerManager.Hit();
+                StartCoroutine(playerManager.Damage());
             }
             else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL ||
                             mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL2)
