@@ -272,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SPotionBoxUI: {fileID: 443989194}
   SPotionUI: {fileID: 1913533429}
+  checkAliveObjs: {fileID: 1426183002}
 --- !u!4 &196486152
 Transform:
   m_ObjectHideFlags: 0
@@ -392,7 +393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPosition: {x: 0, y: 0}
-  aliveItemScript: 0
 --- !u!4 &399242323
 Transform:
   m_ObjectHideFlags: 0
@@ -966,6 +966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d878fdaef26a484ca12dcd9b6ec8121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkAliveObjs: {fileID: 1426183002}
   playerObj: {fileID: 5870177880929257009, guid: 2bc672930450c064e86cd42e23ad6cce, type: 3}
   lifeArray:
   - {fileID: 1544005789200066055, guid: ce7fe08a11ffade45b49a5165779ad70, type: 3}
@@ -1048,6 +1049,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367704355}
   m_CullTransparentMesh: 1
+--- !u!1 &1426183002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426183004}
+  - component: {fileID: 1426183003}
+  m_Layer: 0
+  m_Name: CheckAliveObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1426183003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426183002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ec108faddb8a148b3f782bb670f3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAliveToshiPlayerScr: 1
+  isAliveEnemyManagerScr: 1
+  isAliveRLSlimeScr: 1
+  isAliveTDSlimeScr: 1
+  isAliveruiRLZombieScr: 1
+  isAliveruiTDZombieScr: 1
+  isAliveCentaurScr: 1
+  isAliveItemScr: 1
+--- !u!4 &1426183004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426183002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653118872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,3 +1812,4 @@ SceneRoots:
   - {fileID: 1346186131}
   - {fileID: 399242323}
   - {fileID: 196486152}
+  - {fileID: 1426183004}

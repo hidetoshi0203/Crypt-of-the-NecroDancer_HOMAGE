@@ -36,6 +36,8 @@ public class RuitoshiPlayer : MonoBehaviour
     GameObject rightNotes;
     GameObject function;
     GameObject notesObjets;
+    CheckAliveScripts checkAliveScripts;
+    private GameObject checkAliveObjs;
 
     RuiPlayerManager ruiPlayerManager = null;
     Item itemHPotion = null;
@@ -68,6 +70,8 @@ public class RuitoshiPlayer : MonoBehaviour
         sPotionEffect.Stop();
         audioSource = GetComponent<AudioSource>();
 
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
 
 
@@ -95,7 +99,7 @@ public class RuitoshiPlayer : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
             comboManager = inst.GetComponent <ComboManager>();
         }
-        if (itemSPotion == null && itemSPotion.aliveItemScript)
+        if (itemSPotion == null && checkAliveScripts.isAliveItemScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("StrengthPotion");
             itemSPotion = inst.GetComponent<Item>();

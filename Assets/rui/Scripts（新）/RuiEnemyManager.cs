@@ -14,13 +14,17 @@ public class RuiEnemyManager : MonoBehaviour
     //[SerializeField] GameObject Spawner;
     //[SerializeField] GameObject Spawner1;
 
+    CheckAliveScripts checkAliveScripts;
+    private GameObject checkAliveObjs;
+
     void Start()
     {
         mapGenerator = transform.parent.GetComponent<RuiMapGenerator>();
         hp = HeartObjList.Count;
         //Instantiate(HeartObj, Spawner.transform.position, Quaternion.identity);
         //Instantiate(HeartObj, Spawner1.transform.position, Quaternion.identity);
-        
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
     private void Update()
     {
@@ -47,6 +51,7 @@ public class RuiEnemyManager : MonoBehaviour
         {
             Destroy(gameObject); // 敵のオブジェクトをDestroyする
             mapGenerator.UpdateTile(enemyCurrentPos, RuiMapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
+            checkAliveScripts.isAliveEnemyManagerScr = false;
         }
         HeartObjList[hp].SetActive(false);
     }

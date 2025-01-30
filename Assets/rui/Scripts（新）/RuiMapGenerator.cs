@@ -15,6 +15,8 @@ public class RuiMapGenerator : MonoBehaviour
     List<Item> items = new List<Item>();
     //Vector2 centerPos;
 
+    CheckAliveScripts checkAliveScripts;
+    private GameObject checkAliveObjs;
 
     public enum MAP_TYPE
     {   /*
@@ -74,6 +76,12 @@ public class RuiMapGenerator : MonoBehaviour
         _loadMapData();
 
         _createMap();
+    }
+
+    private void Start()
+    {
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
 
     public void _loadMapData()
@@ -214,7 +222,7 @@ public class RuiMapGenerator : MonoBehaviour
             items.Remove(gotItem);
             Destroy(gotItem.gameObject);
             UpdateMapTile(pos, MAP_TYPE.GROUND);
-
+            checkAliveScripts.isAliveItemScr = false;
         }
     }
 
