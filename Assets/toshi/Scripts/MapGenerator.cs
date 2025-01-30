@@ -11,8 +11,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] EnemySystem enemySystem;
     float mapSize;
     public int floor = 0;
+    List<Item> items = new List<Item>();
     //Vector2 centerPos;
-    
+
+    CheckAliveScripts checkAliveScripts;
+    private GameObject checkAliveObjs;
+
 
     public enum MAP_TYPE
     {   /*
@@ -36,7 +40,10 @@ public class MapGenerator : MonoBehaviour
         ENEMY_STAY,
         ENEMY2,     // 7 敵2(ゾンビ左右)
         ENEMY2_1,   // 8 敵2(ゾンビ上下)
-        ENEMY3      // 9 敵3(ケンタウロス)
+        ENEMY3,      // 9 敵3(ケンタウロス)
+        HEALINGPOTION, // 10 回復ポーション
+        STRENGTHPOTION, // 11 攻撃力UPポーション
+        ENEMY4          // 12 敵4 (ドラゴン)
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -68,6 +75,12 @@ public class MapGenerator : MonoBehaviour
         _createMap();
     }
 
+    private void Start()
+    {
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
+    }
+
     public void _loadMapData()
     {
         string[] mapLines = mapText[floor].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -93,27 +106,7 @@ public class MapGenerator : MonoBehaviour
     public void _createMap()
     {
         mapSize = prefabs[1].GetComponent<SpriteRenderer>().bounds.size.x;
-
-
-
-        //if (mapTable.GetLength(0) % 2 == 0)
-        //{
-        //    centerPos.x = mapTable.GetLength(0) / 2 * mapSize - (mapSize / 2);
-        //}
-        //else
-        //{
-        //    centerPos.x = mapTable.GetLength(0) / 2 * mapSize;
-        //}
-
-        //if (mapTable.GetLength(1) % 2 == 0)
-        //{
-        //    centerPos.y = mapTable.GetLength(1) / 2 * mapSize - (mapSize / 2);
-        //}
-        //else
-        //{
-        //    centerPos.y = mapTable.GetLength(1) / 2 * mapSize;
-        //}
-
+        List<Item> items = new List<Item>();
         List<EnemyManager> list = new List<EnemyManager>();
         for (int y = 0; y < mapTable.GetLength(1); y++)
         {
@@ -131,34 +124,23 @@ public class MapGenerator : MonoBehaviour
                     mapTable[x, y] = MAP_TYPE.GROUND;
                     mapTable2[x, y] = MAP_TYPE.ENEMY;
                 }
+                if (mapTable[x, y] == MAP_TYPE.HEALINGPOTION)
+                {
+                    items.Add(_map.GetComponent<Item>());
 
-                //if (mapTable[x, y] == MAP_TYPE.ENEMY_2)
-                //{
-                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                //    mapTable[x, y] = MAP_TYPE.GROUND;
-                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                //}
+                    _map.GetComponent<Item>().myPosition = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable[x, y] = MAP_TYPE.HEALINGPOTION;
+                }
 
-                //if (mapTable[x, y] == MAP_TYPE.ENEMY2)
-                //{
-                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                //    mapTable[x, y] = MAP_TYPE.GROUND;
-                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                //}
+                if (mapTable[x, y] == MAP_TYPE.STRENGTHPOTION)
+                {
+                    items.Add(_map.GetComponent<Item>());
 
-                //if (mapTable[x, y] == MAP_TYPE.ENEMY2_1)
-                //{
-                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                //    mapTable[x, y] = MAP_TYPE.GROUND;
-                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                //}
-
-                //if (mapTable[x, y] == MAP_TYPE.ENEMY3)
-                //{
-                //    _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
-                //    mapTable[x, y] = MAP_TYPE.GROUND;
-                //    mapTable2[x, y] = MAP_TYPE.ENEMY;
-                //}
+                    _map.GetComponent<Item>().myPosition = pos;
+                    mapTable[x, y] = MAP_TYPE.GROUND;
+                    mapTable[x, y] = MAP_TYPE.STRENGTHPOTION;
+                }
 
 
                 _ground.transform.position = ScreenPos(pos);
