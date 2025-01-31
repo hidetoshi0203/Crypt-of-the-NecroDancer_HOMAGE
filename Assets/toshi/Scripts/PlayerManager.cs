@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
 
+
+
     private void Start()
     {
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
@@ -41,7 +43,7 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("MapChip");
             mapGenerator = inst.GetComponent<MapGenerator>();
         }
-        if (toshiPlayer == null)
+        if (toshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<toshiPlayer>();
@@ -52,7 +54,7 @@ public class PlayerManager : MonoBehaviour
         //}
         
 
-        if (enemyTopDown == null)
+        /*if (enemyTopDown == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyTopDown = inst.GetComponent<EnemySlimeMoveComponent>();
@@ -73,9 +75,9 @@ public class PlayerManager : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
             enemy_Zombie_TopDown = inst.GetComponent<Enemy_Zombie_TopDown>();
-        }
+        }*/
 
-        if (enemyManager == null)
+        if (enemyManager == null && checkAliveScripts.isAliveEnemyManagerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
