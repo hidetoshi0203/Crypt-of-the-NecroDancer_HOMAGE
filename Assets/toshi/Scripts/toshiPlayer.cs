@@ -33,6 +33,10 @@ public class toshiPlayer : MonoBehaviour
     GameObject rightNotes;
     GameObject function;
     GameObject notesObjets;
+    PlayerManager playerManager;
+    Item item;
+    CheckAliveScripts checkAliveScripts;
+    private GameObject checkAliveObjs;
 
     float sconds;
     [SerializeField] SpriteRenderer firstSlashObj;
@@ -40,6 +44,17 @@ public class toshiPlayer : MonoBehaviour
     //[SerializeField] SpriteRenderer secondSlashObj;
 
     PlayerAttackSound playerAttackSound;
+
+    public ParticleSystem sPotionEffect;
+    public float playerAttackPower = 1; // プレイヤーの攻撃力
+    private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
+
+    public float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
+    public float powerUpTimerEnd = 20.0f; // プレイヤー攻撃力UPの効果が切れる時間
+    public bool isPowerUpTimer = false; // プレイヤー攻撃力UPの効果時間のフラグ
+    AudioSource audioSource;
+    public AudioClip getSPotionSound;
+
     private void Start()
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
@@ -49,6 +64,9 @@ public class toshiPlayer : MonoBehaviour
         cam.transform.position = transform.position + new Vector3(0,0,-1);
 
         //playerAttackSound.audioSource = gameObject.AddComponent<AudioSource>();
+        playerManager = GetComponent<PlayerManager>();
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
 
 
@@ -83,6 +101,12 @@ public class toshiPlayer : MonoBehaviour
             playerAttackSound = inst.GetComponent<PlayerAttackSound>();
         }
 
+        if (item == null && checkAliveScripts.isAliveItemScr)
+        {
+            GameObject inst = GameObject.FindGameObjectWithTag("StrengthPotion");
+            item = inst.GetComponent<Item>();
+        }
+
         if (notesManager != null && notesManager.CanInputKey())
         {
             if (Input.GetKeyDown(KeyCode.W))
@@ -102,6 +126,7 @@ public class toshiPlayer : MonoBehaviour
                 HandlePlayerMove(DIRECTION.LEFT);
             }
         }
+        playerAttackPowerUpTimer();
     }
 
     private void HandlePlayerMove(DIRECTION directionInput)
@@ -162,6 +187,16 @@ public class toshiPlayer : MonoBehaviour
                         break;
                     case MapGenerator.MAP_TYPE.WALL2:
                         // 何もしない（後々その場でジャンプするようなアニメーションを入れる）
+                        break;
+                    case MapGenerator.MAP_TYPE.HEALINGPOTION: // プレイヤーが回復ポーションを取ったら
+                        Heal();
+                        mapGenerator.GetItem(playerNextPos);
+                        Move();
+                        break;
+                    case MapGenerator.MAP_TYPE.STRENGTHPOTION:
+                        playerAttackPowerUp();
+                        mapGenerator.GetItem(playerNextPos);
+                        Move();
                         break;
                 }
             }
@@ -250,6 +285,45 @@ public class toshiPlayer : MonoBehaviour
             mapGenerator._createMap();
         }
     }
+
+    void Heal() // プレイヤーが回復する関数
+    {
+        if (playerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
+        {
+            playerManager.playerHP++; // プレイヤー体力(HP)を回復する
+        }
+    }
+
+    void playerAttackPowerUp() // プレイヤーの攻撃力が上がる関数
+    {
+        isPowerUpTimer = true; // trueにしてプレイヤーの攻撃力UPの効果時間を数え始める
+        isPowerUp = true;
+        audioSource.PlayOneShot(getSPotionSound);
+        sPotionEffect.Play(); // 攻撃力UPポーションのエフェクトを始める
+
+        if (isPowerUp) // 攻撃力UPポーションを取ったら、
+        {
+            playerAttackPower++; // プレイヤーの攻撃力を上げる
+            isPowerUp = false; // isPowerUpをfalseにして、プレイヤーの攻撃力を過度に上げないようにしている
+        }
+    }
+
+    void playerAttackPowerUpTimer() // プレイヤーの攻撃力UPの効果時間の関数
+    {
+        if (isPowerUpTimer)
+        {
+            powerUpTimer += Time.deltaTime; // プレイヤーの攻撃力UPの効果時間を数える
+        }
+
+        if (powerUpTimer >= powerUpTimerEnd) // 効果時間がPOWERUPTIMERENDまでいったら、
+        {
+            isPowerUpTimer = false; // falseにして効果時間を数えるのを終わる
+            powerUpTimer = 0.0f; // 効果時間を初期化する
+            playerAttackPower--; // 攻撃力を元に戻す
+            sPotionEffect.Stop();
+        }
+    }
+
     public IEnumerator Slash()
     {
         int index = 0;

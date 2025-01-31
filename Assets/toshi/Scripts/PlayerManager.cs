@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour
     EnemyManager enemyManager = null;
     toshiPlayer toshiPlayer = null;
     MapGenerator mapGenerator = null;
+    CheckAliveScripts checkAliveScripts;
+    private GameObject checkAliveObjs;
 
     EnemySlimeMoveComponent enemyTopDown = null;
     EnemyRightLeft enemyRightLeft = null;
@@ -20,14 +22,18 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] GameObject playerObj;
     public GameObject[] lifeArray = new GameObject[3];
-    int playerHP = 3;
+    public int playerHP = 3;
     [SerializeField] float cycle;
     bool isBlinking = false;
     double time;
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
 
-    
+    private void Start()
+    {
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
+    }
     void Update()
     {
         if (mapGenerator == null)
@@ -106,6 +112,7 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(playerObj); // プレイヤーのオブジェクトをDestroyする
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
+            checkAliveScripts.isAliveToshiPlayerScr = false;
         }
     }
 
