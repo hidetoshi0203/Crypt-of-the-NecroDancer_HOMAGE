@@ -28,7 +28,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void Update()
     {
-        if (ToshiPlayer == null)
+        if (ToshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             ToshiPlayer = inst.GetComponent<toshiPlayer>();
