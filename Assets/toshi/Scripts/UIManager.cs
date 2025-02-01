@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject SPotionBoxUI;
     [SerializeField] private GameObject SPotionUI;
 
-    RuitoshiPlayer ruiToshiPlayer = null;
+    toshiPlayer ToshiPlayer = null;
     CheckAliveScripts checkAliveScripts;
     [SerializeField] private GameObject checkAliveObjs;
 
@@ -22,18 +22,18 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (ruiToshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
+        if (ToshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
-            ruiToshiPlayer = inst.GetComponent<RuitoshiPlayer>();
+            ToshiPlayer = inst.GetComponent<toshiPlayer>();
         }
 
-        if (ruiToshiPlayer.isPowerUpTimer)
+        if (ToshiPlayer.isPowerUpTimer)
         {
             SPotionBoxUI.SetActive(true);
             SPotionUI.SetActive(true);
         }
-        else if (ruiToshiPlayer.isPowerUpTimer == false)
+        else if (ToshiPlayer.isPowerUpTimer == false)
         {
             SPotionBoxUI.SetActive(false);
             SPotionUI.SetActive(false);
