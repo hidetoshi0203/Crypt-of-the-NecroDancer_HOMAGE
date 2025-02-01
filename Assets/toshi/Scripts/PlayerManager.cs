@@ -113,6 +113,7 @@ public class PlayerManager : MonoBehaviour
         if (playerHP == 0)
         {
             Destroy(playerObj); // プレイヤーのオブジェクトをDestroyする
+            //playerObj.SetActive(false);
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
             checkAliveScripts.isAliveToshiPlayerScr = false;
         }

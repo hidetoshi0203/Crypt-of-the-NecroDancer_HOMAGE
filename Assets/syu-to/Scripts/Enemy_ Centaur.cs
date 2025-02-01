@@ -35,6 +35,8 @@ public class Enemy_Centaur : MonoBehaviour
     GameObject rightNotes;
     GameObject function;
 
+    PlayerDamageSound playerDamageSound;
+
     int moveCount = 0;//自分が何回動いたか
     public bool isEnemyAttack = false;
 
@@ -66,6 +68,13 @@ public class Enemy_Centaur : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<toshiPlayer>();
         }
+
+        if (playerDamageSound == null)
+        {
+            GameObject inst = GameObject.Find("PlayerDamageSound");
+            playerDamageSound = inst.GetComponent<PlayerDamageSound>();
+        }
+
         if (check)
         {
             CheckPlayer();
@@ -153,6 +162,7 @@ public class Enemy_Centaur : MonoBehaviour
             if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
                 Debug.Log("攻撃エネミー側");
+                playerDamageSound.DamageSound();
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
 
