@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 public class toshiPlayer : MonoBehaviour
 {
     public enum DIRECTION
@@ -45,7 +46,7 @@ public class toshiPlayer : MonoBehaviour
 
     PlayerAttackSound playerAttackSound;
 
-    private ParticleSystem sPotionEffect;
+    [SerializeField] ParticleSystem sPotionEffect;
     public float playerAttackPower = 1; // プレイヤーの攻撃力
     private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
 
@@ -67,6 +68,7 @@ public class toshiPlayer : MonoBehaviour
         GameObject playerManagerObj = GameObject.Find("PlayerManager");
         playerManager = playerManagerObj.GetComponent<PlayerManager>();
         audioSource = GetComponent<AudioSource>();
+        sPotionEffect.Stop();
 
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
@@ -294,6 +296,7 @@ public class toshiPlayer : MonoBehaviour
         if (playerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
         {
             playerManager.playerHP++; // プレイヤー体力(HP)を回復する
+            playerManager.lifeArray[playerManager.playerHP - 1].GetComponent<Image>().enabled = true;
         }
     }
 

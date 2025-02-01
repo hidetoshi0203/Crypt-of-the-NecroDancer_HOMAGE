@@ -9,7 +9,7 @@ public class BlinkUI : MonoBehaviour
     private float blinkTime; // “_–Å‚ÌŠÔ
     private Image image;
 
-    RuitoshiPlayer ruiToshiPlayer = null;
+    toshiPlayer ToshiPlayer = null;
 
     CheckAliveScripts checkAliveScripts;
     private GameObject checkAliveObjs;
@@ -24,13 +24,13 @@ public class BlinkUI : MonoBehaviour
 
     void Update()
     {
-        if (ruiToshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
+        if (ToshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
-            ruiToshiPlayer = inst.GetComponent<RuitoshiPlayer>();
+            ToshiPlayer = inst.GetComponent<toshiPlayer>();
         }
 
-        if (ruiToshiPlayer.powerUpTimer >= (ruiToshiPlayer.powerUpTimerEnd - 5.0f))
+        if (ToshiPlayer.powerUpTimer >= (ToshiPlayer.powerUpTimerEnd - 5.0f))
         {
             image.color = GetImageColorAlpha(image.color); // ŠÖ”‚ğ“Ç‚ñ‚Åreturn‚Å‹A‚Á‚Ä‚«‚½alpha’l‚ğ“Ç‚İ‚ñ‚Å‚¢‚é
 
