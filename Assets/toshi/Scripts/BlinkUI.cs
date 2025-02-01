@@ -11,15 +11,20 @@ public class BlinkUI : MonoBehaviour
 
     RuitoshiPlayer ruiToshiPlayer = null;
 
+    CheckAliveScripts checkAliveScripts;
+    private GameObject checkAliveObjs;
+
 
     void Start()
     {
         image = this.gameObject.GetComponent<Image>(); // Image�̎擾
+        checkAliveObjs = GameObject.Find("CheckAliveObjects");
+        checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
 
     void Update()
     {
-        if (ruiToshiPlayer == null)
+        if (ruiToshiPlayer == null && checkAliveScripts.isAliveToshiPlayerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             ruiToshiPlayer = inst.GetComponent<RuitoshiPlayer>();
