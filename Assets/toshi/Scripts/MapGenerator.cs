@@ -37,13 +37,13 @@ public class MapGenerator : MonoBehaviour
         STAIRS,     // 4 階段
         ENEMY,      // 5 敵(スライム上下)
         ENEMY_2,    // 6 敵(スライム左右)
-        ENEMY_STAY,
-        ENEMY2,     // 7 敵2(ゾンビ左右)
-        ENEMY2_1,   // 8 敵2(ゾンビ上下)
-        ENEMY3,      // 9 敵3(ケンタウロス)
-        HEALINGPOTION, // 10 回復ポーション
-        STRENGTHPOTION, // 11 攻撃力UPポーション
-        ENEMY4          // 12 敵4 (ドラゴン)
+        ENEMY_STAY, // 7 敵(動かないスライム)
+        ENEMY2,     // 8 敵2(ゾンビ左右)
+        ENEMY2_1,   // 9 敵2(ゾンビ上下)
+        ENEMY3,      // 10 敵3(ケンタウロス)
+        HEALINGPOTION, // 11 回復ポーション
+        STRENGTHPOTION, // 12 攻撃力UPポーション
+        ENEMY4          // 13 敵4 (ドラゴン)
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;

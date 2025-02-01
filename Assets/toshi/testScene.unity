@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5714795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4835937344549469017, guid: b8e465a9a9f44b64f8fe9c059f3c117d, type: 3}
+  m_PrefabInstance: {fileID: 554083793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6656647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,6 +1305,11 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &799222470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3814976047145866212, guid: 917216e8b257b8043bc69ae2489fb4df, type: 3}
+  m_PrefabInstance: {fileID: 749648778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &999507319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,6 +1353,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4618798555804449906, guid: 927b7505da4d58248b7e81bfca4db29b, type: 3}
+      propertyPath: SPotionUI
+      value: 
+      objectReference: {fileID: 799222470}
+    - target: {fileID: 4618798555804449906, guid: 927b7505da4d58248b7e81bfca4db29b, type: 3}
+      propertyPath: SPotionBoxUI
+      value: 
+      objectReference: {fileID: 1552610323}
+    - target: {fileID: 4618798555804449906, guid: 927b7505da4d58248b7e81bfca4db29b, type: 3}
+      propertyPath: checkAliveObjs
+      value: 
+      objectReference: {fileID: 5714795}
     - target: {fileID: 5719317067900842931, guid: 927b7505da4d58248b7e81bfca4db29b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.870953
@@ -1623,6 +1645,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514165582}
   m_CullTransparentMesh: 1
+--- !u!1 &1552610323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6624219566955599782, guid: c5716bbbe4c219744b1798716e107cb6, type: 3}
+  m_PrefabInstance: {fileID: 1791702857}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1596953406
 GameObject:
   m_ObjectHideFlags: 0
