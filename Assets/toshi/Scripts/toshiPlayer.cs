@@ -45,7 +45,7 @@ public class toshiPlayer : MonoBehaviour
 
     PlayerAttackSound playerAttackSound;
 
-    public ParticleSystem sPotionEffect;
+    private ParticleSystem sPotionEffect;
     public float playerAttackPower = 1; // プレイヤーの攻撃力
     private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
 
@@ -64,7 +64,10 @@ public class toshiPlayer : MonoBehaviour
         cam.transform.position = transform.position + new Vector3(0,0,-1);
 
         //playerAttackSound.audioSource = gameObject.AddComponent<AudioSource>();
-        playerManager = GetComponent<PlayerManager>();
+        GameObject playerManagerObj = GameObject.Find("PlayerManager");
+        playerManager = playerManagerObj.GetComponent<PlayerManager>();
+        audioSource = GetComponent<AudioSource>();
+
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
