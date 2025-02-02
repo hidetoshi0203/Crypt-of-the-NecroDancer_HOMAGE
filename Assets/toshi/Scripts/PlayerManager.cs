@@ -21,20 +21,24 @@ public class PlayerManager : MonoBehaviour
     Enemy_Zombie_TopDown enemy_Zombie_TopDown = null;
 
     [SerializeField] GameObject playerObj;
-    //GameObject substitutePlayer; // Prefab‚É“ü‚Á‚Ä‚¢‚éPlayerObj‚Ì‘ã‚í‚è‚ÉDestroy‚³‚ê‚é‚à‚Ì
+    //GameObject substitutePlayer; // Prefabã«å…¥ã£ã¦ã„ã‚‹PlayerObjã®ä»£ã‚ã‚Šã«Destroyã•ã‚Œã‚‹ã‚‚ã®
     public GameObject[] lifeArray = new GameObject[3];
     public int playerHP = 3;
     [SerializeField] float cycle;
     bool isBlinking = false;
     double time;
 
-    public Vector2Int attackedPlayerPos; // “G‚©‚çUŒ‚‚³‚ê‚½ƒvƒŒƒCƒ„[‚ÌÀ•W
+    public Vector2Int attackedPlayerPos; // æ•µã‹ã‚‰æ”»æ’ƒã•ã‚ŒãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™
+
+    AudioSource audioSource;
+    [SerializeField] private AudioClip deadPlayerSE;
 
     private void Start()
     {
         //substitutePlayer = playerObj;
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -76,10 +80,14 @@ public class PlayerManager : MonoBehaviour
         playerHP--;
         if (playerHP == 0)
         {
-            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPE‚ÌUŒ‚‚³‚ê‚½PLAYER‚ğGROUND‚É‚©‚¦‚é
+            Destroy(playerObj); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’Destroyã™ã‚‹
+            audioSource.PlayOneShot(deadPlayerSE);
+            //playerObj.SetActive(false);
+
+            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEã®æ”»æ’ƒã•ã‚ŒãŸPLAYERã‚’GROUNDã«ã‹ãˆã‚‹
             checkAliveScripts.isAliveToshiPlayerScr = false;
             //playerObj.SetActive(false);
-            playerObj.GetComponent<SpriteRenderer>().enabled = false; // ƒvƒŒƒCƒ„[‚ÌƒIƒuƒWƒFƒNƒg‚ğDestroy‚·‚é
+            playerObj.GetComponent<SpriteRenderer>().enabled = false; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’Destroyã™ã‚‹
         }
     }
 }
