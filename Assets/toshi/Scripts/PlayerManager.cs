@@ -21,19 +21,21 @@ public class PlayerManager : MonoBehaviour
     Enemy_Zombie_TopDown enemy_Zombie_TopDown = null;
 
     [SerializeField] GameObject playerObj;
+    //GameObject substitutePlayer; // Prefabã«å…¥ã£ã¦ã„ã‚‹PlayerObjã®ä»£ã‚ã‚Šã«Destroyã•ã‚Œã‚‹ã‚‚ã®
     public GameObject[] lifeArray = new GameObject[3];
     public int playerHP = 3;
     [SerializeField] float cycle;
     bool isBlinking = false;
     double time;
 
-    public Vector2Int attackedPlayerPos; // “G‚©‚çUŒ‚‚³‚ê‚½ƒvƒŒƒCƒ„[‚ÌÀ•W
+    public Vector2Int attackedPlayerPos; // æ•µã‹ã‚‰æ”»æ’ƒã•ã‚ŒãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™
 
     AudioSource audioSource;
     [SerializeField] private AudioClip deadPlayerSE;
 
     private void Start()
     {
+        //substitutePlayer = playerObj;
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
         audioSource = GetComponent<AudioSource>();
@@ -50,48 +52,12 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<toshiPlayer>();
         }        //if (toshiEnemy == null)
-        //{
-        //    GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-        //    toshiEnemy = inst.GetComponent<toshiEnemy>();
-        //}
         
-
-        /*if (enemyTopDown == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            enemyTopDown = inst.GetComponent<EnemySlimeMoveComponent>();
-        }
-        
-        if (enemyRightLeft == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            enemyRightLeft = inst.GetComponent<EnemyRightLeft>();
-        }
-
-        if (enemy_Zombie_RightLeft == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
-            enemy_Zombie_RightLeft = inst.GetComponent<Enemy_Zombie_RightLeft>();
-        }
-        if (enemy_Zombie_TopDown == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
-            enemy_Zombie_TopDown = inst.GetComponent<Enemy_Zombie_TopDown>();
-        }*/
-
         if (enemyManager == null && checkAliveScripts.isAliveEnemyManagerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
         }
-        //if (!isBlinking) return;
-
-        //time += Time.deltaTime;
-
-        //var repeatValue = Mathf.Repeat((float)time,cycle);
-
-        //lifeArray[playerHP - 1].GetComponent<Image>().enabled =
-        //    repeatValue >= cycle * 0.5f;
     }
     
     public IEnumerator Damage()
@@ -114,17 +80,14 @@ public class PlayerManager : MonoBehaviour
         playerHP--;
         if (playerHP == 0)
         {
-            Destroy(playerObj); // ƒvƒŒƒCƒ„[‚ÌƒIƒuƒWƒFƒNƒg‚ğDestroy‚·‚é
+            Destroy(playerObj); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’Destroyã™ã‚‹
             audioSource.PlayOneShot(deadPlayerSE);
             //playerObj.SetActive(false);
-            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPE‚ÌUŒ‚‚³‚ê‚½PLAYER‚ğGROUND‚É‚©‚¦‚é
+
+            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEã®æ”»æ’ƒã•ã‚ŒãŸPLAYERã‚’GROUNDã«ã‹ãˆã‚‹
             checkAliveScripts.isAliveToshiPlayerScr = false;
+            //playerObj.SetActive(false);
+            playerObj.GetComponent<SpriteRenderer>().enabled = false; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’Destroyã™ã‚‹
         }
     }
-
-    //public void StartBlink()
-    //{
-    //    //“_–Åˆ—
-    //    EndBlink();
-    //}
 }
