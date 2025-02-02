@@ -84,18 +84,11 @@ public class PlayerManager : MonoBehaviour
         playerHP--;
         if (playerHP == 0)
         {
-
-            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPE‚ÌUŒ‚‚³‚ê‚½PLAYER‚ğGROUND‚É‚©‚¦‚é
+            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); 
             checkAliveScripts.isAliveToshiPlayerScr = false;
             //playerObj.SetActive(false);
-
-            Destroy(playerObj); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’Destroyã™ã‚‹
+            //Destroy(playerObj);
             audioSource.PlayOneShot(deadPlayerSE);
-            //playerObj.SetActive(false);
-
-            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEã®æ”»æ’E•ã‚ŒãŸPLAYERã‚’GROUNDã«ã‹ãˆã‚E
-            checkAliveScripts.isAliveToshiPlayerScr = false;
-            //playerObj.SetActive(false);
             playerObj.GetComponent<SpriteRenderer>().enabled = false; 
         }
     }
