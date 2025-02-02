@@ -47,7 +47,7 @@ public class toshiPlayer : MonoBehaviour
     PlayerAttackSound playerAttackSound;
 
     [SerializeField] ParticleSystem sPotionEffect;
-    public float playerAttackPower = 1; // プレイヤーの攻撃力
+    public int playerAttackPower = 1; // プレイヤーの攻撃力
     private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
 
     public float powerUpTimer; // プレイヤーの攻撃力UPの効果時間

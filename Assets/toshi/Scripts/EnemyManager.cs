@@ -49,7 +49,7 @@ public class EnemyManager : MonoBehaviour
         attackedEnemyPos = ToshiPlayer.playerNextPos; // プレイヤーのnextPosを代入する
         if (attackedEnemyPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
         {
-            hp--;
+            hp -= ToshiPlayer.playerAttackPower;
             if(hp <= 0)
             {
                 Destroy(gameObject); // 敵のオブジェクトをDestroyする
