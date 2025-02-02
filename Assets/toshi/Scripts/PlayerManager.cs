@@ -21,20 +21,24 @@ public class PlayerManager : MonoBehaviour
     Enemy_Zombie_TopDown enemy_Zombie_TopDown = null;
 
     [SerializeField] GameObject playerObj;
-    //GameObject substitutePlayer; // Prefabに入っているPlayerObjの代わりにDestroyされるもの
+    //GameObject substitutePlayer; // Prefab縺ｫ蜈･縺｣縺ｦ縺・ｋPlayerObj縺ｮ莉｣繧上ｊ縺ｫDestroy縺輔ｌ繧九ｂ縺ｮ
     public GameObject[] lifeArray = new GameObject[3];
     public int playerHP = 3;
     [SerializeField] float cycle;
     bool isBlinking = false;
     double time;
 
-    public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
+    public Vector2Int attackedPlayerPos; // 謨ｵ縺九ｉ謾ｻ謦・＆繧後◆繝励Ξ繧､繝､繝ｼ縺ｮ蠎ｧ讓・
+
+    AudioSource audioSource;
+    [SerializeField] private AudioClip deadPlayerSE;
 
     private void Start()
     {
         //substitutePlayer = playerObj;
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -80,10 +84,19 @@ public class PlayerManager : MonoBehaviour
         playerHP--;
         if (playerHP == 0)
         {
-            playerObj.GetComponent<SpriteRenderer>().enabled = false; // プレイヤーのオブジェクトをDestroyする
+
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
             checkAliveScripts.isAliveToshiPlayerScr = false;
             //playerObj.SetActive(false);
+
+            Destroy(playerObj); // 繝励Ξ繧､繝､繝ｼ縺ｮ繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒDestroy縺吶ｋ
+            audioSource.PlayOneShot(deadPlayerSE);
+            //playerObj.SetActive(false);
+
+            mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPE縺ｮ謾ｻ謦・＆繧後◆PLAYER繧竪ROUND縺ｫ縺九∴繧・
+            checkAliveScripts.isAliveToshiPlayerScr = false;
+            //playerObj.SetActive(false);
+            playerObj.GetComponent<SpriteRenderer>().enabled = false; 
         }
     }
 }
