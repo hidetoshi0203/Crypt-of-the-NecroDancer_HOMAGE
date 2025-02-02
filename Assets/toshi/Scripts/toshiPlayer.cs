@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class toshiPlayer : MonoBehaviour
 {
     public enum DIRECTION
@@ -285,7 +286,10 @@ public class toshiPlayer : MonoBehaviour
             }
 
             mapGenerator.floor++;
-
+            if (mapGenerator.floor == 3)
+            {
+                SceneManager.LoadScene("GameClear");
+            }
             mapGenerator._loadMapData();
             mapGenerator._createMap();
         }
