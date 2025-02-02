@@ -4,6 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -82,6 +83,7 @@ public class PlayerManager : MonoBehaviour
     {
         lifeArray[playerHP - 1].GetComponent<Image>().enabled = false;
         playerHP--;
+        Debug.Log(playerHP);
         if (playerHP == 0)
         {
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); 
@@ -89,7 +91,8 @@ public class PlayerManager : MonoBehaviour
             //playerObj.SetActive(false);
             //Destroy(playerObj);
             audioSource.PlayOneShot(deadPlayerSE);
-            playerObj.GetComponent<SpriteRenderer>().enabled = false; 
+            playerObj.GetComponent<SpriteRenderer>().enabled = false;
+            SceneManager.LoadScene("GameOver");
         }
     }
 }

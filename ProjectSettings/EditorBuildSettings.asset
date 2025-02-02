@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/toshi/title.unity
     guid: 2e490ca00cc962f40acab01b766d7609
+  - enabled: 1
+    path: Assets/toshi/GameOver.unity
+    guid: 91c3dca5b3748f140bc464f1f3d5c4db
   m_configObjects: {}
