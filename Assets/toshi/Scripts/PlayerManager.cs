@@ -54,6 +54,10 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
         }
+        if (playerHP <= 1)
+        {
+            playerObj.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
     
     public IEnumerator Damage()
@@ -76,10 +80,10 @@ public class PlayerManager : MonoBehaviour
         playerHP--;
         if (playerHP == 0)
         {
+            playerObj.GetComponent<SpriteRenderer>().enabled = false; // プレイヤーのオブジェクトをDestroyする
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
             checkAliveScripts.isAliveToshiPlayerScr = false;
             //playerObj.SetActive(false);
-            playerObj.GetComponent<SpriteRenderer>().enabled = false; // プレイヤーのオブジェクトをDestroyする
         }
     }
 }
