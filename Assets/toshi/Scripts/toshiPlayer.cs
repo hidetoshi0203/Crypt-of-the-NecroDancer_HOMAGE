@@ -286,7 +286,7 @@ public class toshiPlayer : MonoBehaviour
             }
 
             mapGenerator.floor++;
-            if (mapGenerator.floor == 3)
+            if (mapGenerator.floor == 2)
             {
                 SceneManager.LoadScene("GameClear");
             }

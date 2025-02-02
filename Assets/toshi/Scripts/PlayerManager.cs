@@ -4,6 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -90,6 +91,7 @@ public class PlayerManager : MonoBehaviour
             //Destroy(playerObj);
             audioSource.PlayOneShot(deadPlayerSE);
             playerObj.GetComponent<SpriteRenderer>().enabled = false; 
+            SceneManager.LoadScene("GameOver");
         }
     }
 }

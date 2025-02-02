@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_SceneTransitionShader
-  m_Shader: {fileID: -6465566751694194690, guid: 17d135fa694e32a4eb1ff479c1db9595, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: abf6d8cc67de26e48bcef00c28eee122, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
