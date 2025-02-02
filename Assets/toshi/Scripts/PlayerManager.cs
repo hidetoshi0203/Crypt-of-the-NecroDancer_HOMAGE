@@ -29,12 +29,14 @@ public class PlayerManager : MonoBehaviour
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
 
-
+    AudioSource audioSource;
+    [SerializeField] private AudioClip deadPlayerSE;
 
     private void Start()
     {
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -113,6 +115,7 @@ public class PlayerManager : MonoBehaviour
         if (playerHP == 0)
         {
             Destroy(playerObj); // プレイヤーのオブジェクトをDestroyする
+            audioSource.PlayOneShot(deadPlayerSE);
             //playerObj.SetActive(false);
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
             checkAliveScripts.isAliveToshiPlayerScr = false;
