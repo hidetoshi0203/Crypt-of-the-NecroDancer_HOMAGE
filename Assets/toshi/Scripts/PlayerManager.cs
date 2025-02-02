@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     Enemy_Zombie_TopDown enemy_Zombie_TopDown = null;
 
     [SerializeField] GameObject playerObj;
+    //GameObject substitutePlayer; // Prefabに入っているPlayerObjの代わりにDestroyされるもの
     public GameObject[] lifeArray = new GameObject[3];
     public int playerHP = 3;
     [SerializeField] float cycle;
@@ -29,10 +30,9 @@ public class PlayerManager : MonoBehaviour
 
     public Vector2Int attackedPlayerPos; // 敵から攻撃されたプレイヤーの座標
 
-
-
     private void Start()
     {
+        //substitutePlayer = playerObj;
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
@@ -48,48 +48,12 @@ public class PlayerManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<toshiPlayer>();
         }        //if (toshiEnemy == null)
-        //{
-        //    GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-        //    toshiEnemy = inst.GetComponent<toshiEnemy>();
-        //}
         
-
-        /*if (enemyTopDown == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            enemyTopDown = inst.GetComponent<EnemySlimeMoveComponent>();
-        }
-        
-        if (enemyRightLeft == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
-            enemyRightLeft = inst.GetComponent<EnemyRightLeft>();
-        }
-
-        if (enemy_Zombie_RightLeft == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
-            enemy_Zombie_RightLeft = inst.GetComponent<Enemy_Zombie_RightLeft>();
-        }
-        if (enemy_Zombie_TopDown == null)
-        {
-            GameObject inst = GameObject.FindGameObjectWithTag("Enemy_Zombie");
-            enemy_Zombie_TopDown = inst.GetComponent<Enemy_Zombie_TopDown>();
-        }*/
-
         if (enemyManager == null && checkAliveScripts.isAliveEnemyManagerScr)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Enemy");
             enemyManager = inst.GetComponent<EnemyManager>();
         }
-        //if (!isBlinking) return;
-
-        //time += Time.deltaTime;
-
-        //var repeatValue = Mathf.Repeat((float)time,cycle);
-
-        //lifeArray[playerHP - 1].GetComponent<Image>().enabled =
-        //    repeatValue >= cycle * 0.5f;
     }
     
     public IEnumerator Damage()
@@ -112,16 +76,10 @@ public class PlayerManager : MonoBehaviour
         playerHP--;
         if (playerHP == 0)
         {
-            Destroy(playerObj); // プレイヤーのオブジェクトをDestroyする
-            //playerObj.SetActive(false);
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたPLAYERをGROUNDにかえる
             checkAliveScripts.isAliveToshiPlayerScr = false;
+            //playerObj.SetActive(false);
+            playerObj.GetComponent<SpriteRenderer>().enabled = false; // プレイヤーのオブジェクトをDestroyする
         }
     }
-
-    //public void StartBlink()
-    //{
-    //    //点滅処理
-    //    EndBlink();
-    //}
 }
