@@ -63,13 +63,15 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
         {
             if (moveCount != 1 && notesManager.enemyCanMove)
             {
+                moveCount++;
                 switch (direction)
                 {
                     case DIRECTION.TOP:
-                        changeDirection();
+                        eMoveType();
+
                         break;
                     case DIRECTION.DOWN:
-                        changeDirection();
+                        eMoveType();
                         break;
                 }
             }
@@ -89,6 +91,10 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
                 playerDamageSound.DamageSound();
                 StartCoroutine(playerManager.Damage());
             }
+            else if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) >= MapGenerator.MAP_TYPE.ENEMY && mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) <= MapGenerator.MAP_TYPE.ENEMY6)
+            {
+                changeDirection();
+            }
             else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.GROUND) 
             {
                 //ˆÚ“®
@@ -97,20 +103,23 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
             }
+            else
+            {
+                changeDirection();
+            }
+            
         }
     }
     void changeDirection()
     {
-        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.GROUND ||
-            mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.PLAYER)
+        if(direction == DIRECTION.TOP)
         {
-            direction = DIRECTION.TOP;
+            direction = DIRECTION.DOWN;
         }
         else
         {
-            eMoveType();
+            direction = DIRECTION.TOP;
         }
-        moveCount++;
+        //eMoveType(); // •ûŒü“]Š·‚·‚é‚Æ‚«ƒm[ƒc1‰ñ•ª‘Ò‚½‚È‚¢‚Ås“® 
     }
 }
