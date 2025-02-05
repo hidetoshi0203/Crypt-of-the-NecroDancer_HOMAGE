@@ -68,10 +68,10 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.RIGHT:
-                        changeDirection();
+                        eMoveType();
                         break;
                     case DIRECTION.LEFT:
-                        changeDirection();
+                        eMoveType();
                         break;
                 }
             }
@@ -86,7 +86,6 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
-                Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
                 playerDamageSound.DamageSound();
@@ -112,13 +111,13 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
     }
     void changeDirection()
     {
-        if (direction == DIRECTION.TOP)
+        if (direction == DIRECTION.RIGHT)
         {
-            direction = DIRECTION.DOWN;
+            direction = DIRECTION.LEFT;
         }
         else
         {
-            direction = DIRECTION.TOP;
+            direction = DIRECTION.RIGHT;
         }
         //eMoveType(); // 方向転換するときノーツ1回分待たないで行動 
     }
