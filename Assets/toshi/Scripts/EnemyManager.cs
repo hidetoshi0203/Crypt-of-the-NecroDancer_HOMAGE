@@ -10,9 +10,6 @@ public class EnemyManager : MonoBehaviour
     MapGenerator mapGenerator;
     private int hp = 0;
     public List<GameObject> HeartObjList;
-    //[SerializeField] GameObject HeartObj;
-    //[SerializeField] GameObject Spawner;
-    //[SerializeField] GameObject Spawner1;
 
     CheckAliveScripts checkAliveScripts;
     private GameObject checkAliveObjs;
@@ -21,8 +18,6 @@ public class EnemyManager : MonoBehaviour
     {
         mapGenerator = transform.parent.GetComponent<MapGenerator>();
         hp = HeartObjList.Count;
-        //Instantiate(HeartObj, Spawner.transform.position, Quaternion.identity);
-        //Instantiate(HeartObj, Spawner1.transform.position, Quaternion.identity);
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
     }
@@ -33,16 +28,6 @@ public class EnemyManager : MonoBehaviour
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             ToshiPlayer = inst.GetComponent<toshiPlayer>();
         }
-    
-        //if (ToshiPlayer.isAttack)
-        //{
-        //    attackedEnemyPos = ToshiPlayer.playerNextPos;　// プレイヤーのnextPosを代入する
-        //    if (attackedEnemyPos == enemyCurrentPos) // プレイヤーから攻撃された座標と敵の座標を比べる
-        //    { 
-        //        Destroy(gameObject); // 敵のオブジェクトをDestroyする
-        //        mapGenerator.UpdateTile(enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND); // MAP_TYAPEの攻撃されたENEMYをGROUNDにかえる
-        //    }
-        //}
     }
     public void Hit()
     {

@@ -115,7 +115,7 @@ public class MapGenerator : MonoBehaviour
 
                 GameObject _ground = Instantiate(prefabs[(int)MAP_TYPE.GROUND], transform);
                 GameObject _map = Instantiate(prefabs[(int)mapTable[x, y]], transform);
-                if (mapTable[x, y] >= MAP_TYPE.ENEMY && mapTable[x, y] <= MAP_TYPE.ENEMY3)
+                if (mapTable[x, y] >= MAP_TYPE.ENEMY && mapTable[x, y] <= MAP_TYPE.ENEMY6)
                 {
                     list.Add(_map.GetComponent<EnemyManager>());
                     if (mapTable[x, y] == MAP_TYPE.ENEMY3);

@@ -105,14 +105,9 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
-                Debug.Log("攻撃エネミー側");
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
                 playerDamageSound.DamageSound();
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.PLAYER);
-                //transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
-                //enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
-                //mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
                 StartCoroutine(playerManager.Damage());
             }
             else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.GROUND) 
