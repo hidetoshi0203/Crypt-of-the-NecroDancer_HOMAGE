@@ -295,7 +295,7 @@ public class toshiPlayer : MonoBehaviour
         }
     }
 
-    void Heal() // プレイヤーが回復する関数
+    public void Heal() // プレイヤーが回復する関数
     {
         if (playerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
         {
