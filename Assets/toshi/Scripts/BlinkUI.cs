@@ -33,12 +33,11 @@ public class BlinkUI : MonoBehaviour
         {
             Debug.Log("fjei");
             image.color = GetImageColorAlpha(image.color); // ŠÖ”‚ð“Ç‚ñ‚Åreturn‚Å‹A‚Á‚Ä‚«‚½alpha’l‚ð“Ç‚Ýž‚ñ‚Å‚¢‚é
-        }
-
-        if (ToshiPlayer.powerUpTimer >= ToshiPlayer.powerUpTimerEnd)
-        {
-            Debug.Log("koetet");
-            this.image.color = new Color32(255, 255, 255, 255);
+            if (ToshiPlayer.powerUpTimer >= ToshiPlayer.powerUpTimerEnd)
+            {
+                Debug.Log("koetet");
+                this.image.color = new Color32(255, 255, 255, 255);
+            }
         }
     }
 

@@ -32,7 +32,6 @@ public class UIManager : MonoBehaviour
         if (ToshiPlayer.isPowerUpTimer)
         {
             SPotionBoxUI.GetComponent<Image>().enabled = true;
-            SPotionUI.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
             SPotionUI.GetComponent<Image>().enabled = true;
         }
         else if (ToshiPlayer.isPowerUpTimer == false)
