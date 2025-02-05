@@ -30,7 +30,7 @@ public class BlinkUI : MonoBehaviour
             ToshiPlayer = inst.GetComponent<toshiPlayer>();
         }
 
-        if (ToshiPlayer.powerUpTimer >= (ToshiPlayer.powerUpTimerEnd - 5.0f))
+        if (ToshiPlayer.powerUpTimer >= (ToshiPlayer.powerUpTimerEnd - 5.0f)) // 攻撃力UPポーションが終わる5秒前になったら
         {
             image.color = GetImageColorAlpha(image.color); // 関数を読んでreturnで帰ってきたalpha値を読み込んでいる
 
