@@ -54,7 +54,6 @@ public class NotesManager : MonoBehaviour
 
     private void Update()
     {
-
         if (Time.time > nextGenerateTime)
         {
             GameObject n = Instantiate(node, generateTrans.position, Quaternion.identity, this.transform);
@@ -62,6 +61,7 @@ public class NotesManager : MonoBehaviour
             notesCont.Set(leftGenerateTrans.position, rightGenerateTrans.position);
             nextGenerateTime += generateTime;
         }
+
 
         if (notesController == null)
         {
@@ -77,6 +77,7 @@ public class NotesManager : MonoBehaviour
         }
 
         notesController.OffTouchHeart(); //ƒn[ƒg‚©‚ç—£‚ê‚Ä‚¢‚é‚Æ‚«
+        
 
         /*
         if(Time.time < nextTouchTime + touchTime && Time.time > nextTouchTime - touchTime)
