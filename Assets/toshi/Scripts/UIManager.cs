@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class UIManager : MonoBehaviour
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
 
-        SPotionBoxUI.SetActive(false);
-        SPotionUI.SetActive(false);
+        SPotionBoxUI.GetComponent<Image>().enabled = false;
+        SPotionUI.GetComponent<Image>().enabled = false;
     }
 
     void Update()
@@ -30,13 +31,14 @@ public class UIManager : MonoBehaviour
 
         if (ToshiPlayer.isPowerUpTimer)
         {
-            SPotionBoxUI.SetActive(true);
-            SPotionUI.SetActive(true);
+            SPotionBoxUI.GetComponent<Image>().enabled = true;
+            SPotionUI.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            SPotionUI.GetComponent<Image>().enabled = true;
         }
         else if (ToshiPlayer.isPowerUpTimer == false)
         {
-            SPotionBoxUI.SetActive(false);
-            SPotionUI.SetActive(false);
+            SPotionBoxUI.GetComponent<Image>().enabled = false;
+            SPotionUI.GetComponent<Image>().enabled = false;
         }
     }
 }
