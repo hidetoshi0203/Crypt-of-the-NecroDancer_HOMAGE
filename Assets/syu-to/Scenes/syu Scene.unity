@@ -172,6 +172,8 @@ MonoBehaviour:
   - {fileID: 3877913508716662561, guid: 09d16134ea6f0d84f88b237fa0048708, type: 3}
   enemySystem: {fileID: 1954274018}
   floor: 0
+  nextX: 0
+  nextY: 0
 --- !u!4 &22027488
 Transform:
   m_ObjectHideFlags: 0
@@ -1376,6 +1378,7 @@ MonoBehaviour:
   ChangedCombos: 10
   ChangeBPM: 10
   ChangeBPMCount: 2
+  recoverCount: 20
 --- !u!114 &874553549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2023,8 +2026,10 @@ MonoBehaviour:
   - {fileID: 106852365}
   - {fileID: 1403704404}
   - {fileID: 164852707}
+  playerHP: 3
   cycle: 0
   attackedPlayerPos: {x: 0, y: 0}
+  deadPlayerSE: {fileID: 0}
 --- !u!4 &2019378176
 Transform:
   m_ObjectHideFlags: 0
