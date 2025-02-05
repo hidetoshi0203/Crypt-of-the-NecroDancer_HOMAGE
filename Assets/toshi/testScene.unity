@@ -242,7 +242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 250.33}
+  m_AnchoredPosition: {x: 0, y: 250.33002}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &175868864
@@ -1943,8 +1943,8 @@ MonoBehaviour:
   comboText: {fileID: 1596953409}
   comboreset: 0
   ChangedCombos: 10
-  ChangeBPM: 30
-  ChangeBPMCount: 3
+  ChangeBPM: 10
+  ChangeBPMCount: 2
 --- !u!114 &1596953409
 MonoBehaviour:
   m_ObjectHideFlags: 0

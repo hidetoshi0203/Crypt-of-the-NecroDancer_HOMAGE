@@ -18,7 +18,6 @@ public class NotesManager : MonoBehaviour
     [SerializeField] private AudioClip touchSound; //ハートに触れたときの音
     [SerializeField] private AudioClip spaceSound; //スペースキーを押したときの音
 
-    //Camera cam;
 
     private float nextGenerateTime = 1f; //次の生成タイミング
     private float nextTouchTime;
@@ -42,7 +41,7 @@ public class NotesManager : MonoBehaviour
     {
         generateTime = tempoManager.Tempo;
         nextGenerateTime = Time.time + generateTime;
-        nextTouchTime = nextGenerateTime + tempo;
+        nextTouchTime = nextGenerateTime + tempo; //
         audioSource = gameObject.AddComponent<AudioSource>(); //AudioSourceを追加
 
         notesController = FindObjectOfType<NotesCont>();
@@ -55,7 +54,7 @@ public class NotesManager : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (Time.time > nextGenerateTime)
         {
             GameObject n = Instantiate(node, generateTrans.position, Quaternion.identity, this.transform);
@@ -63,7 +62,23 @@ public class NotesManager : MonoBehaviour
             notesCont.Set(leftGenerateTrans.position, rightGenerateTrans.position);
             nextGenerateTime += generateTime;
         }
-        
+
+        if (notesController == null)
+        {
+            GameObject NCon = GameObject.FindGameObjectWithTag("Notes");
+            if (NCon != null)
+            {
+                notesController = NCon.GetComponent<NotesCont>();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        notesController.OffTouchHeart(); //ハートから離れているとき
+
+        /*
         if(Time.time < nextTouchTime + touchTime && Time.time > nextTouchTime - touchTime)
         {
             OnTouchHeart();
@@ -77,17 +92,19 @@ public class NotesManager : MonoBehaviour
                 OnTimeLimit();
             }
         }
+        */
+
     }
 
 
     public void UpdateGenerateTime(float newTempo)
     {
-        float elapsedTime = Time.time - (nextGenerateTime - generateTime); // 経過時間を計算
+        float elapsedTime = Time.time - (nextGenerateTime - generateTime); // 経過時間を計算 //
         generateTime = newTempo;
-        nextGenerateTime = Time.time + (generateTime - elapsedTime); // 補正
+        nextGenerateTime = Time.time + (generateTime - elapsedTime); // 補正//
     }
 
-    
+
     //ハートに触れたとき
     public void OnTouchHeart()
     {
@@ -102,16 +119,19 @@ public class NotesManager : MonoBehaviour
     }
 
     //ハートに触れる状態が終わったとき
-    private void OnTimeLimit()
-    {
-        if (canInputKey) // 行動してなかったらコンボリセット
+    public void OnTimeLimit()
+    {   /*
+        if (isTouchingHeart) // 行動してなかったらコンボリセット
         {
             comboManager.ResetCombo();
+            Debug.Log("re");
         }
         else // 行動してたらコンボを増やす
         {
             comboManager.IncreaseCombo();
         }
+        */
+        isTouchingHeart = false;
         canInputKey = false;
         enemyCanMove = true;
         notesCountFlag = true;
@@ -133,6 +153,12 @@ public class NotesManager : MonoBehaviour
         canInputKey = false;
     }
     //入力可能かどうか
+
+    public bool CanInputKeyHeart()
+    {
+        return isTouchingHeart;
+    }
+
     public bool CanInputKey()
     {
         return canInputKey;
