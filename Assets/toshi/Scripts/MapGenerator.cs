@@ -36,14 +36,13 @@ public class MapGenerator : MonoBehaviour
         PLAYER,     // 3 ƒvƒŒƒCƒ„[
         STAIRS,     // 4 ŠK’i
         ENEMY,      // 5 “G(ƒXƒ‰ƒCƒ€ã‰º)
-        ENEMY_2,    // 6 “G(ƒXƒ‰ƒCƒ€¶‰E)
-        ENEMY_STAY, // 7 “G(“®‚©‚È‚¢ƒXƒ‰ƒCƒ€)
-        ENEMY2,     // 8 “G2(ƒ]ƒ“ƒr¶‰E)
-        ENEMY2_1,   // 9 “G2(ƒ]ƒ“ƒrã‰º)
-        ENEMY3,      // 10 “G3(ƒPƒ“ƒ^ƒEƒƒX)
+        ENEMY2,    // 6 “G(ƒXƒ‰ƒCƒ€¶‰E)
+        ENEMY3, // 7 “G(“®‚©‚È‚¢ƒXƒ‰ƒCƒ€)
+        ENEMY4,     // 8 “G2(ƒ]ƒ“ƒr¶‰E)
+        ENEMY5,   // 9 “G2(ƒ]ƒ“ƒrã‰º)
+        ENEMY6,      // 10 “G3(ƒPƒ“ƒ^ƒEƒƒX)
         HEALINGPOTION, // 11 ‰ñ•œƒ|[ƒVƒ‡ƒ“
         STRENGTHPOTION, // 12 UŒ‚—ÍUPƒ|[ƒVƒ‡ƒ“
-        ENEMY4          // 13 “G4 (ƒhƒ‰ƒSƒ“)
     }
     public MAP_TYPE[,] mapTable;
     public MAP_TYPE[,] mapTable2;
@@ -119,7 +118,7 @@ public class MapGenerator : MonoBehaviour
                 if (mapTable[x, y] >= MAP_TYPE.ENEMY && mapTable[x, y] <= MAP_TYPE.ENEMY3)
                 {
                     list.Add(_map.GetComponent<EnemyManager>());
-                    if (mapTable[x, y] == MAP_TYPE.ENEMY3) Debug.Log(_map.name);
+                    if (mapTable[x, y] == MAP_TYPE.ENEMY3);
                     _map.GetComponent<EnemyManager>().enemyCurrentPos = pos;
                     mapTable[x, y] = MAP_TYPE.GROUND;
                     mapTable2[x, y] = MAP_TYPE.ENEMY;

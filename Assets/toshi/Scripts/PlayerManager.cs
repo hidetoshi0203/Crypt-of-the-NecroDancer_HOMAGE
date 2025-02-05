@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
-{
-    toshiEnemy toshiEnemy = null;  
+{  
     EnemyManager enemyManager = null;
     toshiPlayer toshiPlayer = null;
     MapGenerator mapGenerator = null;
