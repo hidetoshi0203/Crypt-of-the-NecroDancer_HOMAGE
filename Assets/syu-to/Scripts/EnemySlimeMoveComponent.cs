@@ -86,13 +86,11 @@ public class EnemySlimeMoveComponent : MonoBehaviour
         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + move[(int)direction];
         if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
         {
-            Debug.Log("攻撃エネミー側");
             playerDamageSound.DamageSound();
             // プレイヤーに攻撃する
             StartCoroutine(playerManager.Damage());
         }
-        else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL ||
-                        mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL2)
+        else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.GROUND)
         {
             //移動
             mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
