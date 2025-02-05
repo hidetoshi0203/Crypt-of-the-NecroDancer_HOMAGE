@@ -1293,6 +1293,7 @@ GameObject:
   - component: {fileID: 1413542712}
   - component: {fileID: 1413542714}
   - component: {fileID: 1413542713}
+  - component: {fileID: 1413542715}
   m_Layer: 5
   m_Name: Dance and attack
   m_TagString: Untagged
@@ -1361,6 +1362,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413542711}
   m_CullTransparentMesh: 1
+--- !u!114 &1413542715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413542711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+  m_EffectDistance: {x: 5, y: 5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1816826395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1388,7 @@ GameObject:
   - component: {fileID: 1816826396}
   - component: {fileID: 1816826398}
   - component: {fileID: 1816826397}
+  - component: {fileID: 1816826399}
   m_Layer: 5
   m_Name: Title text
   m_TagString: Untagged
@@ -1440,6 +1457,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816826395}
   m_CullTransparentMesh: 1
+--- !u!114 &1816826399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816826395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.5924529, g: 0.5924529, b: 0.5924529, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1860109853
 GameObject:
   m_ObjectHideFlags: 0
