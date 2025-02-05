@@ -168,8 +168,7 @@ public class Enemy_Centaur : MonoBehaviour
 
                 StartCoroutine(playerManager.Damage());
             }
-            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL ||
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.WALL2)
+            else if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.GROUND)
             {
                 //移動
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.GROUND);
@@ -228,26 +227,5 @@ public class Enemy_Centaur : MonoBehaviour
 
             }
         }
-        //for (int i = 0; i < directions.Length; i++)
-        //{
-        //    //Rayを飛ばす
-        //    Ray2D ray = new Ray2D(origin, directions[i]);
-        //    // Raycastを実行
-        //    RaycastHit2D hit = Physics2D.Raycast(origin, directions[i], detectionRange);
-
-        //    // DebugでRayを可視化（常に緑色）
-        //    Debug.DrawRay(origin, directions[i] * detectionRange, Color.green);
-
-        //    //Debug.Log(hit.collider.name);
-
-        //    // プレイヤーに当たった場合
-        //    if (hit.collider != null && hit.collider.CompareTag("Player"))
-        //    {
-        //        Debug.Log($"{direction}方向");
-        //        direction = (DIRECTION)i;
-        //    }
-
-        //}
-
     }
 }
