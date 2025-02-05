@@ -67,31 +67,10 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.RIGHT:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL ||
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.LEFT;
-                        }
-                        else
-                        {
-                            eMoveType();
-                        }
-                        
-                        moveCount++;
+                        changeDirection();
                         break;
                     case DIRECTION.LEFT:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL ||
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.RIGHT;
-                        }
-                        else
-                        {
-                            eMoveType();
-                        }
-                        moveCount++;
+                        changeDirection();
                         break;
                 }
             }
@@ -125,5 +104,19 @@ public class Enemy_Zombie_RightLeft : MonoBehaviour
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
             }
         }
+    }
+    void changeDirection()
+    {
+        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.GROUND ||
+            mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.PLAYER)
+        {
+            direction = DIRECTION.RIGHT;
+        }
+        else
+        {
+            eMoveType();
+        }
+        moveCount++;
     }
 }

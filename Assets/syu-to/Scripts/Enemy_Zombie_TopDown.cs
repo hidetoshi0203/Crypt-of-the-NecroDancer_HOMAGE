@@ -66,31 +66,10 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.TOP:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL ||
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.DOWN;
-                        }
-                        else
-                        {
-                            eMoveType();
-                        }
-                        
-                        moveCount++;
+                        changeDirection();
                         break;
                     case DIRECTION.DOWN:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL ||
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.TOP;
-                        }
-                        else
-                        {
-                            eMoveType();
-                        }
-                        moveCount++;
+                        changeDirection();
                         break;
                 }
             }
@@ -119,5 +98,19 @@ public class Enemy_Zombie_TopDown : MonoBehaviour
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
             }
         }
+    }
+    void changeDirection()
+    {
+        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.GROUND ||
+            mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.PLAYER)
+        {
+            direction = DIRECTION.TOP;
+        }
+        else
+        {
+            eMoveType();
+        }
+        moveCount++;
     }
 }

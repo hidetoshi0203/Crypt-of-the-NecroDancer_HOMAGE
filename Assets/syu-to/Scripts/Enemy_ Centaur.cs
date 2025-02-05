@@ -86,66 +86,16 @@ public class Enemy_Centaur : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.RIGHT:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL ||
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.STOP;
-                            check = true;
-                        }
-                        else
-                        {
-                            eMoveType();
-                            check = false;
-                        }
-                        
-                        moveCount++;
+                        changeDirection();
                         break;
                     case DIRECTION.LEFT:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL || 
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.STOP;
-                            check = true;
-                        }
-                        else
-                        {
-                            eMoveType();
-                            check = false;
-                        }
-                        moveCount++;
+                        changeDirection();
                         break;
                     case DIRECTION.TOP:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL || 
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.STOP;
-                            check = true;
-                        }
-                        else
-                        {
-                            eMoveType();
-                            check = false;
-                        }
-                        
-                        moveCount++;
+                        changeDirection();
                         break;
                     case DIRECTION.DOWN:
-                        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-                        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL || 
-                            mapGenerator.GetStageMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.WALL2)
-                        {
-                            direction = DIRECTION.STOP;
-                            check = true;
-                        }
-                        else
-                        {
-                            eMoveType();
-                            check = false;
-                        }
-                        moveCount++;
+                        changeDirection();
                         break;
                 }
             }
@@ -178,8 +128,22 @@ public class Enemy_Centaur : MonoBehaviour
             }
         }
     }
-
-    [SerializeField] float detectionRange = 5.0f;  // 索敵範囲を 5 ユニットに制限
+    void changeDirection()
+    {
+        enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
+        if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.GROUND ||
+            mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.PLAYER)
+        {
+            direction = DIRECTION.STOP;
+            check = true;
+        }
+        else
+        {
+            eMoveType();
+            check = false;
+        }
+        moveCount++;
+    }
     private void CheckPlayer()
     {
         Vector2 origin = transform.position; // Ray開始位置
