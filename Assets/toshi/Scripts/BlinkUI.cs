@@ -10,7 +10,6 @@ public class BlinkUI : MonoBehaviour
     private Image image;
 
     toshiPlayer ToshiPlayer = null;
-
     CheckAliveScripts checkAliveScripts;
     private GameObject checkAliveObjs;
 
@@ -32,8 +31,14 @@ public class BlinkUI : MonoBehaviour
 
         if (ToshiPlayer.powerUpTimer >= (ToshiPlayer.powerUpTimerEnd - 5.0f)) // 攻撃力UPポーションが終わる5秒前になったら
         {
+            Debug.Log("fjei");
             image.color = GetImageColorAlpha(image.color); // 関数を読んでreturnで帰ってきたalpha値を読み込んでいる
+        }
 
+        if (ToshiPlayer.powerUpTimer >= ToshiPlayer.powerUpTimerEnd)
+        {
+            Debug.Log("koetet");
+            this.image.color = new Color32(255, 255, 255, 255);
         }
     }
 
