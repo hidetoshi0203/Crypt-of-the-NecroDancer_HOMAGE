@@ -113,6 +113,7 @@ public class NotesCont : MonoBehaviour
         //ハートの外にいるとき
         if (notesObjects[0].transform.position.x < -Heart_range || notesObjects[1].transform.position.x > Heart_range)
         {
+            
             comboManager.comboreset = true;
         }
         else
