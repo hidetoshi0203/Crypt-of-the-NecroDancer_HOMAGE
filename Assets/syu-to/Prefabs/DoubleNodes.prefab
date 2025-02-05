@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1463452981307894649}
   m_Layer: 0
   m_Name: DoubleNodes
-  m_TagString: Untagged
+  m_TagString: Notes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endX: 0
   tempo: 2
-  Heart_range: 1.1
+  Heart_range: 0.6
   notesObjects:
   - {fileID: 7554711343380091339}
   - {fileID: 4923429893725054150}
