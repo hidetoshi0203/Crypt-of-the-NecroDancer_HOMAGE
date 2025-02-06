@@ -86,16 +86,16 @@ public class Enemy_Centaur : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.RIGHT:
-                        eMoveType();
+                        changeDirection();
                         break;
                     case DIRECTION.LEFT:
-                        eMoveType();
+                        changeDirection();
                         break;
                     case DIRECTION.TOP:
-                        eMoveType();
+                        changeDirection();
                         break;
                     case DIRECTION.DOWN:
-                        eMoveType();
+                        changeDirection();
                         break;
                 }
             }
@@ -111,7 +111,6 @@ public class Enemy_Centaur : MonoBehaviour
             enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
             if (mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
             {
-                Debug.Log("攻撃エネミー側");
                 playerDamageSound.DamageSound();
                 // プレイヤーに攻撃する
                 isEnemyAttack = true;
@@ -132,7 +131,7 @@ public class Enemy_Centaur : MonoBehaviour
     {
         enemyManager.enemyNextPos = enemyManager.enemyCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
         if (mapGenerator.GetStageMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.GROUND ||
-            mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) != MapGenerator.MAP_TYPE.PLAYER)
+            mapGenerator.GetEntityMapType(enemyManager.enemyNextPos) == MapGenerator.MAP_TYPE.PLAYER)
         {
             direction = DIRECTION.STOP;
             check = true;
