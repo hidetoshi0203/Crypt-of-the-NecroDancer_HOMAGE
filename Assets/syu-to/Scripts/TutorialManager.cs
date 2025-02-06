@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToStageScene : MonoBehaviour
+public class TutorialManager : MonoBehaviour
 {
-    private void Update()
+    void Start()
+    {
+        
+    }
+
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("Tutorial");
+            SceneManager.LoadScene("testScene");
         }
     }
 }
