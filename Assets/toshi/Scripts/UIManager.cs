@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject SPotionBoxUI;
-    [SerializeField] private GameObject SPotionUI;
+    [SerializeField] private GameObject SPotionBoxObj;
+    [SerializeField] private GameObject SPotionObj;
 
     toshiPlayer ToshiPlayer = null;
     CheckAliveScripts checkAliveScripts;
@@ -17,8 +17,10 @@ public class UIManager : MonoBehaviour
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
 
-        SPotionBoxUI.GetComponent<Image>().enabled = false;
-        SPotionUI.GetComponent<Image>().enabled = false;
+        SPotionBoxObj = GameObject.Find("SPotionBoxUI");
+        SPotionBoxObj = GameObject.Find("SPotionUI");
+        SPotionBoxObj.GetComponent<Image>().enabled = false;
+        SPotionObj.GetComponent<Image>().enabled = false;
     }
 
     void Update()
@@ -31,13 +33,14 @@ public class UIManager : MonoBehaviour
 
         if (ToshiPlayer.isPowerUpTimer)
         {
-            SPotionBoxUI.GetComponent<Image>().enabled = true;
-            SPotionUI.GetComponent<Image>().enabled = true;
+            SPotionBoxObj.GetComponent<Image>().enabled = true;
+            SPotionObj.GetComponent<Image>().enabled = true;
         }
         else if (ToshiPlayer.isPowerUpTimer == false)
         {
-            SPotionBoxUI.GetComponent<Image>().enabled = false;
-            SPotionUI.GetComponent<Image>().enabled = false;
+            SPotionBoxObj.GetComponent<Image>().enabled = false;
+            SPotionObj.GetComponent<Image>().enabled = false;
+            SPotionObj.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
     }
 }
