@@ -49,6 +49,7 @@ public class toshiPlayer : MonoBehaviour
 
     [SerializeField] ParticleSystem sPotionEffect;
     public int playerAttackPower = 1; // プレイヤーの攻撃力
+    [SerializeField] int playerMaxHP;
     private bool isPowerUp = false; // プレイヤーの攻撃力のフラグ(プレイヤーが攻撃力UPポーションを取ったか)
 
     public float powerUpTimer; // プレイヤーの攻撃力UPの効果時間
@@ -206,60 +207,6 @@ public class toshiPlayer : MonoBehaviour
                         break;
                 }
             }
-            
-
-            
-            /*
-            //if (mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL && mapGenerator.GetPlayerNextMapType(playerNextPos) == MapGenerator.MAP_TYPE.WALL2) // 入力先(プレイヤーのnextPos)が壁だった場合
-            //{
-            //    
-            //}
-            
-            if (mapGenerator.GetEntityMapType(playerNextPos) == MapGenerator.MAP_TYPE.ENEMY) // 敵だった場合
-            {
-                // 上下左右の入力判定をとりboolをtrueにする
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    // 敵を倒す（MapGenarator.csのMAP_TYPEをENEMYからGROUND書き換える）
-                    Attack();
-                    enemyManager.Hit();
-                }
-                else if (Input.GetKeyDown(KeyCode.A))
-                {
-                    Attack();
-                    enemyManager.Hit();
-                }
-                else if (Input.GetKeyDown(KeyCode.S))
-                {
-                    Attack();
-                    enemyManager.Hit();
-                }
-                else if (Input.GetKeyDown(KeyCode.D))
-                {
-                    Attack();
-                    enemyManager.Hit();
-                }
-            }
-
-            if (mapGenerator.GetStageMapType(playerCurrentPos) == MapGenerator.MAP_TYPE.STAIRS)
-            {
-                Debug.Log("階段の上だよ");
-                GameObject parentObject = GameObject.Find("MapChip");
-
-                int childCount = parentObject.transform.childCount;
-                for (int i = 0; i < childCount; i++)
-                {
-                    Transform childTransform = parentObject.transform.GetChild(i);
-                    GameObject childObject = childTransform.gameObject;
-                    Destroy(childObject);
-                }
-
-                mapGenerator.floor++;
-
-                mapGenerator._loadMapData();
-                mapGenerator._createMap();
-            }
-            */
         }
         
         void Move()
@@ -297,7 +244,7 @@ public class toshiPlayer : MonoBehaviour
 
     public void Heal() // プレイヤーが回復する関数
     {
-        if (playerManager.playerHP < 3) // プレイヤーの体力が減ってたら(3HP未満だったら)
+        if (playerManager.playerHP < playerMaxHP) // プレイヤーの体力が減ってたら(3HP未満だったら)
         {
             playerManager.playerHP++; // プレイヤー体力(HP)を回復する
             playerManager.lifeArray[playerManager.playerHP - 1].GetComponent<Image>().enabled = true;

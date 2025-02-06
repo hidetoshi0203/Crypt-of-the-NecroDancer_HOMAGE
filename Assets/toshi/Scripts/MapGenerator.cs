@@ -193,31 +193,31 @@ public class MapGenerator : MonoBehaviour
         mapTable2[_pos.x, _pos.y] = mapType;
     }
 
-    private void OnGUI()
-    {
-        string map = "";
-        for (int x = 0; x < mapTable.GetLength(1); x++)
-        {
+    //private void OnGUI()
+    //{
+    //    string map = "";
+    //    for (int x = 0; x < mapTable.GetLength(1); x++)
+    //    {
 
-            for (int y = 0; y < mapTable.GetLength(0); y++)
-            {
-                //if (isReach[y, x] == false)
-                //{
-                //    map += "H";
-                //    continue;
-                //}
-                if (mapTable2[y, x] == MAP_TYPE.PLAYER) map += "œ";
-                else if (mapTable2[y, x] == MAP_TYPE.ENEMY) map += "Ÿ";
-                else if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "Ÿ";
-                else if (mapTable[y, x] == MAP_TYPE.WALL) map += "¡";
-                else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "œ";
-                else if (mapTable[y, x] == MAP_TYPE.GROUND) map += " ";
-                else map += "¡";
-            }
-            map += "\n";
-        }
-        GUI.Label(new Rect(50, 50, 300, 300), map);
-    }
+    //        for (int y = 0; y < mapTable.GetLength(0); y++)
+    //        {
+    //            //if (isReach[y, x] == false)
+    //            //{
+    //            //    map += "H";
+    //            //    continue;
+    //            //}
+    //            if (mapTable2[y, x] == MAP_TYPE.PLAYER) map += "œ";
+    //            else if (mapTable2[y, x] == MAP_TYPE.ENEMY) map += "Ÿ";
+    //            else if (mapTable[y, x] == MAP_TYPE.ENEMY) map += "Ÿ";
+    //            else if (mapTable[y, x] == MAP_TYPE.WALL) map += "¡";
+    //            else if (mapTable[y, x] == MAP_TYPE.PLAYER) map += "œ";
+    //            else if (mapTable[y, x] == MAP_TYPE.GROUND) map += " ";
+    //            else map += "¡";
+    //        }
+    //        map += "\n";
+    //    }
+    //    GUI.Label(new Rect(50, 50, 300, 300), map);
+    //}
 
     public struct Node
     {

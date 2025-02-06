@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endX: 0
   tempo: 2
-  Heart_range: 0.6
+  Heart_range: 0.75
   notesObjects:
   - {fileID: 7554711343380091339}
   - {fileID: 4923429893725054150}

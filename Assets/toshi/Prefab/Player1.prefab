@@ -193,9 +193,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 581abb6a28724824f9ee16e1f062c6f7, type: 3}
   sPotionEffect: {fileID: 4824946281821752427}
   playerAttackPower: 1
+  playerMaxHP: 5
   powerUpTimer: 0
   powerUpTimerEnd: 20
-  isPowerUpTimer: 0
+  isPowerUpTimer: 1
   getSPotionSound: {fileID: 8300000, guid: dbb5494954669d8498b8355078def97d, type: 3}
 --- !u!61 &-3054327659600628985
 BoxCollider2D:
