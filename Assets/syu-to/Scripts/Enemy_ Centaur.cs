@@ -158,7 +158,6 @@ public class Enemy_Centaur : MonoBehaviour
 
         Vector2Int enemy = enemyManager.enemyCurrentPos;
         Vector2Int player = toshiPlayer.playerCurrentPos;
-        Debug.Log(enemy + " : " + player);
         if (enemy.x == player.x)
         {
             float pPos = enemy.y - player.y;

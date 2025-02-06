@@ -196,7 +196,7 @@ MonoBehaviour:
   playerMaxHP: 5
   powerUpTimer: 0
   powerUpTimerEnd: 20
-  isPowerUpTimer: 1
+  isPowerUpTimer: 0
   getSPotionSound: {fileID: 8300000, guid: dbb5494954669d8498b8355078def97d, type: 3}
 --- !u!61 &-3054327659600628985
 BoxCollider2D:

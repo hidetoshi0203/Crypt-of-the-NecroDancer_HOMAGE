@@ -42,6 +42,7 @@ public class EnemyManager : MonoBehaviour
                 checkAliveScripts.isAliveEnemyManagerScr = false;
             }
           HeartObjList[hp].SetActive(false);
+            Debug.Log(hp);
         }
     }
 }
