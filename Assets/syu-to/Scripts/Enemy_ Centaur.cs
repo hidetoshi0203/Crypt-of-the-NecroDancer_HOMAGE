@@ -86,16 +86,16 @@ public class Enemy_Centaur : MonoBehaviour
                 switch (direction)
                 {
                     case DIRECTION.RIGHT:
-                        changeDirection();
+                        eMoveType();
                         break;
                     case DIRECTION.LEFT:
-                        changeDirection();
+                        eMoveType();
                         break;
                     case DIRECTION.TOP:
-                        changeDirection();
+                        eMoveType();
                         break;
                     case DIRECTION.DOWN:
-                        changeDirection();
+                        eMoveType();
                         break;
                 }
             }
@@ -125,6 +125,10 @@ public class Enemy_Centaur : MonoBehaviour
                 transform.localPosition = mapGenerator.ScreenPos(enemyManager.enemyNextPos);
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
+            }
+            else
+            {
+                changeDirection();
             }
         }
     }
