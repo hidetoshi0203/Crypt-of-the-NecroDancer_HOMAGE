@@ -89,7 +89,7 @@ public class PlayerManager : MonoBehaviour
             //playerObj.SetActive(false);
             //Destroy(playerObj);
             audioSource.PlayOneShot(deadPlayerSE);
-            playerObj.GetComponent<SpriteRenderer>().enabled = false; 
+            //playerObj.GetComponent<SpriteRenderer>().enabled = false; 
             SceneManager.LoadScene("GameOver");
         }
     }

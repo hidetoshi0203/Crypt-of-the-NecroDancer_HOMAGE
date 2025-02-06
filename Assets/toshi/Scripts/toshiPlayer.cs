@@ -85,6 +85,7 @@ public class toshiPlayer : MonoBehaviour
     //　入力時に_move関数を呼ぶようにする。
     private void Update()
     {
+        Debug.Log(playerAttackPower);
 
         if (notesManager == null)
         {
@@ -154,7 +155,6 @@ public class toshiPlayer : MonoBehaviour
             //firstSlashObj.transform.localPosition = new Vector3(move[(int)direction].x, -move[(int)direction].y);
             firstSlashObj.transform.position = new Vector3(playerNextPos.x, -playerNextPos.y);
             //playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
-            Debug.Log( "PlayerPos"+playerNextPos);
             switch (mapGenerator.GetEntityMapType(playerNextPos))
             {
                 //case MapGenerator.MAP_TYPE.PLAYER:
@@ -162,14 +162,12 @@ public class toshiPlayer : MonoBehaviour
                 //    break;
                 case MapGenerator.MAP_TYPE.ENEMY:
                     // 攻撃
-                    Debug.Log("攻撃");
                     enemySystem.Hit(playerNextPos);
                     StartCoroutine("Slash");
                     playerAttackSound.AttackSound();
                     break;
                 case MapGenerator.MAP_TYPE.ENEMY2:
                     // 攻撃
-                    Debug.Log("攻撃");
                     enemySystem.Hit(playerNextPos);
                     StartCoroutine("Slash");
                     playerAttackSound.AttackSound();
@@ -253,6 +251,7 @@ public class toshiPlayer : MonoBehaviour
 
     void playerAttackPowerUp() // プレイヤーの攻撃力が上がる関数
     {
+        Debug.Log("fjs");
         isPowerUpTimer = true; // trueにしてプレイヤーの攻撃力UPの効果時間を数え始める
         isPowerUp = true;
         audioSource.PlayOneShot(getSPotionSound);
@@ -270,14 +269,14 @@ public class toshiPlayer : MonoBehaviour
         if (isPowerUpTimer)
         {
             powerUpTimer += Time.deltaTime; // プレイヤーの攻撃力UPの効果時間を数える
-        }
-
-        if (powerUpTimer >= powerUpTimerEnd) // 効果時間がPOWERUPTIMERENDまでいったら、
-        {
-            isPowerUpTimer = false; // falseにして効果時間を数えるのを終わる
-            powerUpTimer = 0.0f; // 効果時間を初期化する
-            playerAttackPower--; // 攻撃力を元に戻す
-            sPotionEffect.Stop();
+            if (powerUpTimer >= powerUpTimerEnd) // 効果時間がPOWERUPTIMERENDまでいったら、
+            {
+                Debug.Log("PowerDown");
+                isPowerUpTimer = false; // falseにして効果時間を数えるのを終わる
+                powerUpTimer = 0.0f; // 効果時間を初期化する
+                playerAttackPower--; // 攻撃力を元に戻す
+                sPotionEffect.Stop();
+            }
         }
     }
 
