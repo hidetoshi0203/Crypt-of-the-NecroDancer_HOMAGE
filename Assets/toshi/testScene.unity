@@ -906,7 +906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapText:
-  - {fileID: 4900000, guid: 54b2bc5d67281624aa1c79bb72b3edee, type: 3}
+  - {fileID: 4900000, guid: 240a1a03a8790d7479c4378bda19b60c, type: 3}
   - {fileID: 4900000, guid: f41f621275a525049baa9428d93281e2, type: 3}
   - {fileID: 4900000, guid: 6b5a3f870a4ee42488e0fb2dfb6bfc2e, type: 3}
   prefabs:
@@ -1426,7 +1426,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748633328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328177464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2317,8 +2317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb770abd8f4c144bad5bcf2c445d72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SPotionBoxUI: {fileID: 1328177464}
-  SPotionUI: {fileID: 748633328}
+  SPotionBoxObj: {fileID: 1328177464}
+  SPotionObj: {fileID: 748633328}
   checkAliveObjs: {fileID: 1200441384}
 --- !u!4 &1829443512
 Transform:

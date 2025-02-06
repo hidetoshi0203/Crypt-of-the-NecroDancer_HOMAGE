@@ -126,10 +126,6 @@ public class Enemy_Centaur : MonoBehaviour
                 enemyManager.enemyCurrentPos = enemyManager.enemyNextPos;
                 mapGenerator.UpdateTile(enemyManager.enemyCurrentPos, MapGenerator.MAP_TYPE.ENEMY2);
             }
-            else
-            {
-                changeDirection();
-            }
         }
     }
     void changeDirection()
