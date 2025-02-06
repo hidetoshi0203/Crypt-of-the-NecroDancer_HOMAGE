@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class RuiMapGenerator : MonoBehaviour
 {
@@ -209,10 +205,10 @@ public class RuiMapGenerator : MonoBehaviour
 
     public void GetItem(Vector2Int pos)
     {
-       Item gotItem = null;
-        foreach(Item item in items)
+        Item gotItem = null;
+        foreach (Item item in items)
         {
-            if(item.myPosition == pos)
+            if (item.myPosition == pos)
             {
                 gotItem = item;
             }
@@ -269,7 +265,7 @@ public class RuiMapGenerator : MonoBehaviour
     }
 
 
-public struct Node
+    public struct Node
     {
         public bool floor; // çsÇØÇ»Ç¢Ç∆Ç±ÇÎÇÕfalse
         public int cost; // égópÇµÇΩï‡êî

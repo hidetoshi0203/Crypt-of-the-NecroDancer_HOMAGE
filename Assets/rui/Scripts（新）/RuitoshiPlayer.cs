@@ -1,12 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using System.Security.Cryptography;
-using static UnityEditor.Progress;
-using System.Runtime.CompilerServices;
-using UnityEditor.Rendering;
-using UnityEngine.UIElements;
 public class RuitoshiPlayer : MonoBehaviour
 {
     public enum DIRECTION
@@ -63,7 +55,7 @@ public class RuitoshiPlayer : MonoBehaviour
         direction = DIRECTION.DOWN;
         notesObjets = GameObject.FindGameObjectWithTag("Notes");
         cam = Camera.main;
-        cam.transform.position = transform.position + new Vector3(0,0,-1);
+        cam.transform.position = transform.position + new Vector3(0, 0, -1);
 
         ruiPlayerManager = GetComponent<RuiPlayerManager>();
 
@@ -97,7 +89,7 @@ public class RuitoshiPlayer : MonoBehaviour
         if (comboManager == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("ComboManager");
-            comboManager = inst.GetComponent <ComboManager>();
+            comboManager = inst.GetComponent<ComboManager>();
         }
         if (itemSPotion == null && checkAliveScripts.isAliveItemScr)
         {
@@ -141,7 +133,7 @@ public class RuitoshiPlayer : MonoBehaviour
     //移動用の関数
     void moveType()
     {
-        
+
         if (notesManager != null && notesManager.CanInputKey())
         {
             playerNextPos = playerCurrentPos + new Vector2Int(move[(int)direction, 0], move[(int)direction, 1]);
@@ -280,7 +272,7 @@ public class RuitoshiPlayer : MonoBehaviour
 
     void playerAttackPowerUpTimer() // プレイヤーの攻撃力UPの効果時間の関数
     {
-        if (isPowerUpTimer) 
+        if (isPowerUpTimer)
         {
             powerUpTimer += Time.deltaTime; // プレイヤーの攻撃力UPの効果時間を数える
         }
