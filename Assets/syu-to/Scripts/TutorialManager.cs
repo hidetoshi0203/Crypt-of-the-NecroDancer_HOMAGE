@@ -14,7 +14,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("testScene");
+            SceneManager.LoadScene("PlayScene");
         }
     }
 }
