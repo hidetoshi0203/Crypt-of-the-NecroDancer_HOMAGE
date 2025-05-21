@@ -245,7 +245,7 @@ public class toshiPlayer : MonoBehaviour
         if (playerManager.playerHP < playerMaxHP) // プレイヤーの体力が減ってたら(3HP未満だったら)
         {
             playerManager.playerHP++; // プレイヤー体力(HP)を回復する
-            playerManager.lifeArray[playerManager.playerHP - 1].GetComponent<Image>().enabled = true;
+            playerManager.lifeArray[playerManager.playerHP -1].GetComponent<Image>().enabled = true;
         }
     }
 

@@ -21,21 +21,19 @@ public class PlayerManager : MonoBehaviour
     Enemy_Zombie_TopDown enemy_Zombie_TopDown = null;
 
     [SerializeField] GameObject playerObj;
-    //GameObject substitutePlayer; // Prefabに入ってぁE��PlayerObjの代わりにDestroyされるもの
     public GameObject[] lifeArray = new GameObject[3];
     public int playerHP = 3;
     [SerializeField] float cycle;
     bool isBlinking = false;
     double time;
 
-    public Vector2Int attackedPlayerPos; // 敵から攻撁E��れたプレイヤーの座樁E
+    public Vector2Int attackedPlayerPos; 
 
     AudioSource audioSource;
     [SerializeField] private AudioClip deadPlayerSE;
 
     private void Start()
     {
-        //substitutePlayer = playerObj;
         checkAliveObjs = GameObject.Find("CheckAliveObjects");
         checkAliveScripts = checkAliveObjs.GetComponent<CheckAliveScripts>();
         audioSource = GetComponent<AudioSource>();
@@ -51,7 +49,7 @@ public class PlayerManager : MonoBehaviour
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
             toshiPlayer = inst.GetComponent<toshiPlayer>();
-        }        //if (toshiEnemy == null)
+        }       
         
         if (enemyManager == null && checkAliveScripts.isAliveEnemyManagerScr)
         {
@@ -86,10 +84,7 @@ public class PlayerManager : MonoBehaviour
         {
             mapGenerator.UpdateTile(toshiPlayer.playerCurrentPos, MapGenerator.MAP_TYPE.GROUND); 
             checkAliveScripts.isAliveToshiPlayerScr = false;
-            //playerObj.SetActive(false);
-            //Destroy(playerObj);
-            audioSource.PlayOneShot(deadPlayerSE);
-            //playerObj.GetComponent<SpriteRenderer>().enabled = false; 
+            audioSource.PlayOneShot(deadPlayerSE); 
             SceneManager.LoadScene("GameOver");
         }
     }
