@@ -9,7 +9,7 @@ public class TempoManager : MonoBehaviour
     [SerializeField] private float startDelay = 1.5f;
     public float StartDelay { get { return startDelay; } }
     [SerializeField] public int bpm;
-    private int initialBPM; // 初期BPMを保持
+    private int initialBPM; //初期BPMを保持
 
     public int BPM
     {
@@ -17,8 +17,8 @@ public class TempoManager : MonoBehaviour
         set
         {
             bpm = value;
-            Tempo = MINUTES / bpm; // BPM変更時にテンポを再計算
-            NotifyBPMChanged(); // BPMが変更されたことを通知
+            Tempo = MINUTES / bpm;  //BPM変更時にテンポを再計算
+            NotifyBPMChanged();     //BPMが変更されたことを通知
         }
     }
 
@@ -27,30 +27,22 @@ public class TempoManager : MonoBehaviour
 
     private void Awake()
     {
-        initialBPM = bpm; // 初期値を記録
-        Tempo = MINUTES / bpm; // 初期テンポ計算
+        initialBPM = bpm;      //初期値を記録
+        Tempo = MINUTES / bpm; //初期テンポ計算
     }
 
-    // BPMを初期値にリセットするメソッド
+    // BPMを初期値にリセット
     public void ResetBPM()
     {
         BPM = initialBPM; // 初期BPMに戻す
     }
 
-    /*
     private void NotifyBPMChanged()
     {
-        // NotesManagerにBPM変更の通知を送る
-        FindObjectOfType<NotesManager>().UpdateGenerateTime(Tempo); // Tempoに基づいてノーツ生成間隔を更新
-    }
-    */
-
-    private void NotifyBPMChanged()
-    {
-        // NotesManagerにBPM変更の通知を送る
+        //NotesManagerにBPM変更の通知を送る
         FindObjectOfType<NotesManager>().UpdateGenerateTime(Tempo);
 
-        // BGMにBPM変更の通知を送る
+        //BGMにBPM変更の通知を送る
         FindObjectOfType<BGM>()?.UpdatePlaybackSpeed(BPM);
     }
 }
