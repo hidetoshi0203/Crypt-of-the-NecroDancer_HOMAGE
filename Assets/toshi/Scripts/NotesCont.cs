@@ -22,7 +22,7 @@ public class NotesCont : MonoBehaviour
     private ComboManager comboManager;
     private ColorChange ColorChange;
     private toshiPlayer toshiPlayer = null;
-    //private Image a;
+
     private void Awake()
     {
         heartImage = GameObject.Find("Heart");
@@ -43,7 +43,6 @@ public class NotesCont : MonoBehaviour
     }
     private void Update()
     {
-        //Debug.Log(Heart_range);
         if (toshiPlayer == null)
         {
             GameObject inst = GameObject.FindGameObjectWithTag("Player");
