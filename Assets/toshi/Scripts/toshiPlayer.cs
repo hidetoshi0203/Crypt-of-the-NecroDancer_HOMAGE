@@ -124,6 +124,7 @@ public class toshiPlayer : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 HandlePlayerMove(DIRECTION.RIGHT);
+                transform.rotation = Quaternion.Euler(0,0,0);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
@@ -132,6 +133,7 @@ public class toshiPlayer : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.A))
             {
                 HandlePlayerMove(DIRECTION.LEFT);
+                transform.rotation = Quaternion.Euler(0,180,0);
             }
         }
         playerAttackPowerUpTimer();
